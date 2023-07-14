@@ -1,0 +1,42 @@
+﻿namespace FriskyMouse.ViewModels.Windows;
+
+public partial class MainWindowViewModel : ObservableObject
+{
+    private readonly IServiceProvider _serviceProvider;
+
+    [ObservableProperty]
+    private string _applicationTitle;
+
+    [ObservableProperty]
+    private ICollection<object> _menuItems;
+
+    [ObservableProperty]
+    private ICollection<object> _footerMenuItems;
+
+    public MainWindowViewModel(IServiceProvider serviceProvider)
+    {
+        _serviceProvider = serviceProvider;
+        _applicationTitle = "FriskyMouse II";
+
+        _menuItems = new ObservableCollection<object>
+        {
+            new NavigationViewItem("Home", SymbolRegular.Home24, typeof(DashboardPage)),                       
+            new NavigationViewItemSeparator(),
+            new NavigationViewItem("Spotlight", SymbolRegular.Circle48, typeof(HighlighterPage)),
+            new NavigationViewItemSeparator(),
+            new NavigationViewItem("Click Effect", SymbolRegular.CursorClick24, typeof(ClickIndicatorPage)),
+            new NavigationViewItemSeparator(),
+            new NavigationViewItem("Right Click Effect", SymbolRegular.CursorHover32, typeof(RightClickEffectPage)),
+        };
+
+        _footerMenuItems = new ObservableCollection<object>()
+        {
+            new NavigationViewItem
+            {
+                Content = "Settings",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.Settings24 },
+                TargetPageType = typeof(SettingsPage)
+            }
+        };
+    }
+}
