@@ -26,7 +26,7 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
 
         Wpf.Ui.Appearance.Theme.Changed += OnThemeChanged;
 
-        _isInitialized = true;
+        _isInitialized = true;        
     }
 
     private void OnThemeChanged(ThemeType currentTheme, Color systemAccent)

@@ -5,7 +5,7 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wpf.Ui", "wpfui\src\Wpf.Ui\Wpf.Ui.csproj", "{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FriskyMouse", "Wpf.Ui.Gallery\FriskyMouse.csproj", "{171B8D91-EFA4-48FF-9D16-4473E93C220C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FriskyMouse", "FriskyMouse\FriskyMouse.csproj", "{171B8D91-EFA4-48FF-9D16-4473E93C220C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
