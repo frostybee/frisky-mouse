@@ -51,12 +51,12 @@
                                         FontTypography="BodyStrong"
                                         Text="XAML" />
 
-                                    <ui:CodeBlock
+                                    <!--<ui:CodeBlock
                                         Padding="0"
                                         Background="Transparent"
                                         BorderBrush="Transparent"
                                         BorderThickness="0"
-                                        Content="{TemplateBinding XamlCode}" />
+                                        Content="{TemplateBinding XamlCode}" />-->
                                 </StackPanel>
 
                                 <Border
@@ -72,12 +72,12 @@
                                         FontTypography="BodyStrong"
                                         Text="CSharp" />
 
-                                    <ui:CodeBlock
+                                    <!--<ui:CodeBlock
                                         Padding="0"
                                         Background="Transparent"
                                         BorderBrush="Transparent"
                                         BorderThickness="0"
-                                        Content="{TemplateBinding CsharpCode}" />
+                                        Content="{TemplateBinding CsharpCode}" />-->
                                 </StackPanel>
                             </StackPanel>
                         </ui:CardExpander>

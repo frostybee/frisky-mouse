@@ -10,5 +10,5 @@ public struct DisplayableIcon
 
     public string Symbol { get; set; }
 
-    public Wpf.Ui.Common.SymbolRegular Icon { get; set; }
+    public SymbolRegular Icon { get; set; }
 }
