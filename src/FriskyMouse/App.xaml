@@ -13,10 +13,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemesDictionary Theme="Dark" />
                 <ui:ControlsDictionary />                                
-                <ResourceDictionary Source="Source/Controls/TypographyControl.xaml" />
-                <ResourceDictionary Source="Source/Controls/PageControlDocumentation.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
             <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
         </ResourceDictionary>
     </Application.Resources>

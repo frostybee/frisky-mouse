@@ -20,7 +20,7 @@ public partial class MainWindowViewModel : ObservableObject
 
         _menuItems = new ObservableCollection<object>
         {
-            new NavigationViewItem("Home", SymbolRegular.Home24, typeof(DashboardPage)),                       
+            new NavigationViewItem("Home", SymbolRegular.Home48, typeof(DashboardPage)),                       
             new NavigationViewItemSeparator(),
             new NavigationViewItem("Spotlight", SymbolRegular.Circle48, typeof(HighlighterPage)),
             new NavigationViewItemSeparator(),

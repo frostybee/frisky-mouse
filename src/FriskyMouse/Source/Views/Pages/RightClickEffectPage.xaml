@@ -8,8 +8,7 @@
     xmlns:local="clr-namespace:FriskyMouse.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="Settings Page"
-    controls:PageControlDocumentation.Show="False"
+    Title="Settings Page"    
     d:DataContext="{d:DesignInstance local:SettingsPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"

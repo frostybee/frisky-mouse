@@ -8,8 +8,7 @@
     xmlns:local="clr-namespace:FriskyMouse.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="Settings Page"
-    controls:PageControlDocumentation.Show="False"
+    Title="Settings Page"    
     d:DataContext="{d:DesignInstance local:SettingsPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
@@ -31,14 +30,14 @@
             CommandParameter="theme_light"
             Content="Light"
             GroupName="themeSelect"
-            IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}" />
+            IsChecked="{Binding ViewModel.CurrentApplicationTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}" />
         <RadioButton
             Margin="0,8,0,0"
             Command="{Binding ViewModel.ChangeThemeCommand, Mode=OneWay}"
             CommandParameter="theme_dark"
             Content="Dark"
             GroupName="themeSelect"
-            IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}" />
+            IsChecked="{Binding ViewModel.CurrentApplicationTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}" />
 
         <TextBlock
             Margin="0,24,0,0"
