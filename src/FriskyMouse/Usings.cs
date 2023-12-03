@@ -17,4 +17,5 @@ global using FriskyMouse.Views.Windows;
 global using System.Collections.ObjectModel;
 global using FriskyMouse.Helpers;
 global using System.Windows.Media;
+global using System.IO;
 

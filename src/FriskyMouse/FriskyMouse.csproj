@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -12,7 +12,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <RootNamespace>FriskyMouse</RootNamespace>
     <Platforms>AnyCPU;x64</Platforms>
-    <RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>    
+    <RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
+    <!--<UseWindowsForms>True</UseWindowsForms>-->    
   </PropertyGroup>
 
   <ItemGroup>
@@ -54,6 +55,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FriskyMouse.Core\FriskyMouse.Core.csproj" />
+    <ProjectReference Include="..\FriskyMouse.Drawing\FriskyMouse.Drawing.csproj" />
     <ProjectReference Include="..\wpfui\src\Wpf.Ui\Wpf.Ui.csproj" />
   </ItemGroup>
 
