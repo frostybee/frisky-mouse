@@ -12,7 +12,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemesDictionary Theme="Dark" />
-                <ui:ControlsDictionary />                                
+                <ui:ControlsDictionary />
+                <ResourceDictionary Source="pack://application:,,,/Source/Resources/LayoutVariables.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
             <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
         </ResourceDictionary>

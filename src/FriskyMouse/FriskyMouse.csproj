@@ -16,6 +16,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Source\Controllers\**" />
+    <EmbeddedResource Remove="Source\Controllers\**" />
+    <None Remove="Source\Controllers\**" />
+    <Page Remove="Source\Controllers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="wpfui.ico" />
   </ItemGroup>
 
@@ -35,10 +42,6 @@
     <None Update="License - Images.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Source\Controllers\" />
   </ItemGroup>
 
   <ItemGroup>

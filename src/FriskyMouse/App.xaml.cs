@@ -32,8 +32,8 @@ public partial class App : Application
                 // Top-level pages
                 services.AddSingleton<DashboardPage>();
                 services.AddSingleton<DashboardViewModel>();
-                services.AddSingleton<HighlighterPage>();
-                services.AddSingleton<HighlighterViewModel>();
+                services.AddSingleton<SpotlightPage>();
+                services.AddSingleton<SpotlightViewModel>();
                 services.AddSingleton<ClickIndicatorPage>();
                 services.AddSingleton<ClickIndicatorViewModel>();
                 services.AddSingleton<RightClickEffectPage>();
