@@ -1,4 +1,6 @@
-﻿namespace FriskyMouse.Views.Windows;
+﻿using FriskyMouse.Core;
+
+namespace FriskyMouse.Views.Windows;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
@@ -8,7 +10,7 @@ public partial class MainWindow : IWindow
     public MainWindowViewModel ViewModel { get; }
     private bool _isUserClosedPane;
     private bool _isPaneOpenedOrClosedFromCode;
-
+    private readonly DecorationManager _decorationController;
     public MainWindow(
         MainWindowViewModel viewModel,
         INavigationService navigationService,
@@ -23,14 +25,23 @@ public partial class MainWindow : IWindow
         DataContext = this;
 
         InitializeComponent();
+        // Initialize the global managers.
+        _decorationController = DecorationManager.Instance;
 
         snackbarService.SetSnackbarPresenter(SnackbarPresenter);
         navigationService.SetNavigationControl(NavigationView);
         contentDialogService.SetContentPresenter(RootContentDialog);
-
+        //-- Page navigation service.
         NavigationView.SetServiceProvider(serviceProvider);
         NavigationView.Loaded += (_, _) => NavigationView.Navigate(typeof(DashboardPage));
         this.SetValue(TextOptions.TextFormattingModeProperty, TextFormattingMode.Ideal);
+        
+        Loaded += MainWindow_Loaded;
+    }
+
+    private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+    {
+        _decorationController.BootstrapApp();
     }
 
     private void OnNavigationSelectionChanged(object sender, RoutedEventArgs e)

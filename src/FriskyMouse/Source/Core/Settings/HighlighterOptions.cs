@@ -10,8 +10,6 @@
 */
 #endregion
 
-using FriskyMouse.Helpers;
-
 namespace FriskyMouse.Settings;
 using Color = System.Drawing.Color;
 public class HighlighterOptions
@@ -22,8 +20,7 @@ public class HighlighterOptions
     public int Width { get; set; } = 200;
     public int Height { get; set; } = 200;
     public bool IsFilled { get; set; } = true;
-    //public Color FillColor { get; set; } = Color.Yellow;
-    public Color FillColor { get; set; }
+    public Color FillColor { get; set; } = Color.Yellow;
     public byte OpacityPercentage { get; set; } = 50;
     public byte Opacity
     {

@@ -1,4 +1,6 @@
-﻿namespace FriskyMouse;
+﻿using FriskyMouse.Core;
+
+namespace FriskyMouse;
 
 /// <summary>
 /// Interaction logic for App.xaml
@@ -62,15 +64,17 @@ public partial class App : Application
     {
         _host.Start();
     }
-
+    
     /// <summary>
     /// Occurs when the application is closing.
     /// </summary>
     private void OnExit(object sender, ExitEventArgs e)
     {
         _host.StopAsync().Wait();
-
         _host.Dispose();
+        // Uninstall the gloabl mouse hook.
+        DecorationManager.Instance?.DisableHook();
+        DecorationManager.Instance?.Dispose();        
     }
 
     /// <summary>
