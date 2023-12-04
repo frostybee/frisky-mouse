@@ -1,4 +1,7 @@
-﻿namespace FriskyMouse.ViewModels.Windows;
+﻿
+using FriskyMouse.Core;
+
+namespace FriskyMouse.ViewModels.Windows;
 
 public partial class MainWindowViewModel : ObservableObject
 {
@@ -38,5 +41,11 @@ public partial class MainWindowViewModel : ObservableObject
                 TargetPageType = typeof(SettingsPage)
             }
         };
+    }
+
+    internal void DoStartUp()
+    {
+        // Initialize the global manager and bootstrap the application's logic.        
+        DecorationManager.Instance?.BootstrapApp();
     }
 }

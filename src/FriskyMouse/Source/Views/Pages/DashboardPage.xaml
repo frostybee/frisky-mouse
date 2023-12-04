@@ -51,11 +51,11 @@
                         <ui:TextBlock
                             FontTypography="Title"
                             Foreground="#FFFFFF"
-                            Text="Fluent UI" />
+                            Text="FriskyMouse" />
                         <ui:TextBlock
                             FontTypography="Subtitle"
                             Foreground="#B7FFFFFF"
-                            Text="Windows Presentation Foundation" />
+                            Text="Your Presentation Companion" />
                         <ui:TextBlock
                             FontTypography="BodyStrong"
                             Foreground="#B7FFFFFF"

@@ -10,7 +10,7 @@ public partial class MainWindow : IWindow
     public MainWindowViewModel ViewModel { get; }
     private bool _isUserClosedPane;
     private bool _isPaneOpenedOrClosedFromCode;
-    private readonly DecorationManager _decorationController;
+    
     public MainWindow(
         MainWindowViewModel viewModel,
         INavigationService navigationService,
@@ -25,9 +25,6 @@ public partial class MainWindow : IWindow
         DataContext = this;
 
         InitializeComponent();
-        // Initialize the global managers.
-        _decorationController = DecorationManager.Instance;
-
         snackbarService.SetSnackbarPresenter(SnackbarPresenter);
         navigationService.SetNavigationControl(NavigationView);
         contentDialogService.SetContentPresenter(RootContentDialog);
@@ -40,8 +37,8 @@ public partial class MainWindow : IWindow
     }
 
     private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-    {
-        _decorationController.BootstrapApp();
+    {        
+        //ViewModel.DoStartUp();
     }
 
     private void OnNavigationSelectionChanged(object sender, RoutedEventArgs e)

@@ -2,5 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=System.Runtime">
 
-    <system:Double x:Key="MainContainerMargin">42</system:Double>
+    <Thickness x:Key="MainContainerMargin">35</Thickness>
+    <system:Double x:Key="PageHeaderFontSize" >25</system:Double>
 </ResourceDictionary>
