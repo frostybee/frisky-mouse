@@ -13,15 +13,9 @@
     <RootNamespace>FriskyMouse</RootNamespace>
     <Platforms>AnyCPU;x64</Platforms>
     <RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
+    <UseWindowsForms>False</UseWindowsForms>
     <!--<UseWindowsForms>True</UseWindowsForms>-->    
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Source\Controllers\**" />
-    <EmbeddedResource Remove="Source\Controllers\**" />
-    <None Remove="Source\Controllers\**" />
-    <Page Remove="Source\Controllers\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <Content Include="wpfui.ico" />
@@ -36,7 +30,7 @@
     <Resource Include="Assets\WinUiGallery\MenuBar.png" />
     <Resource Include="Assets\wpfui.png" />
     <Resource Include="Assets\wpfui_full.png" />
-    <Resource Include="Source\CodeSamples\Typography\TypographySample_xaml.txt" />
+    <Resource Include="Source\UI\CodeSamples\Typography\TypographySample_xaml.txt" />
   </ItemGroup>
 
   <ItemGroup>

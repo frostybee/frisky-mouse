@@ -95,7 +95,7 @@
                 Padding="0"
                 VerticalAlignment="Stretch"
                 Command="{Binding ViewModel.CardClickCommand, Mode=OneWay}"
-                CommandParameter="Highlighter"
+                CommandParameter="Spotlight"
                 IsChevronVisible="False">
                 <Grid>
                     <Grid.ColumnDefinitions>

@@ -13,7 +13,7 @@
 using FriskyMouse.Helpers;
 
 namespace FriskyMouse.Settings;
-
+using Color = System.Drawing.Color;
 public class HighlighterOptions
 {
     #region Properties        

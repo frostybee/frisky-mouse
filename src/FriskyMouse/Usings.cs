@@ -18,4 +18,8 @@ global using System.Collections.ObjectModel;
 global using FriskyMouse.Helpers;
 global using System.Windows.Media;
 global using System.IO;
+global using System.Drawing;
+using System.Drawing.Imaging;
+using System.Windows.Forms;
+
 

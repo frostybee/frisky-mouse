@@ -74,7 +74,7 @@ public static class NativeMethods
     /// <returns>If the function succeeds, the return value is true.</returns>
     [DllImport(USER32_DLL, CharSet = CharSet.Auto,
         CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-    internal static extern IntPtr CallNextHookEx(IntPtr hHook, int code, IntPtr wParam, IntPtr lParam);
+    public static extern IntPtr CallNextHookEx(IntPtr hHook, int code, IntPtr wParam, IntPtr lParam);
 
     [DllImport(USER32_DLL, SetLastError = true)]
     public static extern IntPtr GetDC(IntPtr hWnd);

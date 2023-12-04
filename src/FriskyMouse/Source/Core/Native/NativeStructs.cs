@@ -20,7 +20,7 @@ namespace FriskyMouse.NativeApi;
 /// <see cref="https://docs.microsoft.com/en-gb/windows/win32/api/winuser/ns-winuser-msllhookstruct?redirectedfrom=MSDN"/>
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
-internal struct MSLLHOOKSTRUCT
+public struct MSLLHOOKSTRUCT
 {
     /// <summary>
     /// The x- and y-coordinates of the cursor, in per-monitor-aware screen coordinates.

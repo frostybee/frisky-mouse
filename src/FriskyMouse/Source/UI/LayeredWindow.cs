@@ -11,8 +11,10 @@
 #endregion
 
 using FriskyMouse.NativeApi;
-using System.Drawing.Imaging;
+
 using NativeStructs = FriskyMouse.NativeApi;
+using Color = System.Drawing.Color;
+using CreateParams = System.Windows.Forms.CreateParams;
 
 namespace FriskyMouse.UI;
 
@@ -20,7 +22,7 @@ namespace FriskyMouse.UI;
 /// Represents a lightweight, click-through window onto which 
 /// the mouse spotlight and other click indicators are rendered. 
 /// </summary>
-internal class LayeredWindow : NativeWindow, IDisposable
+public class LayeredWindow : System.Windows.Forms.NativeWindow, IDisposable
 {
     // Handle of the main window.
     private int handle;
@@ -40,7 +42,7 @@ internal class LayeredWindow : NativeWindow, IDisposable
     #endregion
     public LayeredWindow()
     {
-        // TODO: fix scaling issue see winforms settings.
+        // TODO: fix scaling issue see WinForms settings.
         CreateParams cp = new CreateParams();
         // 
         Height = 200;
@@ -130,7 +132,7 @@ internal class LayeredWindow : NativeWindow, IDisposable
     internal void SetBitmap(Bitmap newBitmap, byte opacity)
     {
         // Does this bitmap contain an alpha channel?
-        if (newBitmap.PixelFormat != PixelFormat.Format32bppArgb)
+        if (newBitmap.PixelFormat != System.Drawing.Imaging.PixelFormat.Format32bppArgb)
         {
             throw new ApplicationException("The bitmap must be 32ppp with alpha-channel.");
         }
