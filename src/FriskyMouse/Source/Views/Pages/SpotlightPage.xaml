@@ -6,7 +6,8 @@
     xmlns:local="clr-namespace:FriskyMouse.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="Settings Page"    
+    xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
+    Title="Mouse Spotlight Page"    
     d:DataContext="{d:DesignInstance local:SpotlightPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
@@ -31,14 +32,19 @@
                 <!--<TextBlock FontSize="{StaticResource PageHeaderFontSize}"
                        FontWeight="Normal"
                        Text="Mouse Highlighter Settings" />-->
-                <ui:ToggleSwitch Grid.Column="0"
+                <ui:ToggleSwitch Grid.Column="0"                                 
+                                 x:Name="tglSpotlight"
                                  Content="Enable/Disable Spotlight"
-                                 IsEnabled="{Binding ViewModel.IsMouseSpotlightEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SpotlightPage},Mode=OneWay}" 
-                                 Command="{Binding ViewModel.SpotlightSwitchClickedCommand, 
-                    RelativeSource={RelativeSource Mode=FindAncestor, 
-                    AncestorType=local:SpotlightPage}, Mode=OneWay}"
-                                 CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
-                                 />
+                                 IsChecked="{Binding ViewModel.IsMouseSpotlightEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SpotlightPage},Mode=OneWay}">
+                    <Behaviors:Interaction.Triggers>
+                        <Behaviors:EventTrigger EventName="Checked" SourceObject="{Binding ElementName=tglSpotlight}">
+                            <Behaviors:InvokeCommandAction Command="{Binding ViewModel.EnableSpotlightCommand}"/>
+                        </Behaviors:EventTrigger>
+                        <Behaviors:EventTrigger EventName="Unchecked" SourceObject="{Binding ElementName=tglSpotlight}">
+                            <Behaviors:InvokeCommandAction Command="{Binding ViewModel.DisableSpotlightCommand}"/>
+                        </Behaviors:EventTrigger>
+                    </Behaviors:Interaction.Triggers>
+                </ui:ToggleSwitch>
                 <!--<ui:Button Grid.Column="0"
                            Command="{Binding ViewModel.CounterIncrementCommand, Mode=OneWay}"
                            Content="Click me!"

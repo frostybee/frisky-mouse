@@ -10,7 +10,7 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     [ObservableProperty]
     private bool _isMouseSpotlightEnabled = true;
     public void OnNavigatedFrom()
-    {        
+    {
     }
     public void OnNavigatedTo()
     {
@@ -18,14 +18,21 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
             InitializeViewModel();
     }
     private void InitializeViewModel()
-    {        
+    {
         _isInitialized = true;
     }
 
     [RelayCommand]
-    private void OnSpotlightSwitchClicked()
+    private void OnEnableSpotlight(object sender)
     {
-        System.Windows.MessageBox.Show(_isMouseSpotlightEnabled.ToString());
+        System.Windows.MessageBox.Show(IsMouseSpotlightEnabled.ToString());
+        IsMouseSpotlightEnabled = true;
+    }
+    [RelayCommand]
+    private void OnDisableSpotlight(object sender)
+    {
+        IsMouseSpotlightEnabled = false;
+        System.Windows.MessageBox.Show(IsMouseSpotlightEnabled.ToString());
     }
 }
 
