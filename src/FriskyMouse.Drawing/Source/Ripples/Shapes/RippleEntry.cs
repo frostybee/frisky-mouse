@@ -138,7 +138,7 @@ public class RippleEntry
         }
     }
 
-    internal void ChangeColor(RippleProfileOptions options)
+    internal void ChangeColor(RippleProfileSettings options)
     {
         if (IsStyleable)
         {

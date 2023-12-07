@@ -14,6 +14,7 @@
     <Platforms>AnyCPU;x64</Platforms>
     <RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
     <UseWindowsForms>False</UseWindowsForms>
+    <BaseOutputPath>..\bin</BaseOutputPath>
     <!--<UseWindowsForms>True</UseWindowsForms>-->    
   </PropertyGroup>
 
@@ -53,6 +54,11 @@
     <ProjectReference Include="..\FriskyMouse.Core\FriskyMouse.Core.csproj" />
     <ProjectReference Include="..\FriskyMouse.Drawing\FriskyMouse.Drawing.csproj" />
     <ProjectReference Include="..\wpfui\src\Wpf.Ui\Wpf.Ui.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="System.Text" />
+    <Using Include="System.Text.Json.Serialization" />
   </ItemGroup>
 
 </Project>

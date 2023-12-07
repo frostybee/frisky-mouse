@@ -11,11 +11,13 @@
 #endregion
 
 using FriskyMouse.Drawing.Animation;
+using FriskyMouse.Settings;
 
 namespace FriskyMouse.Drawing.Ripples;
 
-public class RippleProfileOptions
+public class RippleProfileSettings
 {
+    public HotkeySettings DefaultActivationShortcut => new HotkeySettings(true, false, false, true, 0x48);
     public bool IsEnabled { get; set; } = true;
     public RippleProfileType CurrentRippleProfile { get; set; } = RippleProfileType.Circle;
 

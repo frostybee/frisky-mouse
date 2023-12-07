@@ -1,4 +1,5 @@
 ﻿using FriskyMouse.Core;
+using FriskyMouse.Settings;
 
 namespace FriskyMouse;
 
@@ -7,6 +8,10 @@ namespace FriskyMouse;
 /// </summary>
 public partial class App : Application
 {
+    public static bool IsPortable { get; private set; } = true;
+    public static string BuildInfo { get; private set; } = "Release";
+    public const string ApplicationName = "FriskyMouse";
+
     // The .NET Generic Host provides dependency injection, configuration, logging, and other services.
     // https://docs.microsoft.com/dotnet/core/extensions/generic-host
     // https://docs.microsoft.com/dotnet/core/extensions/dependency-injection
@@ -50,6 +55,14 @@ public partial class App : Application
         .Build();
 
     /// <summary>
+    /// Occurs when the application is loading.
+    /// </summary>
+    private void OnStartup(object sender, StartupEventArgs e)
+    {
+        _host.Start();
+        SettingsManager.LoadSettings();
+    }
+    /// <summary>
     /// Gets registered service.
     /// </summary>
     /// <typeparam name="T">Type of the service to get.</typeparam>
@@ -60,14 +73,6 @@ public partial class App : Application
     }
 
     /// <summary>
-    /// Occurs when the application is loading.
-    /// </summary>
-    private void OnStartup(object sender, StartupEventArgs e)
-    {
-        _host.Start();
-    }
-    
-    /// <summary>
     /// Occurs when the application is closing.
     /// </summary>
     private void OnExit(object sender, ExitEventArgs e)
@@ -76,7 +81,8 @@ public partial class App : Application
         _host.Dispose();
         // Uninstall the gloabl mouse hook.
         DecorationManager.Instance?.DisableHook();
-        DecorationManager.Instance?.Dispose();        
+        DecorationManager.Instance?.Dispose();
+        SettingsManager.SaveSettings();
     }
 
     /// <summary>

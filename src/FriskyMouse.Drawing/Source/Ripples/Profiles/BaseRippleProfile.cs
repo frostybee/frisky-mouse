@@ -32,7 +32,7 @@ public abstract class BaseRippleProfile : IDisposable, IConstructable
     /// </summary>
     /// <param name="inRippleProfile">The profile to be rendered.</param>
     /// <param name="progress">The interpolated value that indicates the progress of the currently running animation. </param>
-    public void RenderRipples(Graphics _graphics, RippleProfileOptions options, double progress)
+    public void RenderRipples(Graphics _graphics, RippleProfileSettings options, double progress)
     {
         // We adjust the ripple properties according to the provided settings.  
         _ripples.ForEach(ripple =>
@@ -60,7 +60,7 @@ public abstract class BaseRippleProfile : IDisposable, IConstructable
         });
     }
 
-    public void UpdateRipplesStyle(RippleProfileOptions options)
+    public void UpdateRipplesStyle(RippleProfileSettings options)
     {
         _ripples.ForEach(ripple =>
             {

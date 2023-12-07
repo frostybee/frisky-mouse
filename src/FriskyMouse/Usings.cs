@@ -21,5 +21,8 @@ global using System.IO;
 global using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
+using System.Text.Json.Serialization;
+using System.Text;
+
 
 

@@ -43,7 +43,7 @@ internal class ClickEffectController: IDisposable
     private Graphics _graphics;
     private readonly ValueAnimator _animationManager;
     private BaseRippleProfile _currentRipplesProfile;
-    private readonly RippleProfileOptions _settings;
+    private readonly RippleProfileSettings _settings;
     public delegate void AnimationCompletedEventHandler();
     public event AnimationCompletedEventHandler AnimationCompleted;
 
@@ -51,7 +51,7 @@ internal class ClickEffectController: IDisposable
     private bool disposedValue;
     public RippleProfileType RippleType { get; set; }
 
-    public ClickEffectController(RippleProfileOptions settings)
+    public ClickEffectController(RippleProfileSettings settings)
     {
         _settings = settings;
         _highlighterWindow = new LayeredWindow();                        
@@ -145,7 +145,7 @@ internal class ClickEffectController: IDisposable
         }
     }
 
-    internal void ApplySettings(RippleProfileOptions options)
+    internal void ApplySettings(RippleProfileSettings options)
     {
         _animationManager.Increment = options.AnimationSpeed;
         _animationManager.Interpolation = options.InterpolationType;

@@ -19,9 +19,9 @@ internal class SettingsWrapper
     #region Properties                
     public ApplicationSettings ApplicationSettings { get; set; } = new ApplicationSettings();
 
-    public HighlighterOptions HighlighterOptions { get; set; } = new HighlighterOptions();
-    public RippleProfileOptions LeftClickOptions { get; set; } = new RippleProfileOptions();
-    public RippleProfileOptions RightClickOptions { get; set; } = new RippleProfileOptions();
+    public HighlighterSettings HighlighterProperties { get; set; } = new HighlighterSettings();
+    public RippleProfileSettings LeftClickOptions { get; set; } = new RippleProfileSettings();
+    public RippleProfileSettings RightClickOptions { get; set; } = new RippleProfileSettings();
 
     #endregion
 
