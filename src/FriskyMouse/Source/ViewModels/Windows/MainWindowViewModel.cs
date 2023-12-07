@@ -30,6 +30,8 @@ public partial class MainWindowViewModel : ObservableObject
             new NavigationViewItem("Click Effect", SymbolRegular.CursorClick24, typeof(ClickIndicatorPage)),
             new NavigationViewItemSeparator(),
             new NavigationViewItem("Right Click Effect", SymbolRegular.CursorHover32, typeof(RightClickEffectPage)),
+            new NavigationViewItemSeparator(),
+            new NavigationViewItem("UI Tests", SymbolRegular.Ruler48, typeof(UiTestsPage)),
         };
 
         _footerMenuItems = new ObservableCollection<object>()

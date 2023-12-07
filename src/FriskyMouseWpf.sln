@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wpf.Ui", "wpfui\src\Wpf.Ui\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FriskyMouse", "FriskyMouse\FriskyMouse.csproj", "{171B8D91-EFA4-48FF-9D16-4473E93C220C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FriskyMouse.Core", "FriskyMouse.Core\FriskyMouse.Core.csproj", "{16F9990C-7BA2-400F-88EA-98FD00CA84CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FriskyMouse.Core", "FriskyMouse.Core\FriskyMouse.Core.csproj", "{16F9990C-7BA2-400F-88EA-98FD00CA84CD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FriskyMouse.Drawing", "FriskyMouse.Drawing\FriskyMouse.Drawing.csproj", "{C170CDDB-C91E-424C-BB45-364D677EAA71}"
 EndProject
