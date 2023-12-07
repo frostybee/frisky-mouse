@@ -29,9 +29,9 @@ public class RippleProfileSettings
 
     #region Visual Appearance
     public bool CanFadeColor { get; set; } = false;
-    public int InitialOpacity { get; set; } = 100;
-    public int RadiusMultiplier { get; set; } = 10;
+    public ushort InitialOpacity { get; set; } = 100;
+    public ushort RadiusMultiplier { get; set; } = 10;
     public Color FillColor { get; set; } = Color.DeepPink;
-    public int OpacityMultiplier { get; set; } = 40;
+    public ushort OpacityMultiplier { get; set; } = 40;
     #endregion    
 }

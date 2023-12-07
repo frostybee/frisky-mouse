@@ -16,12 +16,18 @@ namespace FriskyMouse.Settings;
 
 internal class SettingsWrapper
 {
-    #region Properties                
+    #region Properties      
+    [JsonPropertyName("applicationSettings")]
     public ApplicationSettings ApplicationSettings { get; set; } = new ApplicationSettings();
 
+    [JsonPropertyName("highlighterSettings")]
     public HighlighterSettings HighlighterProperties { get; set; } = new HighlighterSettings();
-    public RippleProfileSettings LeftClickOptions { get; set; } = new RippleProfileSettings();
-    public RippleProfileSettings RightClickOptions { get; set; } = new RippleProfileSettings();
+
+    [JsonPropertyName("mouseLeftClickSettings")]
+    public RippleProfileSettings LeftClickProperties { get; set; } = new RippleProfileSettings();
+
+    [JsonPropertyName("mouseRightClickSettings")]
+    public RippleProfileSettings RightClickProperties { get; set; } = new RippleProfileSettings();
 
     #endregion
 

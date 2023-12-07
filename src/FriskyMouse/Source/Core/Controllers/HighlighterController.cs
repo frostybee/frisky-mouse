@@ -67,7 +67,7 @@ internal class HighlighterController : IDisposable
     /// <param name="inPoint">A point containing the current X and Y coordinates of the mouse cursor.</param>
     internal void MoveSpotlight(POINT inPoint)
     {
-        if (_options.Enabled)
+        if (_options.IsEnabled)
         {
             if (_spotlightBitmap != null)
             {
@@ -82,7 +82,7 @@ internal class HighlighterController : IDisposable
     /// <param name="inPoint"></param>
     internal void BringToFront()
     {
-        if (_options.Enabled)
+        if (_options.IsEnabled)
         {
             // Adjust the coordinates of the layered window based on the spotlight's bitmap size.                
             SetLayeredWindowCoordinates(FMAppHelper.GetCursorPosition());

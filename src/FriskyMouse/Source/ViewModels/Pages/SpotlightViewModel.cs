@@ -1,11 +1,12 @@
-﻿using System.Diagnostics.Metrics;
+﻿using FriskyMouse.Settings;
+using System.Diagnostics.Metrics;
 using System.Windows.Forms;
 
 namespace FriskyMouse.ViewModels.Pages;
 public partial class SpotlightViewModel : ObservableObject, INavigationAware
 {
     private bool _isInitialized = false;
-
+    private HighlighterSettings _settings;
     // Mouse highlighter settings. 
     [ObservableProperty]
     private bool _isMouseSpotlightEnabled = false;
@@ -13,6 +14,8 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     private ushort _spotlightRadius = 0;
     [ObservableProperty]
     private bool _isSpotlightFilled = false;
+    [ObservableProperty]
+    private byte _spotlightOpacity = 0;
 
     // Spotlight's outline settings:
     [ObservableProperty]
@@ -38,19 +41,30 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     }
     private void InitializeViewModel()
     {
+        _settings = SettingsManager.Settings.HighlighterProperties;
         _isInitialized = true;
         IsMouseSpotlightEnabled = true;
+        SpotlightRadius = _settings.Radius;
+        SpotlightOpacity = _settings.OpacityPercentage;
+        IsSpotlightFilled = _settings.IsFilled;
     }
     partial void OnIsMouseSpotlightEnabledChanged(bool value)
     {
-
-        // TODO: save the new value into the settings store.
+        _settings.IsEnabled = value;
     }
 
     partial void OnSpotlightRadiusChanged(ushort value)
     {
         Console.WriteLine("Radius: " + value.ToString());
+        _settings.Radius = value;
     }
-
+    partial void OnSpotlightOpacityChanged(byte value)
+    {
+        _settings.OpacityPercentage = value;
+    }
+    partial void OnIsSpotlightFilledChanged(bool value)
+    {
+        _settings.IsFilled = value;
+    }
 }
 
