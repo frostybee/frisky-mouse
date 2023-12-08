@@ -2,10 +2,8 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
-    <LangVersion>12.0</LangVersion>
-    <!--<Nullable>enable</Nullable>-->
-    <ImplicitUsings>enable</ImplicitUsings>
+    <TargetFramework>$(TargetFramework)</TargetFramework>    
+    <!--<Nullable>enable</Nullable>-->    
     <UseWPF>true</UseWPF>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
     <ApplicationIcon>wpfui.ico</ApplicationIcon>
@@ -14,9 +12,24 @@
     <Platforms>AnyCPU;x64</Platforms>
     <RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
     <UseWindowsForms>False</UseWindowsForms>
-    <BaseOutputPath>..\bin</BaseOutputPath>
+    <BaseOutputPath>..\bin</BaseOutputPath>    
     <!--<UseWindowsForms>True</UseWindowsForms>-->    
   </PropertyGroup>
+
+  <!--<PropertyGroup>
+    --><!--https://github.com/nulastudio/NetBeauty2--><!--
+    <BeautySharedRuntimeMode>False</BeautySharedRuntimeMode>
+    <BeautyLibsDir Condition="$(BeautySharedRuntimeMode) == 'True'">../lib</BeautyLibsDir>
+    <BeautyLibsDir Condition="$(BeautySharedRuntimeMode) != 'True'">./lib</BeautyLibsDir>
+    --><!-- Exclude files if necessary
+		<BeautyExcludes>xyz.dll</BeautyExcludes>
+		--><!--    
+    <DisableBeauty>False</DisableBeauty>
+    <BeautyOnPublishOnly>False</BeautyOnPublishOnly>
+    <BeautyEnableDebugging>False</BeautyEnableDebugging>
+    <BeautyUsePatch>False</BeautyUsePatch>
+    <BeautyLogLevel>Info</BeautyLogLevel>
+  </PropertyGroup>-->
 
   <ItemGroup>
     <Content Include="wpfui.ico" />
@@ -44,6 +57,7 @@
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
+    <PackageReference Include="nulastudio.NetBeauty" Version="2.1.4.1" />
   </ItemGroup>
 
   <ItemGroup>

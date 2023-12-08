@@ -5,8 +5,10 @@ using System.Windows.Forms;
 namespace FriskyMouse.ViewModels.Pages;
 public partial class SpotlightViewModel : ObservableObject, INavigationAware
 {
+    #region Fields
     private bool _isInitialized = false;
     private HighlighterSettings _settings;
+
     // Mouse highlighter settings. 
     [ObservableProperty]
     private bool _isMouseSpotlightEnabled = false;
@@ -29,7 +31,8 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     [ObservableProperty]
     private ushort _shadowOpacity = 1;
     [ObservableProperty]
-    private bool _isShadowEnabled = false;
+    private bool _isShadowEnabled = false; 
+    #endregion
 
     public void OnNavigatedFrom()
     {

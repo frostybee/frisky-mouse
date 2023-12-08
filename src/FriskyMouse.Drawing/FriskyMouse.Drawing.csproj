@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net7.0-windows</TargetFramework>
+		<TargetFramework>$(TargetFramework)</TargetFramework>
 		<OutputType>Library</OutputType>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 		<UseWindowsForms>true</UseWindowsForms>
 		<ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>		
-		<BaseOutputPath>..\bin</BaseOutputPath>
+		<BaseOutputPath></BaseOutputPath>
 		<Platforms>AnyCPU;x64</Platforms>
 		<StartupObject />
 		<AssemblyTitle>FriskyMouse HelpersLib</AssemblyTitle>
@@ -16,6 +16,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<RootNamespace>FriskyMouse.Drawing</RootNamespace>
 		<Configurations>Debug;Release;Portable;SelfContained;MicrosoftStore</Configurations>
+		<SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
 	</PropertyGroup>	
 	<ItemGroup>
 		<Compile Remove="Source\Animation\Easings\SpringEasing.cs" />
