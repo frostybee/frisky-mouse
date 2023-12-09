@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:controls="clr-namespace:FriskyMouse.Ui.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:FriskyMouse.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -20,9 +21,11 @@
     <Grid Margin="{StaticResource MainContainerMargin}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="71*" />
-            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="20*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -40,17 +43,58 @@
             </Grid>
             <Separator Margin="0,5,0,0" />
         </StackPanel>
-        <StackPanel
-            Grid.Row="1"
-            Grid.RowSpan="2"
-            Grid.ColumnSpan="2"
-            Margin="0,20,0,0">
+        <!--<StackPanel Grid.Row="1" Margin="0,20,0,0">
             <ui:ToggleSwitch
                 x:Name="tglSpotlight"
                 Grid.Column="0"
                 Content="Enable/Disable Spotlight"
                 IsChecked="{Binding ViewModel.IsMouseSpotlightEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
+        <ui:Card Grid.Row="2" Margin="0,20,0,0">
+            <Grid>
+                <TextBlock
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Text="Test" />
+                <ui:ToggleSwitch
+                    x:Name="tglOi"
+                    HorizontalAlignment="Right"
+                    Content="Enable/Disable Spotlight"
+                    IsChecked="{Binding ViewModel.IsMouseSpotlightEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </Grid>
+        </ui:Card>-->
+
+        <!--<ui:Card Grid.Row="1" Margin="0,0.5,0,0">
+            <Grid>
+                <TextBlock
+                    Padding="10"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Text="Test" />
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <ui:TextBlock
+                        Margin="0,0,10,0"
+                        VerticalAlignment="Center"
+                        Text="{Binding ViewModel.SwitchStatusText}" />
+                    <ui:ToggleSwitch
+                        x:Name="tglOsi"
+                        Content=""
+                        IsChecked="{Binding ViewModel.IsMouseSpotlightEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+
+            </Grid>
+        </ui:Card>-->
+        <!--<ui:CardExpander Grid.Row="3" Header="Oiii Click Me!" />-->
+        <!--<epco:PageControlDocumentation Grid.Row="2" />
+        <controls:SliderCard Grid.Row="2" Background="red" />-->
+        <controls:SwitchCard
+            Grid.Row="2"
+            IsToggleSwitchEnabled="{Binding ViewModel.IsMouseSpotlightEnabled, Mode=TwoWay}"
+            SwitchStatusText="{Binding ViewModel.SwitchStatusText}" />
+        <controls:SwitchCard
+            Grid.Row="3"
+            IsToggleSwitchEnabled="{Binding ViewModel.IsMouseSpotlightEnabled, Mode=TwoWay}"
+            SwitchStatusText="{Binding ViewModel.SwitchStatusText}" />
     </Grid>
 </Page>
 
