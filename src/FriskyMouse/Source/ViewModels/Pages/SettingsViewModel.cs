@@ -1,4 +1,5 @@
 ﻿
+
 namespace FriskyMouse.ViewModels.Pages;
 
 public partial class SettingsViewModel : ObservableObject, INavigationAware

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.Metrics;
+﻿using ColorPicker.Models;
+using System.Diagnostics.Metrics;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
@@ -11,6 +12,8 @@ public partial class UiTestsViewModel : ObservableObject, INavigationAware
     private bool _isMouseSpotlightEnabled = false;
     [ObservableProperty]
     private string _switchStatusText = "On";
+    [ObservableProperty]
+    private System.Windows.Media.Color _selectedColor;
     public void OnNavigatedFrom()
     {
     }
@@ -48,7 +51,12 @@ public partial class UiTestsViewModel : ObservableObject, INavigationAware
     partial void OnIsMouseSpotlightEnabledChanged(bool value)
     {
         UpdateSwitchStatusText();
-        System.Windows.MessageBox.Show(IsMouseSpotlightEnabled.ToString());
+        //System.Windows.MessageBox.Show(IsMouseSpotlightEnabled.ToString());
+    }
+
+    partial void OnSelectedColorChanged(System.Windows.Media.Color value)
+    {
+        Console.WriteLine(value);
     }
 }
 

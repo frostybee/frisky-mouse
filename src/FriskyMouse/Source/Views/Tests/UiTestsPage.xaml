@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
     xmlns:controls="clr-namespace:FriskyMouse.Ui.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:FriskyMouse.Views.Pages"
@@ -17,6 +18,14 @@
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/ColorPicker;component/Styles/DefaultColorPickerStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </Page.Resources>
 
     <Grid Margin="{StaticResource MainContainerMargin}">
         <Grid.ColumnDefinitions>
@@ -24,6 +33,7 @@
             <ColumnDefinition Width="20*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -43,6 +53,39 @@
             </Grid>
             <Separator Margin="0,5,0,0" />
         </StackPanel>
+        <ui:Card
+            Grid.Row="4"
+            Width="80"
+            Height="80">
+            <Grid Width="60" Height="60">
+                <colorpicker:PortableColorPicker
+                    HintColor="Transparent"
+                    SelectedColor="{Binding ViewModel.SelectedColor, Mode=TwoWay}"
+                    ShowAlpha="False"
+                    ShowFractionalPart="False"
+                    SmallChange="5"
+                    Style="{StaticResource DefaultColorPickerStyle}"
+                    UseHintColor="True" />
+            </Grid>
+        </ui:Card>
+        <ui:CardExpander
+            Grid.Row="2"
+            Header="Opacity"
+            Icon="pack://application:,,,/Assets/WinUiGallery/Button.png">
+            <StackPanel Opacity="0.9" Orientation="Vertical">
+                <controls:SettingsCard Grid.Row="2">
+                    <Slider Width="200" AutoToolTipPlacement="TopLeft" />
+                </controls:SettingsCard>
+                <controls:SettingsCard Grid.Row="3">
+                    <ui:ToggleSwitch />
+                </controls:SettingsCard>
+                <controls:SwitchCard
+                    Grid.Row="4"
+                    IsToggleSwitchEnabled="{Binding ViewModel.IsMouseSpotlightEnabled, Mode=TwoWay}"
+                    SwitchStatusText="{Binding ViewModel.SwitchStatusText}" />
+            </StackPanel>
+        </ui:CardExpander>
+
         <!--<StackPanel Grid.Row="1" Margin="0,20,0,0">
             <ui:ToggleSwitch
                 x:Name="tglSpotlight"
@@ -87,14 +130,25 @@
         <!--<ui:CardExpander Grid.Row="3" Header="Oiii Click Me!" />-->
         <!--<epco:PageControlDocumentation Grid.Row="2" />
         <controls:SliderCard Grid.Row="2" Background="red" />-->
-        <controls:SwitchCard
-            Grid.Row="2"
-            IsToggleSwitchEnabled="{Binding ViewModel.IsMouseSpotlightEnabled, Mode=TwoWay}"
-            SwitchStatusText="{Binding ViewModel.SwitchStatusText}" />
+
+        <!--
         <controls:SwitchCard
             Grid.Row="3"
             IsToggleSwitchEnabled="{Binding ViewModel.IsMouseSpotlightEnabled, Mode=TwoWay}"
-            SwitchStatusText="{Binding ViewModel.SwitchStatusText}" />
+            SwitchStatusText="{Binding ViewModel.SwitchStatusText}" />-->
+        <!--<ui:Card Grid.Row="4" Footer="Oiiiiiiii">
+            <Slider Maximum="100" Minimum="0" />
+        </ui:Card>-->
+        <!--<ui:Card Grid.Row="3" Footer="This is a footer">
+            <ui:TextBlock Text="Test" />
+        </ui:Card>-->
+        <!--
+         Displays a glyph
+        <TextBlock
+            Grid.Row="3"
+            FontFamily="Segoe UI Symbol"
+            Foreground="Wheat"
+            Text="&#xE001;" />-->
     </Grid>
 </Page>
 

@@ -94,6 +94,7 @@
                     Width="300"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
+                    AutoToolTipPlacement="TopLeft"
                     Maximum="100"
                     Minimum="0"
                     Value="{Binding ViewModel.SpotlightOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />

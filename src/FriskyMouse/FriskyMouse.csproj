@@ -16,6 +16,11 @@
     <!--<UseWindowsForms>True</UseWindowsForms>-->    
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Source\UI\CodeSamples\SettingsCard.cs" />
+    <Compile Remove="Source\UI\CodeSamples\SettingsCard.Properties.cs" />
+  </ItemGroup>
+
   <!--<PropertyGroup>
     --><!--https://github.com/nulastudio/NetBeauty2--><!--
     <BeautySharedRuntimeMode>False</BeautySharedRuntimeMode>
@@ -58,6 +63,7 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
     <PackageReference Include="nulastudio.NetBeauty" Version="2.1.4.1" />
+    <PackageReference Include="PixiEditor.ColorPicker" Version="3.4.1" />
   </ItemGroup>
 
   <ItemGroup>
