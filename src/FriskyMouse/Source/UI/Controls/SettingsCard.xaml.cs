@@ -7,21 +7,21 @@
 namespace FriskyMouse.Ui.Controls;
 
 /// <summary>
-/// Simple Card with content and <see cref="Footer"/>.
+/// Settings Card with Icon, header, description and content and <see cref="Footer"/>.
 /// </summary>
 //[ToolboxItem(true)]
 //[ToolboxBitmap(typeof(Card), "Card.bmp")]
-public class SettingsCard : System.Windows.Controls.ContentControl
+public class SettingsCard : CardControl
 {
-    public static readonly DependencyProperty HeaderTextProperty = DependencyProperty.Register(
-       nameof(HeaderText),
+    public static readonly DependencyProperty DescriptionTextProperty = DependencyProperty.Register(
+       nameof(DescriptionText),
        typeof(string),
        typeof(SettingsCard),
        new PropertyMetadata(null)
    );
-    public string? HeaderText
+    public string? DescriptionText
     {
-        get => (string)GetValue(HeaderTextProperty);
-        set => SetValue(HeaderTextProperty, value);
+        get => (string)GetValue(DescriptionTextProperty);
+        set => SetValue(DescriptionTextProperty, value);
     }
 }

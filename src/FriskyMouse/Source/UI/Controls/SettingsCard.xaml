@@ -57,45 +57,37 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <ui:Card
-                            Grid.Row="0"
-                            Height="Auto"
-                            Margin="0,0.5,0,0">
-                            <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <StackPanel
-                                    x:Name="HeaderPanel"
-                                    Grid.Column="0"
-                                    Margin="15,0,24,0"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    Orientation="Vertical">
-                                    <TextBlock
-                                        Margin="0,0,10,0"
-                                        VerticalAlignment="Center"
-                                        Text="This is a header"
-                                        TextWrapping="Wrap" />
-                                    <TextBlock
-                                        Margin="0,0,10,0"
-                                        VerticalAlignment="Center"
-                                        Text="This is a description"
-                                        TextWrapping="Wrap" />
+                        <ui:CardControl
+                            Margin="4"
+                            Padding="{StaticResource SettingsCardPadding}"
+                            Icon="{ui:SymbolIcon FlashSettings24}">
+                            <ui:CardControl.Header>
+                                <StackPanel>
+                                    <ui:TextBlock
+                                        Margin="0"
+                                        FontTypography="BodyStrong"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                        Text="{TemplateBinding Header}"
+                                        TextWrapping="WrapWithOverflow" />
+                                    <ui:TextBlock
+                                        Appearance="Secondary"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                        Text="{TemplateBinding DescriptionText}"
+                                        TextWrapping="WrapWithOverflow" />
                                 </StackPanel>
+                            </ui:CardControl.Header>
+                            <ui:CardControl.Content>
                                 <ContentPresenter
                                     x:Name="ContentPresenter"
-                                    Grid.RowSpan="2"
-                                    Grid.Column="1"
-                                    Margin="0,0,20,0"
-                                    HorizontalAlignment="Right"
+                                    Grid.Column="2"
+                                    Margin="{StaticResource CardControlContentMargin}"
                                     VerticalAlignment="Center"
-                                    Content="{TemplateBinding Content}" />
-
-                            </Grid>
-                        </ui:Card>
+                                    Content="{TemplateBinding Content}"
+                                    TextElement.Foreground="{TemplateBinding Foreground}" />
+                            </ui:CardControl.Content>
+                        </ui:CardControl>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
