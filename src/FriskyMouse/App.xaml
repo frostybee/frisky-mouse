@@ -17,6 +17,7 @@
                 <ResourceDictionary Source="Source/UI/Controls/SliderCard.xaml" />
                 <ResourceDictionary Source="Source/UI/Controls/SwitchCard.xaml" />
                 <ResourceDictionary Source="Source/UI/Controls/SettingsCard.xaml" />
+                <ResourceDictionary Source="Source/UI/Controls/ColorPickerControl.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
         </ResourceDictionary>

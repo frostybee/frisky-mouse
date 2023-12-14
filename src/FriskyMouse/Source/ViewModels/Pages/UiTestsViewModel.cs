@@ -1,7 +1,5 @@
 ﻿using ColorPicker.Models;
-using System.Diagnostics.Metrics;
-using System.Windows.Forms;
-using System.Xml.Linq;
+using Color = System.Windows.Media.Color;
 
 namespace FriskyMouse.ViewModels.Pages;
 public partial class UiTestsViewModel : ObservableObject, INavigationAware
@@ -25,6 +23,7 @@ public partial class UiTestsViewModel : ObservableObject, INavigationAware
     private void InitializeViewModel()
     {
         _isInitialized = true;
+        SelectedColor = (Color)System.Windows.Media.ColorConverter.ConvertFromString("#FFDFD991");
         IsMouseSpotlightEnabled = true;
         UpdateSwitchStatusText();
         
@@ -56,7 +55,7 @@ public partial class UiTestsViewModel : ObservableObject, INavigationAware
 
     partial void OnSelectedColorChanged(System.Windows.Media.Color value)
     {
-        Console.WriteLine(value);
+        //Console.WriteLine(value);
     }
 }
 

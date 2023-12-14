@@ -27,7 +27,7 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
         CurrentApplicationTheme = Wpf.Ui.Appearance.ApplicationThemeManager.GetAppTheme();
         AppVersion = $"WPF UI Gallery - {GetAssemblyVersion()}";
 
-        //Wpf.Ui.Appearance.Theme.Changed += OnThemeChanged;
+        //Wpf.UI.Appearance.Theme.Changed += OnThemeChanged;
 
         _isInitialized = true;
     }

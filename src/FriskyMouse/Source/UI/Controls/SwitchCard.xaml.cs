@@ -1,4 +1,4 @@
-namespace FriskyMouse.Ui.Controls;
+namespace FriskyMouse.UI.Controls;
 
 public class SwitchCard : Control
 {

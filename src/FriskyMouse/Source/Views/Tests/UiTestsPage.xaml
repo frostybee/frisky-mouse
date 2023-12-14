@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
-    xmlns:controls="clr-namespace:FriskyMouse.Ui.Controls"
+    xmlns:controls="clr-namespace:FriskyMouse.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:FriskyMouse.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -41,35 +41,118 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="2">
+        <Grid Grid.Row="0">
+            <TextBlock
+                FontSize="{StaticResource PageHeaderFontSize}"
+                FontWeight="Normal"
+                Text="Mouse Highlighter Settings" />
+            <!--<ui:Button Grid.Column="0"
+               Command="{Binding ViewModel.CounterIncrementCommand, Mode=OneWay}"
+               Content="Click me!"
+               Icon="Fluent24" />-->
+            <Separator Margin="0,30,0,20" />
+        </Grid>
+
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
             <Grid>
-                <TextBlock
-                    FontSize="{StaticResource PageHeaderFontSize}"
-                    FontWeight="Normal"
-                    Text="Mouse Highlighter Settings" />
-                <!--<ui:Button Grid.Column="0"
-                           Command="{Binding ViewModel.CounterIncrementCommand, Mode=OneWay}"
-                           Content="Click me!"
-                           Icon="Fluent24" />-->
+                <StackPanel Orientation="Vertical">
+                    <controls:ColorPickerControl
+                        Description="Select the color of the spotlight's outline"
+                        Header="Outline color"
+                        Icon="{ui:SymbolIcon FlashSettings24}" />
+
+                    <controls:SettingsCard
+                        Grid.Row="3"
+                        Description="Testing the SettingsCard "
+                        Header="Testing the SettingsCard "
+                        Icon="{ui:SymbolIcon FlashSettings24}">
+                        <controls:ColorPickerControl />
+                    </controls:SettingsCard>
+                </StackPanel>
             </Grid>
-            <Separator Margin="0,5,0,0" />
         </StackPanel>
-        <ui:Card
-            Grid.Row="1"
-            Width="80"
-            Height="80">
-            <Grid Width="60" Height="60">
-                <colorpicker:PortableColorPicker
-                    HintColor="Transparent"
-                    SelectedColor="{Binding ViewModel.SelectedColor, Mode=TwoWay}"
-                    ShowAlpha="False"
-                    ShowFractionalPart="False"
-                    SmallChange="5"
-                    Style="{StaticResource DefaultColorPickerStyle}"
-                    UseHintColor="True" />
-            </Grid>
-        </ui:Card>
-        <ui:CardExpander
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ui:CardExpander Grid.Column="0" Icon="{ui:SymbolIcon PlaySettings20}">
+                <ui:CardExpander.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ui:TextBlock
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            FontSize="16"
+                            FontTypography="Body"
+                            Text="This is a header text" />
+                        <ui:TextBlock
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            FontSize="12"
+                            Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                            Text="This is a description text" />
+                        <ui:ToggleSwitch
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            Grid.Column="1"
+                            Margin="0,0,16,0"
+                            OffContent="Off"
+                            OnContent="On" />
+                    </Grid>
+                </ui:CardExpander.Header>
+                <StackPanel Margin="24,0.5,24,10">
+                    <ui:CardControl Padding="20,10,20,10" Header="This is an item">
+                        <ui:ToggleSwitch
+                            HorizontalContentAlignment="Left"
+                            IsEnabled="True"
+                            OffContent="Off"
+                            OnContent="On" />
+                    </ui:CardControl>
+                    <ui:CardControl
+                        Margin="0,0.5,0,0"
+                        Padding="20,10,20,10"
+                        Icon="{ui:SymbolIcon FlashSettings24}">
+                        <ui:CardControl.Header>
+                            <StackPanel>
+                                <ui:TextBlock
+                                    Margin="0"
+                                    FontTypography="BodyStrong"
+                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                    Text="This is a header text"
+                                    TextWrapping="WrapWithOverflow" />
+                                <ui:TextBlock
+                                    Appearance="Secondary"
+                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                    Text="This is a description text."
+                                    TextWrapping="WrapWithOverflow" />
+                            </StackPanel>
+                        </ui:CardControl.Header>
+                        <ui:DropDownButton Content="Hello" Icon="{ui:SymbolIcon Fluent24}">
+                            <ui:DropDownButton.Flyout>
+                                <ContextMenu>
+                                    <MenuItem Header="Add" />
+                                    <MenuItem Header="Remove" />
+                                    <MenuItem Header="Send" />
+                                    <MenuItem Header="Hello" />
+                                </ContextMenu>
+                            </ui:DropDownButton.Flyout>
+                        </ui:DropDownButton>
+                    </ui:CardControl>
+                </StackPanel>
+            </ui:CardExpander>
+            <!--  TODO: ExpandDirection  -->
+        </Grid>
+
+        <!-- <ui:CardExpander
             Grid.Row="2"
             Header="Opacity"
             Icon="{ui:FontIcon '&#x1F308;'}">
@@ -77,24 +160,23 @@
                 <controls:SettingsCard Grid.Row="2">
                     <Slider Width="200" AutoToolTipPlacement="TopLeft" />
                 </controls:SettingsCard>
-
-
                 <controls:SwitchCard
                     Grid.Row="2"
                     IsToggleSwitchEnabled="{Binding ViewModel.IsMouseSpotlightEnabled, Mode=TwoWay}"
                     SwitchStatusText="{Binding ViewModel.SwitchStatusText}" />
             </StackPanel>
-        </ui:CardExpander>
+        </ui:CardExpander>-->
 
-        <controls:SettingsCard
+        <!--  TODO: Change the font family of the card header  -->
+        <!--<controls:SettingsCard
             Grid.Row="3"
-            DescriptionText="Testing the SettingsCard "
+            Description="Testing the SettingsCard "
             Header="Testing the SettingsCard "
             Icon="{ui:SymbolIcon FlashSettings24}">
             <ui:ToggleSwitch />
-        </controls:SettingsCard>
+        </controls:SettingsCard>-->
 
-        <ui:CardControl
+        <!--<ui:CardControl
             Grid.Row="4"
             Margin="20,1,30,0"
             Icon="{ui:SymbolIcon DocumentEdit20,
@@ -106,8 +188,17 @@
                     FontWeight="Normal"
                     Text="This is a header" />
             </ui:CardControl.Header>
-            <Slider Width="200" />
-        </ui:CardControl>
+            <colorpicker:PortableColorPicker
+                Width="48"
+                Height="40"
+                AllowDrop="True"
+                HintColor="Yellow"
+                SelectedColor="{Binding ViewModel.SelectedColor, Mode=TwoWay}"
+                ShowAlpha="False"
+                ShowFractionalPart="False"
+                SmallChange="5"
+                UseHintColor="True" />
+        </ui:CardControl>-->
         <!--<StackPanel Grid.Row="4">
 
             <ui:CardControl
@@ -162,10 +253,10 @@
                     OnContent="On" />
             </ui:CardControl>
         </StackPanel>-->
-        <ui:CardControl
+        <!--<ui:CardControl
             Grid.Row="5"
             Margin="{StaticResource CardControlPadding}"
-            Padding="20,10,20,10"
+            Padding="30,10,20,10"
             Icon="{ui:SymbolIcon FlashSettings24}">
             <ui:CardControl.Header>
                 <StackPanel>
@@ -202,7 +293,7 @@
                     Text="This is a description text."
                     TextWrapping="WrapWithOverflow" />
             </StackPanel>
-        </ui:CardAction>
+        </ui:CardAction>-->
         <!--<StackPanel Grid.Row="1" Margin="0,20,0,0">
             <ui:ToggleSwitch
                 x:Name="tglSpotlight"

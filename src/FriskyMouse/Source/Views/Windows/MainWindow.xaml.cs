@@ -19,7 +19,7 @@ public partial class MainWindow : IWindow
         IContentDialogService contentDialogService
     )
     {
-        //Wpf.Ui.Appearance.SystemThemeWatcher.Watch(this);
+        //Wpf.UI.Appearance.SystemThemeWatcher.Watch(this);
 
         ViewModel = viewModel;
         DataContext = this;

@@ -4,7 +4,7 @@
 // All Rights Reserved.
 
 // ReSharper disable once CheckNamespace
-namespace FriskyMouse.Ui.Controls;
+namespace FriskyMouse.UI.Controls;
 
 /// <summary>
 /// Settings Card with Icon, header, description and content and <see cref="Footer"/>.
@@ -13,15 +13,15 @@ namespace FriskyMouse.Ui.Controls;
 //[ToolboxBitmap(typeof(Card), "Card.bmp")]
 public class SettingsCard : CardControl
 {
-    public static readonly DependencyProperty DescriptionTextProperty = DependencyProperty.Register(
-       nameof(DescriptionText),
+    public static readonly DependencyProperty DescriptionProperty = DependencyProperty.Register(
+       nameof(Description),
        typeof(string),
        typeof(SettingsCard),
        new PropertyMetadata(null)
    );
-    public string? DescriptionText
+    public string? Description
     {
-        get => (string)GetValue(DescriptionTextProperty);
-        set => SetValue(DescriptionTextProperty, value);
+        get => (string)GetValue(DescriptionProperty);
+        set => SetValue(DescriptionProperty, value);
     }
 }
