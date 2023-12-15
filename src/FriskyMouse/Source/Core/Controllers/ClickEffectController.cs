@@ -19,6 +19,7 @@ using System.Drawing.Imaging;
 using FriskyMouse.NativeApi;
 using PixelFormat = System.Drawing.Imaging.PixelFormat;
 
+
 namespace FriskyMouse.Core;
 
 /// <summary>

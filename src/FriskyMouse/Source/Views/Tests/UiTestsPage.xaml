@@ -53,23 +53,23 @@
             <Separator Margin="0,30,0,20" />
         </Grid>
 
-        <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
-            <Grid>
-                <StackPanel Orientation="Vertical">
-                    <controls:ColorPickerControl
-                        Description="Select the color of the spotlight's outline"
-                        Header="Outline color"
-                        Icon="{ui:SymbolIcon FlashSettings24}" />
+        <StackPanel
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Orientation="Vertical">
+            <StackPanel Orientation="Vertical">
+                <controls:ColorPickerControl
+                    Description="Select the color of the spotlight's outline"
+                    Header="Outline color"
+                    Icon="{ui:SymbolIcon FlashSettings24}" />
+                <controls:SettingsCard Description="This is a description of what the user  can do with this settings. This is a description of what the user  can do with this settings." Header="This is a header">
+                    <ui:ToggleSwitch OffContent="Disabled" OnContent="Enabled" />
+                </controls:SettingsCard>
 
-                    <controls:SettingsCard
-                        Grid.Row="3"
-                        Description="Testing the SettingsCard "
-                        Header="Testing the SettingsCard "
-                        Icon="{ui:SymbolIcon FlashSettings24}">
-                        <controls:ColorPickerControl />
-                    </controls:SettingsCard>
-                </StackPanel>
-            </Grid>
+                <controls:SettingsCard Header="Description" Icon="{ui:SymbolIcon FlashSettings24}">
+                    <ui:ToggleSwitch OffContent="Disabled" OnContent="Enabled" />
+                </controls:SettingsCard>
+            </StackPanel>
         </StackPanel>
 
         <Grid Grid.Row="3">
@@ -77,7 +77,10 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <ui:CardExpander Grid.Column="0" Icon="{ui:SymbolIcon PlaySettings20}">
+            <ui:CardExpander
+                Grid.Column="0"
+                HorizontalAlignment="Stretch"
+                Icon="{ui:SymbolIcon PlaySettings20}">
                 <ui:CardExpander.Header>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -109,33 +112,17 @@
                             OnContent="On" />
                     </Grid>
                 </ui:CardExpander.Header>
-                <StackPanel Margin="24,0.5,24,10">
-                    <ui:CardControl Padding="20,10,20,10" Header="This is an item">
-                        <ui:ToggleSwitch
-                            HorizontalContentAlignment="Left"
-                            IsEnabled="True"
-                            OffContent="Off"
-                            OnContent="On" />
-                    </ui:CardControl>
-                    <ui:CardControl
-                        Margin="0,0.5,0,0"
-                        Padding="20,10,20,10"
+                <StackPanel Margin="24,0.5,24,0">
+                    <controls:SettingsCard
+                        Description="Testing the SettingsCard "
+                        Header="Testing the SettingsCard "
                         Icon="{ui:SymbolIcon FlashSettings24}">
-                        <ui:CardControl.Header>
-                            <StackPanel>
-                                <ui:TextBlock
-                                    Margin="0"
-                                    FontTypography="BodyStrong"
-                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                    Text="This is a header text"
-                                    TextWrapping="WrapWithOverflow" />
-                                <ui:TextBlock
-                                    Appearance="Secondary"
-                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                    Text="This is a description text."
-                                    TextWrapping="WrapWithOverflow" />
-                            </StackPanel>
-                        </ui:CardControl.Header>
+                        <controls:ColorPickerControl />
+                    </controls:SettingsCard>
+                    <controls:SettingsCard
+                        Description="Testing the SettingsCard "
+                        Header="Testing the SettingsCard "
+                        Icon="{ui:SymbolIcon FlashSettings24}">
                         <ui:DropDownButton Content="Hello" Icon="{ui:SymbolIcon Fluent24}">
                             <ui:DropDownButton.Flyout>
                                 <ContextMenu>
@@ -146,7 +133,7 @@
                                 </ContextMenu>
                             </ui:DropDownButton.Flyout>
                         </ui:DropDownButton>
-                    </ui:CardControl>
+                    </controls:SettingsCard>
                 </StackPanel>
             </ui:CardExpander>
             <!--  TODO: ExpandDirection  -->

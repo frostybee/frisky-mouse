@@ -429,7 +429,7 @@ public enum SetWindowPosFlags : uint
     /// </summary>
     SWP_SHOWWINDOW = 0x0040
 }
-/// <summary>Enumeration of the different ways of showing a window using ShowWindow</summary>
+/// <summary>Enumeration of the different ways of showing a window using BringWindowToFront</summary>
 public enum WindowShowStyle : uint
 {
     /// <summary>Hides the window and activates another window.</summary>

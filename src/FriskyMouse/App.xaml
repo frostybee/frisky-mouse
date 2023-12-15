@@ -7,7 +7,8 @@
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     DispatcherUnhandledException="OnDispatcherUnhandledException"
     Exit="OnExit"
-    Startup="OnStartup">
+    ShutdownMode="OnMainWindowClose"
+    Startup="OnApplication_Startup">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

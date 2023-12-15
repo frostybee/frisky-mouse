@@ -14,15 +14,17 @@ global using FriskyMouse.Services.Contracts;
 global using FriskyMouse.ViewModels.Windows;
 global using FriskyMouse.Views.Pages;
 global using FriskyMouse.Views.Windows;
-global using System.Collections.ObjectModel;
+global using FriskyMouse.NativeApi;
+global using FriskyMouse.Core;
+global using FriskyMouse.Settings;
 global using FriskyMouse.Helpers;
 global using System.Windows.Media;
 global using System.IO;
+global using System.Text.Json.Serialization;
+global using System.Text;
 global using System.Drawing;
-using System.Drawing.Imaging;
-using System.Windows.Forms;
-using System.Text.Json.Serialization;
-using System.Text;
+global using System.Collections.ObjectModel;
+
 
 
 

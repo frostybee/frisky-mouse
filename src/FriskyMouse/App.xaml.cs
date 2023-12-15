@@ -1,16 +1,21 @@
-﻿using FriskyMouse.Core;
-using FriskyMouse.Settings;
-
-namespace FriskyMouse;
+﻿namespace FriskyMouse;
 
 /// <summary>
 /// Interaction logic for App.xaml
 /// </summary>
 public partial class App : Application
 {
+    #region Fields
     public static bool IsPortable { get; private set; } = true;
     public static string BuildInfo { get; private set; } = "Release";
     public const string ApplicationName = "FriskyMouse";
+    /// <summary>
+    /// A named system-wide mutex used to ensure that only one instance of this application runs at once. 
+    /// </summary>
+    private static string _mutexName = "{FFF0FDB8-C9C3-4B9B-8CE5-92BFD1D8E17F}";
+    private Mutex _mutex;
+    private bool _singleInstanceClose = false;
+    #endregion
 
     // The .NET Generic Host provides dependency injection, configuration, logging, and other services.
     // https://docs.microsoft.com/dotnet/core/extensions/generic-host
@@ -54,14 +59,51 @@ public partial class App : Application
         )
         .Build();
 
+
     /// <summary>
     /// Occurs when the application is loading.
     /// </summary>
-    private void OnStartup(object sender, StartupEventArgs e)
+    private void OnApplication_Startup(object sender, StartupEventArgs e)
     {
-        _host.Start();
-        SettingsManager.LoadSettings();
+        _mutex = new Mutex(true, _mutexName);
+        var mutexIsAcquired = _mutex.WaitOne(TimeSpan.Zero, true);
+        if (!mutexIsAcquired)
+        {
+            // An instance of this application is already running.
+            // Bring it into the foreground
+            SingleAppInstance.PostMessageToMainWindow();
+            // Shutdown this new instance.
+            _singleInstanceClose = true;
+            Shutdown();
+        }
+        else
+        {
+            // Start a new instance of this application.
+            _mutex.ReleaseMutex();
+            InitializeAppConfiguration();
+            _host.Start();
+            SettingsManager.LoadSettings();
+        }        
     }
+
+    private void InitializeAppConfiguration()
+    {
+        //TODO: Create a wrapper object for the following
+        // and add the assembly version to i. 
+#if DEBUG
+        IsPortable = true;
+        BuildInfo = "Debug";
+#elif PORTABLE
+                IsPortable = true;                
+                BuildInfo = "Portable";
+#elif MICROSOFTSTORE
+            BuildInfo = "Microsoft Store";
+#elif SELFCONTAINED
+            IsPortable = true;
+            BuildInfo = "Self contained";
+#endif
+    }
+
     /// <summary>
     /// Gets registered service.
     /// </summary>
@@ -83,6 +125,7 @@ public partial class App : Application
         DecorationManager.Instance?.DisableHook();
         DecorationManager.Instance?.Dispose();
         SettingsManager.SaveSettings();
+        Console.WriteLine("Exiting the application...");
     }
 
     /// <summary>

@@ -86,6 +86,8 @@ public static class NativeMethods
     public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
     [DllImport(USER32_DLL, SetLastError = true)]
+    public static extern bool PostMessage(IntPtr hwnd, uint msg, IntPtr wparam, IntPtr lparam);
+    [DllImport(USER32_DLL, SetLastError = true)]
     public static extern uint RegisterWindowMessage(string lpString);
 
     /// <summary>

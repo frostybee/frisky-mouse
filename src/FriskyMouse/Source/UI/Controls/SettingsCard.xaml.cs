@@ -1,17 +1,12 @@
-// This Source Code Form is subject to the terms of the MIT License.
-// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
-// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
-// All Rights Reserved.
+using System.ComponentModel;
+using System.Windows.Automation.Peers;
 
-// ReSharper disable once CheckNamespace
 namespace FriskyMouse.UI.Controls;
 
 /// <summary>
 /// Settings Card with Icon, header, description and content and <see cref="Footer"/>.
 /// </summary>
-//[ToolboxItem(true)]
-//[ToolboxBitmap(typeof(Card), "Card.bmp")]
-public class SettingsCard : CardControl
+public class SettingsCard : ContentControl
 {
     public static readonly DependencyProperty DescriptionProperty = DependencyProperty.Register(
        nameof(Description),
@@ -23,5 +18,64 @@ public class SettingsCard : CardControl
     {
         get => (string)GetValue(DescriptionProperty);
         set => SetValue(DescriptionProperty, value);
+    }
+    /// <summary>
+    /// Property for <see cref="Header"/>.
+    /// </summary>
+    public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
+        nameof(Header),
+        typeof(object),
+        typeof(SettingsCard),
+        new PropertyMetadata(null)
+    );
+
+    /// <summary>
+    /// Property for <see cref="Icon"/>.
+    /// </summary>
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+        nameof(Icon),
+        typeof(IconElement),
+        typeof(SettingsCard),
+        new PropertyMetadata(null)
+    );
+
+    /// <summary>
+    /// Property for <see cref="CornerRadius"/>
+    /// </summary>
+    public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
+        nameof(CornerRadius),
+        typeof(CornerRadius),
+        typeof(SettingsCard),
+        new PropertyMetadata(new CornerRadius(0))
+    );
+
+    /// <summary>
+    /// Header is the data used to for the header of each item in the control.
+    /// </summary>
+    [Bindable(true)]
+    public object Header
+    {
+        get => GetValue(HeaderProperty);
+        set => SetValue(HeaderProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets displayed <see cref="IconElement"/>.
+    /// </summary>
+    [Bindable(true), Category("Appearance")]
+    public IconElement? Icon
+    {
+        get => (IconElement)GetValue(IconProperty);
+        set => SetValue(IconProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the corner radius of the control.
+    /// </summary>
+    [Bindable(true), Category("Appearance")]
+    public CornerRadius CornerRadius
+    {
+        get => (CornerRadius)GetValue(CornerRadiusProperty);
+        set => SetValue(CornerRadiusProperty, value);
     }
 }

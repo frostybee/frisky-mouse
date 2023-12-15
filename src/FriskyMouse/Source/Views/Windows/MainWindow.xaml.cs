@@ -1,16 +1,19 @@
 ﻿using FriskyMouse.Core;
+using System.Diagnostics;
+using System.Windows.Interop;
 
 namespace FriskyMouse.Views.Windows;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class MainWindow : IWindow
+public partial class MainWindow :  IWindow
 {
     public MainWindowViewModel ViewModel { get; }
     private bool _isUserClosedPane;
     private bool _isPaneOpenedOrClosedFromCode;
-    
+    private HwndSource _hwndSource;
+
     public MainWindow(
         MainWindowViewModel viewModel,
         INavigationService navigationService,
@@ -77,4 +80,52 @@ public partial class MainWindow : IWindow
 
         _isUserClosedPane = true;
     }
+    /// <summary>
+    /// This is called after MainWindow() and before OnContentRendered()
+    /// Bring the main window to foreground or register hotkeys.
+    /// </summary>
+    /// <param name="e"></param>
+    protected override void OnSourceInitialized(EventArgs e)
+    {
+        base.OnSourceInitialized(e);
+
+        _hwndSource = HwndSource.FromHwnd(new WindowInteropHelper(this).Handle);
+        _hwndSource?.AddHook(HwndHook);
+
+        //RegisterHotKeys();
+    }
+
+    [DebuggerStepThrough]
+    private IntPtr HwndHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+    {
+        // Single instance or Hotkey --> Show window
+        if (msg == SingleAppInstance.WM_SHOW_MAIN_WINDOW && wParam.ToInt32() == 0)
+        {
+            BringWindowToFront();
+            Console.WriteLine("Processing bring to front...");
+            handled = true;
+        }
+
+        return IntPtr.Zero;
+    }
+
+    private void BringWindowToFront()
+    {
+        if (this.WindowState == WindowState.Minimized || this.Visibility == Visibility.Hidden)
+        {
+            this.Show();
+            this.WindowState = WindowState.Normal;
+        }
+
+        // Activate and bring the main window to foreground.
+        this.Activate();
+        this.Topmost = true;
+        this.Topmost = false;
+        this.Focus();
+    }
+    //protected override void OnClosed(EventArgs e)
+    //{
+    //    base.OnClosed(e);
+    //    Application.Current.Shutdown();
+    //}
 }
