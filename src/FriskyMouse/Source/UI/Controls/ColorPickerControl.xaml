@@ -55,6 +55,7 @@
                             <ContentControl
                                 x:Name="ControlIcon"
                                 Grid.Column="0"
+                                Height="40"
                                 Margin="{StaticResource CardControlIconMargin}"
                                 VerticalAlignment="Center"
                                 Content="{TemplateBinding Icon}"
@@ -79,8 +80,8 @@
 
                             <ui:Card
                                 Grid.Column="2"
-                                Width="100"
-                                Padding="10">
+                                Width="120"
+                                Padding="5">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
@@ -88,15 +89,15 @@
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <ui:SymbolIcon
+                                    <!--<ui:SymbolIcon
                                         Grid.Column="0"
                                         Margin="0,0,10,0"
-                                        FontSize="144"
-                                        Symbol="Color24" />
+                                        FontSize="70"
+                                        Symbol="Color24" />-->
                                     <colorpicker:PortableColorPicker
                                         Grid.Column="1"
-                                        Width="50"
-                                        Height="30"
+                                        Width="65"
+                                        Height="45"
                                         AllowDrop="True"
                                         HintColor="Red"
                                         SelectedColor="{Binding ViewModel.SelectedColor, Mode=TwoWay}"
@@ -107,7 +108,7 @@
                                         UseHintColor="True" />
                                     <ui:SymbolIcon
                                         Grid.Column="2"
-                                        Margin="10,0,0,0"
+                                        Margin="5,0,0,0"
                                         Symbol="ChevronDown48" />
                                 </Grid>
                             </ui:Card>

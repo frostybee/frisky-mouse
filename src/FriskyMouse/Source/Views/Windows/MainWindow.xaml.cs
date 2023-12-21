@@ -99,10 +99,9 @@ public partial class MainWindow :  IWindow
     private IntPtr HwndHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
     {
         // Single instance or Hotkey --> Show window
-        if (msg == SingleAppInstance.WM_SHOW_MAIN_WINDOW && wParam.ToInt32() == 0)
+        if (msg == SingleAppInstanceHelper.WM_SHOW_MAIN_WINDOW && wParam.ToInt32() == 0)
         {
             BringWindowToFront();
-            Console.WriteLine("Processing bring to front...");
             handled = true;
         }
 

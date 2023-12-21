@@ -8,22 +8,22 @@
     <!--<Thickness x:Key="CardPadding">14,16,14,16</Thickness>-->
     <Thickness x:Key="CardBorderThemeThickness">1</Thickness>
     <Thickness x:Key="SettingsCardBorderThickness">1</Thickness>
-    <Thickness x:Key="SettingsCardPadding">16,16,24,16</Thickness>
-    <Thickness x:Key="SettingsCardIconMargin">2,0,20,0</Thickness>
+    <Thickness x:Key="SettingsCardPadding">14,16,20,16</Thickness>
     <system:Double x:Key="SettingsCardMinWidth">148</system:Double>
     <system:Double x:Key="SettingsCardMinHeight">68</system:Double>
     <system:Double x:Key="SettingsCardActionButtonWidth">32</system:Double>
     <system:Double x:Key="SettingsCardActionButtonHeight">32</system:Double>
     <system:Double x:Key="SettingsCardDescriptionFontSize">12</system:Double>
-    <system:Double x:Key="SettingsCardHeaderIconMaxSize">20</system:Double>
+    <system:Double x:Key="SettingsCardHeaderIconMaxSize">40</system:Double>
     <system:Double x:Key="SettingsCardActionIconMaxSize">13</system:Double>
-    <system:Double x:Key="SettingsCardLeftIndention">40</system:Double>
+    <system:Double x:Key="SettingsCardLeftIndention">20</system:Double>
     <system:Double x:Key="SettingsCardContentMinWidth">120</system:Double>
     <Thickness x:Key="SettingsCardHeaderIconMargin">2,0,20,0</Thickness>
     <Thickness x:Key="SettingsCardVerticalHeaderContentSpacing">0,4,0,0</Thickness>
+    <system:Double x:Key="CardControlIconSize">24.0</system:Double>
     <system:Double x:Key="SettingsCardWrapThreshold">460</system:Double>
     <system:Double x:Key="SettingsCardWrapNoIconThreshold">286</system:Double>
-
+    <Thickness x:Key="CardControlIconMargin">0,0,16,0</Thickness>
 
     <Style TargetType="{x:Type controls:SettingsCard}">
         <Setter Property="Background" Value="{DynamicResource CardBackground}" />
@@ -42,6 +42,8 @@
         <Setter Property="KeyboardNavigation.IsTabStop" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+        <Setter Property="TextOptions.TextRenderingMode" Value="Auto" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:SettingsCard}">
@@ -58,55 +60,60 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{DynamicResource ControlCornerRadius}">
-                        <Grid
-                            x:Name="MainPanel"
-                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
+                        <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" MinWidth="{StaticResource SettingsCardLeftIndention}" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="6*" MinWidth="200" />
+                                <ColumnDefinition Width="6*" MinWidth="200" />
                             </Grid.ColumnDefinitions>
-                            <ContentControl
-                                x:Name="ControlIcon"
-                                Grid.RowSpan="1"
-                                Grid.Column="0"
-                                Width="40"
-                                MaxWidth="{StaticResource SettingsCardHeaderIconMaxSize}"
-                                MaxHeight="{StaticResource SettingsCardHeaderIconMaxSize}"
-                                Margin="{StaticResource SettingsCardHeaderIconMargin}"
-                                VerticalAlignment="Center"
-                                Content="{TemplateBinding Icon}"
-                                Focusable="False"
-                                FontSize="{StaticResource CardControlIconSize}"
-                                Foreground="{TemplateBinding Foreground}"
-                                KeyboardNavigation.IsTabStop="False" />
-                            <StackPanel
-                                x:Name="HeaderPanel"
-                                Grid.Column="1"
-                                Margin="0,0,24,0"
-                                VerticalAlignment="Center"
-                                Orientation="Vertical">
-                                <ui:TextBlock
-                                    Margin="0"
-                                    FontTypography="BodyStrong"
-                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                    Text="{TemplateBinding Header}"
-                                    TextWrapping="WrapWithOverflow" />
-                                <ui:TextBlock
-                                    x:Name="DescriptionText"
-                                    Appearance="Secondary"
-                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                    Text="{TemplateBinding Description}"
-                                    TextWrapping="WrapWithOverflow" />
-                            </StackPanel>
+
+                            <DockPanel>
+                                <ContentControl
+                                    x:Name="ControlIcon"
+                                    Grid.Column="0"
+                                    Margin="{StaticResource CardControlIconMargin}"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Content="{TemplateBinding Icon}"
+                                    Focusable="False"
+                                    FontSize="{StaticResource CardControlIconSize}"
+                                    Foreground="{TemplateBinding Foreground}"
+                                    KeyboardNavigation.IsTabStop="False" />
+                                <!--<ContentControl
+                                    x:Name="ControlIcon"
+                                    Width="40"
+                                    MaxWidth="{StaticResource SettingsCardHeaderIconMaxSize}"
+                                    MaxHeight="{StaticResource SettingsCardHeaderIconMaxSize}"
+                                    Margin="{StaticResource CardControlIconMargin}"
+                                    VerticalAlignment="Center"
+                                    Content="{TemplateBinding Icon}"
+                                    Focusable="False"
+                                    FontSize="{StaticResource CardControlIconSize}"
+                                    Foreground="{TemplateBinding Foreground}"
+                                    KeyboardNavigation.IsTabStop="False" />-->
+
+                                <controls:SimpleStackPanel Margin="0,0,0,0" VerticalAlignment="Center">
+                                    <ui:TextBlock
+                                        Margin="0"
+                                        FontTypography="BodyStrong"
+                                        Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}"
+                                        Text="{TemplateBinding Header}"
+                                        TextOptions.TextFormattingMode="Ideal"
+                                        TextOptions.TextRenderingMode="Auto"
+                                        TextWrapping="WrapWithOverflow" />
+                                    <ui:TextBlock
+                                        x:Name="DescriptionText"
+                                        Appearance="Secondary"
+                                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                                        Text="{TemplateBinding Description}"
+                                        TextOptions.TextFormattingMode="Ideal"
+                                        TextOptions.TextRenderingMode="Auto"
+                                        TextWrapping="WrapWithOverflow" />
+                                </controls:SimpleStackPanel>
+                            </DockPanel>
+
                             <ContentPresenter
                                 x:Name="ContentPresenter"
-                                Grid.Column="2"
+                                Grid.Column="1"
                                 Margin="{StaticResource CardControlContentMargin}"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"

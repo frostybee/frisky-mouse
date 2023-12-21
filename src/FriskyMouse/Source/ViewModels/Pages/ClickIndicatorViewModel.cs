@@ -18,4 +18,3 @@ public class ClickIndicatorViewModel : ObservableObject, INavigationAware
         _isInitialized = true;
     }
 }
-

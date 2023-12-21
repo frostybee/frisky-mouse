@@ -41,7 +41,7 @@ public partial class App : Application
                 services.AddSingleton<IContentDialogService, ContentDialogService>();
                 services.AddSingleton<WindowsProviderService>();
 
-                // Top-level pages
+                // Top-level view pages and their view models. 
                 services.AddSingleton<DashboardPage>();
                 services.AddSingleton<DashboardViewModel>();
                 services.AddSingleton<SpotlightPage>();
@@ -71,18 +71,20 @@ public partial class App : Application
         {
             // An instance of this application is already running.
             // Bring it into the foreground
-            SingleAppInstance.PostMessageToMainWindow();
+            SingleAppInstanceHelper.PostMessageToMainWindow();
             // Shutdown this new instance.
             _singleInstanceClose = true;
             Shutdown();
         }
         else
         {
-            // Start a new instance of this application.
+            // No instance running instance has been detected.
+            // We Start a new instance of this application.
             _mutex.ReleaseMutex();
             InitializeAppConfiguration();
             _host.Start();
             SettingsManager.LoadSettings();
+            AppConfigurationManager.SayHello();            
         }        
     }
 

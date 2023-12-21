@@ -10,10 +10,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="Mouse Spotlight Page"
-    Width="865"
-    Height="560"
     d:DataContext="{d:DesignInstance local:UiTestsPage,
                                      IsDesignTimeCreatable=False}"
+    d:DesignHeight="1450"
+    d:DesignWidth="800"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
@@ -24,326 +24,323 @@
                 <ResourceDictionary Source="pack://application:,,,/ColorPicker;component/Styles/DefaultColorPickerStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-
     </Page.Resources>
 
-    <Grid Margin="{StaticResource MainContainerMargin}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="71*" />
-            <ColumnDefinition Width="20*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <TextBlock
-                FontSize="{StaticResource PageHeaderFontSize}"
-                FontWeight="Normal"
-                Text="Mouse Highlighter Settings" />
-            <!--<ui:Button Grid.Column="0"
-               Command="{Binding ViewModel.CounterIncrementCommand, Mode=OneWay}"
-               Content="Click me!"
-               Icon="Fluent24" />-->
-            <Separator Margin="0,30,0,20" />
-        </Grid>
+    <StackPanel Margin="0,0,0,24">
+        <ui:TextBlock
+            Margin="0,0,0,8"
+            FontTypography="BodyStrong"
+            Text="Appearance &amp; behavior" />
+        <StackPanel Orientation="Vertical">
+            <!--<controls:ColorPickerControl
+                Description="Select the color of the spotlight's outline"
+                Header="Outline color"
+                Icon="{ui:SymbolIcon FlashSettings24}" />-->
 
-        <StackPanel
-            Grid.Row="1"
-            Grid.ColumnSpan="2"
-            Orientation="Vertical">
-            <StackPanel Orientation="Vertical">
-                <controls:ColorPickerControl
-                    Description="Select the color of the spotlight's outline"
-                    Header="Outline color"
-                    Icon="{ui:SymbolIcon FlashSettings24}" />
-                <controls:SettingsCard Description="This is a description of what the user  can do with this settings. This is a description of what the user  can do with this settings." Header="This is a header">
-                    <ui:ToggleSwitch OffContent="Disabled" OnContent="Enabled" />
-                </controls:SettingsCard>
+            <controls:SettingsCard
+                Description="This is a description of what the user  can do with this settings. This is a description of what the user  can do with this settings."
+                Header="This is a header"
+                Icon="{ui:SymbolIcon FlashSettings24}">
+                <colorpicker:PortableColorPicker
+                    Grid.Column="1"
+                    Width="65"
+                    Height="45"
+                    AllowDrop="True"
+                    HintColor="Red"
+                    SelectedColor="{Binding ViewModel.SelectedColor, Mode=TwoWay}"
+                    ShowAlpha="False"
+                    ShowFractionalPart="False"
+                    SmallChange="5"
+                    Style="{DynamicResource DefaultColorPickerStyle}"
+                    UseHintColor="True" />
+            </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Description" Icon="{ui:SymbolIcon FlashSettings24}">
-                    <ui:ToggleSwitch OffContent="Disabled" OnContent="Enabled" />
-                </controls:SettingsCard>
-            </StackPanel>
+            <controls:SettingsCard
+                Description="This is a description of what the user  can do with this settings. This is a description of what the user  can do with this settings This is a description of what the user  can do with this settings. This is a description of what the user  can do with this settings."
+                Header="This is a header"
+                Icon="{ui:SymbolIcon AlignSpaceEvenlyVertical20}">
+                <ui:ToggleSwitch OffContent="Disabled" OnContent="Enabled" />
+            </controls:SettingsCard>
+
+            <controls:SettingsCard Header="Description" Icon="{ui:SymbolIcon DesktopCursor28}">
+                <ui:ToggleSwitch OffContent="Disabled" OnContent="Enabled" />
+            </controls:SettingsCard>
         </StackPanel>
+        <ui:CardControl Margin="0,0,0,12" Icon="{ui:SymbolIcon Color24}">
+            <ui:CardControl.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <ui:TextBlock
+                        Grid.Row="0"
+                        FontTypography="Body"
+                        Text="App theme" />
+                    <ui:TextBlock
+                        Grid.Row="1"
+                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                        Text="Select which app theme to display" />
+                </Grid>
+            </ui:CardControl.Header>
+            <ComboBox Grid.Column="1" MinWidth="200">
+                <ComboBoxItem Content="Light" />
+                <ComboBoxItem Content="Dark" />
+                <ComboBoxItem Content="High Contrast" />
+            </ComboBox>
+        </ui:CardControl>
 
-        <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <ui:CardExpander
-                Grid.Column="0"
-                HorizontalAlignment="Stretch"
-                Icon="{ui:SymbolIcon PlaySettings20}">
-                <ui:CardExpander.Header>
+        <ui:CardControl Margin="0,0,0,12" Icon="{ui:SymbolIcon AlignSpaceEvenlyVertical20}">
+            <ui:CardControl.Header>
+                <ui:TextBlock
+                    Grid.Row="0"
+                    FontTypography="Body"
+                    Text="Navigation style" />
+            </ui:CardControl.Header>
+            <ComboBox Grid.Column="1" MinWidth="200">
+                <ComboBoxItem Content="Left compact" />
+                <ComboBoxItem Content="Fluent" />
+                <ComboBoxItem Content="Top" />
+                <ComboBoxItem Content="Bottom" />
+            </ComboBox>
+        </ui:CardControl>
+
+        <ui:TextBlock
+            Margin="0,24,0,8"
+            FontTypography="BodyStrong"
+            Text="Test Card Expander" />
+
+
+        <controls:ExpandableSettingsControl
+            ContentPadding="40,20,20,20"
+            Description="This is a description and long one!"
+            Header="This is a header "
+            Icon="{ui:SymbolIcon AlignSpaceEvenlyVertical20}">
+            <controls:ExpandableSettingsControl.ExpanderAction>
+                <ui:ToggleSwitch OffContent="Disabled" OnContent="Enabled" />
+            </controls:ExpandableSettingsControl.ExpanderAction>
+            <StackPanel>
+                <Grid Margin="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="To clone this repository" />
+                    <TextBlock
+                        Grid.Column="1"
+                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                        Text="git clone https://github.com/lepoco/wpfui.git" />
+                </Grid>
+                <ui:Anchor
+                    Margin="0"
+                    Padding="16"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    Background="Transparent"
+                    BorderThickness="0,1,0,0"
+                    CornerRadius="0"
+                    NavigateUri="https://github.com/lepoco/wpfui/issues/new/choose">
                     <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <ui:TextBlock
-                            Grid.Row="0"
-                            Grid.Column="0"
-                            FontSize="16"
-                            FontTypography="Body"
-                            Text="This is a header text" />
-                        <ui:TextBlock
-                            Grid.Row="1"
-                            Grid.Column="0"
-                            FontSize="12"
-                            Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                            Text="This is a description text" />
-                        <ui:ToggleSwitch
-                            Grid.Row="0"
-                            Grid.RowSpan="2"
-                            Grid.Column="1"
-                            Margin="0,0,16,0"
-                            OffContent="Off"
-                            OnContent="On" />
+                        <TextBlock Grid.Column="0" Text="File a bug or request a new sample" />
+                        <ui:SymbolIcon Grid.Column="1" Symbol="Link24" />
                     </Grid>
-                </ui:CardExpander.Header>
-                <StackPanel Margin="24,0.5,24,0">
-                    <controls:SettingsCard
-                        Description="Testing the SettingsCard "
-                        Header="Testing the SettingsCard "
-                        Icon="{ui:SymbolIcon FlashSettings24}">
-                        <controls:ColorPickerControl />
-                    </controls:SettingsCard>
-                    <controls:SettingsCard
-                        Description="Testing the SettingsCard "
-                        Header="Testing the SettingsCard "
-                        Icon="{ui:SymbolIcon FlashSettings24}">
-                        <ui:DropDownButton Content="Hello" Icon="{ui:SymbolIcon Fluent24}">
-                            <ui:DropDownButton.Flyout>
-                                <ContextMenu>
-                                    <MenuItem Header="Add" />
-                                    <MenuItem Header="Remove" />
-                                    <MenuItem Header="Send" />
-                                    <MenuItem Header="Hello" />
-                                </ContextMenu>
-                            </ui:DropDownButton.Flyout>
-                        </ui:DropDownButton>
-                    </controls:SettingsCard>
-                </StackPanel>
-            </ui:CardExpander>
-            <!--  TODO: ExpandDirection  -->
-        </Grid>
+                </ui:Anchor>
+                <ui:Anchor
+                    Margin="0"
+                    Padding="16"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    Background="Transparent"
+                    BorderThickness="0,1,0,1"
+                    CornerRadius="0"
+                    NavigateUri="https://wpfui.lepo.co/">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Check out the docs" />
+                        <ui:SymbolIcon Grid.Column="1" Symbol="Link24" />
+                    </Grid>
+                </ui:Anchor>
+                <TextBlock Margin="16" Text="Test" />
+            </StackPanel>
+        </controls:ExpandableSettingsControl>
 
-        <!-- <ui:CardExpander
-            Grid.Row="2"
-            Header="Opacity"
-            Icon="{ui:FontIcon '&#x1F308;'}">
-            <StackPanel Opacity="0.9" Orientation="Vertical">
-                <controls:SettingsCard Grid.Row="2">
-                    <Slider Width="200" AutoToolTipPlacement="TopLeft" />
-                </controls:SettingsCard>
-                <controls:SwitchCard
-                    Grid.Row="2"
-                    IsToggleSwitchEnabled="{Binding ViewModel.IsMouseSpotlightEnabled, Mode=TwoWay}"
-                    SwitchStatusText="{Binding ViewModel.SwitchStatusText}" />
+        <ui:TextBlock
+            Margin="0,24,0,8"
+            FontTypography="BodyStrong"
+            Text="About" />
+        <ui:CardExpander ContentPadding="0" Icon="{ui:ImageIcon 'pack://application:,,,/Assets/wpfui.png', Width=38, Height=35}">
+            <ui:CardExpander.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ui:TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        FontTypography="Body"
+                        Text="WPF UI" />
+                    <ui:TextBlock
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                        Text="© 2023 lepo.co | Leszek Pomianowski &amp; WPF UI Contributors" />
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="1"
+                        Margin="0,0,16,0"
+                        VerticalAlignment="Center"
+                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                        Text="TestTestTestTestTest" />
+                </Grid>
+            </ui:CardExpander.Header>
+            <StackPanel>
+                <Grid Margin="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="To clone this repository" />
+                    <TextBlock
+                        Grid.Column="1"
+                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                        Text="git clone https://github.com/lepoco/wpfui.git" />
+                </Grid>
+                <ui:Anchor
+                    Margin="0"
+                    Padding="16"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    Background="Transparent"
+                    BorderThickness="0,1,0,0"
+                    CornerRadius="0"
+                    NavigateUri="https://github.com/lepoco/wpfui/issues/new/choose">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="File a bug or request a new sample" />
+                        <ui:SymbolIcon Grid.Column="1" Symbol="Link24" />
+                    </Grid>
+                </ui:Anchor>
+                <ui:Anchor
+                    Margin="0"
+                    Padding="16"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    Background="Transparent"
+                    BorderThickness="0,1,0,1"
+                    CornerRadius="0"
+                    NavigateUri="https://wpfui.lepo.co/">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Check out the docs" />
+                        <ui:SymbolIcon Grid.Column="1" Symbol="Link24" />
+                    </Grid>
+                </ui:Anchor>
+                <TextBlock Margin="16" Text="Test" />
+            </StackPanel>
+        </ui:CardExpander>
+        <!--<ui:CardExpander ContentPadding="0" Icon="{ui:ImageIcon 'pack://application:,,,/Assets/wpfui.png', Width=38, Height=35}">
+            <ui:CardExpander.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ui:TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        FontTypography="Body"
+                        Text="WPF UI" />
+                    <ui:TextBlock
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                        Text="© 2023 lepo.co | Leszek Pomianowski &amp; WPF UI Contributors" />
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="1"
+                        Margin="0,0,16,0"
+                        VerticalAlignment="Center"
+                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                        Text="Test" />
+                </Grid>
+            </ui:CardExpander.Header>
+            <StackPanel>
+                <Grid Margin="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="To clone this repository" />
+                    <TextBlock
+                        Grid.Column="1"
+                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                        Text="git clone https://github.com/lepoco/wpfui.git" />
+                </Grid>
+                <ui:Anchor
+                    Margin="0"
+                    Padding="16"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    Background="Transparent"
+                    BorderThickness="0,1,0,0"
+                    CornerRadius="0"
+                    NavigateUri="https://github.com/lepoco/wpfui/issues/new/choose">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="File a bug or request a new sample" />
+                        <ui:SymbolIcon Grid.Column="1" Symbol="Link24" />
+                    </Grid>
+                </ui:Anchor>
+                <ui:Anchor
+                    Margin="0"
+                    Padding="16"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    Background="Transparent"
+                    BorderThickness="0,1,0,1"
+                    CornerRadius="0"
+                    NavigateUri="https://wpfui.lepo.co/">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Check out the docs" />
+                        <ui:SymbolIcon Grid.Column="1" Symbol="Link24" />
+                    </Grid>
+                </ui:Anchor>
+                <TextBlock Margin="16" Text="Test" />
             </StackPanel>
         </ui:CardExpander>-->
+    </StackPanel>
 
-        <!--  TODO: Change the font family of the card header  -->
-        <!--<controls:SettingsCard
-            Grid.Row="3"
-            Description="Testing the SettingsCard "
-            Header="Testing the SettingsCard "
-            Icon="{ui:SymbolIcon FlashSettings24}">
-            <ui:ToggleSwitch />
-        </controls:SettingsCard>-->
 
-        <!--<ui:CardControl
-            Grid.Row="4"
-            Margin="20,1,30,0"
-            Icon="{ui:SymbolIcon DocumentEdit20,
-                                 FontSize=43,
-                                 Filled=False}">
-            <ui:CardControl.Header>
-                <ui:TextBlock
-                    FontSize="16"
-                    FontWeight="Normal"
-                    Text="This is a header" />
-            </ui:CardControl.Header>
-            <colorpicker:PortableColorPicker
-                Width="48"
-                Height="40"
-                AllowDrop="True"
-                HintColor="Yellow"
-                SelectedColor="{Binding ViewModel.SelectedColor, Mode=TwoWay}"
-                ShowAlpha="False"
-                ShowFractionalPart="False"
-                SmallChange="5"
-                UseHintColor="True" />
-        </ui:CardControl>-->
-        <!--<StackPanel Grid.Row="4">
-
-            <ui:CardControl
-                Grid.Row="5"
-                Padding="15,0,24,0"
-                Icon="{ui:SymbolIcon FlashSettings24}">
-                <ui:CardControl.Header>
-                    <StackPanel>
-                        <ui:TextBlock
-                            Margin="0"
-                            FontTypography="BodyStrong"
-                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                            Text="This the header text"
-                            TextWrapping="WrapWithOverflow" />
-                        <ui:TextBlock
-                            Appearance="Secondary"
-                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                            Text="This is a description text."
-                            TextWrapping="WrapWithOverflow" />
-                    </StackPanel>
-                </ui:CardControl.Header>
-                <ui:ToggleSwitch
-                    HorizontalContentAlignment="Left"
-                    IsEnabled="True"
-                    OffContent="Off"
-                    OnContent="On" />
-            </ui:CardControl>
-            <ui:CardControl
-                Grid.Row="5"
-                Margin="{StaticResource CardControlPadding}"
-                Padding="20,10,20,10"
-                Icon="{ui:SymbolIcon FlashSettings24}">
-                <ui:CardControl.Header>
-                    <StackPanel>
-                        <ui:TextBlock
-                            Margin="0"
-                            FontTypography="BodyStrong"
-                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                            Text="This the header text"
-                            TextWrapping="WrapWithOverflow" />
-                        <ui:TextBlock
-                            Appearance="Secondary"
-                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                            Text="This is a description text."
-                            TextWrapping="WrapWithOverflow" />
-                    </StackPanel>
-                </ui:CardControl.Header>
-                <ui:ToggleSwitch
-                    HorizontalContentAlignment="Left"
-                    IsEnabled="True"
-                    OffContent="Off"
-                    OnContent="On" />
-            </ui:CardControl>
-        </StackPanel>-->
-        <!--<ui:CardControl
-            Grid.Row="5"
-            Margin="{StaticResource CardControlPadding}"
-            Padding="30,10,20,10"
-            Icon="{ui:SymbolIcon FlashSettings24}">
-            <ui:CardControl.Header>
-                <StackPanel>
-                    <ui:TextBlock
-                        Margin="0"
-                        FontTypography="BodyStrong"
-                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                        Text="This the header text"
-                        TextWrapping="WrapWithOverflow" />
-                    <ui:TextBlock
-                        Appearance="Secondary"
-                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                        Text="This is a description text."
-                        TextWrapping="WrapWithOverflow" />
-                </StackPanel>
-            </ui:CardControl.Header>
-            <ui:ToggleSwitch
-                HorizontalContentAlignment="Left"
-                IsEnabled="True"
-                OffContent="Off"
-                OnContent="On" />
-        </ui:CardControl>
-        <ui:CardAction Grid.Row="6" Icon="{ui:SymbolIcon DocumentEdit20, FontSize=43, Filled=False}">
-            <StackPanel>
-                <ui:TextBlock
-                    Margin="0"
-                    FontTypography="BodyStrong"
-                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                    Text="This the header text"
-                    TextWrapping="WrapWithOverflow" />
-                <ui:TextBlock
-                    Appearance="Secondary"
-                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                    Text="This is a description text."
-                    TextWrapping="WrapWithOverflow" />
-            </StackPanel>
-        </ui:CardAction>-->
-        <!--<StackPanel Grid.Row="1" Margin="0,20,0,0">
-            <ui:ToggleSwitch
-                x:Name="tglSpotlight"
-                Grid.Column="0"
-                Content="Enable/Disable Spotlight"
-                IsChecked="{Binding ViewModel.IsMouseSpotlightEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-        </StackPanel>
-        <ui:Card Grid.Row="2" Margin="0,20,0,0">
-            <Grid>
-                <TextBlock
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Text="Test" />
-                <ui:ToggleSwitch
-                    x:Name="tglOi"
-                    HorizontalAlignment="Right"
-                    Content="Enable/Disable Spotlight"
-                    IsChecked="{Binding ViewModel.IsMouseSpotlightEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            </Grid>
-        </ui:Card>-->
-
-        <!--<ui:Card Grid.Row="1" Margin="0,0.5,0,0">
-            <Grid>
-                <TextBlock
-                    Padding="10"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Text="Test" />
-                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                    <ui:TextBlock
-                        Margin="0,0,10,0"
-                        VerticalAlignment="Center"
-                        Text="{Binding ViewModel.SwitchStatusText}" />
-                    <ui:ToggleSwitch
-                        x:Name="tglOsi"
-                        Content=""
-                        IsChecked="{Binding ViewModel.IsMouseSpotlightEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-
-            </Grid>
-        </ui:Card>-->
-        <!--<ui:CardExpander Grid.Row="3" Header="Oiii Click Me!" />-->
-        <!--<epco:PageControlDocumentation Grid.Row="2" />
-        <controls:SliderCard Grid.Row="2" Background="red" />-->
-
-        <!--
-        <controls:SwitchCard
-            Grid.Row="3"
-            IsToggleSwitchEnabled="{Binding ViewModel.IsMouseSpotlightEnabled, Mode=TwoWay}"
-            SwitchStatusText="{Binding ViewModel.SwitchStatusText}" />-->
-        <!--<ui:Card Grid.Row="4" Footer="Oiiiiiiii">
-            <Slider Maximum="100" Minimum="0" />
-        </ui:Card>-->
-        <!--<ui:Card Grid.Row="3" Footer="This is a footer">
-            <ui:TextBlock Text="Test" />
-        </ui:Card>-->
-        <!--
-         Displays a glyph
-        <TextBlock
-            Grid.Row="3"
-            FontFamily="Segoe UI Symbol"
-            Foreground="Wheat"
-            Text="&#xE001;" />-->
-    </Grid>
 </Page>
 

@@ -13,6 +13,9 @@
 
 namespace FriskyMouse.Settings;
 
+/// <summary>
+/// Holds application-wide settings. 
+/// </summary>
 public class ApplicationSettings
 {
     #region Properties        
