@@ -15,44 +15,67 @@
                             Icon="{TemplateBinding Icon}"
                             IsExpanded="{TemplateBinding IsExpanded}">
                             <ui:CardExpander.Header>
-                                <Grid>
+                                <Grid
+                                    x:Name="PART_MainPanelControl"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="6*" MinWidth="200" />
-                                        <ColumnDefinition Width="6*" MinWidth="200" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <DockPanel>
-                                        <controls:SimpleStackPanel
-                                            Grid.Column="0"
-                                            Margin="0,0,0,0"
-                                            VerticalAlignment="Center">
-                                            <ui:TextBlock
-                                                x:Name="HeaderText"
-                                                Margin="0"
-                                                FontTypography="BodyStrong"
-                                                Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}"
-                                                Text="{TemplateBinding Header}"
-                                                TextOptions.TextFormattingMode="Ideal"
-                                                TextOptions.TextRenderingMode="Auto"
-                                                TextWrapping="WrapWithOverflow" />
-                                            <ui:TextBlock
-                                                x:Name="DescriptionField"
-                                                Appearance="Secondary"
-                                                Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                                                Text="{TemplateBinding Description}"
-                                                TextOptions.TextFormattingMode="Ideal"
-                                                TextOptions.TextRenderingMode="Auto"
-                                                TextWrapping="WrapWithOverflow" />
-                                        </controls:SimpleStackPanel>
-                                    </DockPanel>
+
+                                    <ContentControl
+                                        x:Name="ControlIcon"
+                                        Grid.Column="0"
+                                        Margin="{StaticResource SettingsCardHeaderIconMargin}"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Content="{TemplateBinding Icon}"
+                                        Focusable="False"
+                                        FontSize="{StaticResource CardControlIconSize}"
+                                        Foreground="{TemplateBinding Foreground}"
+                                        KeyboardNavigation.IsTabStop="False"
+                                        SnapsToDevicePixels="True" />
+
+                                    <Grid
+                                        x:Name="DescriptionPanel"
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <ui:TextBlock
+                                            x:Name="TitleBlock"
+                                            Margin="0"
+                                            FontTypography="Body"
+                                            Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}"
+                                            Text="{TemplateBinding Header}"
+                                            TextOptions.TextFormattingMode="Ideal"
+                                            TextOptions.TextRenderingMode="Auto"
+                                            TextWrapping="WrapWithOverflow" />
+                                        <ui:TextBlock
+                                            x:Name="DescriptionBlock"
+                                            Grid.Row="1"
+                                            Style="{DynamicResource TextBlockSettingDescriptionStyle}"
+                                            Text="{TemplateBinding Description}"
+                                            TextOptions.TextFormattingMode="Ideal"
+                                            TextOptions.TextRenderingMode="Auto"
+                                            TextWrapping="WrapWithOverflow" />
+                                    </Grid>
 
                                     <ContentPresenter
-                                        x:Name="ExpanderActionContentPresenter"
-                                        Grid.Column="1"
-                                        Margin="14,0,30,0"
-                                        HorizontalAlignment="Right"
+                                        x:Name="PART_ActionableElement"
                                         VerticalAlignment="Center"
                                         Content="{TemplateBinding ExpanderAction}"
-                                        TextElement.Foreground="{TemplateBinding Foreground}" />
+                                        Style="{StaticResource NormalState}" />
                                 </Grid>
 
                             </ui:CardExpander.Header>
@@ -89,7 +112,7 @@
                             <Setter TargetName="ControlIcon" Property="Foreground" Value="{DynamicResource CardForegroundPressed}" />
                         </Trigger>-->
                         <Trigger Property="Description" Value="{x:Null}">
-                            <Setter TargetName="DescriptionField" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="DescriptionBlock" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <!--<Trigger Property="Content" Value="{x:Null}">
                             <Setter TargetName="ContentPresenter" Property="Margin" Value="0" />

@@ -15,8 +15,6 @@
                 <ui:ThemesDictionary Theme="Dark" />
                 <ui:ControlsDictionary />
                 <ResourceDictionary Source="pack://application:,,,/Source/Styles/LayoutVariables.xaml" />
-                <ResourceDictionary Source="Source/UI/Controls/SliderCard.xaml" />
-                <ResourceDictionary Source="Source/UI/Controls/SwitchCard.xaml" />
                 <ResourceDictionary Source="Source/UI/Controls/SettingsCard.xaml" />
                 <ResourceDictionary Source="Source/UI/Controls/ExpandableSettingsControl.xaml" />
                 <ResourceDictionary Source="Source/UI/Controls/ColorPickerControl.xaml" />

@@ -25,17 +25,6 @@
     <system:Double x:Key="SettingsCardWrapNoIconThreshold">286</system:Double>
     <Thickness x:Key="CardControlIconMargin">0,0,16,0</Thickness>
 
-    <Style x:Key="NormalState" TargetType="ContentPresenter">
-        <Setter Property="Grid.Row" Value="0" />
-        <Setter Property="Grid.Column" Value="2" />
-        <Setter Property="Margin" Value="24,0,0,0" />
-    </Style>
-    <Style x:Key="CompactState" TargetType="ContentPresenter">
-        <Setter Property="Grid.Row" Value="2" />
-        <Setter Property="Grid.Column" Value="1" />
-        <Setter Property="Margin" Value="0,10,0,0" />
-        <Setter Property="HorizontalAlignment" Value="Left" />
-    </Style>
 
     <Style TargetType="{x:Type controls:SettingsCard}">
         <Setter Property="Background" Value="{DynamicResource CardBackground}" />
@@ -112,7 +101,7 @@
                                 <ui:TextBlock
                                     x:Name="TitleBlock"
                                     Margin="0"
-                                    FontTypography="BodyStrong"
+                                    FontTypography="Body"
                                     Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}"
                                     Text="{TemplateBinding Header}"
                                     TextOptions.TextFormattingMode="Ideal"
@@ -121,8 +110,7 @@
                                 <ui:TextBlock
                                     x:Name="DescriptionBlock"
                                     Grid.Row="1"
-                                    Appearance="Secondary"
-                                    Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                                    Style="{DynamicResource TextBlockSettingDescriptionStyle}"
                                     Text="{TemplateBinding Description}"
                                     TextOptions.TextFormattingMode="Ideal"
                                     TextOptions.TextRenderingMode="Auto"

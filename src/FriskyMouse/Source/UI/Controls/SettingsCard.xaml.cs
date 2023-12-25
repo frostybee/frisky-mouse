@@ -91,7 +91,7 @@ public class SettingsCard : ContentControl
     #endregion
     public SettingsCard()
     {
-        
+
     }
 
     public override void OnApplyTemplate()
@@ -100,30 +100,25 @@ public class SettingsCard : ContentControl
         // We need to make the main panel of this control responsive:
         // The action control should be repositioned if a certain grid width is reached.
         mainPanel = GetTemplateChild(MainPanelControl) as Grid;
-        actionableElementHolder = GetTemplateChild(ActionableElement) as ContentPresenter; 
+        actionableElementHolder = GetTemplateChild(ActionableElement) as ContentPresenter;
         mainPanel.SizeChanged += MainPanel_SizeChanged;
     }
-        
-        private void MainPanel_SizeChanged(object sender, SizeChangedEventArgs e)
+
+    private void MainPanel_SizeChanged(object sender, SizeChangedEventArgs e)
     {
-        Console.WriteLine("Main panel changed...");
-        Console.WriteLine("New width: "+ e.NewSize.Width);
-        
-                
         if (e.NewSize.Width == e.PreviousSize.Width || ActionableElement == null)
         {
             return;
         }
-
-        //if (mainPanel.ActualWidth > e.NewSize.Width / 3)
+        
         if (e.NewSize.Width > 500)
         {
-            Style style = this.FindResource("NormalState") as Style;
+            Style style = FindResource("NormalState") as Style;
             actionableElementHolder.Style = style;
         }
         else
         {
-            Style style = this.FindResource("CompactState") as Style;
+            Style style = FindResource("CompactState") as Style;
             actionableElementHolder.Style = style;
         }
     }

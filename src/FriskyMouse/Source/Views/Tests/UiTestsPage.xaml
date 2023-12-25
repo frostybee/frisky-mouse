@@ -61,55 +61,27 @@
                 <ui:ToggleSwitch OffContent="Disabled" OnContent="Enabled" />
             </controls:SettingsCard>
         </StackPanel>
-        <ui:CardControl Margin="0,0,0,12" Icon="{ui:SymbolIcon Color24}">
-            <ui:CardControl.Header>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <ui:TextBlock
-                        Grid.Row="0"
-                        FontTypography="Body"
-                        Text="App theme" />
-                    <ui:TextBlock Grid.Row="1" Text="Select which app theme to displaySelect which app theme to displaySelect which app theme to display" />
-                </Grid>
-            </ui:CardControl.Header>
-            <ComboBox Grid.Column="1" MinWidth="200">
-                <ComboBoxItem Content="Light" />
-                <ComboBoxItem Content="Dark" />
-                <ComboBoxItem Content="High Contrast" />
-            </ComboBox>
-        </ui:CardControl>
-
-        <ui:CardControl Margin="0,0,0,12" Icon="{ui:SymbolIcon AlignSpaceEvenlyVertical20}">
-            <ui:CardControl.Header>
-                <ui:TextBlock
-                    Grid.Row="0"
-                    FontTypography="Body"
-                    Text="Navigation style" />
-            </ui:CardControl.Header>
-            <ComboBox Grid.Column="1" MinWidth="200">
-                <ComboBoxItem Content="Left compact" />
-                <ComboBoxItem Content="Fluent" />
-                <ComboBoxItem Content="Top" />
-                <ComboBoxItem Content="Bottom" />
-            </ComboBox>
-        </ui:CardControl>
 
         <ui:TextBlock
             Margin="0,24,0,8"
             FontTypography="BodyStrong"
             Text="Test Card Expander" />
         <controls:ExpandableSettingsControl
-            Header="This is a header "
+            Description="This is a description of the expandable settings control"
+            Header="Header: ExpandableSettingsControl"
             HeaderContentPadding="0,0,40,0"
             Icon="{ui:SymbolIcon AlignSpaceEvenlyVertical20}">
             <controls:ExpandableSettingsControl.ExpanderAction>
-                <ui:ToggleSwitch OffContent="Disabled" OnContent="Enabled" />
+                <!--<ui:ToggleSwitch OffContent="Off" OnContent="On" />-->
+                <ComboBox
+                    Grid.Column="1"
+                    MinWidth="200"
+                    Margin="0,0,20,0">
+                    <ComboBoxItem Content="Left compact" />
+                    <ComboBoxItem Content="Fluent" />
+                    <ComboBoxItem Content="Top" />
+                    <ComboBoxItem Content="Bottom" />
+                </ComboBox>
             </controls:ExpandableSettingsControl.ExpanderAction>
             <StackPanel>
                 <Grid Margin="16">
@@ -123,6 +95,9 @@
                         Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
                         Text="git clone https://github.com/lepoco/wpfui.git" />
                 </Grid>
+                <controls:SettingsCard Header="Description" Icon="{ui:SymbolIcon DesktopCursor28}">
+                    <ui:ToggleSwitch OffContent="Disabled" OnContent="Enabled" />
+                </controls:SettingsCard>
                 <ui:Anchor
                     Margin="0"
                     Padding="16"

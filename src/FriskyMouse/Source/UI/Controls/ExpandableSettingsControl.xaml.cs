@@ -7,8 +7,15 @@ using System.Threading.Tasks;
 
 namespace FriskyMouse.UI.Controls;
 
+[TemplatePart(Name = MainPanelControl, Type = typeof(Grid))]
+[TemplatePart(Name = ActionableElement, Type = typeof(ContentPresenter))]
 public class ExpandableSettingsControl: CardExpander
 {
+    private const string MainPanelControl = "PART_MainPanelControl";
+    private const string ActionableElement = "PART_ActionableElement";
+    private ContentPresenter actionableElementHolder;
+    private Grid mainPanel;
+
     public static readonly DependencyProperty DescriptionProperty = DependencyProperty.Register(
        nameof(Description),
        typeof(string),
@@ -92,5 +99,28 @@ public class ExpandableSettingsControl: CardExpander
         set { SetValue(ContentPaddingProperty, value); }
     }
 
+    public override void OnApplyTemplate()
+    {
+        base.OnApplyTemplate();
+        // We need to make the main panel of this control responsive:
+        // The action control should be repositioned if a certain grid width is reached.
+        mainPanel = GetTemplateChild(MainPanelControl) as Grid;
+        actionableElementHolder = GetTemplateChild(ActionableElement) as ContentPresenter;
+        mainPanel.SizeChanged += MainPanel_SizeChanged;
+    }
+
+    private void MainPanel_SizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        if (e.NewSize.Width > 500)
+        {
+            Style style = FindResource("NormalState") as Style;
+            actionableElementHolder.Style = style;
+        }
+        else
+        {
+            Style style = FindResource("CompactState") as Style;
+            actionableElementHolder.Style = style;
+        }
+    }
 
 }
