@@ -7,7 +7,7 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
 {
     #region Fields
     private bool _isInitialized = false;
-    private HighlighterSettings _settings;
+    private HighlighterSettings _spotlightSettings;
 
     // Mouse highlighter settings. 
     [ObservableProperty]
@@ -15,7 +15,7 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     [ObservableProperty]
     private ushort _spotlightRadius = 0;
     [ObservableProperty]
-    private bool _isSpotlightFilled = false;
+    private bool _isFilledSpotlight = false;
     [ObservableProperty]
     private byte _spotlightOpacity = 0;
 
@@ -44,30 +44,31 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     }
     private void InitializeViewModel()
     {
-        _settings = SettingsManager.Settings.HighlighterProperties;
+        _spotlightSettings = SettingsManager.Settings.HighlighterProperties;
         _isInitialized = true;
         IsMouseSpotlightEnabled = true;
-        SpotlightRadius = _settings.Radius;
-        SpotlightOpacity = _settings.OpacityPercentage;
-        IsSpotlightFilled = _settings.IsFilled;
+        SpotlightRadius = _spotlightSettings.Radius;
+        SpotlightOpacity = _spotlightSettings.OpacityPercentage;
+        IsFilledSpotlight = _spotlightSettings.IsFilled;
     }
     partial void OnIsMouseSpotlightEnabledChanged(bool value)
     {
-        _settings.IsEnabled = value;
+        _spotlightSettings.IsEnabled = value;
     }
 
     partial void OnSpotlightRadiusChanged(ushort value)
     {
         Console.WriteLine("Radius: " + value.ToString());
-        _settings.Radius = value;
+        _spotlightSettings.Radius = value;
     }
     partial void OnSpotlightOpacityChanged(byte value)
     {
-        _settings.OpacityPercentage = value;
+        _spotlightSettings.OpacityPercentage = value;
     }
-    partial void OnIsSpotlightFilledChanged(bool value)
+    
+    partial void OnIsFilledSpotlightChanged(bool value)
     {
-        _settings.IsFilled = value;
+        _spotlightSettings.IsFilled = value;
     }
 }
 

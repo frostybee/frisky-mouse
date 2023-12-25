@@ -6,8 +6,15 @@ namespace FriskyMouse.UI.Controls;
 /// <summary>
 /// Settings Card with Icon, header, description and content and <see cref="Footer"/>.
 /// </summary>
+[TemplatePart(Name = MainPanelControl, Type = typeof(Grid))]
+[TemplatePart(Name = ActionableElement, Type = typeof(ContentPresenter))]
 public class SettingsCard : ContentControl
 {
+    private const string MainPanelControl = "PART_MainPanelControl";
+    private const string ActionableElement = "PART_ActionableElement";
+    private ContentPresenter actionableElementHolder;
+    private Grid mainPanel;
+
     public static readonly DependencyProperty DescriptionProperty = DependencyProperty.Register(
        nameof(Description),
        typeof(string),
@@ -49,6 +56,8 @@ public class SettingsCard : ContentControl
         new PropertyMetadata(new CornerRadius(0))
     );
 
+
+    #region Porperties
     /// <summary>
     /// Header is the data used to for the header of each item in the control.
     /// </summary>
@@ -77,5 +86,45 @@ public class SettingsCard : ContentControl
     {
         get => (CornerRadius)GetValue(CornerRadiusProperty);
         set => SetValue(CornerRadiusProperty, value);
+    }
+
+    #endregion
+    public SettingsCard()
+    {
+        
+    }
+
+    public override void OnApplyTemplate()
+    {
+        base.OnApplyTemplate();
+        // We need to make the main panel of this control responsive:
+        // The action control should be repositioned if a certain grid width is reached.
+        mainPanel = GetTemplateChild(MainPanelControl) as Grid;
+        actionableElementHolder = GetTemplateChild(ActionableElement) as ContentPresenter; 
+        mainPanel.SizeChanged += MainPanel_SizeChanged;
+    }
+        
+        private void MainPanel_SizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        Console.WriteLine("Main panel changed...");
+        Console.WriteLine("New width: "+ e.NewSize.Width);
+        
+                
+        if (e.NewSize.Width == e.PreviousSize.Width || ActionableElement == null)
+        {
+            return;
+        }
+
+        //if (mainPanel.ActualWidth > e.NewSize.Width / 3)
+        if (e.NewSize.Width > 500)
+        {
+            Style style = this.FindResource("NormalState") as Style;
+            actionableElementHolder.Style = style;
+        }
+        else
+        {
+            Style style = this.FindResource("CompactState") as Style;
+            actionableElementHolder.Style = style;
+        }
     }
 }

@@ -10,7 +10,10 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:ExpandableSettingsControl}">
                     <Grid>
-                        <ui:CardExpander ContentPadding="0" Icon="{TemplateBinding Icon}">
+                        <ui:CardExpander
+                            ContentPadding="{TemplateBinding HeaderContentPadding}"
+                            Icon="{TemplateBinding Icon}"
+                            IsExpanded="{TemplateBinding IsExpanded}">
                             <ui:CardExpander.Header>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -45,7 +48,7 @@
                                     <ContentPresenter
                                         x:Name="ExpanderActionContentPresenter"
                                         Grid.Column="1"
-                                        Margin="{StaticResource CardControlContentMargin}"
+                                        Margin="14,0,30,0"
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
                                         Content="{TemplateBinding ExpanderAction}"
@@ -58,7 +61,8 @@
                                 Margin="{TemplateBinding ContentPadding}"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                Content="{TemplateBinding Content}" />
+                                Content="{TemplateBinding Content}"
+                                TextElement.Foreground="{TemplateBinding Foreground}" />
 
                         </ui:CardExpander>
                     </Grid>

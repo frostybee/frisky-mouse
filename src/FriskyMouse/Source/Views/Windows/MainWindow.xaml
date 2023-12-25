@@ -10,7 +10,7 @@
     Title="{Binding ViewModel.ApplicationTitle, Mode=OneWay}"
     Width="1450"
     Height="802"
-    MinWidth="700"
+    MinWidth="600"
     d:DataContext="{d:DesignInstance local:MainWindow,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="650"
@@ -19,6 +19,8 @@
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     ExtendsContentIntoTitleBar="True"
     SizeChanged="MainWindow_OnSizeChanged"
+    TextOptions.TextFormattingMode="Display"
+    TextOptions.TextRenderingMode="Auto"
     WindowBackdropType="Mica"
     WindowCornerPreference="Default"
     WindowStartupLocation="CenterScreen"

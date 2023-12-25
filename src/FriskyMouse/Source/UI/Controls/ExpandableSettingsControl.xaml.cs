@@ -15,7 +15,18 @@ public class ExpandableSettingsControl: CardExpander
        typeof(ExpandableSettingsControl),
        new PropertyMetadata(null)
    );
-
+    /// <summary>
+    /// Property for <see cref="ContentPadding"/>.
+    /// </summary>
+    public static readonly DependencyProperty HeaderContentPaddingProperty = DependencyProperty.Register(
+        nameof(HeaderContentPadding),
+        typeof(Thickness),
+        typeof(ExpandableSettingsControl),
+        new FrameworkPropertyMetadata(
+            default(Thickness),
+            FrameworkPropertyMetadataOptions.AffectsParentMeasure
+        )
+    );
 
 
     /// <summary>
@@ -27,6 +38,7 @@ public class ExpandableSettingsControl: CardExpander
         typeof(ExpandableSettingsControl),
         new PropertyMetadata(null)
     );
+
     /// <summary>
     /// Property for <see cref="Header"/>.
     /// </summary>
@@ -67,6 +79,17 @@ public class ExpandableSettingsControl: CardExpander
     {
         get => (string)GetValue(DescriptionProperty);
         set => SetValue(DescriptionProperty, value);
+    }
+
+
+    /// <summary>
+    /// Gets or sets content padding Property
+    /// </summary>
+    [Bindable(true), Category("Layout")]
+    public Thickness HeaderContentPadding
+    {
+        get { return (Thickness)GetValue(ContentPaddingProperty); }
+        set { SetValue(ContentPaddingProperty, value); }
     }
 
 

@@ -18,13 +18,7 @@
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-    <Page.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/ColorPicker;component/Styles/DefaultColorPickerStyle.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Page.Resources>
+
 
     <StackPanel Margin="0,0,0,24">
         <ui:TextBlock
@@ -38,9 +32,10 @@
                 Icon="{ui:SymbolIcon FlashSettings24}" />-->
 
             <controls:SettingsCard
-                Description="This is a description of what the user  can do with this settings. This is a description of what the user  can do with this settings."
+                Description="This is a description of what the user  can do with this settings."
                 Header="This is a header"
                 Icon="{ui:SymbolIcon FlashSettings24}">
+
                 <colorpicker:PortableColorPicker
                     Grid.Column="1"
                     Width="65"
@@ -69,18 +64,18 @@
         <ui:CardControl Margin="0,0,0,12" Icon="{ui:SymbolIcon Color24}">
             <ui:CardControl.Header>
                 <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <ui:TextBlock
                         Grid.Row="0"
                         FontTypography="Body"
                         Text="App theme" />
-                    <ui:TextBlock
-                        Grid.Row="1"
-                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                        Text="Select which app theme to display" />
+                    <ui:TextBlock Grid.Row="1" Text="Select which app theme to displaySelect which app theme to displaySelect which app theme to display" />
                 </Grid>
             </ui:CardControl.Header>
             <ComboBox Grid.Column="1" MinWidth="200">
@@ -109,12 +104,9 @@
             Margin="0,24,0,8"
             FontTypography="BodyStrong"
             Text="Test Card Expander" />
-
-
         <controls:ExpandableSettingsControl
-            ContentPadding="40,20,20,20"
-            Description="This is a description and long one!"
             Header="This is a header "
+            HeaderContentPadding="0,0,40,0"
             Icon="{ui:SymbolIcon AlignSpaceEvenlyVertical20}">
             <controls:ExpandableSettingsControl.ExpanderAction>
                 <ui:ToggleSwitch OffContent="Disabled" OnContent="Enabled" />
@@ -175,7 +167,12 @@
             Margin="0,24,0,8"
             FontTypography="BodyStrong"
             Text="About" />
-        <ui:CardExpander ContentPadding="0" Icon="{ui:ImageIcon 'pack://application:,,,/Assets/wpfui.png', Width=38, Height=35}">
+        <ui:CardExpander
+            ContentPadding="0"
+            Icon="{ui:ImageIcon 'pack://application:,,,/Assets/wpfui.png',
+                                Width=38,
+                                Height=35}"
+            IsExpanded="True">
             <ui:CardExpander.Header>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -339,8 +336,7 @@
                 <TextBlock Margin="16" Text="Test" />
             </StackPanel>
         </ui:CardExpander>-->
+
     </StackPanel>
-
-
 </Page>
 

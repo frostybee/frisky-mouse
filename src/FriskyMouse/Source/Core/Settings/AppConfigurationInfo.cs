@@ -1,4 +1,6 @@
-﻿namespace FriskyMouse.Settings;
+﻿using System.Reflection;
+
+namespace FriskyMouse.Settings;
 
 internal class AppConfigurationInfo
 {
@@ -25,4 +27,10 @@ internal class AppConfigurationInfo
         IsPortable = isPortable;
     }
 
+    /*private static Assembly Assembly { get; } = Assembly.GetExecutingAssembly();
+    public static string Name { get; } = Assembly.GetName().Name!;
+    public static Version Version { get; } = Assembly.GetName().Version!;
+    public static string VersionString { get; } = Version.ToString(3);
+    public static string ProjectUrl { get; } = "https://github.com/frostybee/friskymouse";
+    public static string LatestReleaseUrl { get; } = ProjectUrl + "/releases/latest";*/
 }

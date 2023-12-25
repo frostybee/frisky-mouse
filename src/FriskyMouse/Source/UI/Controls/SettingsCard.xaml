@@ -25,6 +25,18 @@
     <system:Double x:Key="SettingsCardWrapNoIconThreshold">286</system:Double>
     <Thickness x:Key="CardControlIconMargin">0,0,16,0</Thickness>
 
+    <Style x:Key="NormalState" TargetType="ContentPresenter">
+        <Setter Property="Grid.Row" Value="0" />
+        <Setter Property="Grid.Column" Value="2" />
+        <Setter Property="Margin" Value="24,0,0,0" />
+    </Style>
+    <Style x:Key="CompactState" TargetType="ContentPresenter">
+        <Setter Property="Grid.Row" Value="2" />
+        <Setter Property="Grid.Column" Value="1" />
+        <Setter Property="Margin" Value="0,10,0,0" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+
     <Style TargetType="{x:Type controls:SettingsCard}">
         <Setter Property="Background" Value="{DynamicResource CardBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource CardForeground}" />
@@ -46,7 +58,7 @@
         <Setter Property="TextOptions.TextRenderingMode" Value="Auto" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:SettingsCard}">
+                <ControlTemplate x:Name="SettingsCardTemplate" TargetType="{x:Type controls:SettingsCard}">
                     <Border
                         x:Name="ContentBorder"
                         Width="{TemplateBinding Width}"
@@ -60,65 +72,68 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{DynamicResource ControlCornerRadius}">
-                        <Grid>
+                        <Grid
+                            x:Name="PART_MainPanelControl"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="6*" MinWidth="200" />
-                                <ColumnDefinition Width="6*" MinWidth="200" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
-                            <DockPanel>
-                                <ContentControl
-                                    x:Name="ControlIcon"
-                                    Grid.Column="0"
-                                    Margin="{StaticResource CardControlIconMargin}"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    Content="{TemplateBinding Icon}"
-                                    Focusable="False"
-                                    FontSize="{StaticResource CardControlIconSize}"
-                                    Foreground="{TemplateBinding Foreground}"
-                                    KeyboardNavigation.IsTabStop="False" />
-                                <!--<ContentControl
-                                    x:Name="ControlIcon"
-                                    Width="40"
-                                    MaxWidth="{StaticResource SettingsCardHeaderIconMaxSize}"
-                                    MaxHeight="{StaticResource SettingsCardHeaderIconMaxSize}"
-                                    Margin="{StaticResource CardControlIconMargin}"
-                                    VerticalAlignment="Center"
-                                    Content="{TemplateBinding Icon}"
-                                    Focusable="False"
-                                    FontSize="{StaticResource CardControlIconSize}"
-                                    Foreground="{TemplateBinding Foreground}"
-                                    KeyboardNavigation.IsTabStop="False" />-->
+                            <ContentControl
+                                x:Name="ControlIcon"
+                                Grid.Column="0"
+                                Margin="{StaticResource SettingsCardHeaderIconMargin}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Content="{TemplateBinding Icon}"
+                                Focusable="False"
+                                FontSize="{StaticResource CardControlIconSize}"
+                                Foreground="{TemplateBinding Foreground}"
+                                KeyboardNavigation.IsTabStop="False"
+                                SnapsToDevicePixels="True" />
 
-                                <controls:SimpleStackPanel Margin="0,0,0,0" VerticalAlignment="Center">
-                                    <ui:TextBlock
-                                        Margin="0"
-                                        FontTypography="BodyStrong"
-                                        Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}"
-                                        Text="{TemplateBinding Header}"
-                                        TextOptions.TextFormattingMode="Ideal"
-                                        TextOptions.TextRenderingMode="Auto"
-                                        TextWrapping="WrapWithOverflow" />
-                                    <ui:TextBlock
-                                        x:Name="DescriptionText"
-                                        Appearance="Secondary"
-                                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                                        Text="{TemplateBinding Description}"
-                                        TextOptions.TextFormattingMode="Ideal"
-                                        TextOptions.TextRenderingMode="Auto"
-                                        TextWrapping="WrapWithOverflow" />
-                                </controls:SimpleStackPanel>
-                            </DockPanel>
+                            <Grid
+                                x:Name="DescriptionPanel"
+                                Grid.Column="1"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <ui:TextBlock
+                                    x:Name="TitleBlock"
+                                    Margin="0"
+                                    FontTypography="BodyStrong"
+                                    Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}"
+                                    Text="{TemplateBinding Header}"
+                                    TextOptions.TextFormattingMode="Ideal"
+                                    TextOptions.TextRenderingMode="Auto"
+                                    TextWrapping="WrapWithOverflow" />
+                                <ui:TextBlock
+                                    x:Name="DescriptionBlock"
+                                    Grid.Row="1"
+                                    Appearance="Secondary"
+                                    Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                                    Text="{TemplateBinding Description}"
+                                    TextOptions.TextFormattingMode="Ideal"
+                                    TextOptions.TextRenderingMode="Auto"
+                                    TextWrapping="WrapWithOverflow" />
+                            </Grid>
 
                             <ContentPresenter
-                                x:Name="ContentPresenter"
-                                Grid.Column="1"
-                                Margin="{StaticResource CardControlContentMargin}"
-                                HorizontalAlignment="Right"
+                                x:Name="PART_ActionableElement"
                                 VerticalAlignment="Center"
                                 Content="{TemplateBinding Content}"
-                                TextElement.Foreground="{TemplateBinding Foreground}" />
+                                Style="{StaticResource NormalState}" />
                         </Grid>
                     </Border>
 
@@ -144,14 +159,15 @@
                             <Setter TargetName="HeaderContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource CardForegroundPressed}" />
                             <Setter TargetName="ControlIcon" Property="Foreground" Value="{DynamicResource CardForegroundPressed}" />
                         </Trigger>-->
+
                         <Trigger Property="Description" Value="{x:Null}">
-                            <Setter TargetName="DescriptionText" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="DescriptionBlock" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="Content" Value="{x:Null}">
-                            <Setter TargetName="ContentPresenter" Property="Margin" Value="0" />
+                            <Setter TargetName="PART_ActionableElement" Property="Margin" Value="0" />
                         </Trigger>
                         <Trigger Property="Content" Value="">
-                            <Setter TargetName="ContentPresenter" Property="Margin" Value="0" />
+                            <Setter TargetName="PART_ActionableElement" Property="Margin" Value="0" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
