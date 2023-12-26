@@ -15,7 +15,7 @@ using FriskyMouse.Settings;
 
 namespace FriskyMouse.Drawing.Ripples;
 
-public class RippleProfileSettings
+public class RippleProfileInfo
 {
     public HotkeySettings DefaultActivationShortcut => new HotkeySettings(true, false, false, true, 0x48);
     public bool IsEnabled { get; set; } = true;

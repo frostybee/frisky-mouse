@@ -36,7 +36,11 @@ public static class FMAppHelper
         return GetEnums<T>()[i];
     }
 
-    public static Version GetCurrentAppVersion()
+    /// <summary>
+    /// Gets the current version of this executing assembly.
+    /// </summary>
+    /// <returns> The current version of the running assembly.</returns>
+    public static Version GetCurrentVersion()
     {
         Version version = typeof(FMAppHelper).Assembly.GetName().Version;
         return version;

@@ -38,7 +38,7 @@ public partial class MainWindowViewModel : ObservableObject
         {
             new NavigationViewItem
             {
-                Content = "Settings",
+                Content = "Current",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Settings24 },
                 TargetPageType = typeof(SettingsPage)
             }

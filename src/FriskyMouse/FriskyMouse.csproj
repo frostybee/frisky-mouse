@@ -12,7 +12,7 @@
     <Platforms>AnyCPU;x64</Platforms>
     <RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
     <UseWindowsForms>False</UseWindowsForms>
-    <BaseOutputPath>..\bin</BaseOutputPath>    
+    <Configurations>Debug;Release;Portable;SelfContained;MicrosoftStore</Configurations>
     <!--<UseWindowsForms>True</UseWindowsForms>-->    
   </PropertyGroup>
 

@@ -16,47 +16,69 @@ namespace FriskyMouse.Settings;
 
 internal static class SettingsManager
 {
-    private static string SettingsFileName = "settings.json";
+    private static string _settingsFileName = "settings.json";
     private static Mutex _jsonMutex = new Mutex();
-    public static SettingsWrapper Settings { get; private set; } = new SettingsWrapper();
-    private static readonly string PortablePersonalFolder = FileHelpers.GetAbsolutePath();
-    private static readonly string DefaultPersonalFolder =
-        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), App.ApplicationName);
-    private static string SettingsFolder
+    public static GlobalSettings Current { get; private set; } 
+
+    private static string SettingsFilePath
     {
         get
         {
-            return DefaultPersonalFolder;
+            return Path.Combine(GetSettingsFolderLocation(), _settingsFileName);
         }
     }
 
-    private static string AppSettingsFilePath
+    private static string GetSettingsFolderLocation()
     {
-        get
+        return App.Configuration.IsPortable ?
+            FileHelpers.GetAbsolutePath() :
+            Path.Combine(Environment.GetFolderPath(
+                Environment.SpecialFolder.LocalApplicationData),
+                App.Configuration.ApplicationName);
+    }
+
+    public static void LoadSettings()
+    {
+        string settingFilePath = SettingsFilePath;
+        try
         {
-            if (App.IsPortable)
+            if (File.Exists(settingFilePath))
             {
-                return Path.Combine(PortablePersonalFolder, SettingsFileName);
-            };
-            return Path.Combine(SettingsFolder, SettingsFileName);
+                using FileStream openStream = File.OpenRead(settingFilePath);
+                if (openStream.CanRead)
+                {
+                    Current = JsonSerializer.Deserialize<GlobalSettings>(openStream, GetJsonSerializerOptions());
+                    //TODO: verify if JSON file is not corrupted.
+                }
+            }
+            else
+            {
+                // Load the default settings if no settings file found.
+                LoadDefaultSettings();
+            }
+        }
+        catch (Exception)
+        {
+            // Failed to load the settings... Load the default ones.                
         }
     }
+
     public static void SaveSettings()
     {
         try
         {
             _jsonMutex.WaitOne();
-            string filePath = AppSettingsFilePath;
+            string filePath = SettingsFilePath;
             if (!string.IsNullOrEmpty(filePath))
             {
-                Console.WriteLine("Saving settings in "+filePath);
+                Console.WriteLine("Saving settings in " + filePath);
                 LoadDefaultSettings();
-                Settings.ApplicationSettings.ApplicationName = App.ApplicationName;
-                Settings.ApplicationSettings.Version = FMAppHelper.GetApplicationVersion();
+                Current.ApplicationInfo.ApplicationName = App.Configuration.ApplicationName;
+                Current.ApplicationInfo.Version = FMAppHelper.GetApplicationVersion();
                 // Create the directory that will hold the settings file if it doesn't exist.
                 FileHelpers.CreateDirectoryFromFilePath(filePath);
                 FileStream createStream = File.Create(filePath);
-                JsonSerializer.SerializeAsync(createStream, Settings, GetJsonSerializerOptions());
+                JsonSerializer.SerializeAsync(createStream, Current, GetJsonSerializerOptions());
                 createStream.DisposeAsync();
                 //TODO: verify if JSON file is not corrupted.
             }
@@ -72,30 +94,11 @@ internal static class SettingsManager
         }
     }
 
-    public static void LoadSettings()
-    {
-        string settingFilePath = AppSettingsFilePath;
-        try
-        {
-            if (File.Exists(settingFilePath))
-            {
-                using FileStream openStream = File.OpenRead(settingFilePath);
-                if (openStream.CanRead)
-                {
-                    Settings = JsonSerializer.Deserialize<SettingsWrapper>(openStream, GetJsonSerializerOptions());
-                    //TODO: verify if JSON file is not corrupted.
-                }
-            }
-        }
-        catch (Exception)
-        {
-            // Failed to load the settings... Load the default ones.                
-        }
-    }
+   
 
     private static void LoadDefaultSettings()
     {
-        Settings ??= new SettingsWrapper();
+        Current ??= new GlobalSettings();
     }
     private static JsonSerializerOptions GetJsonSerializerOptions()
     {

@@ -14,20 +14,20 @@ using FriskyMouse.Drawing.Ripples;
 
 namespace FriskyMouse.Settings;
 
-internal class SettingsWrapper
+internal sealed class GlobalSettings
 {
     #region Properties      
     [JsonPropertyName("applicationSettings")]
-    public ApplicationSettings ApplicationSettings { get; set; } = new ApplicationSettings();
+    public ApplicationInfo ApplicationInfo { get; set; } = new ApplicationInfo();
 
     [JsonPropertyName("highlighterSettings")]
-    public HighlighterSettings HighlighterProperties { get; set; } = new HighlighterSettings();
+    public HighlighterInfo HighlighterProperties { get; set; } = new HighlighterInfo();
 
     [JsonPropertyName("mouseLeftClickSettings")]
-    public RippleProfileSettings LeftClickProperties { get; set; } = new RippleProfileSettings();
+    public RippleProfileInfo LeftClickProperties { get; set; } = new RippleProfileInfo();
 
     [JsonPropertyName("mouseRightClickSettings")]
-    public RippleProfileSettings RightClickProperties { get; set; } = new RippleProfileSettings();
+    public RippleProfileInfo RightClickProperties { get; set; } = new RippleProfileInfo();
 
     #endregion
 

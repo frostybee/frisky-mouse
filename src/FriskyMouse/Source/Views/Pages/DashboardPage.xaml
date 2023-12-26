@@ -29,7 +29,7 @@
             Height="200"
             CornerRadius="8">
             <Border.Background>
-                <!--FIXME: choose another image, it's causing memory spike -->
+                <!--  FIXME: choose another image, it's causing memory spike  -->
                 <ImageBrush
                     ImageSource="pack://application:,,,/Assets/wpfui.png"
                     RenderOptions.BitmapScalingMode="HighQuality"

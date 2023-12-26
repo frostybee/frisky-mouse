@@ -20,7 +20,7 @@ internal class DecorationManager : IDisposable
 {
     private static readonly Lazy<DecorationManager> _instance =
         new Lazy<DecorationManager>(() => new DecorationManager());        
-    private readonly SettingsWrapper _settings;        
+    private readonly GlobalSettings _settings;        
     private readonly HighlighterController _highlighter;
     private readonly ClickEffectController _leftClickDecorator;
     private readonly ClickEffectController _rightClickDecorator;
@@ -30,7 +30,7 @@ internal class DecorationManager : IDisposable
 
     private DecorationManager()
     {
-        _settings = SettingsManager.Settings;
+        _settings = SettingsManager.Current;
         _leftClickDecorator = new ClickEffectController(_settings.LeftClickProperties);
         _rightClickDecorator = new ClickEffectController(_settings.RightClickProperties);
         _highlighter = new HighlighterController(_settings.HighlighterProperties);

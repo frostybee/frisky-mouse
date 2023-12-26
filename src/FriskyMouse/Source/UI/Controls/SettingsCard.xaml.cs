@@ -4,7 +4,7 @@ using System.Windows.Automation.Peers;
 namespace FriskyMouse.UI.Controls;
 
 /// <summary>
-/// Settings Card with Icon, header, description and content and <see cref="Footer"/>.
+/// Current Card with Icon, header, description and content and <see cref="Footer"/>.
 /// </summary>
 [TemplatePart(Name = MainPanelControl, Type = typeof(Grid))]
 [TemplatePart(Name = ActionableElement, Type = typeof(ContentPresenter))]
@@ -111,7 +111,7 @@ public class SettingsCard : ContentControl
             return;
         }
         
-        if (e.NewSize.Width > 500)
+        if (e.NewSize.Width > 650)
         {
             Style style = FindResource("NormalState") as Style;
             actionableElementHolder.Style = style;

@@ -9,8 +9,8 @@
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="{Binding ViewModel.ApplicationTitle, Mode=OneWay}"
     Width="1450"
-    Height="802"
-    MinWidth="600"
+    Height="800"
+    MinWidth="650"
     d:DataContext="{d:DesignInstance local:MainWindow,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="650"

@@ -6,9 +6,7 @@
 public partial class App : Application
 {
     #region Fields
-    public static bool IsPortable { get; private set; } = true;
-    public static string BuildInfo { get; private set; } = "Release";
-    public const string ApplicationName = "FriskyMouse";
+    public static readonly AppConfigurationInfo Configuration = new AppConfigurationInfo();       
     /// <summary>
     /// A named system-wide mutex used to ensure that only one instance of this application runs at once. 
     /// </summary>
@@ -78,31 +76,30 @@ public partial class App : Application
         }
         else
         {
-            // No instance running instance has been detected.
+            // No running instance has been detected,
             // We Start a new instance of this application.
-            _mutex.ReleaseMutex();
-            InitializeAppConfiguration();
+            _mutex.ReleaseMutex();            
             _host.Start();
+            LoadAppConfigurationInfo();
             SettingsManager.LoadSettings();
             AppConfigurationManager.SayHello();            
         }        
     }
 
-    private void InitializeAppConfiguration()
+    private void LoadAppConfigurationInfo()
     {
-        //TODO: Create a wrapper object for the following
-        // and add the assembly version to i. 
 #if DEBUG
-        IsPortable = true;
-        BuildInfo = "Debug";
+        Configuration.IsPortable = true;
+        Configuration.BuildInfo = "Debug";
 #elif PORTABLE
-                IsPortable = true;                
-                BuildInfo = "Portable";
+                Configuration.IsPortable = true;                
+                Configuration.BuildInfo = "Portable";
 #elif MICROSOFTSTORE
-            BuildInfo = "Microsoft Store";
+            Configuration.IsPortable = false;
+            Configuration.BuildInfo = "Microsoft Store";
 #elif SELFCONTAINED
-            IsPortable = true;
-            BuildInfo = "Self contained";
+        Configuration.IsPortable = true;
+            Configuration.BuildInfo = "Self contained";
 #endif
     }
 

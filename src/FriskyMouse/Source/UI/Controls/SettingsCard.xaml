@@ -6,25 +6,22 @@
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
 
     <!--<Thickness x:Key="CardPadding">14,16,14,16</Thickness>-->
-    <Thickness x:Key="CardBorderThemeThickness">1</Thickness>
     <Thickness x:Key="SettingsCardBorderThickness">1</Thickness>
-    <Thickness x:Key="SettingsCardPadding">14,16,20,16</Thickness>
+    <Thickness x:Key="SettingsCardPadding">16,16,16,16</Thickness>
     <system:Double x:Key="SettingsCardMinWidth">148</system:Double>
     <system:Double x:Key="SettingsCardMinHeight">68</system:Double>
-    <system:Double x:Key="SettingsCardActionButtonWidth">32</system:Double>
-    <system:Double x:Key="SettingsCardActionButtonHeight">32</system:Double>
     <system:Double x:Key="SettingsCardDescriptionFontSize">12</system:Double>
-    <system:Double x:Key="SettingsCardHeaderIconMaxSize">40</system:Double>
-    <system:Double x:Key="SettingsCardActionIconMaxSize">13</system:Double>
-    <system:Double x:Key="SettingsCardLeftIndention">20</system:Double>
+    <system:Double x:Key="SettingsCardHeaderIconMaxSize">20</system:Double>
+    <system:Double x:Key="SettingsCardLeftIndention">0</system:Double>
     <system:Double x:Key="SettingsCardContentMinWidth">120</system:Double>
     <Thickness x:Key="SettingsCardHeaderIconMargin">2,0,20,0</Thickness>
-    <Thickness x:Key="SettingsCardVerticalHeaderContentSpacing">0,4,0,0</Thickness>
-    <system:Double x:Key="CardControlIconSize">24.0</system:Double>
-    <system:Double x:Key="SettingsCardWrapThreshold">460</system:Double>
-    <system:Double x:Key="SettingsCardWrapNoIconThreshold">286</system:Double>
-    <Thickness x:Key="CardControlIconMargin">0,0,16,0</Thickness>
-
+    <Thickness x:Key="SettingsCardActionIconMargin">14,0,0,0</Thickness>
+    <system:Double x:Key="SettingsCardActionIconMaxSize">13</system:Double>
+    <system:Double x:Key="SettingsCardVerticalHeaderContentSpacing">8</system:Double>
+    <system:Double x:Key="SettingsCardWrapThreshold">476</system:Double>
+    <system:Double x:Key="SettingsCardWrapNoIconThreshold">
+        286
+    </system:Double>
 
     <Style TargetType="{x:Type controls:SettingsCard}">
         <Setter Property="Background" Value="{DynamicResource CardBackground}" />
@@ -68,7 +65,6 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />

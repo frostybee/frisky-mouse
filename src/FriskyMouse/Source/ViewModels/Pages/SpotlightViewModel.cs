@@ -7,7 +7,7 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
 {
     #region Fields
     private bool _isInitialized = false;
-    private HighlighterSettings _spotlightSettings;
+    private HighlighterInfo _spotlightSettings;
 
     // Mouse highlighter settings. 
     [ObservableProperty]
@@ -44,7 +44,7 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     }
     private void InitializeViewModel()
     {
-        _spotlightSettings = SettingsManager.Settings.HighlighterProperties;
+        _spotlightSettings = SettingsManager.Current.HighlighterProperties;
         _isInitialized = true;
         IsMouseSpotlightEnabled = true;
         SpotlightRadius = _spotlightSettings.Radius;

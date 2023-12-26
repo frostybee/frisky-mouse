@@ -14,7 +14,7 @@ using Color = System.Drawing.Color;
 
 namespace FriskyMouse.Settings;
 
-public class HighlighterSettings
+public sealed class HighlighterInfo
 {
     #region Properties        
     public HotkeySettings DefaultActivationShortcut => new HotkeySettings(true, false, false, true, 0x48);
