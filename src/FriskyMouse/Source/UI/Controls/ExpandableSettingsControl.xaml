@@ -11,6 +11,7 @@
                 <ControlTemplate TargetType="{x:Type controls:ExpandableSettingsControl}">
                     <Grid>
                         <ui:CardExpander
+                            Padding="0,16,16,16"
                             ContentPadding="{TemplateBinding HeaderContentPadding}"
                             Icon="{TemplateBinding Icon}"
                             IsExpanded="{TemplateBinding IsExpanded}">
@@ -34,7 +35,7 @@
                                         x:Name="ControlIcon"
                                         Grid.Column="0"
                                         Margin="{StaticResource SettingsCardHeaderIconMargin}"
-                                        HorizontalAlignment="Center"
+                                        HorizontalAlignment="Left"
                                         VerticalAlignment="Center"
                                         Content="{TemplateBinding Icon}"
                                         Focusable="False"
