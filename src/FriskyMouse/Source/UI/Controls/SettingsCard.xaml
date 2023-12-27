@@ -1,7 +1,7 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:FriskyMouse.UI.Controls"
+    xmlns:local="clr-namespace:FriskyMouse.UI.Controls"
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
 
@@ -23,7 +23,7 @@
         286
     </system:Double>
 
-    <Style TargetType="{x:Type controls:SettingsCard}">
+    <Style TargetType="{x:Type local:SettingsCard}">
         <Setter Property="Background" Value="{DynamicResource CardBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource CardForeground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource CardBorderBrush}" />
@@ -44,7 +44,7 @@
         <Setter Property="TextOptions.TextRenderingMode" Value="Auto" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate x:Name="SettingsCardTemplate" TargetType="{x:Type controls:SettingsCard}">
+                <ControlTemplate x:Name="SettingsCardTemplate" TargetType="{x:Type local:SettingsCard}">
                     <Border
                         x:Name="ContentBorder"
                         Width="{TemplateBinding Width}"
@@ -71,7 +71,10 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-
+                            <ContentPresenter
+                                x:Name="ResizableFlag"
+                                Content="{TemplateBinding CanReposition}"
+                                Visibility="Collapsed" />
                             <ContentControl
                                 x:Name="ControlIcon"
                                 Grid.Column="0"

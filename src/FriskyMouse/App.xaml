@@ -8,7 +8,7 @@
     DispatcherUnhandledException="OnDispatcherUnhandledException"
     Exit="OnExit"
     ShutdownMode="OnMainWindowClose"
-    Startup="OnApplication_Startup">
+    Startup="OnApplicationStartup">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

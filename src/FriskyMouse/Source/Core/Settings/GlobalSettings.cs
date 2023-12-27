@@ -21,7 +21,7 @@ internal sealed class GlobalSettings
     public ApplicationInfo ApplicationInfo { get; set; } = new ApplicationInfo();
 
     [JsonPropertyName("highlighterSettings")]
-    public HighlighterInfo HighlighterProperties { get; set; } = new HighlighterInfo();
+    public HighlighterInfoModel HighlighterOptions { get; set; } = new HighlighterInfoModel();
 
     [JsonPropertyName("mouseLeftClickSettings")]
     public RippleProfileInfo LeftClickProperties { get; set; } = new RippleProfileInfo();

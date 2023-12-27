@@ -15,6 +15,14 @@ public class SettingsCard : ContentControl
     private ContentPresenter actionableElementHolder;
     private Grid mainPanel;
 
+
+    public static readonly DependencyProperty CanRepositionProperty = DependencyProperty.Register(
+       nameof(CanReposition),
+       typeof(bool),
+       typeof(SettingsCard),
+       new PropertyMetadata(null)
+   );
+
     public static readonly DependencyProperty DescriptionProperty = DependencyProperty.Register(
        nameof(Description),
        typeof(string),
@@ -25,6 +33,12 @@ public class SettingsCard : ContentControl
     {
         get => (string)GetValue(DescriptionProperty);
         set => SetValue(DescriptionProperty, value);
+    }
+
+    public bool CanReposition
+    {
+        get => (bool)GetValue(CanRepositionProperty);
+        set => SetValue(CanRepositionProperty, value);
     }
     /// <summary>
     /// Property for <see cref="Header"/>.
@@ -106,6 +120,10 @@ public class SettingsCard : ContentControl
 
     private void MainPanel_SizeChanged(object sender, SizeChangedEventArgs e)
     {
+        if (!CanReposition)
+        {
+            return;
+        }
         if (e.NewSize.Width == e.PreviousSize.Width || ActionableElement == null)
         {
             return;

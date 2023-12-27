@@ -33,7 +33,7 @@ internal class DecorationManager : IDisposable
         _settings = SettingsManager.Current;
         _leftClickDecorator = new ClickEffectController(_settings.LeftClickProperties);
         _rightClickDecorator = new ClickEffectController(_settings.RightClickProperties);
-        _highlighter = new HighlighterController(_settings.HighlighterProperties);
+        _highlighter = new HighlighterController(_settings.HighlighterOptions);
         _mouseHookController = new MouseHookController(_highlighter, _leftClickDecorator, _rightClickDecorator);
         //_rightClickDecorator.AnimationCompleted += _rightClickDecorator_AnimationCompleted;
     }
@@ -47,13 +47,13 @@ internal class DecorationManager : IDisposable
 
     internal void EnableHighlighter()
     {            
-        _highlighter.SetHighlighterBitmap(_settings.HighlighterProperties);        
+        _highlighter.SetHighlighterBitmap(_settings.HighlighterOptions);        
     }         
     internal void DisableHighlighter()
     {
         // HideSpotlight the layered window.
         _highlighter.HideSpotlight();
-        if (_settings.HighlighterProperties.IsEnabled)
+        if (_settings.HighlighterOptions.IsEnabled)
         {
             
         }            
@@ -80,7 +80,7 @@ internal class DecorationManager : IDisposable
     {
         // Save the newly edited settings.
         //SettingsManager.SaveSettings();
-        if (_settings.HighlighterProperties.IsEnabled)
+        if (_settings.HighlighterOptions.IsEnabled)
         {                
             EnableHighlighter();
         }
@@ -92,7 +92,7 @@ internal class DecorationManager : IDisposable
         EnableHook();
         if (_mouseHookController.Started)
         {
-            if (_settings.HighlighterProperties.IsEnabled)
+            if (_settings.HighlighterOptions.IsEnabled)
             {
                 // Set the initial coordinates of the spotlight upon starting the application.
                 _highlighter.SetInitialPosition();

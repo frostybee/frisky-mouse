@@ -24,7 +24,7 @@ internal static class GraphicsExtensions
     {
         graphics.Clear(Color.Transparent);
     }
-    public static void DrawHighlighter(this Graphics graphics, Rectangle rect, HighlighterInfo options)
+    public static void DrawHighlighter(this Graphics graphics, Rectangle rect, HighlighterInfoModel options)
     {
         graphics.SetAntiAliasing();
 
@@ -53,7 +53,7 @@ internal static class GraphicsExtensions
         }
     }
 
-    public static void DrawOutline(this Graphics graphics, HighlighterInfo options)
+    public static void DrawOutline(this Graphics graphics, HighlighterInfoModel options)
     {
         Rectangle outlineRect = DrawingHelper.CreateRectangle(options.Width, options.Height, options.Radius + 2);
         //using Pen pen = new Pen(Color.Red, options.OutlineWidth);
@@ -62,7 +62,7 @@ internal static class GraphicsExtensions
         graphics.DrawEllipse(pen, outlineRect);
     }
 
-    public static void DrawRoundShadow(this Graphics graphics, HighlighterInfo options)
+    public static void DrawRoundShadow(this Graphics graphics, HighlighterInfoModel options)
     {
         int radius = options.Radius +
             (options.IsOutlined ? options.OutlineWidth + 4 : options.ShadowDepth - options.OutlineWidth

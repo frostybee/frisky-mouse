@@ -24,6 +24,7 @@ public partial class UiTestsViewModel : ObservableObject, INavigationAware
     {
         _isInitialized = true;
         SelectedColor = (Color)System.Windows.Media.ColorConverter.ConvertFromString("#FFDFD991");
+        
         IsMouseSpotlightEnabled = true;
         UpdateSwitchStatusText();
         

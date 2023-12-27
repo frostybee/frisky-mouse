@@ -32,17 +32,17 @@ internal class HighlighterController : IDisposable
     /// </summary>
     private LayeredWindow _highlighterWindow;
     private bool _disposed = false;
-    private readonly HighlighterInfo _options;
+    private readonly HighlighterInfoModel _options;
     private int _width = 0;
     private int _height = 0;
 
-    internal HighlighterController(HighlighterInfo options)
+    internal HighlighterController(HighlighterInfoModel options)
     {
         _highlighterWindow = new LayeredWindow();
         _options = options;
     }
 
-    internal void SetHighlighterBitmap(HighlighterInfo highlighterInfo)
+    internal void SetHighlighterBitmap(HighlighterInfoModel highlighterInfo)
     {
         // Clean up any previously generated bitmap.
         _spotlightBitmap?.Dispose();

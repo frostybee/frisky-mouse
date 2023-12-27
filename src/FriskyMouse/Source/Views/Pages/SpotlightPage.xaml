@@ -12,8 +12,8 @@
     Title="Mouse Highlighter Settings"
     d:DataContext="{d:DesignInstance local:SpotlightPage,
                                      IsDesignTimeCreatable=False}"
-    d:DesignHeight="1500"
-    d:DesignWidth="1000"
+    d:DesignHeight="500"
+    d:DesignWidth="600"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
@@ -25,7 +25,7 @@
             Header="Mouse highligther status"
             Icon="{ui:SymbolIcon DesktopCursor28}">
             <ui:ToggleSwitch
-                IsChecked="{Binding ViewModel.IsMouseSpotlightEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                IsChecked="{Binding ViewModel.SpotlightOptions.IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 OffContent="Off"
                 OnContent="On" />
         </controls:SettingsCard>
@@ -38,37 +38,79 @@
             TextOptions.TextRenderingMode="Auto"
             TextWrapping="WrapWithOverflow" />
         <ui:Card
-            Width="300"
-            Margin="0,10,10,10"
-            Padding="20,20,20,20"
+            Width="400"
+            Margin="10,10,10,10"
+            Padding="10,20,20,20"
             HorizontalAlignment="Left">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="3*" />
-                </Grid.ColumnDefinitions>
+            <StackPanel Width="400">
+                <controls:SettingsCard
+                    Width="350"
+                    Margin="0,0,0,0"
+                    Padding="5,5,25,5"
+                    CanReposition="False"
+                    Header="Filled spotlight"
+                    Icon="{ui:SymbolIcon DesktopCursor28}">
+                    <ui:ToggleSwitch
+                        Margin="70,0,0,0"
+                        IsChecked="{Binding ViewModel.SpotlightOptions.IsFilled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        OffContent="Off"
+                        OnContent="On" />
+                </controls:SettingsCard>
+                <!--<StackPanel Margin="0,0,0,10" Orientation="Horizontal">
+                    <TextBlock
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Text="Filled spotlight" />
+                </StackPanel>-->
+                <controls:SettingsCard
+                    Width="350"
+                    Margin="0,0,0,0"
+                    Padding="5,5,25,5"
+                    CanReposition="False"
+                    Header="Fill color"
+                    Icon="{ui:SymbolIcon DesktopCursor28}">
+                    <colorpicker:PortableColorPicker
+                        Width="40"
+                        Height="20"
+                        AllowDrop="True"
+                        HintColor="Red"
+                        SelectedColor="{Binding ViewModel.SelectedColor, Mode=TwoWay}"
+                        ShowAlpha="False"
+                        ShowFractionalPart="False"
+                        SmallChange="5"
+                        Style="{DynamicResource DefaultColorPickerStyle}"
+                        UseHintColor="False" />
+                </controls:SettingsCard>
+                <!--<StackPanel Margin="0,0,0,10" Orientation="Horizontal">
+                    <TextBlock
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Text="Fill color" />
+                </StackPanel>-->
+                <controls:SettingsCard
+                    Width="350"
+                    Margin="0,0,0,0"
+                    Padding="5,5,25,5"
+                    CanReposition="False"
+                    Header="Radius"
+                    Icon="{ui:SymbolIcon DesktopCursor28}">
+                    <Slider
+                        x:Name="sldSpotlightRadius"
+                        Grid.Column="1"
+                        Width="200"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        AutoToolTipPlacement="TopLeft"
+                        Maximum="100"
+                        Minimum="0"
+                        Value="{Binding ViewModel.SpotlightOptions.Radius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </controls:SettingsCard>
                 <TextBlock
                     Grid.Column="0"
                     Margin="0,0,10,0"
                     Text="Radius: " />
-                <Slider
-                    x:Name="sldSpotlightRadius"
-                    Grid.Column="1"
-                    Width="150"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    AutoToolTipPlacement="TopLeft"
-                    Maximum="100"
-                    Minimum="0"
-                    Value="{Binding ViewModel.SpotlightRadius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBlock Grid.Row="1" Margin="-5" />
+
+                <!--<TextBlock Grid.Row="1" Margin="-5" />-->
                 <!--  Opcity options  -->
                 <TextBlock
                     Grid.Row="2"
@@ -78,14 +120,14 @@
                     x:Name="sldSpotlightOpacity"
                     Grid.Row="2"
                     Grid.Column="1"
-                    Width="150"
+                    Width="200"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     AutoToolTipPlacement="TopLeft"
                     Maximum="100"
                     Minimum="0"
-                    Value="{Binding ViewModel.SpotlightOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            </Grid>
+                    Value="{Binding ViewModel.SpotlightOptions.OpacityPercentage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
 
         </ui:Card>
     </StackPanel>

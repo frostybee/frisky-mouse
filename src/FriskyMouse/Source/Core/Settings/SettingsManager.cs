@@ -59,7 +59,8 @@ internal static class SettingsManager
         }
         catch (Exception)
         {
-            // Failed to load the settings... Load the default ones.                
+            // Failed to load the settings... Load the default settings if no settings file found.
+            LoadDefaultSettings();
         }
     }
 
@@ -94,12 +95,11 @@ internal static class SettingsManager
         }
     }
 
-   
-
     private static void LoadDefaultSettings()
     {
         Current ??= new GlobalSettings();
     }
+
     private static JsonSerializerOptions GetJsonSerializerOptions()
     {
         var options = new JsonSerializerOptions

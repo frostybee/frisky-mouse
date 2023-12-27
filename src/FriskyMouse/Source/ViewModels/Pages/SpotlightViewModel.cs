@@ -1,37 +1,20 @@
-﻿using FriskyMouse.Settings;
+﻿using FriskyMouse.Extensions;
+using FriskyMouse.Settings;
 using System.Diagnostics.Metrics;
-using System.Windows.Forms;
+
+using Color = System.Windows.Media.Color;
 
 namespace FriskyMouse.ViewModels.Pages;
 public partial class SpotlightViewModel : ObservableObject, INavigationAware
 {
     #region Fields
     private bool _isInitialized = false;
-    private HighlighterInfo _spotlightSettings;
 
-    // Mouse highlighter settings. 
     [ObservableProperty]
-    private bool _isMouseSpotlightEnabled = false;
+    private HighlighterInfoModel _spotlightOptions;
     [ObservableProperty]
-    private ushort _spotlightRadius = 0;
-    [ObservableProperty]
-    private bool _isFilledSpotlight = false;
-    [ObservableProperty]
-    private byte _spotlightOpacity = 0;
+    private System.Windows.Media.Color _selectedColor;
 
-    // Spotlight's outline settings:
-    [ObservableProperty]
-    private byte _outlineWidth = 1;
-    [ObservableProperty]
-    private bool _isOutlineEnabled = false;
-
-    // Spotlight's shadow settings:
-    [ObservableProperty]
-    private ushort _shadowDepth = 1;
-    [ObservableProperty]
-    private ushort _shadowOpacity = 1;
-    [ObservableProperty]
-    private bool _isShadowEnabled = false; 
     #endregion
 
     public void OnNavigatedFrom()
@@ -44,31 +27,15 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     }
     private void InitializeViewModel()
     {
-        _spotlightSettings = SettingsManager.Current.HighlighterProperties;
+        SpotlightOptions = SettingsManager.Current.HighlighterOptions;
         _isInitialized = true;
-        IsMouseSpotlightEnabled = true;
-        SpotlightRadius = _spotlightSettings.Radius;
-        SpotlightOpacity = _spotlightSettings.OpacityPercentage;
-        IsFilledSpotlight = _spotlightSettings.IsFilled;
-    }
-    partial void OnIsMouseSpotlightEnabledChanged(bool value)
-    {
-        _spotlightSettings.IsEnabled = value;
+        SelectedColor = SpotlightOptions.FillColor.ToMediaColor();
     }
 
-    partial void OnSpotlightRadiusChanged(ushort value)
+    partial void OnSelectedColorChanged(System.Windows.Media.Color value)
     {
-        Console.WriteLine("Radius: " + value.ToString());
-        _spotlightSettings.Radius = value;
-    }
-    partial void OnSpotlightOpacityChanged(byte value)
-    {
-        _spotlightSettings.OpacityPercentage = value;
-    }
-    
-    partial void OnIsFilledSpotlightChanged(bool value)
-    {
-        _spotlightSettings.IsFilled = value;
+        // Convert the selected color to System.Drawing.Color
+        SpotlightOptions.FillColor = value.ToDrawingColor();
     }
 }
 

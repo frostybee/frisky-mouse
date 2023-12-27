@@ -23,7 +23,7 @@ public partial class App : Application
     /// <summary>
     /// Occurs when the application is loading.
     /// </summary>
-    private async void OnApplication_Startup(object sender, StartupEventArgs e)
+    private async void OnApplicationStartup(object sender, StartupEventArgs e)
     {
         _mutex = new Mutex(true, _mutexName);
         var mutexIsAcquired = _mutex.WaitOne(TimeSpan.Zero, true);
@@ -40,7 +40,7 @@ public partial class App : Application
                 })
                 .ConfigureServices(ConfigureServices)
                 .Build();
-            //_host.Start();
+            
             await _host.StartAsync();
             LoadAppConfigurationInfo();
             SettingsManager.LoadSettings();
@@ -119,6 +119,8 @@ public partial class App : Application
     )
     {
         // For more info see https://docs.microsoft.com/en-us/dotnet/api/system.windows.application.dispatcherunhandledexception?view=windowsdesktop-6.0
+        // Prevent default unhandled exception processing
+        e.Handled = true;
     }
 
     private void LoadAppConfigurationInfo()
