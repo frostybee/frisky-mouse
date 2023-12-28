@@ -105,7 +105,7 @@ public class SettingsCard : ContentControl
     #endregion
     public SettingsCard()
     {
-
+        this.DefaultStyleKey = typeof(SettingsCard);
     }
 
     public override void OnApplyTemplate()

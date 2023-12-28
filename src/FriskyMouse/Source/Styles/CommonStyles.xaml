@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:FriskyMouse.UI.Controls"
     xmlns:system="clr-namespace:System;assembly=System.Runtime">
 
     <Thickness x:Key="MainContainerMargin">20</Thickness>
@@ -24,5 +25,4 @@
         <Setter Property="Margin" Value="0,10,0,0" />
         <Setter Property="HorizontalAlignment" Value="Left" />
     </Style>
-
 </ResourceDictionary>

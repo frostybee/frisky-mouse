@@ -91,7 +91,6 @@ public partial class App : Application
         services.AddSingleton<SettingsViewModel>();
         services.AddSingleton<UiTestsPage>();
         services.AddSingleton<UiTestsViewModel>();
-
     }
 
     /// <summary>

@@ -104,9 +104,9 @@ public class ExpandableSettingsControl: CardExpander
         base.OnApplyTemplate();
         // We need to make the main panel of this control responsive:
         // The action control should be repositioned if a certain grid width is reached.
-        mainPanel = GetTemplateChild(MainPanelControl) as Grid;
+        /*mainPanel = GetTemplateChild(MainPanelControl) as Grid;
         actionableElementHolder = GetTemplateChild(ActionableElement) as ContentPresenter;
-        mainPanel.SizeChanged += MainPanel_SizeChanged;
+        mainPanel.SizeChanged += MainPanel_SizeChanged;*/
     }
 
     private void MainPanel_SizeChanged(object sender, SizeChangedEventArgs e)

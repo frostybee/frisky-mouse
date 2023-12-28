@@ -23,7 +23,13 @@
         286
     </system:Double>
 
-    <Style TargetType="{x:Type local:SettingsCard}">
+    <Thickness x:Key="SettingsExpanderItemPadding">58,8,44,8</Thickness>
+    <Thickness x:Key="SettingsExpanderHeaderPadding">16,16,4,16</Thickness>
+
+    <Thickness x:Key="SettingsExpanderItemBorderThickness">0,1,0,0</Thickness>
+    <system:Double x:Key="SettingsExpanderContentMinHeight">16</system:Double>
+
+    <Style x:Key="DefaultSettingsCardStyle" TargetType="{x:Type local:SettingsCard}">
         <Setter Property="Background" Value="{DynamicResource CardBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource CardForeground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource CardBorderBrush}" />
@@ -57,7 +63,7 @@
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="{DynamicResource ControlCornerRadius}">
+                        CornerRadius="{TemplateBinding CornerRadius}">
                         <Grid
                             x:Name="PART_MainPanelControl"
                             HorizontalAlignment="Stretch"
@@ -160,5 +166,21 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <!--  Apply the default style implicitly  -->
+    <Style BasedOn="{StaticResource DefaultSettingsCardStyle}" TargetType="{x:Type local:SettingsCard}" />
+
+    <Style
+        x:Key="SettingsCardExpanderItemStyle"
+        BasedOn="{StaticResource DefaultSettingsCardStyle}"
+        TargetType="local:SettingsCard">
+        <Style.Setters>
+            <Setter Property="BorderThickness" Value="{StaticResource SettingsExpanderItemBorderThickness}" />
+            <Setter Property="MinHeight" Value="52" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Padding" Value="{StaticResource SettingsExpanderItemPadding}" />
+            <Setter Property="local:SettingsCard.CornerRadius" Value="0" />
+        </Style.Setters>
     </Style>
 </ResourceDictionary>
