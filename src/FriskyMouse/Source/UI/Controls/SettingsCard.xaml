@@ -134,6 +134,7 @@
                         <!--<Trigger Property="Description" Value="{x:Null}">
                             <Setter TargetName="DescriptionText" Property="Visibility" Value="Collapsed" />
                         </Trigger>-->
+                        <!--  TODO: Add MultiTrigger: https://wpf-tutorial.com/styles/multi-triggers-multitrigger-multidatatrigger/  -->
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="{DynamicResource CardBackgroundPointerOver}" />
                             <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
@@ -176,6 +177,7 @@
         BasedOn="{StaticResource DefaultSettingsCardStyle}"
         TargetType="local:SettingsCard">
         <Style.Setters>
+            <!--  TODO: Add IsMouseOver style enabled flag.  -->
             <Setter Property="BorderThickness" Value="{StaticResource SettingsExpanderItemBorderThickness}" />
             <Setter Property="MinHeight" Value="52" />
             <Setter Property="Background" Value="Transparent" />

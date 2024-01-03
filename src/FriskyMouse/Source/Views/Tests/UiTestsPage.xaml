@@ -34,6 +34,7 @@
                 Header="This is a header"
                 Icon="{ui:SymbolIcon FlashSettings24}">
 
+
                 <colorpicker:PortableColorPicker
                     Grid.Column="1"
                     Width="65"

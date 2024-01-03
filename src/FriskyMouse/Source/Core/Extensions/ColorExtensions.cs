@@ -5,7 +5,7 @@ namespace FriskyMouse.Extensions;
 public static class ColorExtensions
 {
     /// <summary>
-    /// Convert Media Color (WPF) to Drawing Color (WinForm)
+    /// Converts Media Color (WPF) to Drawing Color (WinForm)
     /// </summary>
     /// <param name="mediaColor"></param>
     /// <returns>The corresponding System.Drawing.Color object.</returns>
@@ -16,7 +16,7 @@ public static class ColorExtensions
     }
 
     /// <summary>
-    /// Convert Drawing Color (WPF) to Media Color (WinForm)
+    /// Converts Drawing Color (WPF) to Media Color (WinForm)
     /// </summary>
     /// <param name="drawingColor"></param>
     /// <returns>The corresponding System.Windows.Media.Color object.</returns>

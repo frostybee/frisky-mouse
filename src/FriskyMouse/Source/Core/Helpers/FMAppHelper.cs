@@ -13,6 +13,7 @@
 using FriskyMouse.NativeApi;
 using FriskyMouse.Extensions;
 using System.Diagnostics;
+using System.ComponentModel;
 
 namespace FriskyMouse.Helpers;
 using Color = System.Drawing.Color;
@@ -34,6 +35,24 @@ public static class FMAppHelper
     public static T GetEnumFromIndex<T>(int i)
     {
         return GetEnums<T>()[i];
+    }
+
+    public static IReadOnlyList<String> GetEnumDescriptions<T>()
+    {
+        IReadOnlyList<string> descriptions = new List<string>();
+        var type = typeof(T);
+
+        var propNames = Enum.GetValues(type)
+            .Cast<T>()
+            .Select(x => x.ToString())
+            .ToArray();
+
+        var attributes = propNames
+            .Select(n => type.GetMember(n).First())
+            .SelectMany(member => member.GetCustomAttributes(typeof(DescriptionAttribute), true).Cast<DescriptionAttribute>())
+            .ToList();
+        descriptions = attributes.Select(x => x.Description).ToList();
+        return descriptions;
     }
 
     /// <summary>
