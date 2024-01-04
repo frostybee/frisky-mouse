@@ -83,8 +83,8 @@ public partial class App : Application
         services.AddSingleton<DashboardViewModel>();
         services.AddSingleton<SpotlightPage>();
         services.AddSingleton<SpotlightViewModel>();
-        services.AddSingleton<ClickIndicatorPage>();
-        services.AddSingleton<ClickIndicatorViewModel>();
+        services.AddSingleton<LeftClickPage>();
+        services.AddSingleton<LeftClickViewModel>();
         services.AddSingleton<RightClickEffectPage>();
         services.AddSingleton<RightClickEffectViewModel>();
         services.AddSingleton<SettingsPage>();

@@ -15,23 +15,65 @@ using FriskyMouse.Settings;
 
 namespace FriskyMouse.Drawing.Ripples;
 
-public class RippleProfileInfo
+public partial class RippleProfileInfo : ObservableObject
 {
     public HotkeySettings DefaultActivationShortcut => new HotkeySettings(true, false, false, true, 0x48);
-    public bool IsEnabled { get; set; } = true;
-    public RippleProfileType CurrentRippleProfile { get; set; } = RippleProfileType.Circle;
+
+    [ObservableProperty]
+    [JsonIgnore]
+    private bool _isEnabled;
+
+    [ObservableProperty]
+    [JsonIgnore]
+    private RippleProfileType _currentRippleProfile;
 
     #region Animation Settings
-    public InterpolationType InterpolationType { get; set; } = InterpolationType.Linear;
-    public AnimationDirection AnimationDirection { get; set; } = AnimationDirection.In;
-    public double AnimationSpeed { get; set; } = 0.020;
+    [ObservableProperty]
+    [JsonIgnore]
+    private InterpolationType _interpolationType;
+
+    [ObservableProperty]
+    [JsonIgnore]
+    private AnimationDirection _animationDirection;
+
+    [ObservableProperty]
+    [JsonIgnore]
+    private double _animationSpeed;
     #endregion        
 
     #region Visual Appearance
-    public bool CanFadeColor { get; set; } = false;
-    public ushort InitialOpacity { get; set; } = 100;
-    public ushort RadiusMultiplier { get; set; } = 10;
-    public Color FillColor { get; set; } = Color.DeepPink;
-    public ushort OpacityMultiplier { get; set; } = 40;
+    [ObservableProperty]
+    [JsonIgnore]
+    private bool _canFadeColor;
+
+    [ObservableProperty]
+    [JsonIgnore]
+    private ushort _initialOpacity;
+
+    [ObservableProperty]
+    [JsonIgnore]
+    private ushort _radiusMultiplier;
+
+    [ObservableProperty]
+    [JsonIgnore]
+    private Color _fillColor;
+
+    [ObservableProperty]
+    [JsonIgnore]
+    private ushort _opacityMultiplier;
     #endregion    
+
+    public RippleProfileInfo()
+    {
+        _canFadeColor = false;
+        _isEnabled = true;        
+        _initialOpacity = 100;
+        _radiusMultiplier = 10;
+        _opacityMultiplier = 40;
+        _animationSpeed = 0.020;
+        _interpolationType = InterpolationType.Linear;
+        _animationDirection = AnimationDirection.In;
+        _currentRippleProfile = RippleProfileType.Circle;
+        _fillColor = Color.DeepPink;
+    }
 }

@@ -27,7 +27,7 @@ public partial class MainWindowViewModel : ObservableObject
             new NavigationViewItemSeparator(),
             new NavigationViewItem("Mouse Highlighter", SymbolRegular.Circle48, typeof(SpotlightPage)),
             new NavigationViewItemSeparator(),
-            new NavigationViewItem("Click Effect", SymbolRegular.CursorClick24, typeof(ClickIndicatorPage)),
+            new NavigationViewItem("Click Effect", SymbolRegular.CursorClick24, typeof(LeftClickPage)),
             new NavigationViewItemSeparator(),
             new NavigationViewItem("Right Click Effect", SymbolRegular.CursorHover32, typeof(RightClickEffectPage)),
             new NavigationViewItemSeparator(),

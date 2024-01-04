@@ -40,4 +40,7 @@
 	<ItemGroup>
 	  <None Include="D:\Dev\my-repos\FriskyMouse\src\FriskyMouse.Drawing\.editorconfig" />
 	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+	</ItemGroup>
 </Project>

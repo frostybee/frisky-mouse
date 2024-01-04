@@ -132,7 +132,7 @@
                 Padding="0"
                 VerticalAlignment="Stretch"
                 Command="{Binding ViewModel.CardClickCommand, Mode=OneWay}"
-                CommandParameter="ClickIndicator"
+                CommandParameter="LeftClick"
                 IsChevronVisible="False">
                 <Grid>
                     <Grid.ColumnDefinitions>

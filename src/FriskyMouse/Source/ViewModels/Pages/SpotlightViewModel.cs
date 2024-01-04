@@ -1,15 +1,10 @@
-﻿using FriskyMouse.Extensions;
-using FriskyMouse.Settings;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics.Metrics;
-
-using Color = System.Windows.Media.Color;
+﻿using Color = System.Windows.Media.Color;
 
 namespace FriskyMouse.ViewModels.Pages;
 public partial class SpotlightViewModel : ObservableObject, INavigationAware
 {
     #region Fields
+
     private bool _isInitialized = false;
 
     [ObservableProperty]
@@ -70,10 +65,8 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
 
     partial void OnSelectedOutlineStyleChanged(int value)
     {
-        SelectedOutlineStyle = value;
-        SpotlightOptions.OutlineStyle = (OutlineStyle)value;
-        Console.WriteLine(value.ToString());
+        //SelectedOutlineStyle = value;
+        SpotlightOptions.OutlineStyle = (OutlineStyle)value;        
     }
-
 }
 

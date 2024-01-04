@@ -61,6 +61,11 @@
             </controls:SettingsCard>
         </StackPanel>
 
+        <controls:SimpleStackPanel Spacing="10">
+            <ui:TextBlock FontTypography="BodyStrong" Text="Test Card Expander" />
+            <ui:TextBlock FontTypography="BodyStrong" Text="Test Card Expander" />
+
+        </controls:SimpleStackPanel>
         <ui:TextBlock
             Margin="0,24,0,8"
             FontTypography="BodyStrong"
