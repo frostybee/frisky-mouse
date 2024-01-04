@@ -121,7 +121,7 @@
                                 VerticalAlignment="Center"
                                 AutoToolTipPlacement="TopLeft"
                                 Maximum="100"
-                                Minimum="0"
+                                Minimum="10"
                                 Value="{Binding ViewModel.SpotlightOptions.Radius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </controls:SettingsCard>
 
@@ -139,8 +139,8 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
                                 AutoToolTipPlacement="TopLeft"
-                                Maximum="100"
-                                Minimum="0"
+                                Maximum="95"
+                                Minimum="10"
                                 Value="{Binding ViewModel.SpotlightOptions.OpacityPercentage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </controls:SettingsCard>
 
@@ -225,8 +225,8 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
                                 AutoToolTipPlacement="TopLeft"
-                                Maximum="100"
-                                Minimum="0"
+                                Maximum="7"
+                                Minimum="1"
                                 Value="{Binding ViewModel.SpotlightOptions.OutlineWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </controls:SettingsCard>
 
@@ -327,8 +327,8 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
                                 AutoToolTipPlacement="TopLeft"
-                                Maximum="100"
-                                Minimum="0"
+                                Maximum="10"
+                                Minimum="1"
                                 Value="{Binding ViewModel.SpotlightOptions.ShadowDepth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </controls:SettingsCard>
 
@@ -343,7 +343,7 @@
                                 VerticalAlignment="Center"
                                 AutoToolTipPlacement="TopLeft"
                                 Maximum="100"
-                                Minimum="0"
+                                Minimum="5"
                                 Value="{Binding ViewModel.SpotlightOptions.ShadowOpacityPercentage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </controls:SettingsCard>
                     </Grid>

@@ -23,7 +23,7 @@ public partial class App : Application
     /// <summary>
     /// Occurs when the application is loading.
     /// </summary>
-    private async void OnApplicationStartup(object sender, StartupEventArgs e)
+    private void OnApplicationStartup(object sender, StartupEventArgs e)
     {
         _mutex = new Mutex(true, _mutexName);
         var mutexIsAcquired = _mutex.WaitOne(TimeSpan.Zero, true);
@@ -32,6 +32,9 @@ public partial class App : Application
             // No running instance has been detected,
             // We Start a new instance of this application.
             _mutex.ReleaseMutex();
+            // Load the user-saved settings first.
+            SettingsManager.LoadSettings();
+            LoadAppConfigurationInfo();
 
             _host = Host.CreateDefaultBuilder(e.Args)
                 .ConfigureAppConfiguration(c =>
@@ -41,9 +44,7 @@ public partial class App : Application
                 .ConfigureServices(ConfigureServices)
                 .Build();
             
-            await _host.StartAsync();
-            LoadAppConfigurationInfo();
-            SettingsManager.LoadSettings();
+            _host.Start();            
         }
         else
         {
@@ -96,9 +97,9 @@ public partial class App : Application
     /// <summary>
     /// Occurs when the application is closing.
     /// </summary>
-    private async void OnExit(object sender, ExitEventArgs e)
+    private void OnExit(object sender, ExitEventArgs e)
     {
-        await _host.StopAsync();
+         _host.StopAsync().Wait();
         _host.Dispose();
         _host = null;
 

@@ -41,7 +41,7 @@ public partial class MainWindow :  IWindow
 
     private void MainWindow_Loaded(object sender, RoutedEventArgs e)
     {        
-        //ViewModel.DoStartUp();
+        ViewModel.DoStartUp();
     }
 
     private void OnNavigationSelectionChanged(object sender, RoutedEventArgs e)

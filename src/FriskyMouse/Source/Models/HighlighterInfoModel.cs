@@ -10,13 +10,18 @@
 */
 #endregion
 
+using FriskyMouse.Core;
+using System.Runtime.InteropServices;
 using Color = System.Drawing.Color;
 
 namespace FriskyMouse.Models;
 
 public partial class HighlighterInfoModel : ObservableObject
 {
-    #region Fields & Properties        
+    #region Fields & Properties          
+    public event EventHandler SpotlightOptionsChanged;
+    [JsonIgnore]
+    private DecorationManager _decorationManager;
     public HotkeySettings DefaultActivationShortcut => new HotkeySettings(true, false, false, true, 0x48);
 
     [ObservableProperty]
@@ -116,5 +121,44 @@ public partial class HighlighterInfoModel : ObservableObject
         _shadowDepth = 5;
         _shadowColor = Color.CornflowerBlue;
         _shadowOpacityPercentage = 50;
-    }       
+    }
+   
+    partial void OnOpacityPercentageChanged(byte value)
+    {
+        SpotlightOptionsChanged?.Invoke(this, EventArgs.Empty);
+    }
+    partial void OnShadowOpacityPercentageChanged(byte value)
+    {
+        SpotlightOptionsChanged?.Invoke(this, EventArgs.Empty);
+    }
+    partial void OnHasShadowChanged(bool value)
+    {
+        SpotlightOptionsChanged?.Invoke(this, EventArgs.Empty);
+    }
+    partial void OnOutlineWidthChanged(ushort value)
+    {
+        SpotlightOptionsChanged?.Invoke(this, EventArgs.Empty);
+    }
+    partial void OnIsOutlinedChanged(bool value)
+    {
+        SpotlightOptionsChanged?.Invoke(this, EventArgs.Empty);
+    }
+    partial void OnIsFilledChanged(bool value)
+    {
+        SpotlightOptionsChanged?.Invoke(this, EventArgs.Empty);
+    }
+    partial void OnIsEnabledChanged(bool value)
+    {
+        SpotlightOptionsChanged?.Invoke(this, EventArgs.Empty);
+    }
+    partial void OnRadiusChanged(ushort value)
+    {
+        SpotlightOptionsChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    partial void OnShadowDepthChanged(ushort value)
+    {
+        SpotlightOptionsChanged?.Invoke(this, EventArgs.Empty);
+    }
+   
 }
