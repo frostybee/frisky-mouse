@@ -18,7 +18,7 @@ internal static class SettingsManager
 {
     private static string _settingsFileName = "settings.json";
     private static Mutex _jsonMutex = new Mutex();
-    public static GlobalSettings Current { get; private set; } 
+    public static SettingsWrapper Current { get; private set; } 
 
     private static string SettingsFilePath
     {
@@ -47,7 +47,7 @@ internal static class SettingsManager
                 using FileStream openStream = File.OpenRead(settingFilePath);
                 if (openStream.CanRead)
                 {
-                    Current = JsonSerializer.Deserialize<GlobalSettings>(openStream, GetJsonSerializerOptions());
+                    Current = JsonSerializer.Deserialize<SettingsWrapper>(openStream, GetJsonSerializerOptions());
                     //TODO: verify if JSON file is not corrupted.
                 }
             }
@@ -97,7 +97,7 @@ internal static class SettingsManager
 
     private static void LoadDefaultSettings()
     {
-        Current ??= new GlobalSettings();
+        Current ??= new SettingsWrapper();
     }
 
     private static JsonSerializerOptions GetJsonSerializerOptions()

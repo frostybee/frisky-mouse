@@ -26,7 +26,7 @@
                 Header="Mouse left-click indicator"
                 Icon="{ui:SymbolIcon DesktopCursor28}">
                 <ui:ToggleSwitch
-                    IsChecked="{Binding ViewModel.LeftClickOptions.IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    IsChecked="{Binding ViewModel.IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     OffContent="Off"
                     OnContent="On" />
             </controls:SettingsCard>
@@ -107,7 +107,7 @@
                             Maximum="100"
                             Minimum="10"
                             SmallChange="1"
-                            Value="{Binding ViewModel.LeftClickOptions.RadiusMultiplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            Value="{Binding ViewModel.RadiusMultiplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                         <TextBlock Style="{StaticResource OutputTextBlockStyle}" Text="{Binding Value, ElementName=RippleRadius, Mode=OneWay}" />
                     </StackPanel>
@@ -120,7 +120,7 @@
                         AutoToolTipPlacement="TopLeft"
                         Maximum="100"
                         Minimum="0"
-                        Value="{Binding ViewModel.LeftClickOptions.RadiusMultiplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
+                        Value="{Binding ViewModel.RadiusMultiplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
                 </controls:SettingsCard>
 
                 <controls:SettingsCard
@@ -137,7 +137,7 @@
                             AutoToolTipPlacement="TopLeft"
                             Maximum="100"
                             Minimum="0"
-                            Value="{Binding ViewModel.LeftClickOptions.OpacityMultiplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            Value="{Binding ViewModel.OpacityMultiplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                         <TextBlock Style="{StaticResource OutputTextBlockStyle}" Text="{Binding Value, ElementName=RippleFadingOpacity, Mode=OneWay}" />
                     </StackPanel>
@@ -175,7 +175,7 @@
                                 Maximum="100"
                                 Minimum="10"
                                 SmallChange="1"
-                                Value="{Binding ViewModel.LeftClickOptions.AnimationSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                Value="{Binding ViewModel.AnimationSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             <TextBlock Style="{StaticResource OutputTextBlockStyle}" Text="{Binding Value, ElementName=AnimationSpeed, Mode=OneWay}" />
                         </StackPanel>
                     </controls:SettingsCard>
@@ -230,7 +230,7 @@
                     AutoToolTipPlacement="TopLeft"
                     Maximum="100"
                     Minimum="0"
-                    Value="{Binding ViewModel.LeftClickOptions.AnimationSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    Value="{Binding ViewModel.AnimationSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <controls:SimpleStackPanel Grid.Row="1" Grid.Column="1">
 
 

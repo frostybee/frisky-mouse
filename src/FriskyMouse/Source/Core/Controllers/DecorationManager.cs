@@ -20,7 +20,7 @@ internal class DecorationManager : IDisposable
 {
     private static readonly Lazy<DecorationManager> _instance =
         new Lazy<DecorationManager>(() => new DecorationManager());        
-    private readonly GlobalSettings _settings;        
+    private readonly SettingsWrapper _settings;        
     private readonly HighlighterController _highlighter;
     private readonly ClickEffectController _leftClickDecorator;
     private readonly ClickEffectController _rightClickDecorator;
@@ -45,10 +45,15 @@ internal class DecorationManager : IDisposable
 
     #region Methods
 
-    internal void EnableHighlighter()
+    internal void UpdateHighlighterDrawing()
     {            
         _highlighter.SetHighlighterBitmap(_settings.HighlighterOptions);        
-    }         
+    }
+    
+    internal Bitmap GetHighlighterBitmap()
+    {
+        return _highlighter.SpotlightDrawing;
+    }
     internal void DisableHighlighter()
     {
         // HideSpotlight the layered window.
@@ -82,7 +87,7 @@ internal class DecorationManager : IDisposable
         //SettingsManager.SaveSettings();
         if (_settings.HighlighterOptions.IsEnabled)
         {                
-            EnableHighlighter();
+            UpdateHighlighterDrawing();
         }
     }
 
@@ -96,7 +101,7 @@ internal class DecorationManager : IDisposable
             {
                 // Set the initial coordinates of the spotlight upon starting the application.
                 _highlighter.SetInitialPosition();
-                EnableHighlighter();
+                UpdateHighlighterDrawing();
             }
         }
         else 

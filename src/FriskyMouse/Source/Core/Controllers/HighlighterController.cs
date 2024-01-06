@@ -26,23 +26,24 @@ internal class HighlighterController : IDisposable
     /// The bitmap on which the mouse highlighter is drawn.
     /// </summary>
     private Bitmap? _spotlightBitmap;
+
     /// <summary>
     /// The transparent, click-through window used 
     /// to show the mouse highlighter. 
     /// </summary>
     private LayeredWindow _highlighterWindow;
     private bool _disposed = false;
-    private readonly HighlighterInfoModel _options;
+    private readonly HighlighterInfo _options;
     private int _width = 0;
     private int _height = 0;
 
-    internal HighlighterController(HighlighterInfoModel options)
+    internal HighlighterController(HighlighterInfo options)
     {
         _highlighterWindow = new LayeredWindow();
         _options = options;
     }
 
-    internal void SetHighlighterBitmap(HighlighterInfoModel highlighterInfo)
+    internal void SetHighlighterBitmap(HighlighterInfo highlighterInfo)
     {
         // Clean up any previously generated bitmap.
         _spotlightBitmap?.Dispose();
@@ -110,6 +111,7 @@ internal class HighlighterController : IDisposable
     {
         _highlighterWindow?.Hide();
     }
+    public Bitmap SpotlightDrawing { get { return _spotlightBitmap; } }
 
     protected virtual void Dispose(bool disposing)
     {

@@ -16,6 +16,9 @@ using System.Drawing.Drawing2D;
 using Color = System.Drawing.Color;
 using Pen = System.Drawing.Pen;
 using DashStyle = System.Drawing.Drawing2D.DashStyle;
+using System.Drawing.Imaging;
+using System.Windows.Media.Imaging;
+using System.Windows.Interop;
 namespace FriskyMouse.Extensions;
 
 internal static class GraphicsExtensions
@@ -24,7 +27,7 @@ internal static class GraphicsExtensions
     {
         graphics.Clear(Color.Transparent);
     }
-    public static void DrawHighlighter(this Graphics graphics, Rectangle rect, HighlighterInfoModel options)
+    public static void DrawHighlighter(this Graphics graphics, Rectangle rect, HighlighterInfo options)
     {
         graphics.SetAntiAliasing();
 
@@ -53,7 +56,7 @@ internal static class GraphicsExtensions
         }
     }
 
-    public static void DrawOutline(this Graphics graphics, HighlighterInfoModel options)
+    public static void DrawOutline(this Graphics graphics, HighlighterInfo options)
     {
         Rectangle outlineRect = DrawingHelper.CreateRectangle(options.Width, options.Height, options.Radius + 2);
         //using Pen pen = new Pen(Color.Red, options.OutlineWidth);
@@ -62,7 +65,7 @@ internal static class GraphicsExtensions
         graphics.DrawEllipse(pen, outlineRect);
     }
 
-    public static void DrawRoundShadow(this Graphics graphics, HighlighterInfoModel options)
+    public static void DrawRoundShadow(this Graphics graphics, HighlighterInfo options)
     {
         int radius = options.Radius +
             (options.IsOutlined ? options.OutlineWidth + 4 : options.ShadowDepth - options.OutlineWidth
@@ -79,4 +82,29 @@ internal static class GraphicsExtensions
         graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
         graphics.CompositingQuality = CompositingQuality.HighQuality;
     }
+
+
+    [System.Runtime.InteropServices.DllImport("gdi32.dll")]
+    public static extern bool DeleteObject(IntPtr hObject);
+
+    public static BitmapSource ToBitmapSource(this Bitmap bitmap)
+    {
+        IntPtr hBitmap = bitmap.GetHbitmap();
+        BitmapSource retval;
+
+        try
+        {
+            retval = Imaging.CreateBitmapSourceFromHBitmap(
+                         hBitmap,
+                         IntPtr.Zero,
+                         Int32Rect.Empty,
+                         BitmapSizeOptions.FromEmptyOptions());
+        }
+        finally
+        {
+            DeleteObject(hBitmap);
+        }
+
+        return retval;
+    }     
 }

@@ -1,4 +1,5 @@
 ﻿
+
 namespace FriskyMouse.ViewModels.Pages;
 public partial class LeftClickViewModel : ObservableObject, INavigationAware
 {
@@ -26,7 +27,39 @@ public partial class LeftClickViewModel : ObservableObject, INavigationAware
     
     [ObservableProperty]
     private System.Windows.Media.Color _rippleFillColor;
+
+    [ObservableProperty]
+    private bool _isEnabled;
+
+    [ObservableProperty]
+    private RippleProfileType _currentRippleProfile;
+
+    #region Animation Settings
+    [ObservableProperty]
+    private InterpolationType _interpolationType;
+
+    [ObservableProperty]
+    private AnimationDirection _animationDirection;
+
+    [ObservableProperty]
+    private double _animationSpeed;
+    #endregion
+
+    #region Visual Appearance
+    [ObservableProperty]
+    private bool _canFadeColor;
+
+    [ObservableProperty]
+    private ushort _initialOpacity;
+
+    [ObservableProperty]
+    private ushort _radiusMultiplier;
+
+    [ObservableProperty]
+    private ushort _opacityMultiplier;
+
     private bool _isInitialized = false; 
+    #endregion
     #endregion
 
     public void OnNavigatedFrom()
@@ -56,6 +89,41 @@ public partial class LeftClickViewModel : ObservableObject, INavigationAware
         // Load the list of animation's easing functions from their corresponding enum.
         Interpolators = FMAppHelper.GetEnumDescriptions<InterpolationType>();
         SelectedInterpolator = (int)LeftClickOptions.InterpolationType;
+        LoadLeftClickOptions();
+    }
+
+    private void LoadLeftClickOptions()
+    {
+        IsEnabled = LeftClickOptions.IsEnabled;
+        CanFadeColor = LeftClickOptions.CanFadeColor;
+        InitialOpacity = LeftClickOptions.InitialOpacity;
+        RadiusMultiplier = LeftClickOptions.RadiusMultiplier;
+        OpacityMultiplier = LeftClickOptions.OpacityMultiplier;
+    }
+
+    partial void OnIsEnabledChanged(bool value)
+    {
+        LeftClickOptions.IsEnabled = value;
+    }
+
+    partial void OnCanFadeColorChanged(bool value)
+    {
+        LeftClickOptions.CanFadeColor = value;
+    }
+
+    partial void OnInitialOpacityChanged(ushort value)
+    {
+        LeftClickOptions.InitialOpacity = value;
+    }
+
+    partial void OnRadiusMultiplierChanged(ushort value)
+    {
+        LeftClickOptions.RadiusMultiplier = value;
+    }
+
+    partial void OnOpacityMultiplierChanged(ushort value)
+    {
+        LeftClickOptions.OpacityMultiplier = value;
     }
 
     partial void OnSelectedRippleProfileChanged(int value)
