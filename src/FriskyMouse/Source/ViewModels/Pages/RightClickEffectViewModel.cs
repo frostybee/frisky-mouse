@@ -2,6 +2,7 @@
 public class RightClickEffectViewModel : ObservableObject, INavigationAware
 {
     private bool _isInitialized = false;
+
     public void OnNavigatedFrom()
     {
         

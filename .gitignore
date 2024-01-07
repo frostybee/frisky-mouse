@@ -6,6 +6,7 @@
 # Ignore the WPF UI report
 src/wpfui
 src/bck
+Old-UI
 
 # User-specific files
 *.suo

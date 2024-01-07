@@ -1,4 +1,7 @@
-﻿namespace FriskyMouse.ViewModels.Windows;
+﻿
+using FriskyMouse.Core;
+
+namespace FriskyMouse.ViewModels.Windows;
 
 public partial class MainWindowViewModel : ObservableObject
 {
@@ -22,11 +25,13 @@ public partial class MainWindowViewModel : ObservableObject
         {
             new NavigationViewItem("Home", SymbolRegular.Home48, typeof(DashboardPage)),                       
             new NavigationViewItemSeparator(),
-            new NavigationViewItem("Spotlight", SymbolRegular.Circle48, typeof(HighlighterPage)),
+            new NavigationViewItem("Mouse Highlighter", SymbolRegular.Circle48, typeof(SpotlightPage)),
             new NavigationViewItemSeparator(),
-            new NavigationViewItem("Click Effect", SymbolRegular.CursorClick24, typeof(ClickIndicatorPage)),
+            new NavigationViewItem("Click Effect", SymbolRegular.CursorClick24, typeof(LeftClickPage)),
             new NavigationViewItemSeparator(),
             new NavigationViewItem("Right Click Effect", SymbolRegular.CursorHover32, typeof(RightClickEffectPage)),
+            new NavigationViewItemSeparator(),
+            new NavigationViewItem("UI Tests", SymbolRegular.Ruler48, typeof(UiTestsPage)),
         };
 
         _footerMenuItems = new ObservableCollection<object>()
@@ -38,5 +43,11 @@ public partial class MainWindowViewModel : ObservableObject
                 TargetPageType = typeof(SettingsPage)
             }
         };
+    }
+
+    internal void DoStartUp()
+    {
+        // Initialize the global manager and bootstrap the application's logic.        
+        DecorationManager.Instance?.BootstrapApp();
     }
 }

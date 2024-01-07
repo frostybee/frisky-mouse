@@ -1,12 +1,15 @@
 ﻿
+
 namespace FriskyMouse.ViewModels.Pages;
 
 public partial class SettingsViewModel : ObservableObject, INavigationAware
 {
+    #region Fields
     private bool _isInitialized = false;
 
     [ObservableProperty]
-    private string _appVersion = String.Empty;
+    private string _appVersion = String.Empty; 
+    #endregion
 
     [ObservableProperty]
     private Wpf.Ui.Appearance.ApplicationTheme _currentApplicationTheme = Wpf.Ui.Appearance.ApplicationTheme.Unknown;
@@ -24,7 +27,7 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
         CurrentApplicationTheme = Wpf.Ui.Appearance.ApplicationThemeManager.GetAppTheme();
         AppVersion = $"WPF UI Gallery - {GetAssemblyVersion()}";
 
-        //Wpf.Ui.Appearance.Theme.Changed += OnThemeChanged;
+        //Wpf.UI.Appearance.Theme.Changed += OnThemeChanged;
 
         _isInitialized = true;
     }

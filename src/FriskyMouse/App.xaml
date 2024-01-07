@@ -7,12 +7,18 @@
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     DispatcherUnhandledException="OnDispatcherUnhandledException"
     Exit="OnExit"
-    Startup="OnStartup">
+    ShutdownMode="OnMainWindowClose"
+    Startup="OnApplicationStartup">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemesDictionary Theme="Dark" />
-                <ui:ControlsDictionary />                                
+                <ui:ControlsDictionary />
+                <ResourceDictionary Source="pack://application:,,,/Source/Styles/CommonStyles.xaml" />
+                <ResourceDictionary Source="Source/UI/Controls/SettingsCard.xaml" />
+                <ResourceDictionary Source="Source/UI/Controls/ExpandableSettingsControl.xaml" />
+                <!--<ResourceDictionary Source="Source/UI/Controls/ColorPickerControl.xaml" />-->
+                <ResourceDictionary Source="pack://application:,,,/ColorPicker;component/Styles/DefaultColorPickerStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
         </ResourceDictionary>

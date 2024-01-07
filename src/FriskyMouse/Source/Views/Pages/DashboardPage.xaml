@@ -29,7 +29,7 @@
             Height="200"
             CornerRadius="8">
             <Border.Background>
-                <!--FIXME: choose another image, it's causing memory spike -->
+                <!--  FIXME: choose another image, it's causing memory spike  -->
                 <ImageBrush
                     ImageSource="pack://application:,,,/Assets/wpfui.png"
                     RenderOptions.BitmapScalingMode="HighQuality"
@@ -51,11 +51,11 @@
                         <ui:TextBlock
                             FontTypography="Title"
                             Foreground="#FFFFFF"
-                            Text="Fluent UI" />
+                            Text="FriskyMouse" />
                         <ui:TextBlock
                             FontTypography="Subtitle"
                             Foreground="#B7FFFFFF"
-                            Text="Windows Presentation Foundation" />
+                            Text="Your Presentation Companion" />
                         <ui:TextBlock
                             FontTypography="BodyStrong"
                             Foreground="#B7FFFFFF"
@@ -95,7 +95,7 @@
                 Padding="0"
                 VerticalAlignment="Stretch"
                 Command="{Binding ViewModel.CardClickCommand, Mode=OneWay}"
-                CommandParameter="Highlighter"
+                CommandParameter="Spotlight"
                 IsChevronVisible="False">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -132,7 +132,7 @@
                 Padding="0"
                 VerticalAlignment="Stretch"
                 Command="{Binding ViewModel.CardClickCommand, Mode=OneWay}"
-                CommandParameter="ClickIndicator"
+                CommandParameter="LeftClick"
                 IsChevronVisible="False">
                 <Grid>
                     <Grid.ColumnDefinitions>

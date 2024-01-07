@@ -1,0 +1,321 @@
+﻿<Page
+    x:Class="FriskyMouse.Views.Pages.UiTestsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
+    xmlns:controls="clr-namespace:FriskyMouse.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:FriskyMouse.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="Mouse Spotlight Page"
+    d:DataContext="{d:DesignInstance local:UiTestsPage,
+                                     IsDesignTimeCreatable=False}"
+    d:DesignHeight="1450"
+    d:DesignWidth="800"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    mc:Ignorable="d">
+    <StackPanel Margin="0,0,0,24">
+        <ui:TextBlock
+            Margin="0,0,0,8"
+            FontTypography="BodyStrong"
+            Text="Appearance &amp; behavior" />
+        <StackPanel Orientation="Vertical">
+            <!--<controls:ColorPickerControl
+                Description="Select the color of the spotlight's outline"
+                Header="Outline color"
+                Icon="{ui:SymbolIcon FlashSettings24}" />-->
+
+            <controls:SettingsCard
+                Description="This is a description of what the user  can do with this settings."
+                Header="This is a header"
+                Icon="{ui:SymbolIcon FlashSettings24}">
+
+
+                <colorpicker:PortableColorPicker
+                    Grid.Column="1"
+                    Width="65"
+                    Height="45"
+                    AllowDrop="True"
+                    HintColor="Red"
+                    SelectedColor="{Binding ViewModel.SelectedColor, Mode=TwoWay}"
+                    ShowAlpha="False"
+                    ShowFractionalPart="False"
+                    SmallChange="5"
+                    Style="{DynamicResource DefaultColorPickerStyle}"
+                    UseHintColor="True" />
+            </controls:SettingsCard>
+
+            <controls:SettingsCard
+                Description="This is a description of what the user  can do with this settings. This is a description of what the user  can do with this settings This is a description of what the user  can do with this settings. This is a description of what the user  can do with this settings."
+                Header="This is a header"
+                Icon="{ui:SymbolIcon AlignSpaceEvenlyVertical20}">
+                <ui:ToggleSwitch OffContent="Disabled" OnContent="Enabled" />
+            </controls:SettingsCard>
+
+            <controls:SettingsCard Header="Description" Icon="{ui:SymbolIcon DesktopCursor28}">
+                <ui:ToggleSwitch OffContent="Disabled" OnContent="Enabled" />
+            </controls:SettingsCard>
+        </StackPanel>
+
+        <controls:SimpleStackPanel Spacing="10">
+            <ui:TextBlock FontTypography="BodyStrong" Text="Test Card Expander" />
+            <ui:TextBlock FontTypography="BodyStrong" Text="Test Card Expander" />
+
+        </controls:SimpleStackPanel>
+        <ui:TextBlock
+            Margin="0,24,0,8"
+            FontTypography="BodyStrong"
+            Text="Test Card Expander" />
+        <controls:ExpandableSettingsControl
+            Description="This is a description of the expandable settings control"
+            Header="Header: ExpandableSettingsControl"
+            HeaderContentPadding="0,0,40,0"
+            Icon="{ui:SymbolIcon AlignSpaceEvenlyVertical20}">
+            <controls:ExpandableSettingsControl.ExpanderAction>
+                <!--<ui:ToggleSwitch OffContent="Off" OnContent="On" />-->
+                <ComboBox
+                    Grid.Column="1"
+                    MinWidth="200"
+                    Margin="0,0,20,0">
+                    <ComboBoxItem Content="Left compact" />
+                    <ComboBoxItem Content="Fluent" />
+                    <ComboBoxItem Content="Top" />
+                    <ComboBoxItem Content="Bottom" />
+                </ComboBox>
+            </controls:ExpandableSettingsControl.ExpanderAction>
+            <StackPanel>
+                <Grid Margin="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="To clone this repository" />
+                    <TextBlock
+                        Grid.Column="1"
+                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                        Text="git clone https://github.com/lepoco/wpfui.git" />
+                </Grid>
+                <controls:SettingsCard Header="Description" Icon="{ui:SymbolIcon DesktopCursor28}">
+                    <ui:ToggleSwitch OffContent="Disabled" OnContent="Enabled" />
+                </controls:SettingsCard>
+                <ui:Anchor
+                    Margin="0"
+                    Padding="16"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    Background="Transparent"
+                    BorderThickness="0,1,0,0"
+                    CornerRadius="0"
+                    NavigateUri="https://github.com/lepoco/wpfui/issues/new/choose">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="File a bug or request a new sample" />
+                        <ui:SymbolIcon Grid.Column="1" Symbol="Link24" />
+                    </Grid>
+                </ui:Anchor>
+                <ui:Anchor
+                    Margin="0"
+                    Padding="16"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    Background="Transparent"
+                    BorderThickness="0,1,0,1"
+                    CornerRadius="0"
+                    NavigateUri="https://wpfui.lepo.co/">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Check out the docs" />
+                        <ui:SymbolIcon Grid.Column="1" Symbol="Link24" />
+                    </Grid>
+                </ui:Anchor>
+                <TextBlock Margin="16" Text="Test" />
+            </StackPanel>
+        </controls:ExpandableSettingsControl>
+
+        <ui:TextBlock
+            Margin="0,24,0,8"
+            FontTypography="BodyStrong"
+            Text="About" />
+        <ui:CardExpander
+            ContentPadding="0"
+            Icon="{ui:ImageIcon 'pack://application:,,,/Assets/wpfui.png',
+                                Width=38,
+                                Height=35}"
+            IsExpanded="True">
+            <ui:CardExpander.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ui:TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        FontTypography="Body"
+                        Text="WPF UI" />
+                    <ui:TextBlock
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                        Text="© 2023 lepo.co | Leszek Pomianowski &amp; WPF UI Contributors" />
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="1"
+                        Margin="0,0,16,0"
+                        VerticalAlignment="Center"
+                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                        Text="TestTestTestTestTest" />
+                </Grid>
+            </ui:CardExpander.Header>
+            <StackPanel>
+                <Grid Margin="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="To clone this repository" />
+                    <TextBlock
+                        Grid.Column="1"
+                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                        Text="git clone https://github.com/lepoco/wpfui.git" />
+                </Grid>
+                <ui:Anchor
+                    Margin="0"
+                    Padding="16"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    Background="Transparent"
+                    BorderThickness="0,1,0,0"
+                    CornerRadius="0"
+                    NavigateUri="https://github.com/lepoco/wpfui/issues/new/choose">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="File a bug or request a new sample" />
+                        <ui:SymbolIcon Grid.Column="1" Symbol="Link24" />
+                    </Grid>
+                </ui:Anchor>
+                <ui:Anchor
+                    Margin="0"
+                    Padding="16"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    Background="Transparent"
+                    BorderThickness="0,1,0,1"
+                    CornerRadius="0"
+                    NavigateUri="https://wpfui.lepo.co/">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Check out the docs" />
+                        <ui:SymbolIcon Grid.Column="1" Symbol="Link24" />
+                    </Grid>
+                </ui:Anchor>
+                <TextBlock Margin="16" Text="Test" />
+            </StackPanel>
+        </ui:CardExpander>
+        <!--<ui:CardExpander ContentPadding="0" Icon="{ui:ImageIcon 'pack://application:,,,/Assets/wpfui.png', Width=38, Height=35}">
+            <ui:CardExpander.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ui:TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        FontTypography="Body"
+                        Text="WPF UI" />
+                    <ui:TextBlock
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                        Text="© 2023 lepo.co | Leszek Pomianowski &amp; WPF UI Contributors" />
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="1"
+                        Margin="0,0,16,0"
+                        VerticalAlignment="Center"
+                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                        Text="Test" />
+                </Grid>
+            </ui:CardExpander.Header>
+            <StackPanel>
+                <Grid Margin="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="To clone this repository" />
+                    <TextBlock
+                        Grid.Column="1"
+                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                        Text="git clone https://github.com/lepoco/wpfui.git" />
+                </Grid>
+                <ui:Anchor
+                    Margin="0"
+                    Padding="16"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    Background="Transparent"
+                    BorderThickness="0,1,0,0"
+                    CornerRadius="0"
+                    NavigateUri="https://github.com/lepoco/wpfui/issues/new/choose">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="File a bug or request a new sample" />
+                        <ui:SymbolIcon Grid.Column="1" Symbol="Link24" />
+                    </Grid>
+                </ui:Anchor>
+                <ui:Anchor
+                    Margin="0"
+                    Padding="16"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    Background="Transparent"
+                    BorderThickness="0,1,0,1"
+                    CornerRadius="0"
+                    NavigateUri="https://wpfui.lepo.co/">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Check out the docs" />
+                        <ui:SymbolIcon Grid.Column="1" Symbol="Link24" />
+                    </Grid>
+                </ui:Anchor>
+                <TextBlock Margin="16" Text="Test" />
+            </StackPanel>
+        </ui:CardExpander>-->
+
+    </StackPanel>
+</Page>
+
