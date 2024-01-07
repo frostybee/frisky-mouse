@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Configuration;
+using System.Reflection;
 
 namespace FriskyMouse.Settings;
 
@@ -36,13 +37,13 @@ public sealed class AppConfigurationInfo
     /// <summary>
     /// Create a new instance of <see cref="AppConfigurationInfo"/> with static configuration.
     /// </summary>
-  /*  public AppConfigurationInfo(bool isAdmin, string executionPath, string applicationFullName, string applicationName, bool isPortable)
-    {
-        ExecutionPath = executionPath;
-        //ApplicationFullName = applicationFullName;
-        ApplicationName = applicationName;
-        IsPortable = isPortable;
-    }*/
+    /*  public AppConfigurationInfo(bool isAdmin, string executionPath, string applicationFullName, string applicationName, bool isPortable)
+      {
+          ExecutionPath = executionPath;
+          //ApplicationFullName = applicationFullName;
+          ApplicationName = applicationName;
+          IsPortable = isPortable;
+      }*/
 
     // TODO: add app's version and URLs.
     /*private static Assembly Assembly { get; } = Assembly.GetExecutingAssembly();
@@ -51,4 +52,24 @@ public sealed class AppConfigurationInfo
     public static string VersionString { get; } = Version.ToString(3);
     public static string ProjectUrl { get; } = "https://github.com/frostybee/friskymouse";
     public static string LatestReleaseUrl { get; } = ProjectUrl + "/releases/latest";*/
+
+    public void LoadAppConfigurationInfo()
+    {
+#if DEBUG
+        IsPortable = true;
+        BuildInfo = "DEBUG";
+#elif RELEASE
+        IsPortable = false;
+        BuildInfo = "RELEASE";
+#elif MICROSOFTSTORE
+            IsPortable = false;
+            BuildInfo = "Microsoft Store";
+#elif PORTABLE
+                IsPortable = true;                
+                BuildInfo = "Portable";
+#elif SELFCONTAINED
+        IsPortable = true;
+        BuildInfo = "Self contained";
+#endif
+    }
 }

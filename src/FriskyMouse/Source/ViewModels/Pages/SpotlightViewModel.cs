@@ -1,7 +1,4 @@
-﻿using FriskyMouse.Core;
-using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
+﻿using System.Windows.Media.Imaging;
 using Color = System.Windows.Media.Color;
 
 namespace FriskyMouse.ViewModels.Pages;
@@ -10,61 +7,43 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     #region Fields    
 
     private bool _isInitialized = false;
-
-    [ObservableProperty]
-    private BitmapSource _spotlightImagePreview;
     private DecorationManager _decorationManager;
-
-    [ObservableProperty]
     private HighlighterInfo _spotlightOptions;
 
     [ObservableProperty]
+    private BitmapSource _spotlightImagePreview;
+    [ObservableProperty]
     private System.Windows.Media.Color _fillColor;
-
     [ObservableProperty]
     private System.Windows.Media.Color _shadowColor;
-
     [ObservableProperty]
     private System.Windows.Media.Color _outlineColor;
-
     [ObservableProperty]
     private IReadOnlyList<string> _outlineStyles;
-
     [ObservableProperty]
     private int _selectedOutlineStyle;
     [ObservableProperty]
     private bool _isEnabled;
-
     [ObservableProperty]
     private ushort _radius;
-
     [ObservableProperty]
     private byte _opacityPercentage;
-
     [ObservableProperty]
     private ushort _width;
-
     [ObservableProperty]
     private ushort _height;
-
     [ObservableProperty]
     private bool _isFilled;
-
     [ObservableProperty]
     private bool _isOutlined;
-
     [ObservableProperty]
     private byte _outlineWidth;
-
     [ObservableProperty]
     private OutlineStyle _outlineStyle;
-
     [ObservableProperty]
     private bool _hasShadow;
-
     [ObservableProperty]
     private byte _shadowDepth;
-
     [ObservableProperty]
     private byte _shadowOpacityPercentage;
 
@@ -83,11 +62,11 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     private void InitializeViewModel()
     {
         _decorationManager = DecorationManager.Instance;
-        SpotlightOptions = SettingsManager.Current.HighlighterOptions;
+        _spotlightOptions = SettingsManager.Current.HighlighterOptions;
         LoadSpotlightOptions();
         // Load the outline styles from their corresponding enum.
         OutlineStyles = FMAppHelper.GetEnumDescriptions<OutlineStyle>();
-        SelectedOutlineStyle = (int)SpotlightOptions.OutlineStyle;
+        SelectedOutlineStyle = (int)_spotlightOptions.OutlineStyle;
         // We apply the options and draw the spotlight once we're done
         // loading all the options.
         _isInitialized = true;
@@ -96,18 +75,18 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
 
     private void LoadSpotlightOptions()
     {
-        FillColor = SpotlightOptions.FillColor.ToMediaColor();
-        ShadowColor = SpotlightOptions.ShadowColor.ToMediaColor();
-        OutlineColor = SpotlightOptions.OutlineColor.ToMediaColor();
-        IsEnabled = SpotlightOptions.IsEnabled;
-        Radius = SpotlightOptions.Radius;
-        OpacityPercentage = SpotlightOptions.OpacityPercentage;
-        IsFilled = SpotlightOptions.IsFilled;
-        IsOutlined = SpotlightOptions.IsOutlined;
-        OutlineWidth = SpotlightOptions.OutlineWidth;
-        HasShadow = SpotlightOptions.HasShadow;
-        ShadowDepth = SpotlightOptions.ShadowDepth;
-        ShadowOpacityPercentage = SpotlightOptions.ShadowOpacityPercentage;
+        FillColor = _spotlightOptions.FillColor.ToMediaColor();
+        ShadowColor = _spotlightOptions.ShadowColor.ToMediaColor();
+        OutlineColor = _spotlightOptions.OutlineColor.ToMediaColor();
+        IsEnabled = _spotlightOptions.IsEnabled;
+        Radius = _spotlightOptions.Radius;
+        OpacityPercentage = _spotlightOptions.OpacityPercentage;
+        IsFilled = _spotlightOptions.IsFilled;
+        IsOutlined = _spotlightOptions.IsOutlined;
+        OutlineWidth = _spotlightOptions.OutlineWidth;
+        HasShadow = _spotlightOptions.HasShadow;
+        ShadowDepth = _spotlightOptions.ShadowDepth;
+        ShadowOpacityPercentage = _spotlightOptions.ShadowOpacityPercentage;
     }
 
     private void ApplySpotlightOptions()
@@ -115,7 +94,7 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
         // Apply the options only once this ViewModel has been initialized.
         if (_isInitialized)
         {
-            if (!SpotlightOptions.IsEnabled)
+            if (!_spotlightOptions.IsEnabled)
             {
                 _decorationManager.DisableHighlighter();
             }
@@ -142,71 +121,101 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
         {
         }
     }
+    // TODO: Need to show a confirmation dialog before
+    // resetting the spotlight options.
+    private void ResetSpotlightOptions()
+    {
+        Radius = 15;
+        OpacityPercentage = 75;
+        OutlineWidth = 3;
+        IsFilled = true;
+        HasShadow = false;
+        IsOutlined = false;
+        ShadowDepth = 4;
+        ShadowOpacityPercentage = 45;
+        OutlineStyle = OutlineStyle.Solid;
+        SelectedOutlineStyle = (int)OutlineStyle.Solid;
+        FillColor = System.Drawing.Color.Yellow.ToMediaColor();
+        OutlineColor = System.Drawing.Color.Red.ToMediaColor();
+        ShadowColor = System.Drawing.Color.CornflowerBlue.ToMediaColor();
+    }
 
     #region Properties event handlers
+
+    [RelayCommand]
+    private void OnResetButtonClick(string parameter)
+    {
+        if (String.IsNullOrWhiteSpace(parameter))
+            return;
+        if (parameter == "ResetSpotlight")
+        {
+            ResetSpotlightOptions();
+        }
+    }
+
     partial void OnFillColorChanged(Color value)
     {
-        SpotlightOptions.FillColor = value.ToDrawingColor();
+        _spotlightOptions.FillColor = value.ToDrawingColor();
         ApplySpotlightOptions();
     }
     partial void OnShadowColorChanged(Color value)
     {
-        SpotlightOptions.ShadowColor = value.ToDrawingColor();
+        _spotlightOptions.ShadowColor = value.ToDrawingColor();
         ApplySpotlightOptions();
     }
     partial void OnOutlineColorChanged(Color value)
     {
-        SpotlightOptions.OutlineColor = value.ToDrawingColor();
+        _spotlightOptions.OutlineColor = value.ToDrawingColor();
         ApplySpotlightOptions();
     }
     partial void OnSelectedOutlineStyleChanged(int value)
     {
-        SpotlightOptions.OutlineStyle = (OutlineStyle)value;
+        _spotlightOptions.OutlineStyle = (OutlineStyle)value;
         ApplySpotlightOptions();
     }
     partial void OnOpacityPercentageChanged(byte value)
     {
-        SpotlightOptions.OpacityPercentage = value;
+        _spotlightOptions.OpacityPercentage = value;
         ApplySpotlightOptions();
     }
     partial void OnShadowOpacityPercentageChanged(byte value)
     {
-        SpotlightOptions.ShadowOpacityPercentage = value;
+        _spotlightOptions.ShadowOpacityPercentage = value;
         ApplySpotlightOptions();
     }
     partial void OnHasShadowChanged(bool value)
     {
-        SpotlightOptions.HasShadow = value;
+        _spotlightOptions.HasShadow = value;
         ApplySpotlightOptions();
     }
     partial void OnOutlineWidthChanged(byte value)
     {
-        SpotlightOptions.OutlineWidth = value;
+        _spotlightOptions.OutlineWidth = value;
         ApplySpotlightOptions();
     }
     partial void OnIsOutlinedChanged(bool value)
     {
-        SpotlightOptions.IsOutlined = value;
+        _spotlightOptions.IsOutlined = value;
         ApplySpotlightOptions();
     }
     partial void OnIsFilledChanged(bool value)
     {
-        SpotlightOptions.IsFilled = value;
+        _spotlightOptions.IsFilled = value;
         ApplySpotlightOptions();
     }
     partial void OnIsEnabledChanged(bool value)
     {
-        SpotlightOptions.IsEnabled = value;
+        _spotlightOptions.IsEnabled = value;
         ApplySpotlightOptions();
     }
     partial void OnRadiusChanged(ushort value)
     {
-        SpotlightOptions.Radius = value;
+        _spotlightOptions.Radius = value;
         ApplySpotlightOptions();
     }
     partial void OnShadowDepthChanged(byte value)
     {
-        SpotlightOptions.ShadowDepth = value;
+        _spotlightOptions.ShadowDepth = value;
         ApplySpotlightOptions();
     }
     #endregion

@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Configuration;
+using System.Reflection;
 
 namespace FriskyMouse;
 
@@ -7,18 +8,17 @@ namespace FriskyMouse;
 /// </summary>
 public partial class App : Application
 {
-    #region Fields
-    public static readonly AppConfigurationInfo Configuration = new AppConfigurationInfo();
+    #region Fields   
+    
     /// <summary>
     /// A named system-wide mutex used to ensure that only one instance of this application runs at once. 
     /// </summary>
-    private static string _mutexName = "{FFF0FDB8-C9C3-4B9B-8CE5-92BFD1D8E17F}";
-    private Mutex _mutex;
-    private bool _singleInstanceClose = false;
+    private static string _mutexName = "{FFF0FDB8-C9C3-4B9B-8CE5-92BFD1D8E17F}";    
+    private Mutex _mutex;    
     private IHost _host;
+    public static readonly AppConfigurationInfo Configuration = new AppConfigurationInfo();
+    private bool _singleInstanceClose = false;
     #endregion
-
-
 
     /// <summary>
     /// Occurs when the application is loading.
@@ -34,7 +34,7 @@ public partial class App : Application
             _mutex.ReleaseMutex();
             //!important: the app configuration must be loaded first
             // before loading the user's settings. 
-            LoadAppConfigurationInfo();
+            Configuration.LoadAppConfigurationInfo();
             // Load the user-saved settings first.
             SettingsManager.LoadSettings();
 
@@ -58,16 +58,16 @@ public partial class App : Application
             Shutdown();
         }
     }
+
     private void ConfigureServices(HostBuilderContext context, IServiceCollection services)
     {
-
         // The .NET Generic Host provides dependency injection, configuration, logging, and other services.
         // https://docs.microsoft.com/dotnet/core/extensions/generic-host
         // https://docs.microsoft.com/dotnet/core/extensions/dependency-injection
         // https://docs.microsoft.com/dotnet/core/extensions/configuration
         // https://docs.microsoft.com/dotnet/core/extensions/logging
 
-        // TODO: Register services, viewmodels and pages here.
+        // TODO: Register services, ViewModels and pages here.
 
         // App Host
         services.AddHostedService<ApplicationHostService>();
@@ -126,24 +126,6 @@ public partial class App : Application
         // Prevent default unhandled exception processing
         e.Handled = true;
     }
-
-    private void LoadAppConfigurationInfo()
-    {
-#if DEBUG
-        Configuration.IsPortable = true;
-        Configuration.BuildInfo = "Debug";
-#elif PORTABLE
-                Configuration.IsPortable = true;                
-                Configuration.BuildInfo = "Portable";
-#elif MICROSOFTSTORE
-            Configuration.IsPortable = false;
-            Configuration.BuildInfo = "Microsoft Store";
-#elif SELFCONTAINED
-        Configuration.IsPortable = true;
-            Configuration.BuildInfo = "Self contained";
-#endif
-    }
-
 
     /// <summary>
     /// Gets registered service.
