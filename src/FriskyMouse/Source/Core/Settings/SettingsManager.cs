@@ -73,7 +73,7 @@ internal static class SettingsManager
             if (!string.IsNullOrEmpty(filePath))
             {
                 Console.WriteLine("Saving settings in " + filePath);
-                LoadDefaultSettings();
+                //LoadDefaultSettings();
                 Current.ApplicationInfo.ApplicationName = App.Configuration.ApplicationName;
                 Current.ApplicationInfo.Version = FMAppHelper.GetApplicationVersion();
                 // Create the directory that will hold the settings file if it doesn't exist.

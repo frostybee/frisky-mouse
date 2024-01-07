@@ -32,9 +32,11 @@ public partial class App : Application
             // No running instance has been detected,
             // We Start a new instance of this application.
             _mutex.ReleaseMutex();
+            //!important: the app configuration must be loaded first
+            // before loading the user's settings. 
+            LoadAppConfigurationInfo();
             // Load the user-saved settings first.
             SettingsManager.LoadSettings();
-            LoadAppConfigurationInfo();
 
             _host = Host.CreateDefaultBuilder(e.Args)
                 .ConfigureAppConfiguration(c =>
@@ -99,14 +101,16 @@ public partial class App : Application
     /// </summary>
     private void OnExit(object sender, ExitEventArgs e)
     {
-         _host.StopAsync().Wait();
+        // Save the settings before disposing any runtime objects/shutting down the app.
+        SettingsManager.SaveSettings();
+
+        _host.StopAsync().Wait();
         _host.Dispose();
         _host = null;
-
         // Uninstall the global mouse hook.
         DecorationManager.Instance?.DisableHook();
         DecorationManager.Instance?.Dispose();
-        SettingsManager.SaveSettings();
+        
         Console.WriteLine("Exiting the application...");
     }
 

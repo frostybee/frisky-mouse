@@ -72,9 +72,9 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <colorpicker:PortableColorPicker
-                                Width="55"
-                                Height="30"
-                                Padding="0,0,5,0"
+                                Width="60"
+                                Height="35"
+                                Padding="2,2,5,2"
                                 AllowDrop="True"
                                 HintColor="Red"
                                 SelectedColor="{Binding ViewModel.RippleFillColor, Mode=TwoWay}"

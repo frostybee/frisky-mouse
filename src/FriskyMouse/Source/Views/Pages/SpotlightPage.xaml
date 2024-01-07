@@ -86,21 +86,18 @@
                                 Header="Spotlight color"
                                 Icon="{ui:SymbolIcon DesktopCursor28}">
 
-                                <ui:Card
-                                    Grid.Column="2"
-                                    Width="90"
-                                    Padding="5">
+                                <ui:Card Width="90" Padding="5">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
                                         <colorpicker:PortableColorPicker
-                                            Width="55"
-                                            Height="30"
-                                            Padding="0,0,5,0"
+                                            Width="60"
+                                            Height="35"
+                                            Padding="2,2,5,2"
                                             AllowDrop="True"
-                                            HintColor="Yellow"
+                                            HintColor="Red"
                                             SelectedColor="{Binding ViewModel.FillColor, Mode=TwoWay}"
                                             ShowAlpha="False"
                                             ShowFractionalPart="False"
@@ -121,16 +118,18 @@
                                 Margin="0,0,0,0"
                                 Padding="5,5,25,5"
                                 CanReposition="False"
-                                Header="Radius"
+                                Header="Radius (px)"
                                 Icon="{ui:SymbolIcon DesktopCursor28}">
                                 <Slider
                                     Grid.Column="1"
-                                    Width="200"
+                                    Width="160"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
                                     AutoToolTipPlacement="TopLeft"
-                                    Maximum="100"
+                                    IsSnapToTickEnabled="True"
+                                    Maximum="80"
                                     Minimum="10"
+                                    SmallChange="1"
                                     Value="{Binding ViewModel.Radius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             </controls:SettingsCard>
 
@@ -144,7 +143,7 @@
                                 <Slider
                                     Grid.Row="2"
                                     Grid.Column="1"
-                                    Width="200"
+                                    Width="160"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
                                     AutoToolTipPlacement="TopLeft"
@@ -179,9 +178,8 @@
                 </StackPanel>
             </Grid>
             <StackPanel
-                Width="610"
                 Margin="0,15,0,0"
-                HorizontalAlignment="Left"
+                HorizontalAlignment="Stretch"
                 Orientation="Vertical">
                 <controls:ExpandableSettingsControl
                     Description="Customize the outline to be rendered around the highlighter"
@@ -219,9 +217,9 @@
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
                                     <colorpicker:PortableColorPicker
-                                        Width="55"
-                                        Height="30"
-                                        Padding="0,0,5,0"
+                                        Width="60"
+                                        Height="35"
+                                        Padding="2,2,5,2"
                                         AllowDrop="True"
                                         HintColor="Red"
                                         SelectedColor="{Binding ViewModel.OutlineColor, Mode=TwoWay}"
@@ -241,7 +239,7 @@
 
                         <controls:SettingsCard
                             Grid.Row="1"
-                            Header="Width"
+                            Header="Width (px)"
                             Icon="{ui:SymbolIcon DesktopCursor28}"
                             Style="{StaticResource SettingsCardExpanderItemStyle}">
 
@@ -250,7 +248,7 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
                                 AutoToolTipPlacement="TopLeft"
-                                Maximum="7"
+                                Maximum="6"
                                 Minimum="1"
                                 Value="{Binding ViewModel.OutlineWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </controls:SettingsCard>
@@ -322,9 +320,9 @@
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
                                     <colorpicker:PortableColorPicker
-                                        Width="55"
-                                        Height="30"
-                                        Padding="0,0,5,0"
+                                        Width="60"
+                                        Height="35"
+                                        Padding="2,2,5,2"
                                         AllowDrop="True"
                                         HintColor="Red"
                                         SelectedColor="{Binding ViewModel.ShadowColor, Mode=TwoWay}"
@@ -344,7 +342,7 @@
 
                         <controls:SettingsCard
                             Grid.Row="1"
-                            Header="Depth"
+                            Header="Depth (px)"
                             Icon="{ui:SymbolIcon DesktopCursor28}"
                             Style="{StaticResource SettingsCardExpanderItemStyle}">
                             <Slider
@@ -352,8 +350,8 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
                                 AutoToolTipPlacement="TopLeft"
-                                Maximum="10"
-                                Minimum="1"
+                                Maximum="15"
+                                Minimum="2"
                                 Value="{Binding ViewModel.ShadowDepth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </controls:SettingsCard>
 
@@ -367,7 +365,7 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
                                 AutoToolTipPlacement="TopLeft"
-                                Maximum="100"
+                                Maximum="95"
                                 Minimum="5"
                                 Value="{Binding ViewModel.ShadowOpacityPercentage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </controls:SettingsCard>
