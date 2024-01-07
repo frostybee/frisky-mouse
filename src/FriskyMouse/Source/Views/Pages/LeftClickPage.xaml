@@ -43,7 +43,7 @@
                 </Grid.ColumnDefinitions>
                 <controls:SettingsCard
                     Grid.Row="0"
-                    Description="Select the shapre or drawing you want to use as click indicator"
+                    Description="Select the shape or drawing you want to use as click indicator"
                     Header="Ripple drawing profile"
                     Icon="{ui:SymbolIcon DesktopCursor28}"
                     Style="{StaticResource SettingsCardExpanderItemStyle}">
@@ -93,7 +93,7 @@
 
                 <controls:SettingsCard
                     Grid.Row="2"
-                    Header="Radius"
+                    Header="Radius (%)"
                     Icon="{ui:SymbolIcon DesktopCursor28}"
                     Style="{StaticResource SettingsCardExpanderItemStyle}">
 
@@ -104,8 +104,8 @@
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             AutoToolTipPlacement="TopLeft"
-                            Maximum="100"
-                            Minimum="10"
+                            Maximum="25"
+                            Minimum="7"
                             SmallChange="1"
                             Value="{Binding ViewModel.RadiusMultiplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
@@ -135,8 +135,8 @@
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             AutoToolTipPlacement="TopLeft"
-                            Maximum="100"
-                            Minimum="0"
+                            Maximum="95"
+                            Minimum="1"
                             Value="{Binding ViewModel.OpacityMultiplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                         <TextBlock Style="{StaticResource OutputTextBlockStyle}" Text="{Binding Value, ElementName=RippleFadingOpacity, Mode=OneWay}" />
@@ -172,7 +172,7 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
                                 AutoToolTipPlacement="TopLeft"
-                                Maximum="100"
+                                Maximum="50"
                                 Minimum="10"
                                 SmallChange="1"
                                 Value="{Binding ViewModel.AnimationSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
