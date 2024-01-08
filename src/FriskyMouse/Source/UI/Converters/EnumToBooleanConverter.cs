@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Windows.Data;
 
-namespace FriskyMouse.Helpers;
+namespace FriskyMouse.Converters;
 
 internal class EnumToBooleanConverter : IValueConverter
 {

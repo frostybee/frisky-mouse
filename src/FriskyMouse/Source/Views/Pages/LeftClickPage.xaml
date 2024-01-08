@@ -37,10 +37,12 @@
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
+
                 <controls:SettingsCard
                     Grid.Row="0"
                     Description="Select the shape or drawing you want to use as click indicator"
@@ -93,6 +95,7 @@
 
                 <controls:SettingsCard
                     Grid.Row="2"
+                    Description="Adjust the value of the ripple's radius"
                     Header="Radius (%)"
                     Icon="{ui:SymbolIcon DesktopCursor28}"
                     Style="{StaticResource SettingsCardExpanderItemStyle}">
@@ -125,7 +128,7 @@
 
                 <controls:SettingsCard
                     Grid.Row="3"
-                    Header="Fading opacity"
+                    Header="Fading opacity (%)"
                     Icon="{ui:SymbolIcon DesktopCursor28}"
                     Style="{StaticResource SettingsCardExpanderItemStyle}">
                     <StackPanel Orientation="Horizontal">
@@ -142,17 +145,171 @@
                         <TextBlock Style="{StaticResource OutputTextBlockStyle}" Text="{Binding Value, ElementName=RippleFadingOpacity, Mode=OneWay}" />
                     </StackPanel>
                 </controls:SettingsCard>
+
+                <controls:SettingsCard
+                    Grid.Row="4"
+                    Header="Can opacity"
+                    Icon="{ui:SymbolIcon DesktopCursor28}"
+                    Style="{StaticResource SettingsCardExpanderItemStyle}">
+                    <ui:ToggleSwitch
+                        IsChecked="{Binding ViewModel.IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        OffContent="Off"
+                        OnContent="On" />
+                </controls:SettingsCard>
             </Grid>
 
+            <!--<ui:Card Width="650" HorizontalAlignment="Left">
+                <Grid Width="650">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <controls:SettingsCard
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Padding="0,0,0,15"
+                        CanReposition="False"
+                        Header="Animation speed"
+                        Icon="{ui:SymbolIcon DesktopCursor28}"
+                        Style="{StaticResource SettingsCardExpanderItemStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <Slider
+                                x:Name="AnimationSpeed"
+                                Width="200"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                AutoToolTipPlacement="TopLeft"
+                                Maximum="50"
+                                Minimum="10"
+                                SmallChange="1"
+                                Value="{Binding ViewModel.AnimationSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock Style="{StaticResource OutputTextBlockStyle}" Text="{Binding Value, ElementName=AnimationSpeed, Mode=OneWay}" />
+                        </StackPanel>
+                    </controls:SettingsCard>
+
+                    <StackPanel Grid.Row="1">
+                        <ui:TextBlock
+                            Margin="0,0,0,5"
+                            FontTypography="Body"
+                            Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}"
+                            Text="Animation direction"
+                            TextWrapping="WrapWithOverflow" />
+                        <ComboBox
+                            x:Name="RippleAnimationDirections"
+                            MinWidth="200"
+                            HorizontalAlignment="Left"
+                            ItemsSource="{Binding ViewModel.AnimationDirections, Mode=OneWay}"
+                            SelectedIndex="{Binding ViewModel.SelectedAnimationDirection, Mode=TwoWay}" />
+                    </StackPanel>
+
+                    <StackPanel
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="20,0,0,0">
+                        <ui:TextBlock
+                            Margin="0,0,0,5"
+                            FontTypography="Body"
+                            Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}"
+                            Text="Easing fucntion"
+                            TextWrapping="WrapWithOverflow" />
+                        <ComboBox
+                            x:Name="InterpolationTypes"
+                            MinWidth="200"
+                            HorizontalAlignment="Left"
+                            ItemsSource="{Binding ViewModel.Interpolators, Mode=OneWay}"
+                            ScrollViewer.VerticalScrollBarVisibility="Visible"
+                            SelectedIndex="{Binding ViewModel.SelectedInterpolator, Mode=TwoWay}" />
+                    </StackPanel>
+                </Grid>
+            </ui:Card>-->
 
             <controls:ExpandableSettingsControl
+                Margin="0,10,0,0"
                 Description="Customize the speed, direction, and easing functions of the ripple's animation"
                 Header="Ripple Animation Options"
                 HeaderContentPadding="0,0,0,0"
                 Icon="{ui:SymbolIcon AlignSpaceEvenlyVertical20}"
                 IsExpanded="True">
 
-                <!--  Spotlight shadow's controls  -->
+                <!--<ui:Card Width="650" HorizontalAlignment="Left">-->
+                <!--<Grid Width="650" HorizontalAlignment="Left">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <controls:SettingsCard
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        CanReposition="False"
+                        Header="Animation speed"
+                        Icon="{ui:SymbolIcon DesktopCursor28}"
+                        Style="{StaticResource SettingsCardExpanderItemStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <Slider
+                                x:Name="AnimationSpeed"
+                                Width="200"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                AutoToolTipPlacement="TopLeft"
+                                Maximum="50"
+                                Minimum="10"
+                                SmallChange="1"
+                                Value="{Binding ViewModel.AnimationSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock Style="{StaticResource OutputTextBlockStyle}" Text="{Binding Value, ElementName=AnimationSpeed, Mode=OneWay}" />
+                        </StackPanel>
+                    </controls:SettingsCard>
+
+                    <StackPanel Grid.Row="1" Margin="58,8,25,8">
+
+                        <ui:TextBlock
+                            Margin="0,0,0,5"
+                            FontSize="14"
+                            FontTypography="Body"
+                            Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}"
+                            Text="Animation direction"
+                            TextWrapping="WrapWithOverflow" />
+                        <ComboBox
+                            x:Name="RippleAnimationDirections"
+                            MinWidth="200"
+                            HorizontalAlignment="Left"
+                            ItemsSource="{Binding ViewModel.AnimationDirections, Mode=OneWay}"
+                            SelectedIndex="{Binding ViewModel.SelectedAnimationDirection, Mode=TwoWay}" />
+                    </StackPanel>
+
+                    <StackPanel
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="5,8,44,30">
+                        <ui:TextBlock
+                            Margin="0,0,0,5"
+                            FontSize="14"
+                            FontTypography="Body"
+                            Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}"
+                            Text="Easing fucntion"
+                            TextWrapping="WrapWithOverflow" />
+                        <ComboBox
+                            x:Name="InterpolationTypes"
+                            MinWidth="200"
+                            HorizontalAlignment="Left"
+                            ItemsSource="{Binding ViewModel.Interpolators, Mode=OneWay}"
+                            ScrollViewer.VerticalScrollBarVisibility="Visible"
+                            SelectedIndex="{Binding ViewModel.SelectedInterpolator, Mode=TwoWay}" />
+                    </StackPanel>
+
+                </Grid>-->
+
+                <!--</ui:Card>-->
+
                 <Grid HorizontalAlignment="Stretch">
                     <Grid.RowDefinitions>
                         <RowDefinition />
@@ -162,6 +319,7 @@
                     <controls:SettingsCard
                         Height="55"
                         CanReposition="False"
+                        Description="Adjust the speed of the animation to your liking."
                         Header="Animation speed"
                         Icon="{ui:SymbolIcon DesktopCursor28}"
                         Style="{StaticResource SettingsCardExpanderItemStyle}">
@@ -182,6 +340,7 @@
 
                     <controls:SettingsCard
                         Grid.Row="1"
+                        Description="Specify whether you want the animation to progress inward, outward, or inward-outward"
                         Header="Direction"
                         Icon="{ui:SymbolIcon DesktopCursor28}"
                         Style="{StaticResource SettingsCardExpanderItemStyle}">
@@ -195,7 +354,8 @@
 
                     <controls:SettingsCard
                         Grid.Row="2"
-                        Header="Easing fucntion"
+                        Description="Select a function to control the acceleration and deceleration of the animation"
+                        Header="Easing fucntions"
                         Icon="{ui:SymbolIcon DesktopCursor28}"
                         Style="{StaticResource SettingsCardExpanderItemStyle}">
                         <ComboBox
@@ -208,34 +368,6 @@
                     </controls:SettingsCard>
                 </Grid>
             </controls:ExpandableSettingsControl>
-
-            <!--  Ripple animation options  -->
-            <!--<Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-            -->
-            <!--  TODO: put it in a settingsCard  -->
-            <!--
-                <Slider
-                    x:Name="AnimationSpeed"
-                    Width="200"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    AutoToolTipPlacement="TopLeft"
-                    Maximum="100"
-                    Minimum="0"
-                    Value="{Binding ViewModel.AnimationSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <controls:SimpleStackPanel Grid.Row="1" Grid.Column="1">
-
-
-                </controls:SimpleStackPanel>
-            </Grid>-->
         </controls:SimpleStackPanel>
     </Grid>
 

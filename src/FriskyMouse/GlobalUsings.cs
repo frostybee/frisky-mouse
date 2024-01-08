@@ -5,9 +5,7 @@ global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Hosting;
 global using Wpf.Ui.Controls;
 global using Wpf.Ui;
-global using System.Windows.Controls;
-global using System.Windows;
-global using System.Windows.Threading;
+global using Wpf.Ui.Appearance;
 global using FriskyMouse.Services;
 global using FriskyMouse.Services.Contracts;
 global using FriskyMouse.ViewModels.Windows;
@@ -28,7 +26,11 @@ global using System.Text.Json.Serialization;
 global using System.Text;
 global using System.Drawing;
 global using System.Collections.ObjectModel;
-
+global using System.Windows.Data;
+global using System.Windows.Controls;
+global using System.Windows;
+global using System.Windows.Threading;
+global using System.Globalization;
 
 
 

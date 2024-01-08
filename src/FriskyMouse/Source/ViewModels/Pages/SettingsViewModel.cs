@@ -1,72 +1,71 @@
-﻿
+﻿namespace FriskyMouse.ViewModels.Pages;
 
-namespace FriskyMouse.ViewModels.Pages;
+using System.Reflection;
+using Wpf.Ui.Appearance;
+using Wpf.Ui.Controls;
+using Wpf.Ui.Extensions;
+
+using Color = System.Windows.Media.Color;
 
 public partial class SettingsViewModel : ObservableObject, INavigationAware
 {
-    #region Fields
+     private readonly INavigationService _navigationService;
+
     private bool _isInitialized = false;
 
     [ObservableProperty]
-    private string _appVersion = String.Empty; 
-    #endregion
+    private string _appVersion = String.Empty;
 
     [ObservableProperty]
-    private Wpf.Ui.Appearance.ApplicationTheme _currentApplicationTheme = Wpf.Ui.Appearance.ApplicationTheme.Unknown;
+    private ApplicationTheme _currentApplicationTheme = ApplicationTheme.Unknown;
 
-    public void OnNavigatedTo()
+    [ObservableProperty]
+    private NavigationViewPaneDisplayMode _currentApplicationNavigationStyle =
+        NavigationViewPaneDisplayMode.Left;
+
+    public SettingsViewModel(INavigationService navigationService)
     {
-        if (!_isInitialized)
-            InitializeViewModel();
+        _navigationService = navigationService;
     }
-
-    public void OnNavigatedFrom() { }
 
     private void InitializeViewModel()
     {
-        CurrentApplicationTheme = Wpf.Ui.Appearance.ApplicationThemeManager.GetAppTheme();
-        AppVersion = $"WPF UI Gallery - {GetAssemblyVersion()}";
+        CurrentApplicationTheme = ApplicationThemeManager.GetAppTheme();
+        AppVersion = $"{GetAssemblyVersion()}";
 
-        //Wpf.UI.Appearance.Theme.Changed += OnThemeChanged;
+        ApplicationThemeManager.Changed += OnThemeChanged;
 
         _isInitialized = true;
     }
 
-    /*private void OnThemeChanged(ThemeType currentTheme, Color systemAccent)
+
+    public void OnNavigatedTo()
+    {
+        if (!_isInitialized)
+        {
+            InitializeViewModel();
+        }
+    }
+
+    public void OnNavigatedFrom() { }
+
+    partial void OnCurrentApplicationThemeChanged(ApplicationTheme oldValue, ApplicationTheme newValue)
+    {
+        ApplicationThemeManager.Apply(newValue);
+    }
+
+    private void OnThemeChanged(ApplicationTheme currentApplicationTheme, Color systemAccent)
     {
         // Update the theme if it has been changed elsewhere than in the settings.
-        if (CurrentTheme != currentTheme)
-            CurrentTheme = currentTheme;
-    }*/
+        if (CurrentApplicationTheme != currentApplicationTheme)
+        {
+            CurrentApplicationTheme = currentApplicationTheme;
+        }
+    }
 
     private string GetAssemblyVersion()
     {
-        return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString()
-            ?? String.Empty;
-    }
-
-    [RelayCommand]
-    private void OnChangeTheme(string parameter)
-    {
-        switch (parameter)
-        {
-            case "theme_light":
-                if (CurrentApplicationTheme == Wpf.Ui.Appearance.ApplicationTheme.Light)
-                    break;
-
-                Wpf.Ui.Appearance.ApplicationThemeManager.Apply(Wpf.Ui.Appearance.ApplicationTheme.Light);
-                CurrentApplicationTheme = Wpf.Ui.Appearance.ApplicationTheme.Light;
-
-                break;
-
-            default:
-                if (CurrentApplicationTheme == Wpf.Ui.Appearance.ApplicationTheme.Dark)
-                    break;
-
-                Wpf.Ui.Appearance.ApplicationThemeManager.Apply(Wpf.Ui.Appearance.ApplicationTheme.Dark);
-                CurrentApplicationTheme = Wpf.Ui.Appearance.ApplicationTheme.Dark;
-
-                break;
-        }
+        // TODO: Read the version from App.Configuration
+        return Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? String.Empty;
     }
 }

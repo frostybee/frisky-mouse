@@ -96,7 +96,7 @@
                 VerticalAlignment="Stretch"
                 Command="{Binding ViewModel.CardClickCommand, Mode=OneWay}"
                 CommandParameter="Spotlight"
-                IsChevronVisible="False">
+                IsChevronVisible="True">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />

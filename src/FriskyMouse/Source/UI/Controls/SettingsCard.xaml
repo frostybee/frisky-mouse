@@ -41,7 +41,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="FontWeight" Value="Normal" />
-        <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="KeyboardNavigation.IsTabStop" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />

@@ -1,7 +1,4 @@
-﻿
-
-
-using FriskyMouse.Drawing;
+﻿using FriskyMouse.Drawing;
 using FriskyMouse.Drawing.Attributes;
 using FriskyMouse.Drawing.Extensions;
 using System.Runtime;
@@ -23,13 +20,22 @@ public partial class LeftClickViewModel : ObservableObject, INavigationAware
     
     [ObservableProperty]
     private IReadOnlyList<string> _interpolators;
-    
+
+    /// <summary>
+    /// Holds the index of the user-selected ripple profile. 
+    /// </summary>
     [ObservableProperty]
     private int _selectedRippleProfile;
-    
-    [ObservableProperty]
+
+    /// <summary>
+    /// Holds the index of the user-selected animation direction.
+    /// </summary>
+    [ObservableProperty]   
     private int _selectedAnimationDirection;
     
+    /// <summary>
+    /// Holds the index of the user-selected interpolation type.
+    /// </summary>
     [ObservableProperty]
     private int _selectedInterpolator;
     
@@ -56,9 +62,6 @@ public partial class LeftClickViewModel : ObservableObject, INavigationAware
     #region Visual Appearance
     [ObservableProperty]
     private bool _canFadeColor;
-
-    [ObservableProperty]
-    private ushort _initialOpacity;
 
     [ObservableProperty]
     private ushort _radiusMultiplier;
@@ -113,7 +116,6 @@ public partial class LeftClickViewModel : ObservableObject, INavigationAware
 
     private void AdjustAnimationSpeed(int speed)
     {
-        //_leftClickOptions.AnimationSpeed = speed;
         // Increase the animation speed.
         double speedRate = (double)speed / 1000d;
         //_rippleValueAnimator.Increment = speedRate;
@@ -136,26 +138,17 @@ public partial class LeftClickViewModel : ObservableObject, INavigationAware
     {
         IsEnabled = _leftClickOptions.IsEnabled;
         CanFadeColor = _leftClickOptions.CanFadeColor;
-        InitialOpacity = _leftClickOptions.InitialOpacity;
         RadiusMultiplier = _leftClickOptions.RadiusMultiplier;
         OpacityMultiplier = _leftClickOptions.OpacityMultiplier;
     }
 
     private void SwitchAnimationInterpolator(InterpolationType interpolator)
     {
-        // The animation's saved easing mode has been changed.                                     
-        //InterpolationType interpolation = cmbInterpolationMode.GetSelectedEnumValue<InterpolationType>();
-        //_rippleValueAnimator.Interpolation = interpolation;
-        //_settings.InterpolationType = interpolation;
         _profileManager.ApplySettings(_leftClickOptions);        
         // Adjust the animation speed based on the recommended value associated with the selected 
         // savedEasing mode. 
         DefaultSpeedAttribute speedAttribute = interpolator.GetEnumAttribute<DefaultSpeedAttribute>();
         AdjustAnimationSpeed(speedAttribute.Speed);
-
-        // TODO: Display the recommended speed in a label instead.
-        //sliderAnimSpeed.Value = speedAttribute.Speed;
-        //StartAnimation();
     }
     partial void OnIsEnabledChanged(bool value)
     {
@@ -165,11 +158,7 @@ public partial class LeftClickViewModel : ObservableObject, INavigationAware
     partial void OnCanFadeColorChanged(bool value)
     {
         _leftClickOptions.CanFadeColor = value;
-    }
-
-    partial void OnInitialOpacityChanged(ushort value)
-    {
-        _leftClickOptions.InitialOpacity = value;
+        //_currentProfile.ResetColorOpacity();
     }
 
     partial void OnRadiusMultiplierChanged(ushort value)
@@ -179,7 +168,7 @@ public partial class LeftClickViewModel : ObservableObject, INavigationAware
 
     partial void OnOpacityMultiplierChanged(ushort value)
     {
-        _leftClickOptions.OpacityMultiplier = value;
+        //_leftClickOptions.OpacityMultiplier = value;
     }
 
     partial void OnSelectedRippleProfileChanged(int value)
@@ -208,6 +197,5 @@ public partial class LeftClickViewModel : ObservableObject, INavigationAware
     {
         _leftClickOptions.FillColor = value.ToDrawingColor();
         _currentProfile?.UpdateRipplesStyle(_leftClickOptions);
-        //Console.WriteLine(value.ToString());
     }
 }
