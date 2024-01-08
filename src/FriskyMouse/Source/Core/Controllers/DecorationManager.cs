@@ -30,9 +30,9 @@ internal class DecorationManager : IDisposable
 
     private DecorationManager()
     {
-        _settings = SettingsManager.Current;
-        _leftClickDecorator = new ClickEffectController(_settings.LeftClickProperties);
-        _rightClickDecorator = new ClickEffectController(_settings.RightClickProperties);
+        _settings = SettingsManager.Settings;
+        _leftClickDecorator = new ClickEffectController(_settings.LeftClickOptions);
+        _rightClickDecorator = new ClickEffectController(_settings.RightClickOptions);
         _highlighter = new HighlighterController(_settings.HighlighterOptions);
         _mouseHookController = new MouseHookController(_highlighter, _leftClickDecorator, _rightClickDecorator);
         //_rightClickDecorator.AnimationCompleted += _rightClickDecorator_AnimationCompleted;
@@ -138,7 +138,7 @@ internal class DecorationManager : IDisposable
     /// </summary>
     public static DecorationManager Instance => _instance.Value;        
     public HighlighterController MouseHighlighter => _highlighter;
-    public ClickEffectController ClickDecorator => _leftClickDecorator;
+    public ClickEffectController LeftClickDecorator => _leftClickDecorator;
     public ClickEffectController RightClickDecorator => _rightClickDecorator;
 
     //public MainForm MainForm { get; internal set; }

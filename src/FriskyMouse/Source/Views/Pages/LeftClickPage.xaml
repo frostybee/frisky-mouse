@@ -21,6 +21,14 @@
 
     <Grid>
         <controls:SimpleStackPanel Width="Auto" Spacing="20">
+            <ComboBox
+                Width="200"
+                MinWidth="20"
+                HorizontalAlignment="Left"
+                SelectedIndex="{Binding ViewModel.CurrentMouseButtonType, Mode=TwoWay}">
+                <ComboBoxItem Content="Left Click" />
+                <ComboBoxItem Content="Right Click" />
+            </ComboBox>
             <controls:SettingsCard
                 Description="Select whether you want to decorate left mouse clicks with a visual indicator such as a ripple or a fading spotlight."
                 Header="Mouse left-click indicator"
@@ -152,7 +160,7 @@
                     Icon="{ui:SymbolIcon DesktopCursor28}"
                     Style="{StaticResource SettingsCardExpanderItemStyle}">
                     <ui:ToggleSwitch
-                        IsChecked="{Binding ViewModel.IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        IsChecked="{Binding ViewModel.CanFadeColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         OffContent="Off"
                         OnContent="On" />
                 </controls:SettingsCard>

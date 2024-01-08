@@ -125,6 +125,6 @@ public partial class MainWindow :  IWindow
     //protected override void OnClosed(EventArgs e)
     //{
     //    base.OnClosed(e);
-    //    Application.Current.Shutdown();
+    //    Application.Settings.Shutdown();
     //}
 }
