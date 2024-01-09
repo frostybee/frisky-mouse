@@ -10,13 +10,6 @@
 */
 #endregion
 
-using FriskyMouse.Drawing;
-using FriskyMouse.Drawing.Animation;
-using FriskyMouse.Drawing.Ripples;
-using FriskyMouse.UI;
-using FriskyMouse.Extensions;
-using System.Drawing.Imaging;
-using FriskyMouse.NativeApi;
 using PixelFormat = System.Drawing.Imaging.PixelFormat;
 
 
@@ -29,7 +22,7 @@ namespace FriskyMouse.Core;
 /// It maintains ripple instances corresponding to what the user has selected/enabled.
 /// The profiles maintained are left click, right click, and double click ripple profiles. 
 /// </summary>
-internal class ClickEffectController: IDisposable
+internal class RippleEffectController: IDisposable
 {
     private readonly LayeredWindow _highlighterWindow;
     // NOTE: move those to the BaseRippleProfile.
@@ -52,7 +45,7 @@ internal class ClickEffectController: IDisposable
     private bool disposedValue;
     public RippleProfileType RippleType { get; set; }
 
-    public ClickEffectController(RippleProfileInfo settings)
+    public RippleEffectController(RippleProfileInfo settings)
     {
         _settings = settings;
         _highlighterWindow = new LayeredWindow();                        
@@ -146,7 +139,7 @@ internal class ClickEffectController: IDisposable
         }
     }
 
-    internal void ApplySettings(RippleProfileInfo options)
+    internal void SetAnimationSettings(RippleProfileInfo options)
     {
         _animationManager.Increment = options.AnimationSpeed;
         _animationManager.Interpolation = options.InterpolationType;
@@ -182,7 +175,7 @@ internal class ClickEffectController: IDisposable
     }
 
     // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
-    // ~ClickEffectController()
+    // ~RippleEffectController()
     // {
     //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
     //     Dispose(disposing: false);

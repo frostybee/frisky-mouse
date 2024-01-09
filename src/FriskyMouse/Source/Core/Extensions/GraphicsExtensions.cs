@@ -10,15 +10,13 @@
 */
 #endregion
 
-using FriskyMouse.Drawing.Helpers;
-using FriskyMouse.Settings;
+using System.Windows.Media.Imaging;
+using System.Windows.Interop;
 using System.Drawing.Drawing2D;
 using Color = System.Drawing.Color;
 using Pen = System.Drawing.Pen;
 using DashStyle = System.Drawing.Drawing2D.DashStyle;
-using System.Drawing.Imaging;
-using System.Windows.Media.Imaging;
-using System.Windows.Interop;
+
 namespace FriskyMouse.Extensions;
 
 internal static class GraphicsExtensions
@@ -84,9 +82,6 @@ internal static class GraphicsExtensions
     }
 
 
-    [System.Runtime.InteropServices.DllImport("gdi32.dll")]
-    public static extern bool DeleteObject(IntPtr hObject);
-
     public static BitmapSource ToBitmapSource(this Bitmap bitmap)
     {
         IntPtr hBitmap = bitmap.GetHbitmap();
@@ -102,7 +97,7 @@ internal static class GraphicsExtensions
         }
         finally
         {
-            DeleteObject(hBitmap);
+            NativeMethods.DeleteObject(hBitmap);
         }
 
         return retval;

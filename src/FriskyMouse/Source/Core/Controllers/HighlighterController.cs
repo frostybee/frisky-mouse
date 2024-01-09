@@ -10,12 +10,6 @@
 */
 #endregion
 
-using FriskyMouse.Drawing.Helpers;
-
-using FriskyMouse.NativeApi;
-using FriskyMouse.UI;
-using FriskyMouse.Extensions;
-using FriskyMouse.Settings;
 using Color = System.Drawing.Color;
 
 namespace FriskyMouse.Core;

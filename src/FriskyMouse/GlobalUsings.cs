@@ -14,12 +14,16 @@ global using FriskyMouse.ViewModels.Pages;
 global using FriskyMouse.Models;
 global using FriskyMouse.Views.Windows;
 global using FriskyMouse.NativeApi;
-global using FriskyMouse.Core;
+global using FriskyMouse.Drawing.Helpers;
+global using FriskyMouse.UI;
+global using FriskyMouse.Extensions;
 global using FriskyMouse.Settings;
-global using FriskyMouse.Helpers;
+global using FriskyMouse.Core;
+global using FriskyMouse.Drawing;
 global using FriskyMouse.Drawing.Animation;
 global using FriskyMouse.Drawing.Ripples;
-global using FriskyMouse.Extensions;
+global using System.Drawing.Imaging;
+global using FriskyMouse.Helpers;
 global using System.Windows.Media;
 global using System.IO;
 global using System.Text.Json.Serialization;
@@ -31,6 +35,8 @@ global using System.Windows.Controls;
 global using System.Windows;
 global using System.Windows.Threading;
 global using System.Globalization;
-
+global using System.ComponentModel;
+global using System.Runtime.InteropServices;
+global using System.Diagnostics;
 
 

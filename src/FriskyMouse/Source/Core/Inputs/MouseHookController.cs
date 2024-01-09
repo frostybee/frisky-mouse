@@ -21,12 +21,12 @@ internal class MouseHookController : GlobalMouseHook
 {
     private int _systemDoubleClickTime;
     private HighlighterController _highlighter;
-    private ClickEffectController _clickDecorator;
-    private ClickEffectController _rightClickDecorator;
+    private RippleEffectController _clickDecorator;
+    private RippleEffectController _rightClickDecorator;
     private static object _syncRoot = new Object();
     private IntPtr _mouseHookHandle = IntPtr.Zero;
-    public MouseHookController(HighlighterController highlighter, ClickEffectController clickDecorator,
-        ClickEffectController rightClickDecorator)
+    public MouseHookController(HighlighterController highlighter, RippleEffectController clickDecorator,
+        RippleEffectController rightClickDecorator)
     {
         _highlighter = highlighter;
         _clickDecorator = clickDecorator;

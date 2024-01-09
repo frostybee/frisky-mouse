@@ -10,12 +10,6 @@
 */
 #endregion
 
-using FriskyMouse.NativeApi;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-
-
 namespace FriskyMouse.Core;
 
 internal abstract class GlobalMouseHook

@@ -13,6 +13,7 @@
     <RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
     <UseWindowsForms>False</UseWindowsForms>
     <Configurations>Debug;Release;Portable;SelfContained;MicrosoftStore</Configurations>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <!--<UseWindowsForms>True</UseWindowsForms>-->    
   </PropertyGroup>
 
@@ -73,10 +74,6 @@
   <ItemGroup>
     <Using Include="System.Text" />
     <Using Include="System.Text.Json.Serialization" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Themes\" />
   </ItemGroup>
 
 </Project>

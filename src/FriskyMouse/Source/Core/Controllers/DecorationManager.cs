@@ -10,9 +10,6 @@
 */
 #endregion
 
-using FriskyMouse.Settings;
-using FriskyMouse.UI;
-
 namespace FriskyMouse.Core;
 
 //TODO: Dispose everything here.
@@ -22,8 +19,8 @@ internal class DecorationManager : IDisposable
         new Lazy<DecorationManager>(() => new DecorationManager());        
     private readonly SettingsWrapper _settings;        
     private readonly HighlighterController _highlighter;
-    private readonly ClickEffectController _leftClickDecorator;
-    private readonly ClickEffectController _rightClickDecorator;
+    private readonly RippleEffectController _leftClickDecorator;
+    private readonly RippleEffectController _rightClickDecorator;
     private readonly MouseHookController _mouseHookController;
     private readonly object _syncLock = new object();
     private bool _disposed = false;
@@ -31,8 +28,8 @@ internal class DecorationManager : IDisposable
     private DecorationManager()
     {
         _settings = SettingsManager.Settings;
-        _leftClickDecorator = new ClickEffectController(_settings.LeftClickOptions);
-        _rightClickDecorator = new ClickEffectController(_settings.RightClickOptions);
+        _leftClickDecorator = new RippleEffectController(_settings.LeftClickOptions);
+        _rightClickDecorator = new RippleEffectController(_settings.RightClickOptions);
         _highlighter = new HighlighterController(_settings.HighlighterOptions);
         _mouseHookController = new MouseHookController(_highlighter, _leftClickDecorator, _rightClickDecorator);
         //_rightClickDecorator.AnimationCompleted += _rightClickDecorator_AnimationCompleted;
@@ -138,8 +135,8 @@ internal class DecorationManager : IDisposable
     /// </summary>
     public static DecorationManager Instance => _instance.Value;        
     public HighlighterController MouseHighlighter => _highlighter;
-    public ClickEffectController LeftClickDecorator => _leftClickDecorator;
-    public ClickEffectController RightClickDecorator => _rightClickDecorator;
+    public RippleEffectController LeftClickDecorator => _leftClickDecorator;
+    public RippleEffectController RightClickDecorator => _rightClickDecorator;
 
     //public MainForm MainForm { get; internal set; }
 
