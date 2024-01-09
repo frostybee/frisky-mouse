@@ -1,22 +1,20 @@
-﻿using FriskyMouse.Drawing;
-using FriskyMouse.Drawing.Attributes;
+﻿using FriskyMouse.Drawing.Attributes;
 using FriskyMouse.Drawing.Extensions;
-using System.Runtime;
 
 namespace FriskyMouse.ViewModels.Pages;
 public partial class LeftClickViewModel : ObservableObject, INavigationAware
 {
     #region Fields
     private RippleEffectController _rippleEffectController;
-    private BaseRippleProfile _currentProfile;
-    private RippleProfileInfo _rippleOptions;    
+    private BaseRippleProfile _currentRippleProfile;
+    private RippleProfileInfo _rippleOptions;
     private RippleClickType _currentClickType;
     [ObservableProperty]
     private IReadOnlyList<string> _rippleProfiles;
-    
+
     [ObservableProperty]
     private IReadOnlyList<string> _animationDirections;
-    
+
     [ObservableProperty]
     private IReadOnlyList<string> _interpolators;
 
@@ -29,17 +27,17 @@ public partial class LeftClickViewModel : ObservableObject, INavigationAware
     /// <summary>
     /// Holds the index of the user-selected animation direction.
     /// </summary>
-    [ObservableProperty]   
+    [ObservableProperty]
     private int _selectedAnimationDirection;
-    
+
     /// <summary>
     /// Holds the index of the user-selected interpolation type.
     /// </summary>
     [ObservableProperty]
     private int _selectedInterpolator;
-    
+
     [ObservableProperty]
-    private System.Windows.Media.Color _rippleFillColor;
+    private System.Windows.Media.Color _fillColor;
 
     [ObservableProperty]
     private bool _isEnabled;
@@ -72,13 +70,13 @@ public partial class LeftClickViewModel : ObservableObject, INavigationAware
     private ushort _CurrentMouseButtonType;
 
     private bool _isInitialized = false;
-    
+
     #endregion
     #endregion
 
     public void OnNavigatedFrom()
     {
-     
+
     }
 
     public void OnNavigatedTo()
@@ -90,7 +88,8 @@ public partial class LeftClickViewModel : ObservableObject, INavigationAware
     private void InitializeViewModel()
     {
         _isInitialized = true;
-        _currentProfile = new FilledSonarPulseProfile();
+        // Default mouse click ripple profiles.
+        _currentRippleProfile = new FilledSonarPulseProfile();
         _currentClickType = RippleClickType.LeftClick;
         // Load the list of ripple profiles from their corresponding enum.
         RippleProfiles = FMAppHelper.GetEnumDescriptions<RippleProfileType>();
@@ -111,60 +110,60 @@ public partial class LeftClickViewModel : ObservableObject, INavigationAware
             // Switch the options:
             _rippleOptions = SettingsManager.Settings.LeftClickOptions;
         }
-        else if (clickType ==  RippleClickType.RightClick)
+        else if (clickType == RippleClickType.RightClick)
         {
             // Right click (right button).
             _rippleEffectController = DecorationManager.Instance.RightClickDecorator;
             // Switch the options:
             _rippleOptions = SettingsManager.Settings.RightClickOptions;
-        }        
+        }
         LoadProfileOptions();
+        SwitchLeftProfile((RippleProfileType)SelectedRippleProfile);
     }
 
     private void LoadProfileOptions()
     {
-        SelectedRippleProfile = (int)_rippleOptions.CurrentRippleProfile;        
-        SelectedAnimationDirection = (int)_rippleOptions.AnimationDirection;        
+        SelectedRippleProfile = (int)_rippleOptions.CurrentRippleProfile;
+        SelectedAnimationDirection = (int)_rippleOptions.AnimationDirection;
         SelectedInterpolator = (int)_rippleOptions.InterpolationType;
-        SwitchRippleProfile((RippleProfileType)SelectedRippleProfile);
         AdjustAnimationSpeed((int)(_rippleOptions.AnimationSpeed * 1000));
         // Set the values of the remaining properties.
         IsEnabled = _rippleOptions.IsEnabled;
         CanFadeColor = _rippleOptions.CanFadeColor;
         RadiusMultiplier = _rippleOptions.RadiusMultiplier;
         OpacityMultiplier = _rippleOptions.OpacityMultiplier;
-        RippleFillColor = _rippleOptions.FillColor.ToMediaColor();
+        FillColor = _rippleOptions.FillColor.ToMediaColor();
     }
 
     private void AdjustAnimationSpeed(int speed)
     {
         // Increase the animation speed.
         double speedRate = (double)speed / 1000d;
-        _rippleOptions.AnimationSpeed = speedRate;        
+        _rippleOptions.AnimationSpeed = speedRate;
         AnimationSpeed = speed;
         _rippleEffectController.SetAnimationSettings(_rippleOptions);
     }
 
-    private void SwitchRippleProfile(RippleProfileType profileType)
+    private void SwitchLeftProfile(RippleProfileType profileType)
     {
         BaseRippleProfile _newProfile = ConstructableFactory.GetInstanceOf<BaseRippleProfile>(profileType);
         //FIXME: this is causing an issue when changing the ripples color using the color picker.
-        //_currentProfile?.Dispose();
-        _currentProfile = _newProfile;
+        //_currentRippleProfile?.Dispose();
+        _currentRippleProfile = _newProfile;
         _rippleEffectController.SwitchProfile(_newProfile);
         _rippleOptions.CurrentRippleProfile = profileType;
-        _currentProfile.UpdateRipplesStyle(_rippleOptions);
+        _currentRippleProfile.UpdateRipplesStyle(_rippleOptions);
     }
-    
+
     private void SwitchAnimationInterpolator(InterpolationType interpolator)
     {
-        _rippleEffectController.SetAnimationSettings(_rippleOptions);        
+        _rippleEffectController.SetAnimationSettings(_rippleOptions);
         // Adjust the animation speed based on the recommended clickType associated with the selected 
         // savedEasing mode. 
         DefaultSpeedAttribute speedAttribute = interpolator.GetEnumAttribute<DefaultSpeedAttribute>();
         AdjustAnimationSpeed(speedAttribute.Speed);
     }
-    
+
     partial void OnIsEnabledChanged(bool value)
     {
         _rippleOptions.IsEnabled = value;
@@ -173,7 +172,7 @@ public partial class LeftClickViewModel : ObservableObject, INavigationAware
     partial void OnCanFadeColorChanged(bool value)
     {
         _rippleOptions.CanFadeColor = value;
-        _currentProfile.ResetColorOpacity();
+        _currentRippleProfile.ResetColorOpacity();
     }
 
     partial void OnRadiusMultiplierChanged(ushort value)
@@ -188,8 +187,9 @@ public partial class LeftClickViewModel : ObservableObject, INavigationAware
 
     partial void OnSelectedRippleProfileChanged(int value)
     {
+        _rippleEffectController?.StopAnimation();
         _rippleOptions.CurrentRippleProfile = (RippleProfileType)value;
-        SwitchRippleProfile((RippleProfileType)value);
+        SwitchLeftProfile((RippleProfileType)value);
     }
 
     partial void OnAnimationSpeedChanged(int value)
@@ -206,16 +206,18 @@ public partial class LeftClickViewModel : ObservableObject, INavigationAware
     {
         _rippleOptions.InterpolationType = (InterpolationType)value;
         SwitchAnimationInterpolator((InterpolationType)value);
-    }   
-    
-    partial void OnRippleFillColorChanged(System.Windows.Media.Color value)
-    {
-        _rippleOptions.FillColor = value.ToDrawingColor();
-        _currentProfile?.UpdateRipplesStyle(_rippleOptions);
     }
-    
-    partial void OnCurrentMouseButtonTypeChanged(ushort value)
+
+    partial void OnFillColorChanged(System.Windows.Media.Color value)
     {
-        SwitchMouseButtonSettings((RippleClickType)value);        
+        _rippleEffectController.StopAnimation();
+        _rippleOptions.FillColor = value.ToDrawingColor();
+        _currentRippleProfile?.UpdateRipplesStyle(_rippleOptions);               
+    }
+
+    partial void OnCurrentMouseButtonTypeChanged(ushort value)
+    {        
+        _currentClickType = (RippleClickType)value;
+        SwitchMouseButtonSettings((RippleClickType)value);
     }
 }

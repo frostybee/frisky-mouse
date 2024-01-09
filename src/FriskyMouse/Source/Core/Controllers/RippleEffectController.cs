@@ -38,11 +38,9 @@ internal class RippleEffectController: IDisposable
     private readonly ValueAnimator _animationManager;
     private BaseRippleProfile _currentRipplesProfile;
     private readonly RippleProfileInfo _settings;
+    private bool disposedValue;
     public delegate void AnimationCompletedEventHandler();
     public event AnimationCompletedEventHandler AnimationCompleted;
-
-
-    private bool disposedValue;
     public RippleProfileType RippleType { get; set; }
 
     public RippleEffectController(RippleProfileInfo settings)

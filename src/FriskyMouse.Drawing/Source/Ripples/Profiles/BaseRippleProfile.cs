@@ -18,8 +18,8 @@ namespace FriskyMouse.Drawing.Ripples;
 public abstract class BaseRippleProfile : IDisposable, IConstructable
 {
     private bool disposedValue;
-    private readonly List<RippleEntry> _ripples = new List<RippleEntry>();
-
+    private readonly List<RippleEntry> _ripples = [];
+    private readonly object _rippleLock = new();
 
     #region Properties
     public int Width { get; set; } = 200;
@@ -34,17 +34,20 @@ public abstract class BaseRippleProfile : IDisposable, IConstructable
     /// <param name="progress">The interpolated value that indicates the progress of the currently running animation. </param>
     public void RenderRipples(Graphics _graphics, RippleProfileInfo options, double progress)
     {
-        // We adjust the ripple properties according to the provided settings.  
-        _ripples.ForEach(ripple =>
+        lock (_rippleLock)
         {
-            if (options.CanFadeColor)
+            // We adjust the ripple properties according to the provided settings.  
+            _ripples.ForEach(ripple =>
             {
-                // We fade the color of the ripple based on the current animation's progress value.
-                ripple.AdjustColorOpacity(progress, options.OpacityMultiplier);
-            }                
-            ripple.ExpandRadius(progress, options.RadiusMultiplier);
-            ripple.Draw(_graphics);
-        });
+                if (options.CanFadeColor)
+                {
+                    // We fade the color of the ripple based on the current animation's progress value.
+                    ripple.AdjustColorOpacity(progress, options.OpacityMultiplier);
+                }
+                ripple.ExpandRadius(progress, options.RadiusMultiplier);
+                ripple.Draw(_graphics);
+            }); 
+        }
     }
     internal void AddRipple(RippleEntry newRipple)
     {
@@ -53,19 +56,25 @@ public abstract class BaseRippleProfile : IDisposable, IConstructable
 
     public void ResetColorOpacity()
     {
-        // Reset the opacity of the color upon disabling color transition.
-        _ripples.ForEach(ripple =>
+        lock (_rippleLock)
         {
-            ripple.ResetColorOpacity(255);
-        });
+            // Reset the opacity of the color upon disabling color transition.
+            _ripples.ForEach(ripple =>
+            {
+                ripple.ResetColorOpacity(255);
+            }); 
+        }
     }
 
     public void UpdateRipplesStyle(RippleProfileInfo options)
     {
-        _ripples.ForEach(ripple =>
-            {
-                ripple.ChangeColor(options);
-            });
+        lock (_rippleLock)
+        {
+            _ripples.ForEach(ripple =>
+                {
+                    ripple.ChangeColor(options);
+                }); 
+        }
     }
 
     private void DisposeDrawingTools()

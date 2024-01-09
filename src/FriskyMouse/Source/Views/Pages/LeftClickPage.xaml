@@ -38,6 +38,7 @@
                     OffContent="Off"
                     OnContent="On" />
             </controls:SettingsCard>
+
             <!--  Ripple options  -->
             <Grid HorizontalAlignment="Left">
                 <Grid.RowDefinitions>
@@ -70,7 +71,7 @@
 
                 <controls:SettingsCard
                     Grid.Row="1"
-                    Description="Select the color to be used while rendering the ripple profile"
+                    Description="Select the color to be applied while rendering the ripple profile"
                     Header="Ripple color"
                     Icon="{ui:SymbolIcon DesktopCursor28}"
                     Style="{StaticResource SettingsCardExpanderItemStyle}">
@@ -87,7 +88,7 @@
                                 Padding="2,2,5,2"
                                 AllowDrop="True"
                                 HintColor="Red"
-                                SelectedColor="{Binding ViewModel.RippleFillColor, Mode=TwoWay}"
+                                SelectedColor="{Binding ViewModel.FillColor, Mode=TwoWay}"
                                 ShowAlpha="False"
                                 ShowFractionalPart="False"
                                 SmallChange="5"
@@ -103,7 +104,7 @@
 
                 <controls:SettingsCard
                     Grid.Row="2"
-                    Description="Adjust the value of the ripple's radius"
+                    Description="Adjust the maximum value of the ripple's radius"
                     Header="Radius (%)"
                     Icon="{ui:SymbolIcon DesktopCursor28}"
                     Style="{StaticResource SettingsCardExpanderItemStyle}">
