@@ -174,14 +174,21 @@
                         TextOptions.TextRenderingMode="Auto"
                         TextWrapping="WrapWithOverflow" />
                     <ui:Card
-                        Width="220"
+                        Width="240"
                         Margin="0,0,0,0"
                         Padding="0,0,0,0"
                         HorizontalAlignment="Left">
-                        <Image
-                            Width="200"
-                            Height="240"
-                            Source="{Binding ViewModel.SpotlightImagePreview}" />
+                        <Grid>
+                            <Image
+                                Width="200"
+                                Height="240"
+                                Source="pack://application:,,,/Assets/sampleText.png" />
+                            <Image
+                                Width="200"
+                                Height="240"
+                                Source="{Binding ViewModel.SpotlightImagePreview}" />
+                        </Grid>
+
                         <!--<ImageBrush ImageSource="{Binding ViewModel.SpotlightImagePreview}" Stretch="UniformToFill" />-->
                     </ui:Card>
                 </StackPanel>

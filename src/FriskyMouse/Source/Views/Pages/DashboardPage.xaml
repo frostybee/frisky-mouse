@@ -132,7 +132,7 @@
                 Padding="0"
                 VerticalAlignment="Stretch"
                 Command="{Binding ViewModel.CardClickCommand, Mode=OneWay}"
-                CommandParameter="LeftClick"
+                CommandParameter="RippleEffect"
                 IsChevronVisible="False">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -152,7 +152,7 @@
                         <ui:TextBlock
                             Margin="0"
                             FontTypography="BodyStrong"
-                            Text="Left Click Effects"
+                            Text="Ripple Effects"
                             TextWrapping="WrapWithOverflow" />
                         <ui:TextBlock
                             Appearance="Tertiary"

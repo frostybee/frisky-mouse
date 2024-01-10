@@ -140,7 +140,6 @@ public class RippleEntry
 
     internal void ChangeColor(RippleProfileInfo options)
     {
-        Console.WriteLine("Changing color...");
         if (IsStyleable)
         {
             if (IsFilled)
@@ -151,7 +150,6 @@ public class RippleEntry
             else
             {
                 OutlinePen.Color = Color.FromArgb(OutlinePen.Color.A, options.FillColor);
-                Console.WriteLine("Changing outline color...");
             }
         }
     }

@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="FriskyMouse.Views.Pages.LeftClickPage"
+    x:Class="FriskyMouse.Views.Pages.RippleEffectPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
@@ -10,7 +10,7 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="Left Click Indicator"
-    d:DataContext="{d:DesignInstance local:LeftClickPage,
+    d:DataContext="{d:DesignInstance local:RippleEffectPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="1000"
     d:DesignWidth="800"
@@ -21,17 +21,92 @@
 
     <Grid>
         <controls:SimpleStackPanel Width="Auto" Spacing="20">
-            <ComboBox
+            <StackPanel Orientation="Horizontal">
+
+                <ui:CardAction
+                    Command="{Binding ViewModel.CardOptionsClickCommand}"
+                    CommandParameter="left_button"
+                    Icon="{ui:SymbolIcon DocumentEdit20,
+                                         FontSize=43,
+                                         Filled=False}">
+                    <StackPanel>
+                        <ui:TextBlock
+                            Margin="0"
+                            FontTypography="BodyStrong"
+                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                            Text="Left Click Options"
+                            TextWrapping="WrapWithOverflow" />
+                        <!--<ui:TextBlock
+                Appearance="Secondary"
+                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                Text="This is a description text."
+                TextWrapping="WrapWithOverflow" />-->
+                    </StackPanel>
+                </ui:CardAction>
+
+                <ui:CardAction
+                    Margin="50,0,0,0"
+                    Command="{Binding ViewModel.CardOptionsClickCommand}"
+                    CommandParameter="right_button"
+                    Icon="{ui:SymbolIcon DocumentEdit20,
+                                         FontSize=43,
+                                         Filled=False}">
+                    <StackPanel>
+                        <ui:TextBlock
+                            Margin="0"
+                            FontTypography="BodyStrong"
+                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                            Text="Right Click Options"
+                            TextWrapping="WrapWithOverflow" />
+                        <!--<ui:TextBlock
+Appearance="Secondary"
+Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+Text="This is a description text."
+TextWrapping="WrapWithOverflow" />-->
+                    </StackPanel>
+                </ui:CardAction>
+            </StackPanel>
+            <!--<Grid
+                Width="500"
+                Margin="0,20,0,0"
+                HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+
+            -->
+            <!--<ui:Card Grid.Column="1">
+                    <StackPanel>
+                        <ui:SymbolIcon Symbol="DocumentEdit24" />
+                        <ui:TextBlock
+                            Margin="0"
+                            FontTypography="BodyStrong"
+                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                            Text="Mouse Left Click"
+                            TextWrapping="WrapWithOverflow" />
+                        <ui:TextBlock
+                            Appearance="Secondary"
+                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                            Text="This is a description text."
+                            TextWrapping="WrapWithOverflow" />
+                    </StackPanel>
+                </ui:Card>-->
+            <!--
+
+            </Grid>-->
+            <!--<ComboBox
                 Width="200"
                 MinWidth="20"
                 HorizontalAlignment="Left"
                 SelectedIndex="{Binding ViewModel.CurrentMouseButtonType, Mode=TwoWay}">
                 <ComboBoxItem Content="Left Click" />
                 <ComboBoxItem Content="Right Click" />
-            </ComboBox>
+            </ComboBox>-->
             <controls:SettingsCard
-                Description="Select whether you want to decorate left mouse clicks with a visual indicator such as a ripple or a fading spotlight."
-                Header="Mouse left-click indicator"
+                Description="{Binding ViewModel.SwitchDescriptionText}"
+                Header="{Binding ViewModel.SwitchHeaderText}"
                 Icon="{ui:SymbolIcon DesktopCursor28}">
                 <ui:ToggleSwitch
                     IsChecked="{Binding ViewModel.IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -371,7 +446,7 @@
                             x:Name="InterpolationTypes"
                             MinWidth="200"
                             HorizontalAlignment="Left"
-                            ItemsSource="{Binding ViewModel.Interpolators, Mode=OneWay}"
+                            ItemsSource="{Binding ViewModel.EasingFunctions, Mode=OneWay}"
                             ScrollViewer.VerticalScrollBarVisibility="Visible"
                             SelectedIndex="{Binding ViewModel.SelectedInterpolator, Mode=TwoWay}" />
                     </controls:SettingsCard>

@@ -56,7 +56,9 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     public void OnNavigatedTo()
     {
         if (!_isInitialized)
+        {
             InitializeViewModel();
+        }
     }
 
     private void InitializeViewModel()

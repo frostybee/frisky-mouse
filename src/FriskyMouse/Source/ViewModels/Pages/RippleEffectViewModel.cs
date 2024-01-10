@@ -2,34 +2,40 @@
 using FriskyMouse.Drawing.Extensions;
 
 namespace FriskyMouse.ViewModels.Pages;
-public partial class LeftClickViewModel : ObservableObject, INavigationAware
+public partial class RippleEffectViewModel : ObservableObject, INavigationAware
 {
     #region Fields
     private RippleEffectController _rippleEffectController;
     private BaseRippleProfile _currentRippleProfile;
     private RippleProfileInfo _rippleOptions;
-    private RippleClickType _currentClickType;
+    private MouseButtonType _currentClickType;
+    private bool _isInitialized = false;
+
+    /// <summary>
+    /// Holds the list of pre-defined ripple profiles.
+    /// </summary>
     [ObservableProperty]
     private IReadOnlyList<string> _rippleProfiles;
-
+    /// <summary>
+    /// The list of available animation directions.
+    /// </summary>
     [ObservableProperty]
     private IReadOnlyList<string> _animationDirections;
-
+    /// <summary>
+    /// The list of animation interpolators.
+    /// </summary>
     [ObservableProperty]
-    private IReadOnlyList<string> _interpolators;
-
+    private IReadOnlyList<string> _easingFunctions;
     /// <summary>
     /// Holds the index of the user-selected ripple profile. 
     /// </summary>
     [ObservableProperty]
     private int _selectedRippleProfile;
-
     /// <summary>
     /// Holds the index of the user-selected animation direction.
     /// </summary>
     [ObservableProperty]
     private int _selectedAnimationDirection;
-
     /// <summary>
     /// Holds the index of the user-selected interpolation type.
     /// </summary>
@@ -37,21 +43,20 @@ public partial class LeftClickViewModel : ObservableObject, INavigationAware
     private int _selectedInterpolator;
 
     [ObservableProperty]
-    private System.Windows.Media.Color _fillColor;
+    private string _switchHeaderText;
+    [ObservableProperty]
+    private string _switchDescriptionText;
 
     [ObservableProperty]
+    private System.Windows.Media.Color _fillColor;
+    [ObservableProperty]
     private bool _isEnabled;
-
-    //[ObservableProperty]
-    //private RippleProfileType _currentRippleProfile;
 
     #region Animation Settings
     [ObservableProperty]
     private InterpolationType _interpolationType;
-
     [ObservableProperty]
     private AnimationDirection _animationDirection;
-
     [ObservableProperty]
     private int _animationSpeed;
     #endregion
@@ -59,18 +64,10 @@ public partial class LeftClickViewModel : ObservableObject, INavigationAware
     #region Visual Appearance
     [ObservableProperty]
     private bool _canFadeColor;
-
     [ObservableProperty]
     private ushort _radiusMultiplier;
-
     [ObservableProperty]
     private ushort _opacityMultiplier;
-    [ObservableProperty]
-    //CurrentMouseButtonType
-    private ushort _CurrentMouseButtonType;
-
-    private bool _isInitialized = false;
-
     #endregion
     #endregion
 
@@ -82,7 +79,9 @@ public partial class LeftClickViewModel : ObservableObject, INavigationAware
     public void OnNavigatedTo()
     {
         if (!_isInitialized)
+        {
             InitializeViewModel();
+        }
     }
 
     private void InitializeViewModel()
@@ -90,33 +89,53 @@ public partial class LeftClickViewModel : ObservableObject, INavigationAware
         _isInitialized = true;
         // Default mouse click ripple profiles.
         _currentRippleProfile = new FilledSonarPulseProfile();
-        _currentClickType = RippleClickType.LeftClick;
+        _currentClickType = MouseButtonType.LeftClick;
+
         // Load the list of ripple profiles from their corresponding enum.
         RippleProfiles = FMAppHelper.GetEnumDescriptions<RippleProfileType>();
         // Load the list of animation directions from their corresponding enum.
         AnimationDirections = FMAppHelper.GetEnumDescriptions<AnimationDirection>();
         // Load the list of animation's easing functions from their corresponding enum.
-        Interpolators = FMAppHelper.GetEnumDescriptions<InterpolationType>();
+        EasingFunctions = FMAppHelper.GetEnumDescriptions<InterpolationType>();
+        AdjustEnablingSwitchText(MouseButtonType.LeftClick);
         SwitchMouseButtonSettings(_currentClickType);
     }
 
-    private void SwitchMouseButtonSettings(RippleClickType clickType)
+    private void AdjustEnablingSwitchText(MouseButtonType clickType)
+    {
+        string buttonText = "";
+        string descriptionText = "";
+        if (clickType == MouseButtonType.LeftClick)
+        {
+            buttonText = "left-click";
+            descriptionText = "left";
+        }else if(clickType == MouseButtonType.RightClick)
+        {
+            buttonText = "right-click";
+            descriptionText = "right";
+        }
+        SwitchHeaderText = $"Mouse {buttonText} indicator";
+        SwitchDescriptionText = $"Select whether you want to decorate {descriptionText} mouse clicks with a visual indicator such as a ripple or a fading spotlight.";
+    }
+
+    private void SwitchMouseButtonSettings(MouseButtonType clickType)
     {
         // Switch the options and the profile.
-        if (clickType == RippleClickType.LeftClick)
+        if (clickType == MouseButtonType.LeftClick)
         {
             // Left click (left button).
             _rippleEffectController = DecorationManager.Instance.LeftClickDecorator;
             // Switch the options:
             _rippleOptions = SettingsManager.Settings.LeftClickOptions;
         }
-        else if (clickType == RippleClickType.RightClick)
+        else if (clickType == MouseButtonType.RightClick)
         {
             // Right click (right button).
             _rippleEffectController = DecorationManager.Instance.RightClickDecorator;
             // Switch the options:
             _rippleOptions = SettingsManager.Settings.RightClickOptions;
         }
+        AdjustEnablingSwitchText(clickType);
         LoadProfileOptions();
         SwitchLeftProfile((RippleProfileType)SelectedRippleProfile);
     }
@@ -161,7 +180,10 @@ public partial class LeftClickViewModel : ObservableObject, INavigationAware
         // Adjust the animation speed based on the recommended clickType associated with the selected 
         // savedEasing mode. 
         DefaultSpeedAttribute speedAttribute = interpolator.GetEnumAttribute<DefaultSpeedAttribute>();
-        AdjustAnimationSpeed(speedAttribute.Speed);
+        if ((_rippleOptions.AnimationSpeed * 1000) < speedAttribute.Speed)
+        {
+            AdjustAnimationSpeed(speedAttribute.Speed);
+        }
     }
 
     partial void OnIsEnabledChanged(bool value)
@@ -194,6 +216,7 @@ public partial class LeftClickViewModel : ObservableObject, INavigationAware
 
     partial void OnAnimationSpeedChanged(int value)
     {
+        _rippleEffectController.StopAnimation();
         AdjustAnimationSpeed(value);
     }
 
@@ -212,12 +235,30 @@ public partial class LeftClickViewModel : ObservableObject, INavigationAware
     {
         _rippleEffectController.StopAnimation();
         _rippleOptions.FillColor = value.ToDrawingColor();
-        _currentRippleProfile?.UpdateRipplesStyle(_rippleOptions);               
+        _currentRippleProfile?.UpdateRipplesStyle(_rippleOptions);
     }
 
-    partial void OnCurrentMouseButtonTypeChanged(ushort value)
-    {        
-        _currentClickType = (RippleClickType)value;
-        SwitchMouseButtonSettings((RippleClickType)value);
+    /*partial void OnCurrentMouseButtonTypeChanged(ushort value)
+    {
+        _currentClickType = (MouseButtonType)value;
+        SwitchMouseButtonSettings((MouseButtonType)value);
+    }*/
+
+    [RelayCommand]
+    private void OnCardOptionsClick(string parameter)
+    {
+        _rippleEffectController.StopAnimation();
+        if (String.IsNullOrWhiteSpace(parameter))
+            return;
+        if (parameter == "left_button")
+        {
+            _currentClickType = MouseButtonType.LeftClick;
+            SwitchMouseButtonSettings(MouseButtonType.LeftClick);
+        }
+        else if (parameter == "right_button")
+        {
+            _currentClickType = MouseButtonType.RightClick;
+            SwitchMouseButtonSettings(MouseButtonType.RightClick);
+        }
     }
 }
