@@ -147,7 +147,6 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
         SelectedAnimationDirection = (int)_rippleOptions.AnimationDirection;
         SelectedInterpolator = (int)_rippleOptions.InterpolationType;
         AnimationSpeed = (int)(_rippleOptions.AnimationSpeed * 1000);
-        // Set the values of the remaining properties.
         IsEnabled = _rippleOptions.IsEnabled;
         CanFadeColor = _rippleOptions.CanFadeColor;
         RadiusMultiplier = _rippleOptions.RadiusMultiplier;
@@ -160,7 +159,6 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
         // Increase the animation speed.
         double speedRate = (double)speed / 1000d;
         _rippleOptions.AnimationSpeed = speedRate;
-        //AnimationSpeed = speed;
         _rippleEffectController.SetAnimationSettings(_rippleOptions);
     }
 
@@ -168,6 +166,7 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
     {
         if (_isInitialized)
         {
+            // Make a new profile based on the user's selection.
             _currentRippleProfile = _decorationManager.MakeRippleEffectProfile(_rippleEffectController, _rippleOptions);
         }
         else

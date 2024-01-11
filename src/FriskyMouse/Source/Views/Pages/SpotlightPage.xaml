@@ -24,7 +24,7 @@
             <controls:SettingsCard
                 Description="Turn on or off the mouse highlighter feature"
                 Header="Mouse highligther status"
-                Icon="{ui:SymbolIcon DesktopCursor28}">
+                Icon="{ui:SymbolIcon Flashlight16}">
                 <ui:ToggleSwitch
                     IsChecked="{Binding ViewModel.IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     OffContent="Off"
@@ -71,7 +71,7 @@
                                     Padding="5,5,25,5"
                                     CanReposition="False"
                                     Header="Filled spotlight"
-                                    Icon="{ui:SymbolIcon DesktopCursor28}">
+                                    Icon="{ui:SymbolIcon CircleHalfFill24}">
                                     <ui:ToggleSwitch
                                         Margin="70,0,0,0"
                                         IsChecked="{Binding ViewModel.IsFilled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -86,7 +86,7 @@
                                     Padding="5,5,25,5"
                                     CanReposition="False"
                                     Header="Spotlight color"
-                                    Icon="{ui:SymbolIcon DesktopCursor28}">
+                                    Icon="{ui:SymbolIcon Color24}">
 
                                     <ui:Card Width="90" Padding="5">
                                         <Grid>
@@ -121,7 +121,7 @@
                                     Padding="5,5,25,5"
                                     CanReposition="False"
                                     Header="Radius (px)"
-                                    Icon="{ui:SymbolIcon DesktopCursor28}">
+                                    Icon="{ui:SymbolIcon CircleEdit24}">
                                     <Slider
                                         Grid.Column="1"
                                         Width="160"
@@ -141,7 +141,7 @@
                                     Padding="5,5,25,5"
                                     CanReposition="False"
                                     Header="Opacity"
-                                    Icon="{ui:SymbolIcon DesktopCursor28}">
+                                    Icon="{ui:SymbolIcon LightbulbFilament24}">
                                     <Slider
                                         Grid.Row="2"
                                         Grid.Column="1"
@@ -153,11 +153,14 @@
                                         Minimum="10"
                                         Value="{Binding ViewModel.OpacityPercentage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </controls:SettingsCard>
+
                                 <ui:Button
                                     Margin="30,10,0,0"
                                     HorizontalAlignment="Left"
+                                    Appearance="Primary"
                                     Command="{Binding ViewModel.ResetButtonClickCommand, Mode=OneWay}"
-                                    CommandParameter="ResetSpotlight">
+                                    CommandParameter="ResetSpotlight"
+                                    Icon="{ui:SymbolIcon ArrowReset48}">
                                     Reset
                                 </ui:Button>
                             </StackPanel>
@@ -200,9 +203,9 @@
                 Orientation="Vertical">
                 <controls:ExpandableSettingsControl
                     Description="Customize the outline to be rendered around the highlighter"
-                    Header="Spotlight's Outline"
+                    Header="Highlighter Outline"
                     HeaderContentPadding="0,0,0,0"
-                    Icon="{ui:SymbolIcon AlignSpaceEvenlyVertical20}"
+                    Icon="{ui:SymbolIcon BorderNone24}"
                     IsExpanded="True">
                     <controls:ExpandableSettingsControl.ExpanderAction>
                         <!--<ui:ToggleSwitch OffContent="Off" OnContent="On" />-->
@@ -224,7 +227,7 @@
                             Height="55"
                             CanReposition="False"
                             Header="Outline color"
-                            Icon="{ui:SymbolIcon DesktopCursor28}"
+                            Icon="{ui:SymbolIcon ColorBackground24}"
                             Style="{StaticResource SettingsCardExpanderItemStyle}">
 
                             <ui:Card Width="90" Padding="5">
@@ -257,7 +260,7 @@
                         <controls:SettingsCard
                             Grid.Row="1"
                             Header="Width (px)"
-                            Icon="{ui:SymbolIcon DesktopCursor28}"
+                            Icon="{ui:SymbolIcon AutoFitWidth24}"
                             Style="{StaticResource SettingsCardExpanderItemStyle}">
 
                             <Slider
@@ -273,7 +276,7 @@
                         <controls:SettingsCard
                             Grid.Row="2"
                             Header="Outline style"
-                            Icon="{ui:SymbolIcon DesktopCursor28}"
+                            Icon="{ui:SymbolIcon BorderTopBottomDouble24}"
                             Style="{StaticResource SettingsCardExpanderItemStyle}">
                             <ComboBox
                                 MinWidth="200"
@@ -305,7 +308,7 @@
                     Description="Configure a shadow to be rendered around the highlighter"
                     Header="Highlighter shadow"
                     HeaderContentPadding="0,0,0,0"
-                    Icon="{ui:SymbolIcon AlignSpaceEvenlyVertical20}"
+                    Icon="{ui:SymbolIcon SquareShadow20}"
                     IsExpanded="True">
                     <controls:ExpandableSettingsControl.ExpanderAction>
                         <!--<ui:ToggleSwitch OffContent="Off" OnContent="On" />-->
@@ -327,7 +330,7 @@
                             Height="55"
                             CanReposition="False"
                             Header="Shadow color"
-                            Icon="{ui:SymbolIcon DesktopCursor28}"
+                            Icon="{ui:SymbolIcon ColorFill20}"
                             Style="{StaticResource SettingsCardExpanderItemStyle}">
 
                             <ui:Card Width="90" Padding="5">
@@ -360,7 +363,7 @@
                         <controls:SettingsCard
                             Grid.Row="1"
                             Header="Depth (px)"
-                            Icon="{ui:SymbolIcon DesktopCursor28}"
+                            Icon="{ui:SymbolIcon ArrowAutofitWidth24}"
                             Style="{StaticResource SettingsCardExpanderItemStyle}">
                             <Slider
                                 Width="200"
@@ -375,7 +378,7 @@
                         <controls:SettingsCard
                             Grid.Row="2"
                             Header="Opacity"
-                            Icon="{ui:SymbolIcon DesktopCursor28}"
+                            Icon="{ui:SymbolIcon Lightbulb28}"
                             Style="{StaticResource SettingsCardExpanderItemStyle}">
                             <Slider
                                 Width="200"
