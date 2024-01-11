@@ -378,7 +378,7 @@
                         <controls:SettingsCard
                             Grid.Row="2"
                             Header="Opacity"
-                            Icon="{ui:SymbolIcon Lightbulb28}"
+                            Icon="{ui:SymbolIcon BrightnessLow48}"
                             Style="{StaticResource SettingsCardExpanderItemStyle}">
                             <Slider
                                 Width="200"
