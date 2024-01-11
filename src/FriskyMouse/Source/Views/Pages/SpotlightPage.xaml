@@ -174,13 +174,13 @@
                         TextOptions.TextRenderingMode="Auto"
                         TextWrapping="WrapWithOverflow" />
                     <ui:Card
-                        Width="240"
+                        Width="220"
                         Margin="0,0,0,0"
                         Padding="0,0,0,0"
                         HorizontalAlignment="Left">
                         <Grid>
                             <Image
-                                Width="200"
+                                Width="230"
                                 Height="240"
                                 Source="pack://application:,,,/Assets/sampleText.png" />
                             <Image

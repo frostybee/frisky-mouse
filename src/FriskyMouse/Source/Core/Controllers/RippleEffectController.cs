@@ -22,7 +22,7 @@ namespace FriskyMouse.Core;
 /// It maintains ripple instances corresponding to what the user has selected/enabled.
 /// The profiles maintained are left click, right click, and double click ripple profiles. 
 /// </summary>
-internal class RippleEffectController: IDisposable
+internal class RippleEffectController : IDisposable
 {
     private readonly LayeredWindow _highlighterWindow;
     // NOTE: move those to the BaseRippleProfile.
@@ -46,7 +46,7 @@ internal class RippleEffectController: IDisposable
     public RippleEffectController(RippleProfileInfo settings)
     {
         _settings = settings;
-        _highlighterWindow = new LayeredWindow();                        
+        _highlighterWindow = new LayeredWindow();
         // Default ripple profile.
         RippleType = RippleProfileType.FilledSonarPulse;
         _currentRipplesProfile = ConstructableFactory.GetInstanceOf<BaseRippleProfile>(RippleProfileType.SquaredPulse);
@@ -132,7 +132,7 @@ internal class RippleEffectController: IDisposable
         // We perform the drawing here.            
         if (!_animationManager.IsAnimating())
         {
-            _highlighterWindow.SetBitmap(_blankCanvas, 1);                
+            _highlighterWindow.SetBitmap(_blankCanvas, 1);
             _animationManager.StartNewAnimation(_settings.AnimationDirection);
         }
     }
@@ -151,6 +151,8 @@ internal class RippleEffectController: IDisposable
         }
     }
 
+    public BaseRippleProfile CurrentProfile => _currentRipplesProfile;
+
     protected virtual void Dispose(bool disposing)
     {
         if (!disposedValue)
@@ -161,7 +163,7 @@ internal class RippleEffectController: IDisposable
                 _canvas?.Dispose();
                 _blankCanvas?.Dispose();
                 _animationManager.Dispose();
-                _highlighterWindow?.Dispose();                    
+                _highlighterWindow?.Dispose();
                 _canvas = null;
                 _blankCanvas = null;
             }

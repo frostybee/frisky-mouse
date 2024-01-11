@@ -1,4 +1,5 @@
-﻿using FriskyMouse.Drawing.Attributes;
+﻿using FriskyMouse.Core;
+using FriskyMouse.Drawing.Attributes;
 using FriskyMouse.Drawing.Extensions;
 
 namespace FriskyMouse.ViewModels.Pages;
@@ -8,7 +9,7 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
     private RippleEffectController _rippleEffectController;
     private BaseRippleProfile _currentRippleProfile;
     private RippleProfileInfo _rippleOptions;
-    private MouseButtonType _currentClickType;
+    private DecorationManager _decorationManager;
     private bool _isInitialized = false;
 
     /// <summary>
@@ -86,10 +87,9 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
 
     private void InitializeViewModel()
     {
-        _isInitialized = true;
+        _decorationManager = DecorationManager.Instance;
         // Default mouse click ripple profiles.
         _currentRippleProfile = new FilledSonarPulseProfile();
-        _currentClickType = MouseButtonType.LeftClick;
 
         // Load the list of ripple profiles from their corresponding enum.
         RippleProfiles = FMAppHelper.GetEnumDescriptions<RippleProfileType>();
@@ -97,8 +97,30 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
         AnimationDirections = FMAppHelper.GetEnumDescriptions<AnimationDirection>();
         // Load the list of animation's easing functions from their corresponding enum.
         EasingFunctions = FMAppHelper.GetEnumDescriptions<InterpolationType>();
-        AdjustEnablingSwitchText(MouseButtonType.LeftClick);
-        SwitchMouseButtonSettings(_currentClickType);
+        SwitchCurrentProfileSettings(MouseButtonType.LeftClick);
+        // Must be set last.
+        _isInitialized = true;
+    }
+
+    private void SwitchCurrentProfileSettings(MouseButtonType clickType)
+    {
+        // Switch the options and the profile.
+        if (clickType == MouseButtonType.LeftClick)
+        {
+            // Left click (left button).
+            _rippleEffectController = _decorationManager.LeftClickDecorator;
+            // Switch the options:
+            _rippleOptions = SettingsManager.Settings.LeftClickOptions;
+        }
+        else if (clickType == MouseButtonType.RightClick)
+        {
+            // Right click (right button).
+            _rippleEffectController = _decorationManager.RightClickDecorator;
+            // Switch the options:
+            _rippleOptions = SettingsManager.Settings.RightClickOptions;
+        }
+        AdjustEnablingSwitchText(clickType);
+        LoadProfileOptions();
     }
 
     private void AdjustEnablingSwitchText(MouseButtonType clickType)
@@ -109,7 +131,8 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
         {
             buttonText = "left-click";
             descriptionText = "left";
-        }else if(clickType == MouseButtonType.RightClick)
+        }
+        else if (clickType == MouseButtonType.RightClick)
         {
             buttonText = "right-click";
             descriptionText = "right";
@@ -118,34 +141,12 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
         SwitchDescriptionText = $"Select whether you want to decorate {descriptionText} mouse clicks with a visual indicator such as a ripple or a fading spotlight.";
     }
 
-    private void SwitchMouseButtonSettings(MouseButtonType clickType)
-    {
-        // Switch the options and the profile.
-        if (clickType == MouseButtonType.LeftClick)
-        {
-            // Left click (left button).
-            _rippleEffectController = DecorationManager.Instance.LeftClickDecorator;
-            // Switch the options:
-            _rippleOptions = SettingsManager.Settings.LeftClickOptions;
-        }
-        else if (clickType == MouseButtonType.RightClick)
-        {
-            // Right click (right button).
-            _rippleEffectController = DecorationManager.Instance.RightClickDecorator;
-            // Switch the options:
-            _rippleOptions = SettingsManager.Settings.RightClickOptions;
-        }
-        AdjustEnablingSwitchText(clickType);
-        LoadProfileOptions();
-        SwitchLeftProfile((RippleProfileType)SelectedRippleProfile);
-    }
-
     private void LoadProfileOptions()
     {
         SelectedRippleProfile = (int)_rippleOptions.CurrentRippleProfile;
         SelectedAnimationDirection = (int)_rippleOptions.AnimationDirection;
         SelectedInterpolator = (int)_rippleOptions.InterpolationType;
-        AdjustAnimationSpeed((int)(_rippleOptions.AnimationSpeed * 1000));
+        AnimationSpeed = (int)(_rippleOptions.AnimationSpeed * 1000);
         // Set the values of the remaining properties.
         IsEnabled = _rippleOptions.IsEnabled;
         CanFadeColor = _rippleOptions.CanFadeColor;
@@ -159,27 +160,31 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
         // Increase the animation speed.
         double speedRate = (double)speed / 1000d;
         _rippleOptions.AnimationSpeed = speedRate;
-        AnimationSpeed = speed;
+        //AnimationSpeed = speed;
         _rippleEffectController.SetAnimationSettings(_rippleOptions);
     }
 
-    private void SwitchLeftProfile(RippleProfileType profileType)
+    private void SwitchLeftProfile()
     {
-        BaseRippleProfile _newProfile = ConstructableFactory.GetInstanceOf<BaseRippleProfile>(profileType);
-        //FIXME: this is causing an issue when changing the ripples color using the color picker.
-        //_currentRippleProfile?.Dispose();
-        _currentRippleProfile = _newProfile;
-        _rippleEffectController.SwitchProfile(_newProfile);
-        _rippleOptions.CurrentRippleProfile = profileType;
-        _currentRippleProfile.UpdateRipplesStyle(_rippleOptions);
+        if (_isInitialized)
+        {
+            _currentRippleProfile = _decorationManager.MakeRippleEffectProfile(_rippleEffectController, _rippleOptions);
+        }
+        else
+        {
+            // No need to make a new one if the user hasn't selected another ripple profile 
+            // From the dropdown menu.
+            _currentRippleProfile = _rippleEffectController.CurrentProfile;
+        }
     }
 
     private void SwitchAnimationInterpolator(InterpolationType interpolator)
     {
-        _rippleEffectController.SetAnimationSettings(_rippleOptions);
-        // Adjust the animation speed based on the recommended clickType associated with the selected 
-        // savedEasing mode. 
+        _rippleEffectController.SetAnimationSettings(_rippleOptions);        
         DefaultSpeedAttribute speedAttribute = interpolator.GetEnumAttribute<DefaultSpeedAttribute>();
+
+        // Adjust the animation speed based on the recommended speed profile associated with the selected 
+        // easing function. 
         if ((_rippleOptions.AnimationSpeed * 1000) < speedAttribute.Speed)
         {
             AdjustAnimationSpeed(speedAttribute.Speed);
@@ -211,7 +216,7 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
     {
         _rippleEffectController?.StopAnimation();
         _rippleOptions.CurrentRippleProfile = (RippleProfileType)value;
-        SwitchLeftProfile((RippleProfileType)value);
+        SwitchLeftProfile();
     }
 
     partial void OnAnimationSpeedChanged(int value)
@@ -238,12 +243,6 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
         _currentRippleProfile?.UpdateRipplesStyle(_rippleOptions);
     }
 
-    /*partial void OnCurrentMouseButtonTypeChanged(ushort value)
-    {
-        _currentClickType = (MouseButtonType)value;
-        SwitchMouseButtonSettings((MouseButtonType)value);
-    }*/
-
     [RelayCommand]
     private void OnCardOptionsClick(string parameter)
     {
@@ -252,13 +251,11 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
             return;
         if (parameter == "left_button")
         {
-            _currentClickType = MouseButtonType.LeftClick;
-            SwitchMouseButtonSettings(MouseButtonType.LeftClick);
+            SwitchCurrentProfileSettings(MouseButtonType.LeftClick);
         }
         else if (parameter == "right_button")
         {
-            _currentClickType = MouseButtonType.RightClick;
-            SwitchMouseButtonSettings(MouseButtonType.RightClick);
+            SwitchCurrentProfileSettings(MouseButtonType.RightClick);
         }
     }
 }

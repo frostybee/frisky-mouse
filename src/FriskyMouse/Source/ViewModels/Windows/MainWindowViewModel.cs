@@ -45,6 +45,8 @@ public partial class MainWindowViewModel : ObservableObject
 
     internal void DoStartUp()
     {
+        // Initialize the left and right mouse click ripple effect controllers. 
+        DecorationManager.Instance?.SetRippleEffectProfiles();
         // Initialize the global manager and bootstrap the application's logic.        
         DecorationManager.Instance?.BootstrapApp();
     }

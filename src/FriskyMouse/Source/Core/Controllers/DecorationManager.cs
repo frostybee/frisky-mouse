@@ -10,6 +10,7 @@
 */
 #endregion
 
+
 namespace FriskyMouse.Core;
 
 //TODO: Dispose everything here.
@@ -105,7 +106,27 @@ internal class DecorationManager : IDisposable
         {
             // TODO: Failed to install the mouse hook... Raise an error.
         }                    
-    }        
+    }
+    internal void SetRippleEffectProfiles()
+    {
+        // Initialize the left click ripple effect controller.
+        MakeRippleEffectProfile(_leftClickDecorator, _settings.LeftClickOptions);
+        // Initialize the left click ripple effect controller.
+        MakeRippleEffectProfile(_rightClickDecorator, _settings.RightClickOptions);
+        // Adjust the animation speed of each decoration controller based on the user-selected options.
+        _leftClickDecorator.SetAnimationSettings(_settings.LeftClickOptions);
+        _rightClickDecorator.SetAnimationSettings(_settings.RightClickOptions);
+    }
+
+    internal BaseRippleProfile MakeRippleEffectProfile(RippleEffectController controller, RippleProfileInfo profileOptions)
+    {
+        controller.StopAnimation();
+        BaseRippleProfile _newProfile = ConstructableFactory.GetInstanceOf<BaseRippleProfile>(profileOptions.CurrentRippleProfile);
+        controller?.SwitchProfile(_newProfile);
+        _newProfile.UpdateRipplesStyle(profileOptions);
+        return _newProfile;
+    }
+
     protected virtual void Dispose(bool disposing)
     {
         if (!_disposed)
@@ -125,7 +146,7 @@ internal class DecorationManager : IDisposable
         // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
         Dispose(disposing: true);
         GC.SuppressFinalize(this);
-    }        
+    }    
 
     #endregion
 
