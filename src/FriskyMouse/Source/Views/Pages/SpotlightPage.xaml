@@ -161,7 +161,7 @@
                                     Command="{Binding ViewModel.ResetButtonClickCommand, Mode=OneWay}"
                                     CommandParameter="ResetSpotlight"
                                     Icon="{ui:SymbolIcon ArrowReset48}">
-                                    Reset
+                                    Reset Options
                                 </ui:Button>
                             </StackPanel>
                         </Grid>
@@ -226,7 +226,8 @@
                         <controls:SettingsCard
                             Height="55"
                             CanReposition="False"
-                            Header="Outline color"
+                            Description="Select color for the spotlight's outline"
+                            Header="Color"
                             Icon="{ui:SymbolIcon ColorBackground24}"
                             Style="{StaticResource SettingsCardExpanderItemStyle}">
 
@@ -259,6 +260,7 @@
 
                         <controls:SettingsCard
                             Grid.Row="1"
+                            Description="Adjust the width of the outline"
                             Header="Width (px)"
                             Icon="{ui:SymbolIcon AutoFitWidth24}"
                             Style="{StaticResource SettingsCardExpanderItemStyle}">
@@ -275,6 +277,7 @@
 
                         <controls:SettingsCard
                             Grid.Row="2"
+                            Description="Select an outline style"
                             Header="Outline style"
                             Icon="{ui:SymbolIcon BorderTopBottomDouble24}"
                             Style="{StaticResource SettingsCardExpanderItemStyle}">
@@ -329,7 +332,8 @@
                         <controls:SettingsCard
                             Height="55"
                             CanReposition="False"
-                            Header="Shadow color"
+                            Description="Select a shadow color"
+                            Header="Color"
                             Icon="{ui:SymbolIcon ColorFill20}"
                             Style="{StaticResource SettingsCardExpanderItemStyle}">
 
@@ -362,6 +366,7 @@
 
                         <controls:SettingsCard
                             Grid.Row="1"
+                            Description="Adjust the depth of the shadow"
                             Header="Depth (px)"
                             Icon="{ui:SymbolIcon ArrowAutofitWidth24}"
                             Style="{StaticResource SettingsCardExpanderItemStyle}">
@@ -377,7 +382,8 @@
 
                         <controls:SettingsCard
                             Grid.Row="2"
-                            Header="Opacity"
+                            Description="Adjust the percentage of the opacity"
+                            Header="Opacity (%)"
                             Icon="{ui:SymbolIcon BrightnessLow48}"
                             Style="{StaticResource SettingsCardExpanderItemStyle}">
                             <Slider

@@ -19,7 +19,7 @@ public partial class MainWindowViewModel : ObservableObject
     public MainWindowViewModel(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
-        _applicationTitle = "FriskyMouse II";
+        _applicationTitle = "FriskyMouse";
 
         _menuItems = new ObservableCollection<object>
         {
@@ -48,6 +48,6 @@ public partial class MainWindowViewModel : ObservableObject
         // Initialize the left and right mouse click ripple effect controllers. 
         DecorationManager.Instance?.SetRippleEffectProfiles();
         // Initialize the global manager and bootstrap the application's logic.        
-        DecorationManager.Instance?.BootstrapApp();
+        //DecorationManager.Instance?.BootstrapApp();
     }
 }

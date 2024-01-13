@@ -134,4 +134,9 @@ public static class FMAppHelper
             Debug.WriteLine(e.Message);
         }
     }
+
+    internal static void ChangeUICurrentTheme(ApplicationTheme newTheme)
+    {
+        ApplicationThemeManager.Apply(newTheme);
+    }
 }

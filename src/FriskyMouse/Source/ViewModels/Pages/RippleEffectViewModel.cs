@@ -52,6 +52,8 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
     private System.Windows.Media.Color _fillColor;
     [ObservableProperty]
     private bool _isEnabled;
+    [ObservableProperty]
+    private Style _currentCardStyle;
 
     #region Animation Settings
     [ObservableProperty]
@@ -100,6 +102,7 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
         SwitchCurrentProfileSettings(MouseButtonType.LeftClick);
         // Must be set last.
         _isInitialized = true;
+        SetCurrentCardStyle();
     }
 
     private void SwitchCurrentProfileSettings(MouseButtonType clickType)
@@ -125,20 +128,17 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
 
     private void AdjustEnablingSwitchText(MouseButtonType clickType)
     {
-        string buttonText = "";
-        string descriptionText = "";
+        string buttonTypeText = "";
         if (clickType == MouseButtonType.LeftClick)
         {
-            buttonText = "left-click";
-            descriptionText = "left";
+            buttonTypeText = "Left";
         }
         else if (clickType == MouseButtonType.RightClick)
         {
-            buttonText = "right-click";
-            descriptionText = "right";
+            buttonTypeText = "Right";
         }
-        SwitchHeaderText = $"Mouse {buttonText} indicator";
-        SwitchDescriptionText = $"Select whether you want to decorate {descriptionText} mouse clicks with a visual indicator such as a ripple or a fading spotlight.";
+        SwitchHeaderText = $"Mouse {buttonTypeText}-Click indicator";
+        SwitchDescriptionText = $"Decorate mouse {buttonTypeText.ToLower()} clicks with a visual indicator such as a ripple or a fading spotlight.";
     }
 
     private void LoadProfileOptions()
@@ -249,12 +249,24 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
         if (String.IsNullOrWhiteSpace(parameter))
             return;
         if (parameter == "left_button")
-        {
+        {            
+            SetCurrentCardStyle();
             SwitchCurrentProfileSettings(MouseButtonType.LeftClick);
         }
         else if (parameter == "right_button")
         {
             SwitchCurrentProfileSettings(MouseButtonType.RightClick);
+        }
+    }
+
+    private void SetCurrentCardStyle()
+    {
+        //DefaultUiCardActionStyle
+        //Style style = Application.Current.FindResource("CurrentRippleProfileCardStyle") as Style;
+        Style style = Application.Current.FindResource("CurrentRippleProfileCardStyle") as Style;
+        if (style != null)
+        {
+            CurrentCardStyle = style;
         }
     }
 }

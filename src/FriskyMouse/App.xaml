@@ -14,8 +14,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemesDictionary Theme="Dark" />
                 <ui:ControlsDictionary />
-                <ResourceDictionary Source="pack://application:,,,/Source/Styles/CommonStyles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Source/UI/Styles/CommonStyles.xaml" />
                 <ResourceDictionary Source="Source/UI/Controls/SettingsCard.xaml" />
+                <ResourceDictionary Source="Source/UI/Controls/GalleryNavigationPresenter.xaml" />
                 <ResourceDictionary Source="Source/UI/Controls/ExpandableSettingsControl.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/ColorPicker;component/Styles/DefaultColorPickerStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>

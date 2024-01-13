@@ -6,7 +6,7 @@
     <!--<Nullable>enable</Nullable>-->    
     <UseWPF>true</UseWPF>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
-    <ApplicationIcon>wpfui.ico</ApplicationIcon>
+    <ApplicationIcon>FriskyMouseIcon.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <RootNamespace>FriskyMouse</RootNamespace>
     <Platforms>AnyCPU;x64</Platforms>
@@ -18,7 +18,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\FmLogo.png" />
+    <None Remove="Assets\images\RightClick50.png" />
     <None Remove="Assets\sampleText.png" />
+    <None Remove="FriskyMouseIcon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="FriskyMouseIcon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\FmLogo.png" />
+    <Resource Include="FriskyMouseIcon.ico" />
   </ItemGroup>
 
   <!--<PropertyGroup>
@@ -37,19 +49,11 @@
   </PropertyGroup>-->
 
   <ItemGroup>
-    <Content Include="wpfui.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Assets\geo_icons.png" />
-    <Resource Include="Assets\octonaut.jpg" />
-    <Resource Include="Assets\pexels-johannes-plenio-1103970.jpg" />
+    <Resource Include="Assets\images\RightClick50.png" />
     <Resource Include="Assets\sampleText.png" />
     <Resource Include="Assets\WinUiGallery\Button.png" />
     <Resource Include="Assets\WinUiGallery\Flyout.png" />
     <Resource Include="Assets\WinUiGallery\MenuBar.png" />
-    <Resource Include="Assets\wpfui.png" />
-    <Resource Include="Assets\wpfui_full.png" />
   </ItemGroup>
 
   <ItemGroup>

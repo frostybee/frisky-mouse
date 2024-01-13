@@ -23,9 +23,7 @@ public sealed class ApplicationInfo
     public string ApplicationName { get; set; } = "FriskyMouse";
     public string Version { get; set; } = string.Empty;
     public string LastCheckForUpdate { get; set; }  = "07-3-2023";
-    //public ColorSchemeType ColorScheme { get; set; } = ColorSchemeType.Indigo;
-    public bool UseDarkTheme { get; set; } = false;
-    public bool UseColoredDrawer { get; set; } = false;
+    public ApplicationTheme AppUiTheme{ get; set; } = ApplicationTheme.Light;
 
     #endregion
 }

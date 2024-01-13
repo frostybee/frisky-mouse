@@ -9,13 +9,13 @@ namespace FriskyMouse;
 public partial class App : Application
 {
     #region Fields   
-    
+
     /// <summary>
     /// A named system-wide mutex used to ensure that only one instance of this application runs at once. 
     /// </summary>
-    private static string _mutexName = "{FFF0FDB8-C9C3-4B9B-8CE5-92BFD1D8E17F}";    
-    private Mutex _mutex;    
-    private IHost _host;
+    private static string _mutexName = "{FFF0FDB8-C9C3-4B9B-8CE5-92BFD1D8E17F}";
+    private Mutex _mutex;
+    private static IHost _host;
     public static readonly AppConfigurationInfo Configuration = new AppConfigurationInfo();
     private bool _singleInstanceClose = false;
     #endregion
@@ -45,8 +45,8 @@ public partial class App : Application
                 })
                 .ConfigureServices(ConfigureServices)
                 .Build();
-            
-            _host.Start();            
+
+            _host.Start();
         }
         else
         {
@@ -108,7 +108,7 @@ public partial class App : Application
         // Uninstall the global mouse hook.
         DecorationManager.Instance?.DisableHook();
         DecorationManager.Instance?.Dispose();
-        
+
         Console.WriteLine("Exiting the application...");
     }
 
@@ -133,5 +133,15 @@ public partial class App : Application
     public T GetService<T>() where T : class
     {
         return _host.Services.GetService(typeof(T)) as T ?? null;
+    }
+    /// <summary>
+    /// Gets registered service.
+    /// </summary>
+    /// <typeparam name="T">Type of the service to get.</typeparam>
+    /// <returns>Instance of the service or <see langword="null"/>.</returns>
+    public static T GetRequiredService<T>()
+        where T : class
+    {
+        return _host.Services.GetRequiredService<T>();
     }
 }

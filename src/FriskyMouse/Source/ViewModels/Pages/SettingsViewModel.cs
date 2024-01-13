@@ -15,6 +15,8 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
 
     [ObservableProperty]
     private string _appVersion = String.Empty;
+    [ObservableProperty]
+    private string _applicationName = String.Empty;
 
     [ObservableProperty]
     private ApplicationTheme _currentApplicationTheme = ApplicationTheme.Unknown;
@@ -34,7 +36,7 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
         AppVersion = $"{GetAssemblyVersion()}";
 
         ApplicationThemeManager.Changed += OnThemeChanged;
-
+        ApplicationName = App.Configuration.ApplicationName;
         _isInitialized = true;
     }
 
@@ -51,7 +53,8 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
 
     partial void OnCurrentApplicationThemeChanged(ApplicationTheme oldValue, ApplicationTheme newValue)
     {
-        ApplicationThemeManager.Apply(newValue);
+        FMAppHelper.ChangeUICurrentTheme(newValue);        
+        SettingsManager.Settings.ApplicationInfo.AppUiTheme = newValue;
     }
 
     private void OnThemeChanged(ApplicationTheme currentApplicationTheme, Color systemAccent)

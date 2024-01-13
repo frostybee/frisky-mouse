@@ -24,23 +24,25 @@
             <StackPanel Orientation="Horizontal">
 
                 <ui:CardAction
+                    Height="60"
                     Command="{Binding ViewModel.CardOptionsClickCommand}"
                     CommandParameter="left_button"
-                    Icon="{ui:SymbolIcon DocumentEdit20,
+                    Icon="{ui:SymbolIcon ShoppingBagArrowLeft24,
                                          FontSize=43,
-                                         Filled=False}">
+                                         Filled=False}"
+                    Style="{Binding ViewModel.CurrentCardStyle}">
                     <StackPanel>
                         <ui:TextBlock
                             Margin="0"
                             FontTypography="BodyStrong"
                             Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                            Text="Left Click Options"
+                            Text="Left Click"
                             TextWrapping="WrapWithOverflow" />
-                        <!--<ui:TextBlock
-                Appearance="Secondary"
-                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                Text="This is a description text."
-                TextWrapping="WrapWithOverflow" />-->
+                        <ui:TextBlock
+                            Appearance="Secondary"
+                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                            Text="Press to edit options"
+                            TextWrapping="WrapWithOverflow" />
                     </StackPanel>
                 </ui:CardAction>
 
@@ -48,21 +50,22 @@
                     Margin="50,0,0,0"
                     Command="{Binding ViewModel.CardOptionsClickCommand}"
                     CommandParameter="right_button"
-                    Icon="{ui:SymbolIcon DocumentEdit20,
-                                         FontSize=43,
+                    Icon="{ui:SymbolIcon ShoppingBagPlay24,
+                                         FontSize=143,
                                          Filled=False}">
+
                     <StackPanel>
                         <ui:TextBlock
                             Margin="0"
                             FontTypography="BodyStrong"
                             Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                            Text="Right Click Options"
+                            Text="Right Click"
                             TextWrapping="WrapWithOverflow" />
-                        <!--<ui:TextBlock
-Appearance="Secondary"
-Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-Text="This is a description text."
-TextWrapping="WrapWithOverflow" />-->
+                        <ui:TextBlock
+                            Appearance="Secondary"
+                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                            Text="Press to edit options"
+                            TextWrapping="WrapWithOverflow" />
                     </StackPanel>
                 </ui:CardAction>
             </StackPanel>
