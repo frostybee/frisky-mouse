@@ -73,7 +73,7 @@ public class SettingsCard : ContentControl
 
     #region Porperties
     /// <summary>
-    /// Header is the data used to for the header of each item in the control.
+    /// Title is the data used to for the header of each item in the control.
     /// </summary>
     [Bindable(true)]
     public object Header

@@ -62,7 +62,7 @@ public class ExpandableSettingsControl: CardExpander
     }
 
     /// <summary>
-    /// Header is the data used to for the header of each item in the control.
+    /// Title is the data used to for the header of each item in the control.
     /// </summary>
     [Bindable(true)]
     public object Header
@@ -72,7 +72,7 @@ public class ExpandableSettingsControl: CardExpander
     }
 
     /// <summary>
-    /// Header is the data used to for the header of each item in the control.
+    /// Title is the data used to for the header of each item in the control.
     /// </summary>
     [Bindable(true)]
     public object ExpanderAction

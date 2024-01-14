@@ -89,7 +89,7 @@ internal class DecorationManager : IDisposable
         }
     }
 
-    internal void BootstrapApp()
+    internal void EnableMouseDecoration()
     {
         // TODO: add check ==> Is click decorator enabled as well?
         EnableHook();

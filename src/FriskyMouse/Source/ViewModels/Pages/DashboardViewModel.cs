@@ -7,14 +7,17 @@ public partial class DashboardViewModel : ObservableObject
     private readonly INavigationService _navigationService;
 
     [ObservableProperty]
+    private string _feedBackUri;
+
+    [ObservableProperty]
     private ICollection<NavigationCard> _navigationCards = new ObservableCollection<NavigationCard>(
-        ControlPages
-            .FromNamespace(typeof(DashboardPage).Namespace!)
+        AppToolPages
+            .GetPagesFromNamespace(typeof(DashboardPage).Namespace!)
             .Select(
                 x =>
                     new NavigationCard()
                     {
-                        Name = x.Name,
+                        Title = x.Title,
                         Icon = x.Icon,
                         Description = x.Description,
                         PageType = x.PageType
@@ -25,6 +28,35 @@ public partial class DashboardViewModel : ObservableObject
     public DashboardViewModel(INavigationService navigationService)
     {
         _navigationService = navigationService;
+        InitializeViewModel();
+    }
+
+    private void InitializeViewModel()
+    {
+        FeedBackUri = App.Configuration.SendFeedbackURI;
+    }
+
+    private static void SwitchThemes()
+    {
+        var currentTheme = ApplicationThemeManager.GetAppTheme();
+        ApplicationThemeManager
+        .Apply(
+            currentTheme == ApplicationTheme.Light
+                ? ApplicationTheme.Dark
+                : ApplicationTheme.Light
+        );
+        SettingsManager.Settings.ApplicationInfo.AppUiTheme = currentTheme;
+    }
+
+    [RelayCommand]
+    private void OnToolButtonClick(string parameter)
+    {
+        if (String.IsNullOrWhiteSpace(parameter))
+            return;
+        if (parameter == "switch_theme")
+        {
+            SwitchThemes();
+        }
     }
 
     [RelayCommand]

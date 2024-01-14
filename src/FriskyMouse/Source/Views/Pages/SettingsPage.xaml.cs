@@ -1,7 +1,7 @@
 ﻿using FriskyMouse.UI.Helpers;
 
 namespace FriskyMouse.Views.Pages;
-[GalleryPage("Rating using stars.", SymbolRegular.Star24)]
+[ApplicationPage(3, "Settings", "Change the application settings", SymbolRegular.Settings24)]
 public partial class SettingsPage : INavigableView<SettingsViewModel>
 {
     public SettingsViewModel ViewModel { get; }

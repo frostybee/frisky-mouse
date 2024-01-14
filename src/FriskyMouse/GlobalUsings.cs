@@ -16,6 +16,7 @@ global using FriskyMouse.Views.Windows;
 global using FriskyMouse.NativeApi;
 global using FriskyMouse.Drawing.Helpers;
 global using FriskyMouse.UI;
+global using FriskyMouse.UI.Converters;
 global using FriskyMouse.Extensions;
 global using FriskyMouse.Settings;
 global using FriskyMouse.Core;
@@ -38,5 +39,5 @@ global using System.Globalization;
 global using System.ComponentModel;
 global using System.Runtime.InteropServices;
 global using System.Diagnostics;
-
+global using System.Reflection;
 

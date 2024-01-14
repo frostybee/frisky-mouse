@@ -1,11 +1,6 @@
-// This Source Code Form is subject to the terms of the MIT License.
-// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
-// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
-// All Rights Reserved.
-
 namespace FriskyMouse.UI.Controls;
 
-public class GalleryNavigationPresenter : System.Windows.Controls.Control
+public class ToolNavigationPresenter : System.Windows.Controls.Control
 {
     /// <summary>
     /// Property for <see cref="ItemsSource"/>.
@@ -13,7 +8,7 @@ public class GalleryNavigationPresenter : System.Windows.Controls.Control
     public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(
         nameof(ItemsSource),
         typeof(object),
-        typeof(GalleryNavigationPresenter),
+        typeof(ToolNavigationPresenter),
         new PropertyMetadata(null)
     );
 
@@ -23,7 +18,7 @@ public class GalleryNavigationPresenter : System.Windows.Controls.Control
     public static readonly DependencyProperty TemplateButtonCommandProperty = DependencyProperty.Register(
         nameof(TemplateButtonCommand),
         typeof(Wpf.Ui.Input.IRelayCommand),
-        typeof(GalleryNavigationPresenter),
+        typeof(ToolNavigationPresenter),
         new PropertyMetadata(null)
     );
 
@@ -40,10 +35,10 @@ public class GalleryNavigationPresenter : System.Windows.Controls.Control
         (Wpf.Ui.Input.IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="GalleryNavigationPresenter"/> class.
+    /// Initializes a new instance of the <see cref="ToolNavigationPresenter"/> class.
     /// Creates a new instance of the class and sets the default <see cref="FrameworkElement.Loaded"/> event.
     /// </summary>
-    public GalleryNavigationPresenter()
+    public ToolNavigationPresenter()
     {
         SetValue(TemplateButtonCommandProperty, new Wpf.Ui.Input.RelayCommand<Type>(o => OnTemplateButtonClick(o)));
     }
@@ -62,8 +57,8 @@ public class GalleryNavigationPresenter : System.Windows.Controls.Control
             .Diagnostics
             .Debug
             .WriteLine(
-                $"INFO | {nameof(GalleryNavigationPresenter)} navigated, ({pageType})",
-                "Wpf.Ui.Gallery"
+                $"INFO | {nameof(ToolNavigationPresenter)} navigated, ({pageType})",
+                "FriskyMouse.UI.Controls"
             );
 #endif
     }

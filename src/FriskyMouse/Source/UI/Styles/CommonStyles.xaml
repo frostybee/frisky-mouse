@@ -15,6 +15,7 @@
         <Setter Property="Opacity" Value="0.80" />
     </Style>
 
+
     <!--  Style for the  buttons that allows the user to edit the mouse click ripple profiles.  -->
     <Style
         x:Key="CurrentRippleProfileCardStyle"
@@ -25,7 +26,7 @@
             <!--
             Add border to all sides.
             <Setter Property="BorderThickness" Value="4" />-->
-            <Setter Property="BorderThickness" Value="1,0,1,5" />
+            <Setter Property="BorderThickness" Value="1,1,1,5" />
             <Setter Property="BorderBrush" Value="#00CED1" />
             <Setter Property="MinHeight" Value="52" />
             <!--<Setter Property="Background" Value="Gray" />-->
@@ -58,8 +59,7 @@
         x:Key="OutputTextBlockStyle"
         BasedOn="{StaticResource BodyTextBlockStyle}"
         TargetType="TextBlock">
-        <Setter Property="Margin" Value="10,8,0,0" />
-        <Setter Property="Padding" Value="0,0,0,5" />
+        <Setter Property="Margin" Value="10,0,0,0" />
+        <Setter Property="Width" Value="20" />
     </Style>
-
 </ResourceDictionary>

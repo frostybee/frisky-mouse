@@ -54,6 +54,10 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
     private bool _isEnabled;
     [ObservableProperty]
     private Style _currentCardStyle;
+    [ObservableProperty]
+    private bool _isLeftButtonCurrent;
+    [ObservableProperty]
+    private bool _isRightButtonCurrent;
 
     #region Animation Settings
     [ObservableProperty]
@@ -102,7 +106,6 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
         SwitchCurrentProfileSettings(MouseButtonType.LeftClick);
         // Must be set last.
         _isInitialized = true;
-        SetCurrentCardStyle();
     }
 
     private void SwitchCurrentProfileSettings(MouseButtonType clickType)
@@ -110,6 +113,8 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
         // Switch the options and the profile.
         if (clickType == MouseButtonType.LeftClick)
         {
+            IsLeftButtonCurrent = true;
+            IsRightButtonCurrent = false;
             // Left click (left button).
             _rippleEffectController = _decorationManager.LeftClickDecorator;
             // Switch the options:
@@ -117,6 +122,8 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
         }
         else if (clickType == MouseButtonType.RightClick)
         {
+            IsLeftButtonCurrent = false;
+            IsRightButtonCurrent = true;
             // Right click (right button).
             _rippleEffectController = _decorationManager.RightClickDecorator;
             // Switch the options:
@@ -250,23 +257,12 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
             return;
         if (parameter == "left_button")
         {            
-            SetCurrentCardStyle();
+            
             SwitchCurrentProfileSettings(MouseButtonType.LeftClick);
         }
         else if (parameter == "right_button")
-        {
+        {            
             SwitchCurrentProfileSettings(MouseButtonType.RightClick);
         }
-    }
-
-    private void SetCurrentCardStyle()
-    {
-        //DefaultUiCardActionStyle
-        //Style style = Application.Current.FindResource("CurrentRippleProfileCardStyle") as Style;
-        Style style = Application.Current.FindResource("CurrentRippleProfileCardStyle") as Style;
-        if (style != null)
-        {
-            CurrentCardStyle = style;
-        }
-    }
+    }    
 }

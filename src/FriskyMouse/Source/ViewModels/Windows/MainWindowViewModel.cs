@@ -25,7 +25,7 @@ public partial class MainWindowViewModel : ObservableObject
         {
             new NavigationViewItem("Home", SymbolRegular.Home48, typeof(DashboardPage)),                       
             new NavigationViewItemSeparator(),
-            new NavigationViewItem("Mouse Highlighter", SymbolRegular.Circle48, typeof(SpotlightPage)),
+            new NavigationViewItem("Mouse Highlighter", SymbolRegular.Flashlight20, typeof(SpotlightPage)),
             new NavigationViewItemSeparator(),
             new NavigationViewItem("Click Effect", SymbolRegular.CursorClick24, typeof(RippleEffectPage)),
             new NavigationViewItemSeparator(),
@@ -48,6 +48,6 @@ public partial class MainWindowViewModel : ObservableObject
         // Initialize the left and right mouse click ripple effect controllers. 
         DecorationManager.Instance?.SetRippleEffectProfiles();
         // Initialize the global manager and bootstrap the application's logic.        
-        //DecorationManager.Instance?.BootstrapApp();
+        DecorationManager.Instance?.EnableMouseDecoration();
     }
 }

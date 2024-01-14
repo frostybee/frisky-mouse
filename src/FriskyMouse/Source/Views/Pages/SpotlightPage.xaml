@@ -201,6 +201,14 @@
                 Margin="0,15,0,0"
                 HorizontalAlignment="Stretch"
                 Orientation="Vertical">
+                <ui:TextBlock
+                    Margin="0,20,0,5"
+                    FontTypography="BodyStrong"
+                    Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}"
+                    Text="Outline options"
+                    TextOptions.TextFormattingMode="Ideal"
+                    TextOptions.TextRenderingMode="Auto"
+                    TextWrapping="WrapWithOverflow" />
                 <controls:ExpandableSettingsControl
                     Description="Customize the outline to be rendered around the highlighter"
                     Header="Highlighter Outline"
@@ -260,7 +268,7 @@
 
                         <controls:SettingsCard
                             Grid.Row="1"
-                            Description="Adjust the width of the outline"
+                            Description="Adjust the width of the spotlight outline"
                             Header="Width (px)"
                             Icon="{ui:SymbolIcon AutoFitWidth24}"
                             Style="{StaticResource SettingsCardExpanderItemStyle}">
@@ -299,16 +307,16 @@
                 </controls:ExpandableSettingsControl>
 
                 <ui:TextBlock
-                    Margin="0,20,0,0"
+                    Margin="0,20,0,5"
                     FontTypography="BodyStrong"
                     Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}"
-                    Text="Shadow's options"
+                    Text="Shadow options"
                     TextOptions.TextFormattingMode="Ideal"
                     TextOptions.TextRenderingMode="Auto"
                     TextWrapping="WrapWithOverflow" />
 
                 <controls:ExpandableSettingsControl
-                    Description="Configure a shadow to be rendered around the highlighter"
+                    Description="Add and configure a shadow to be rendered around the highlighter's outline"
                     Header="Highlighter shadow"
                     HeaderContentPadding="0,0,0,0"
                     Icon="{ui:SymbolIcon SquareShadow20}"
@@ -382,7 +390,7 @@
 
                         <controls:SettingsCard
                             Grid.Row="2"
-                            Description="Adjust the percentage of the opacity"
+                            Description="Adjust the percentage of the shadow opacity"
                             Header="Opacity (%)"
                             Icon="{ui:SymbolIcon BrightnessLow48}"
                             Style="{StaticResource SettingsCardExpanderItemStyle}">

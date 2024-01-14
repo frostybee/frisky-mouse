@@ -5,7 +5,7 @@ namespace FriskyMouse.Views.Pages;
 /// <summary>
 /// Interaction logic for SpotlightPage.xaml
 /// </summary>
-[GalleryPage("Mouse highlighter options.", SymbolRegular.DualScreen24)]
+[ApplicationPage(1, "Mouse Highlighter", "Draw a spotlight around the mouse pointer", SymbolRegular.Flashlight20)]
 public partial class SpotlightPage : INavigableView<SpotlightViewModel>
 {
     public SpotlightViewModel ViewModel { get; }

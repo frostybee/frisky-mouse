@@ -33,6 +33,7 @@ public sealed class AppConfigurationInfo
     /// Application name like "FriskyMouse".
     /// </summary>
     public string ApplicationName { get; internal set; } = "FriskyMouse";
+    public string SendFeedbackURI { get; private set; } = "https://github.com/lepoco/wpfui/issues/new?assignees=pomianowski&amp;labels=bug,gallery&amp;template=bug_report.yaml&amp;title=WPF+UI+Gallery+Problem";
 
     /// <summary>
     /// Create a new instance of <see cref="AppConfigurationInfo"/> with static configuration.
@@ -47,7 +48,7 @@ public sealed class AppConfigurationInfo
 
     // TODO: add app's version and URLs.
     /*private static Assembly Assembly { get; } = Assembly.GetExecutingAssembly();
-    public static string Name { get; } = Assembly.GetName().Name!;
+    public static string Title { get; } = Assembly.GetName().Title!;
     public static Version Version { get; } = Assembly.GetName().Version!;
     public static string VersionString { get; } = Version.ToString(3);
     public static string ProjectUrl { get; } = "https://github.com/frostybee/friskymouse";

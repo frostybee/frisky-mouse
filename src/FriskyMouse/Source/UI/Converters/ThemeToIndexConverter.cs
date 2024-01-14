@@ -1,4 +1,4 @@
-namespace FriskyMouse.Converters;
+namespace FriskyMouse.UI.Converters;
 
 internal sealed class ThemeToIndexConverter : IValueConverter
 {
