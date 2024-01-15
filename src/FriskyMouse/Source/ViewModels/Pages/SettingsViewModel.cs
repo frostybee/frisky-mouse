@@ -1,10 +1,5 @@
 ﻿namespace FriskyMouse.ViewModels.Pages;
 
-using System.Reflection;
-using Wpf.Ui.Appearance;
-using Wpf.Ui.Controls;
-using Wpf.Ui.Extensions;
-
 using Color = System.Windows.Media.Color;
 
 public partial class SettingsViewModel : ObservableObject, INavigationAware
@@ -33,7 +28,7 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
     private void InitializeViewModel()
     {
         CurrentApplicationTheme = ApplicationThemeManager.GetAppTheme();
-        AppVersion = $"{GetAssemblyVersion()}";
+        AppVersion = App.Configuration.AppBuildInfo;
 
         ApplicationThemeManager.Changed += OnThemeChanged;
         ApplicationName = App.Configuration.ApplicationName;
@@ -64,11 +59,5 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
         {
             CurrentApplicationTheme = currentApplicationTheme;
         }
-    }
-
-    private string GetAssemblyVersion()
-    {
-        // TODO: Read the version from App.Configuration
-        return Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? String.Empty;
-    }
+    }    
 }

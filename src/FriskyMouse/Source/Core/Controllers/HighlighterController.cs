@@ -66,8 +66,9 @@ internal class HighlighterController : IDisposable
         {
             if (_spotlightBitmap != null)
             {
-                SetLayeredWindowCoordinates(inPoint);
+                SetLayeredWindowCoordinates(inPoint);                
                 _highlighterWindow.Move();
+                _highlighterWindow.SetTopMost();
             }
         }
     }

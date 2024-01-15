@@ -8,8 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="{Binding ViewModel.ApplicationTitle, Mode=OneWay}"
-    Width="1450"
-    Height="1200"
+    Width="950"
+    Height="1000"
     MinWidth="650"
     d:DataContext="{d:DesignInstance local:MainWindow,
                                      IsDesignTimeCreatable=False}"
@@ -56,7 +56,7 @@
                     <!--<controls:PageControlDocumentation Margin="0,10,0,0" NavigationView="{Binding ElementName=NavigationView}" />-->
                 </StackPanel>
             </ui:NavigationView.Header>
-            <ui:NavigationView.AutoSuggestBox>
+            <!--<ui:NavigationView.AutoSuggestBox>
                 <ui:AutoSuggestBox x:Name="AutoSuggestBox" PlaceholderText="Search">
                     <ui:AutoSuggestBox.Icon>
                         <ui:IconSourceElement>
@@ -64,7 +64,7 @@
                         </ui:IconSourceElement>
                     </ui:AutoSuggestBox.Icon>
                 </ui:AutoSuggestBox>
-            </ui:NavigationView.AutoSuggestBox>
+            </ui:NavigationView.AutoSuggestBox>-->
             <ui:NavigationView.ContentOverlay>
                 <Grid>
                     <ui:SnackbarPresenter x:Name="SnackbarPresenter" />

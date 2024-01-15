@@ -1,7 +1,5 @@
 ﻿namespace FriskyMouse.ViewModels.Pages;
 
-using FriskyMouse.Views.Pages;
-using FriskyMouse.UI.Helpers;
 public partial class DashboardViewModel : ObservableObject
 {
     private readonly INavigationService _navigationService;
@@ -45,7 +43,7 @@ public partial class DashboardViewModel : ObservableObject
                 ? ApplicationTheme.Dark
                 : ApplicationTheme.Light
         );
-        SettingsManager.Settings.ApplicationInfo.AppUiTheme = currentTheme;
+        SettingsManager.Settings.ApplicationInfo.AppUiTheme = ApplicationThemeManager.GetAppTheme();
     }
 
     [RelayCommand]

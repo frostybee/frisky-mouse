@@ -85,7 +85,10 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <ui:TextBlock FontTypography="Subtitle" Text="All Tools" />
+            <ui:TextBlock
+                Margin="0,5,0,0"
+                FontTypography="Subtitle"
+                Text="All Tools" />
             <StackPanel
                 Grid.Column="1"
                 Margin="40,0,0,0"
@@ -95,9 +98,7 @@
                     CommandParameter="switch_theme"
                     FontSize="18"
                     Icon="{ui:SymbolIcon WeatherSunny24}"
-                    ToolTip="Toggle theme">
-                    Toggle theme
-                </ui:Button>
+                    ToolTip="Toggle theme" />
                 <Separator
                     Grid.Column="2"
                     Height="16"
@@ -108,9 +109,7 @@
                     FontSize="18"
                     Icon="{ui:SymbolIcon PersonFeedback24}"
                     NavigateUri="{Binding ViewModel.FeedBackUri}"
-                    ToolTip="Send feedback">
-                    Send feedback
-                </ui:Anchor>
+                    ToolTip="Send feedback" />
             </StackPanel>
         </Grid>
 
@@ -142,6 +141,7 @@
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="GitHub"
+                Icon="{ui:SymbolIcon WeatherSunny24}"
                 NavigateUri="https://github.com/frostybee/FriskyMouse"
                 ToolTip="https://github.com/frostybee/FriskyMouse" />
         </StackPanel>

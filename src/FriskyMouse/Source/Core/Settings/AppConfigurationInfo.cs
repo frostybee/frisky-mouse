@@ -1,5 +1,6 @@
-﻿using System.Configuration;
-using System.Reflection;
+﻿
+using Microsoft.VisualBasic;
+using System.IO.Packaging;
 
 namespace FriskyMouse.Settings;
 
@@ -28,31 +29,36 @@ public sealed class AppConfigurationInfo
     /// </summary>
     public Version Version { get; private set; } = FMAppHelper.GetCurrentVersion();
 
+    public string AppBuildInfo
+    {
+        get
+        {
+            return GetAppBuildInfo();
+        }
+    }
 
+    
     /// <summary>
     /// Application name like "FriskyMouse".
     /// </summary>
     public string ApplicationName { get; internal set; } = "FriskyMouse";
-    public string SendFeedbackURI { get; private set; } = "https://github.com/lepoco/wpfui/issues/new?assignees=pomianowski&amp;labels=bug,gallery&amp;template=bug_report.yaml&amp;title=WPF+UI+Gallery+Problem";
+    public string SendFeedbackURI { get; private set; } = "https://github.com/frostybee/friskymouse/issues/new?assignees=frostybee&amp;labels=bug,friskymouse&amp;template=bug_report.yaml&amp;title=FriskyMouse+Problem";
+    public string ProjectGitHubRepo { get; private set; } = "https://github.com/frostybee/friskymouse";
+    public string ApplicationWebsite { get; private set; } = "https://friskymouse.github.io/";
 
-    /// <summary>
-    /// Create a new instance of <see cref="AppConfigurationInfo"/> with static configuration.
-    /// </summary>
-    /*  public AppConfigurationInfo(bool isAdmin, string executionPath, string applicationFullName, string applicationName, bool isPortable)
-      {
-          ExecutionPath = executionPath;
-          //ApplicationFullName = applicationFullName;
-          ApplicationName = applicationName;
-          IsPortable = isPortable;
-      }*/
 
     // TODO: add app's version and URLs.
-    /*private static Assembly Assembly { get; } = Assembly.GetExecutingAssembly();
-    public static string Title { get; } = Assembly.GetName().Title!;
-    public static Version Version { get; } = Assembly.GetName().Version!;
-    public static string VersionString { get; } = Version.ToString(3);
-    public static string ProjectUrl { get; } = "https://github.com/frostybee/friskymouse";
+    /*public static string VersionString { get; } = Version.ToString(3);    
     public static string LatestReleaseUrl { get; } = ProjectUrl + "/releases/latest";*/
+
+    private string GetAppBuildInfo()
+    {
+        string buildInfo = string.Empty;
+        string version = FMAppHelper.GetApplicationVersion();
+        string architecture = RuntimeInformation.OSArchitecture.ToString();
+
+        return $"Version: {version} | {architecture} | {BuildInfo} ";
+    }
 
     public void LoadAppConfigurationInfo()
     {

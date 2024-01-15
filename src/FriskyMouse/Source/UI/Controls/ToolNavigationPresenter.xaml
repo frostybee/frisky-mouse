@@ -17,7 +17,7 @@
                             <DataTemplate DataType="{x:Type models:NavigationCard}">
                                 <ui:CardAction
                                     Margin="5"
-                                    Padding="15"
+                                    Padding="20,0,5,0"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
                                     Command="{Binding TemplateButtonCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:ToolNavigationPresenter}, Mode=OneWay}"
