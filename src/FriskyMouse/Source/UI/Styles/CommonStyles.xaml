@@ -8,13 +8,16 @@
 
     <Thickness x:Key="MainContainerMargin">20</Thickness>
     <system:Double x:Key="PageHeaderFontSize">25</system:Double>
+    <system:Double x:Key="PageMaxWidth">1000</system:Double>
+    <system:Double x:Key="SubtitleTextBlockFontSize">20</system:Double>
+    <system:Double x:Key="TitleTextBlockFontSize">28</system:Double>
+    <Thickness x:Key="ModulePageTitleTextMargin">0,44,0,30</Thickness>
 
     <Style x:Key="TextBlockSettingDescriptionStyle" TargetType="TextBlock">
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="Opacity" Value="0.80" />
     </Style>
-
 
     <!--  Style for the  buttons that allows the user to edit the mouse click ripple profiles.  -->
     <Style
@@ -55,6 +58,19 @@
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="LineStackingStrategy" Value="MaxHeight" />
     </Style>
+
+    <Style
+        x:Key="TitleTextBlockStyle"
+        BasedOn="{StaticResource BodyTextBlockStyle}"
+        TargetType="TextBlock">
+        <Setter Property="FontSize" Value="{StaticResource TitleTextBlockFontSize}" />
+        <Setter Property="FontFamily" Value="{DynamicResource {x:Static SystemFonts.MessageFontFamilyKey}}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="LineStackingStrategy" Value="MaxHeight" />
+    </Style>
+
     <Style
         x:Key="OutputTextBlockStyle"
         BasedOn="{StaticResource BodyTextBlockStyle}"

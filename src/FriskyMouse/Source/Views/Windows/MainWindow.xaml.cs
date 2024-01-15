@@ -52,11 +52,12 @@ public partial class MainWindow :  IWindow
         if (sender is not Wpf.Ui.Controls.NavigationView navigationView)
             return;
 
-        NavigationView.HeaderVisibility =
-
-            navigationView.SelectedItem?.TargetPageType != typeof(DashboardPage)
-                ? Visibility.Visible
-                : Visibility.Collapsed;
+        NavigationView.HeaderVisibility = Visibility.Collapsed;
+        /*
+                    navigationView.SelectedItem?.TargetPageType != typeof(DashboardPage)
+                        ? Visibility.Visible
+                        : Visibility.Collapsed;
+        */
     }
 
     private void MainWindow_OnSizeChanged(object sender, SizeChangedEventArgs e)

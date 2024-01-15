@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+# nullable enable
 namespace FriskyMouse.UI.Controls;
 
 [TemplatePart(Name = MainPanelControl, Type = typeof(Grid))]

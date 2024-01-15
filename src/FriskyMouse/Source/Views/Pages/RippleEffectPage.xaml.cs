@@ -13,7 +13,7 @@ public partial class RippleEffectPage : INavigableView<RippleEffectViewModel>
     {
         ViewModel = viewModel;
         DataContext = this;
-        InitializeComponent();
+        InitializeComponent();        
     }
 }
 

@@ -144,7 +144,7 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
         {
             buttonTypeText = "Right";
         }
-        SwitchHeaderText = $"Mouse {buttonTypeText}-Click indicator";
+        SwitchHeaderText = $"Enable {buttonTypeText}-Click indicator";
         SwitchDescriptionText = $"Decorate mouse {buttonTypeText.ToLower()} clicks with a visual indicator such as a ripple or a fading spotlight.";
     }
 
