@@ -10,13 +10,6 @@
 */
 #endregion
 
-using FriskyMouse.Drawing;
-using FriskyMouse.Drawing.Animation;
-using FriskyMouse.Drawing.Ripples;
-using FriskyMouse.UI;
-using FriskyMouse.Extensions;
-using System.Drawing.Imaging;
-using FriskyMouse.NativeApi;
 using PixelFormat = System.Drawing.Imaging.PixelFormat;
 
 
@@ -29,7 +22,7 @@ namespace FriskyMouse.Core;
 /// It maintains ripple instances corresponding to what the user has selected/enabled.
 /// The profiles maintained are left click, right click, and double click ripple profiles. 
 /// </summary>
-internal class ClickEffectController: IDisposable
+internal class RippleEffectController : IDisposable
 {
     private readonly LayeredWindow _highlighterWindow;
     // NOTE: move those to the BaseRippleProfile.
@@ -45,17 +38,15 @@ internal class ClickEffectController: IDisposable
     private readonly ValueAnimator _animationManager;
     private BaseRippleProfile _currentRipplesProfile;
     private readonly RippleProfileInfo _settings;
+    private bool disposedValue;
     public delegate void AnimationCompletedEventHandler();
     public event AnimationCompletedEventHandler AnimationCompleted;
-
-
-    private bool disposedValue;
     public RippleProfileType RippleType { get; set; }
 
-    public ClickEffectController(RippleProfileInfo settings)
+    public RippleEffectController(RippleProfileInfo settings)
     {
         _settings = settings;
-        _highlighterWindow = new LayeredWindow();                        
+        _highlighterWindow = new LayeredWindow();
         // Default ripple profile.
         RippleType = RippleProfileType.FilledSonarPulse;
         _currentRipplesProfile = ConstructableFactory.GetInstanceOf<BaseRippleProfile>(RippleProfileType.SquaredPulse);
@@ -141,12 +132,12 @@ internal class ClickEffectController: IDisposable
         // We perform the drawing here.            
         if (!_animationManager.IsAnimating())
         {
-            _highlighterWindow.SetBitmap(_blankCanvas, 1);                
+            _highlighterWindow.SetBitmap(_blankCanvas, 1);
             _animationManager.StartNewAnimation(_settings.AnimationDirection);
         }
     }
 
-    internal void ApplySettings(RippleProfileInfo options)
+    internal void SetAnimationSettings(RippleProfileInfo options)
     {
         _animationManager.Increment = options.AnimationSpeed;
         _animationManager.Interpolation = options.InterpolationType;
@@ -160,6 +151,8 @@ internal class ClickEffectController: IDisposable
         }
     }
 
+    public BaseRippleProfile CurrentProfile => _currentRipplesProfile;
+
     protected virtual void Dispose(bool disposing)
     {
         if (!disposedValue)
@@ -170,7 +163,8 @@ internal class ClickEffectController: IDisposable
                 _canvas?.Dispose();
                 _blankCanvas?.Dispose();
                 _animationManager.Dispose();
-                _highlighterWindow?.Dispose();                    
+                _highlighterWindow?.Dispose();
+                _currentRipplesProfile?.Dispose();
                 _canvas = null;
                 _blankCanvas = null;
             }
@@ -182,7 +176,7 @@ internal class ClickEffectController: IDisposable
     }
 
     // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
-    // ~ClickEffectController()
+    // ~RippleEffectController()
     // {
     //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
     //     Dispose(disposing: false);

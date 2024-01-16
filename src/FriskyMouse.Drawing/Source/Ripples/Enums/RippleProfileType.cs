@@ -19,10 +19,10 @@ public enum RippleProfileType : uint
 {
     [Description("Fading Spotlight"), ConstructableEnum(typeof(SpotlightProfile))]
     Spotlight,
-    [Description("Ice Cream"), ConstructableEnum(typeof(IceCreamProfile))]
-    IceCream,
     [Description("Circle"), ConstructableEnum(typeof(CircleProfile))]
     Circle,
+    [Description("Ice Cream"), ConstructableEnum(typeof(IceCreamProfile))]
+    IceCream,    
     [Description("Square"), ConstructableEnum(typeof(SquareProfile))]
     Square,
     [Description("Hexagon"), ConstructableEnum(typeof(HexagonProfile))]

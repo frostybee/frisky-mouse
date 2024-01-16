@@ -4,7 +4,7 @@ using System.Windows.Automation.Peers;
 namespace FriskyMouse.UI.Controls;
 
 /// <summary>
-/// Current Card with Icon, header, description and content and <see cref="Footer"/>.
+/// Settings Card with Icon, header, description and content and <see cref="Footer"/>.
 /// </summary>
 [TemplatePart(Name = MainPanelControl, Type = typeof(Grid))]
 [TemplatePart(Name = ActionableElement, Type = typeof(ContentPresenter))]
@@ -73,7 +73,7 @@ public class SettingsCard : ContentControl
 
     #region Porperties
     /// <summary>
-    /// Header is the data used to for the header of each item in the control.
+    /// Title is the data used to for the header of each item in the control.
     /// </summary>
     [Bindable(true)]
     public object Header

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+# nullable enable
 namespace FriskyMouse.UI.Controls;
 
 [TemplatePart(Name = MainPanelControl, Type = typeof(Grid))]
@@ -62,7 +63,7 @@ public class ExpandableSettingsControl: CardExpander
     }
 
     /// <summary>
-    /// Header is the data used to for the header of each item in the control.
+    /// Title is the data used to for the header of each item in the control.
     /// </summary>
     [Bindable(true)]
     public object Header
@@ -72,7 +73,7 @@ public class ExpandableSettingsControl: CardExpander
     }
 
     /// <summary>
-    /// Header is the data used to for the header of each item in the control.
+    /// Title is the data used to for the header of each item in the control.
     /// </summary>
     [Bindable(true)]
     public object ExpanderAction

@@ -24,10 +24,10 @@ internal sealed class SettingsWrapper
     public HighlighterInfo HighlighterOptions { get; set; } = new HighlighterInfo();
 
     [JsonPropertyName("mouseLeftClickSettings")]
-    public RippleProfileInfo LeftClickProperties { get; set; } = new RippleProfileInfo();
+    public RippleProfileInfo LeftClickOptions { get; set; } = new RippleProfileInfo();
 
     [JsonPropertyName("mouseRightClickSettings")]
-    public RippleProfileInfo RightClickProperties { get; set; } = new RippleProfileInfo();
+    public RippleProfileInfo RightClickOptions { get; set; } = new RippleProfileInfo();
 
     #endregion
 

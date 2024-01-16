@@ -2,6 +2,7 @@
     x:Class="FriskyMouse.Views.Pages.DashboardPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:FriskyMouse.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:FriskyMouse.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -22,19 +23,22 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Border
             Grid.Row="0"
             Height="200"
             CornerRadius="8">
-            <Border.Background>
-                <!--  FIXME: choose another image, it's causing memory spike  -->
+            <!--<Border.Background>
+            -->
+            <!--  FIXME: choose another image, it's causing memory spike  -->
+            <!--
                 <ImageBrush
                     ImageSource="pack://application:,,,/Assets/wpfui.png"
                     RenderOptions.BitmapScalingMode="HighQuality"
                     Stretch="UniformToFill" />
-            </Border.Background>
+            </Border.Background>-->
             <Border CornerRadius="8">
                 <Border.Background>
                     <RadialGradientBrush>
@@ -59,7 +63,7 @@
                         <ui:TextBlock
                             FontTypography="BodyStrong"
                             Foreground="#B7FFFFFF"
-                            Text="Build Fluent experiences on Windows using WPF UI." />
+                            Text="Highlight your mouse cursor and decorate your mouse clicks." />
                     </StackPanel>
                     <ui:TextBlock
                         Margin="12"
@@ -67,176 +71,79 @@
                         VerticalAlignment="Bottom"
                         FontTypography="Caption"
                         Foreground="#57FFFFFF"
-                        Text="Created by lepo.co" />
+                        Text="Created by FrostyBee" />
                 </Grid>
             </Border>
         </Border>
 
-        <!--<controls:GalleryNavigationPresenter
-            Grid.Row="1"
-            Margin="0,24,0,0"
-            Padding="0"
-            ItemsSource="{Binding ViewModel.NavigationCards, Mode=OneWay}" />-->
-
-        <Grid Grid.Row="1" Margin="0,24,0,0">
+        <Grid Grid.Row="1" Margin="0,50,0,5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
 
-            <ui:CardAction
-                Grid.Row="0"
-                Grid.Column="0"
-                Margin="0,0,4,0"
-                Padding="0"
-                VerticalAlignment="Stretch"
-                Command="{Binding ViewModel.CardClickCommand, Mode=OneWay}"
-                CommandParameter="Spotlight"
-                IsChevronVisible="False">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Image
-                        Width="60"
-                        Margin="24,0,0,0"
-                        Source="pack://application:,,,/Assets/WinUiGallery/Button.png" />
-
-                    <StackPanel
-                        Grid.Column="1"
-                        Margin="24"
-                        VerticalAlignment="Center">
-                        <ui:TextBlock
-                            Margin="0"
-                            FontTypography="BodyStrong"
-                            Text="Mouse Highlighter"
-                            TextWrapping="WrapWithOverflow" />
-                        <ui:TextBlock
-                            Appearance="Tertiary"
-                            Text="Spotlight configuration and more..."
-                            TextWrapping="WrapWithOverflow" />
-                    </StackPanel>
-                </Grid>
-            </ui:CardAction>
-
-            <ui:CardAction
-                Grid.Row="0"
+            <ui:TextBlock
+                Margin="0,5,0,0"
+                FontTypography="Subtitle"
+                Text="All Tools" />
+            <StackPanel
                 Grid.Column="1"
-                Margin="4,0,4,0"
-                Padding="0"
-                VerticalAlignment="Stretch"
-                Command="{Binding ViewModel.CardClickCommand, Mode=OneWay}"
-                CommandParameter="LeftClick"
-                IsChevronVisible="False">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Image
-                        Width="60"
-                        Margin="24,0,0,0"
-                        Source="pack://application:,,,/Assets/WinUiGallery/Flyout.png" />
-
-                    <StackPanel
-                        Grid.Column="1"
-                        Margin="24"
-                        VerticalAlignment="Center">
-                        <ui:TextBlock
-                            Margin="0"
-                            FontTypography="BodyStrong"
-                            Text="Left Click Effects"
-                            TextWrapping="WrapWithOverflow" />
-                        <ui:TextBlock
-                            Appearance="Tertiary"
-                            Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                            Text="Configure click effects."
-                            TextWrapping="WrapWithOverflow" />
-                    </StackPanel>
-                </Grid>
-            </ui:CardAction>
-
-            <ui:CardAction
-                Grid.Row="0"
-                Grid.Column="2"
-                Margin="4,0,4,0"
-                Padding="0"
-                VerticalAlignment="Stretch"
-                Command="{Binding ViewModel.CardClickCommand, Mode=OneWay}"
-                CommandParameter="RightClickEffect"
-                IsChevronVisible="False">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Image
-                        Width="60"
-                        Margin="24,0,0,0"
-                        Source="pack://application:,,,/Assets/WinUiGallery/MenuBar.png" />
-
-                    <StackPanel
-                        Grid.Column="1"
-                        Margin="24"
-                        VerticalAlignment="Center">
-                        <ui:TextBlock
-                            Margin="0"
-                            FontTypography="BodyStrong"
-                            Text="Right Click Effects"
-                            TextWrapping="WrapWithOverflow" />
-                        <ui:TextBlock
-                            Appearance="Tertiary"
-                            Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                            Text="Configure right click effects."
-                            TextWrapping="WrapWithOverflow" />
-                    </StackPanel>
-                </Grid>
-            </ui:CardAction>
+                Margin="40,0,0,0"
+                Orientation="Horizontal">
+                <ui:Button
+                    Command="{Binding ViewModel.ToolButtonClickCommand}"
+                    CommandParameter="switch_theme"
+                    FontSize="18"
+                    Icon="{ui:SymbolIcon WeatherSunny24}"
+                    ToolTip="Toggle theme" />
+                <Separator
+                    Grid.Column="2"
+                    Height="16"
+                    Margin="4,0,4,0" />
+                <ui:Anchor
+                    Grid.Column="4"
+                    Margin="4,0,0,0"
+                    FontSize="18"
+                    Icon="{ui:SymbolIcon PersonFeedback24}"
+                    NavigateUri="{Binding ViewModel.FeedBackUri}"
+                    ToolTip="Send feedback" />
+            </StackPanel>
         </Grid>
 
-        <!--<StackPanel Grid.Row="2" Margin="0,24,0,0">
+        <controls:ToolNavigationPresenter
+            Grid.Row="2"
+            Margin="0,10,0,0"
+            Padding="0"
+            ItemsSource="{Binding ViewModel.NavigationCards, Mode=OneWay}" />
+
+
+        <StackPanel Grid.Row="3" Margin="0,55,0,0">
             <TextBlock
                 FontSize="18"
                 FontWeight="DemiBold"
                 Text="Learn more" />
-            <ui:Hyperlink
+            <ui:HyperlinkButton
                 Margin="8,8,0,0"
                 Padding="4"
                 Content="Documentation"
-                NavigateUri="https://wpfui.lepo.co/"
-                ToolTip="https://wpfui.lepo.co/" />
-            <ui:Hyperlink
+                NavigateUri="https://friskymouse.github.io/"
+                ToolTip="https://friskymouse.github.io/" />
+            <ui:HyperlinkButton
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="Microsoft Store"
-                NavigateUri="https://apps.microsoft.com/store/detail/wpf-ui/9N9LKV8R9VGM"
-                ToolTip="https://apps.microsoft.com/store/detail/wpf-ui/9N9LKV8R9VGM" />
-            <ui:Hyperlink
+                NavigateUri="https://apps.microsoft.com/detail/9NDWJST4VTQR"
+                ToolTip="https://apps.microsoft.com/detail/9NDWJST4VTQR" />
+            <ui:HyperlinkButton
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="GitHub"
-                NavigateUri="https://github.com/lepoco/wpfui"
-                ToolTip="https://github.com/lepoco/wpfui" />
-            <ui:Hyperlink
-                Margin="8,0,0,0"
-                Padding="4"
-                Content="NuGet"
-                NavigateUri="https://www.nuget.org/packages/wpf-ui/"
-                ToolTip="https://www.nuget.org/packages/wpf-ui/" />
-            <ui:Hyperlink
-                Margin="8,0,0,0"
-                Padding="4"
-                Content="Visual Studio Marketplace"
-                NavigateUri="https://marketplace.visualstudio.com/items?itemName=lepo.wpf-ui"
-                ToolTip="https://marketplace.visualstudio.com/items?itemName=lepo.wpf-ui" />
-        </StackPanel>-->
+                Icon="{ui:SymbolIcon WeatherSunny24}"
+                NavigateUri="https://github.com/frostybee/FriskyMouse"
+                ToolTip="https://github.com/frostybee/FriskyMouse" />
+        </StackPanel>
     </Grid>
 </Page>

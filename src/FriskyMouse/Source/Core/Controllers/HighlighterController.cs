@@ -10,12 +10,6 @@
 */
 #endregion
 
-using FriskyMouse.Drawing.Helpers;
-
-using FriskyMouse.NativeApi;
-using FriskyMouse.UI;
-using FriskyMouse.Extensions;
-using FriskyMouse.Settings;
 using Color = System.Drawing.Color;
 
 namespace FriskyMouse.Core;
@@ -72,8 +66,9 @@ internal class HighlighterController : IDisposable
         {
             if (_spotlightBitmap != null)
             {
-                SetLayeredWindowCoordinates(inPoint);
+                SetLayeredWindowCoordinates(inPoint);                
                 _highlighterWindow.Move();
+                _highlighterWindow.SetTopMost();
             }
         }
     }

@@ -19,10 +19,10 @@ namespace FriskyMouse.Drawing.Animation;
 /// </summary>
 public enum AnimationDirection : uint
 {
-    [Description("In")]
+    [Description("Inward")]
     In, // The animation will progress outward.
-    [Description("Out")]
+    [Description("Outward")]
     Out, // The animation will progress inward.
-    [Description("In Out In")]
+    [Description("Inward-Outward")]
     InOutIn //Same as In, but changes to InOutOut if finished.     
 }

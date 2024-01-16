@@ -18,7 +18,7 @@ internal static class SettingsManager
 {
     private static string _settingsFileName = "settings.json";
     private static Mutex _jsonMutex = new Mutex();
-    public static SettingsWrapper Current { get; private set; } 
+    public static SettingsWrapper Settings { get; private set; } 
 
     private static string SettingsFilePath
     {
@@ -47,7 +47,7 @@ internal static class SettingsManager
                 using FileStream openStream = File.OpenRead(settingFilePath);
                 if (openStream.CanRead)
                 {
-                    Current = JsonSerializer.Deserialize<SettingsWrapper>(openStream, GetJsonSerializerOptions());
+                    Settings = JsonSerializer.Deserialize<SettingsWrapper>(openStream, GetJsonSerializerOptions());
                     //TODO: verify if JSON file is not corrupted.
                 }
             }
@@ -73,13 +73,13 @@ internal static class SettingsManager
             if (!string.IsNullOrEmpty(filePath))
             {
                 Console.WriteLine("Saving settings in " + filePath);
-                LoadDefaultSettings();
-                Current.ApplicationInfo.ApplicationName = App.Configuration.ApplicationName;
-                Current.ApplicationInfo.Version = FMAppHelper.GetApplicationVersion();
+                //LoadDefaultSettings();
+                Settings.ApplicationInfo.ApplicationName = App.Configuration.ApplicationName;
+                Settings.ApplicationInfo.Version = FMAppHelper.GetApplicationVersion();
                 // Create the directory that will hold the settings file if it doesn't exist.
                 FileHelpers.CreateDirectoryFromFilePath(filePath);
                 FileStream createStream = File.Create(filePath);
-                JsonSerializer.SerializeAsync(createStream, Current, GetJsonSerializerOptions());
+                JsonSerializer.SerializeAsync(createStream, Settings, GetJsonSerializerOptions());
                 createStream.DisposeAsync();
                 //TODO: verify if JSON file is not corrupted.
             }
@@ -97,7 +97,7 @@ internal static class SettingsManager
 
     private static void LoadDefaultSettings()
     {
-        Current ??= new SettingsWrapper();
+        Settings ??= new SettingsWrapper();
     }
 
     private static JsonSerializerOptions GetJsonSerializerOptions()

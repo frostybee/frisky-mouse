@@ -20,16 +20,16 @@ namespace FriskyMouse.Core;
 internal class MouseHookController : GlobalMouseHook
 {
     private int _systemDoubleClickTime;
-    private HighlighterController _highlighter;
-    private ClickEffectController _clickDecorator;
-    private ClickEffectController _rightClickDecorator;
-    private static object _syncRoot = new Object();
+    private readonly HighlighterController _highlighter;
+    private readonly RippleEffectController _leftClickDecorator;
+    private readonly RippleEffectController _rightClickDecorator;
+    private static object _syncRoot = new();
     private IntPtr _mouseHookHandle = IntPtr.Zero;
-    public MouseHookController(HighlighterController highlighter, ClickEffectController clickDecorator,
-        ClickEffectController rightClickDecorator)
+    public MouseHookController(HighlighterController highlighter, RippleEffectController clickDecorator,
+        RippleEffectController rightClickDecorator)
     {
         _highlighter = highlighter;
-        _clickDecorator = clickDecorator;
+        _leftClickDecorator = clickDecorator;
         _rightClickDecorator = rightClickDecorator;
         _systemDoubleClickTime = SystemInformation.DoubleClickTime;
         _hookType = WH_MOUSE_LL;
@@ -50,8 +50,8 @@ internal class MouseHookController : GlobalMouseHook
             switch (messageType)
             {
                 case MouseButtonTypes.LeftButtonDown:
-                    _clickDecorator.ShowRipplesAt(hookStruct.pt);
-                    //_clickDecorator.ShowRipplesAt(cursorPos);
+                    _leftClickDecorator.ShowRipplesAt(hookStruct.pt);
+                    //_leftClickDecorator.ShowRipplesAt(cursorPos);
                     break;
                 case MouseButtonTypes.LeftButtonUp:
                     // Fix the issue when the highlighter is no longer top most.

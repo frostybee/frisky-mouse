@@ -1,7 +1,5 @@
-﻿using System.Globalization;
-using System.Windows.Data;
-
-namespace FriskyMouse.UI.Helpers;
+﻿
+namespace FriskyMouse.UI.Converters;
 
 public class NullToVisibilityConverter : IValueConverter
 {

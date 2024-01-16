@@ -132,7 +132,7 @@ public enum WindowStyles : uint
     WS_THICKFRAME = 0x00040000,
 
     /// <summary>
-    /// Specifies the first control of a group of controls in which the user can move from one control to the next with the arrow keys. All controls defined with the WS_GROUP style FALSE after the first control belong to the same group. The next control with the WS_GROUP style starts the next group (that is, one group ends where the next begins).
+    /// Specifies the first control of a group of controls in which the user can move from one control to the next with the arrow keys. GetAllPages controls defined with the WS_GROUP style FALSE after the first control belong to the same group. The next control with the WS_GROUP style starts the next group (that is, one group ends where the next begins).
     /// </summary>
     WS_GROUP = 0x00020000,
 

@@ -10,10 +10,6 @@
 */
 #endregion
 
-using FriskyMouse.NativeApi;
-using System.ComponentModel;
-using System.Globalization;
-
 namespace FriskyMouse.Extensions;
 
 public static class Extensions

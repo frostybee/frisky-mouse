@@ -19,17 +19,15 @@ public partial class MainWindowViewModel : ObservableObject
     public MainWindowViewModel(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
-        _applicationTitle = "FriskyMouse II";
+        _applicationTitle = "FriskyMouse";
 
         _menuItems = new ObservableCollection<object>
         {
             new NavigationViewItem("Home", SymbolRegular.Home48, typeof(DashboardPage)),                       
             new NavigationViewItemSeparator(),
-            new NavigationViewItem("Mouse Highlighter", SymbolRegular.Circle48, typeof(SpotlightPage)),
+            new NavigationViewItem("Mouse Highlighter", SymbolRegular.Flashlight20, typeof(SpotlightPage)),
             new NavigationViewItemSeparator(),
-            new NavigationViewItem("Click Effect", SymbolRegular.CursorClick24, typeof(LeftClickPage)),
-            new NavigationViewItemSeparator(),
-            new NavigationViewItem("Right Click Effect", SymbolRegular.CursorHover32, typeof(RightClickEffectPage)),
+            new NavigationViewItem("Click Effect", SymbolRegular.CursorClick24, typeof(RippleEffectPage)),
             new NavigationViewItemSeparator(),
             new NavigationViewItem("UI Tests", SymbolRegular.Ruler48, typeof(UiTestsPage)),
         };
@@ -47,7 +45,9 @@ public partial class MainWindowViewModel : ObservableObject
 
     internal void DoStartUp()
     {
+        // Initialize the left and right mouse click ripple effect controllers. 
+        DecorationManager.Instance?.SetRippleEffectProfiles();
         // Initialize the global manager and bootstrap the application's logic.        
-        DecorationManager.Instance?.BootstrapApp();
+        DecorationManager.Instance?.EnableMouseDecoration();
     }
 }

@@ -1,0 +1,64 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:FriskyMouse.UI.Controls"
+    xmlns:models="clr-namespace:FriskyMouse.Models"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+
+    <Style TargetType="{x:Type controls:ToolNavigationPresenter}">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:ToolNavigationPresenter}">
+                    <ItemsControl ItemsSource="{TemplateBinding ItemsSource}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type models:NavigationCard}">
+                                <ui:CardAction
+                                    Margin="5"
+                                    Padding="20,0,5,0"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Command="{Binding TemplateButtonCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:ToolNavigationPresenter}, Mode=OneWay}"
+                                    CommandParameter="{Binding PageType, Mode=OneTime}"
+                                    IsChevronVisible="True">
+
+                                    <StackPanel>
+                                        <ui:Card Width="70" Height="70">
+                                            <ui:SymbolIcon FontSize="40" Symbol="{Binding Icon, Mode=OneTime}" />
+                                        </ui:Card>
+                                        <ui:TextBlock
+                                            Margin="0,10,0,0"
+                                            HorizontalAlignment="Left"
+                                            FontTypography="BodyStrong"
+                                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                            Text="{Binding Title, Mode=OneTime}"
+                                            TextWrapping="WrapWithOverflow" />
+                                        <ui:TextBlock
+                                            HorizontalAlignment="Left"
+                                            FontSize="13"
+                                            Style="{StaticResource TextBlockSettingDescriptionStyle}"
+                                            Text="{Binding Description, Mode=OneTime}"
+                                            TextWrapping="WrapWithOverflow" />
+                                    </StackPanel>
+                                </ui:CardAction>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ui:VirtualizingWrapPanel
+                                    IsItemsHost="True"
+                                    ItemSize="270,170"
+                                    Orientation="Vertical"
+                                    SpacingMode="Uniform"
+                                    StretchItems="True" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

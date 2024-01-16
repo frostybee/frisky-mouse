@@ -22,6 +22,7 @@ public partial class MainWindow :  IWindow
         IContentDialogService contentDialogService
     )
     {
+        //FIXME: check Wpf.UI's Gallery for the right way to watch the system's theme.
         //Wpf.UI.Appearance.SystemThemeWatcher.Watch(this);
 
         ViewModel = viewModel;
@@ -40,7 +41,9 @@ public partial class MainWindow :  IWindow
     }
 
     private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-    {        
+    {
+        // Apply the theme that was selected by the user.
+        FMAppHelper.ChangeUICurrentTheme(SettingsManager.Settings.ApplicationInfo.AppUiTheme);
         ViewModel.DoStartUp();
     }
 
@@ -48,11 +51,13 @@ public partial class MainWindow :  IWindow
     {
         if (sender is not Wpf.Ui.Controls.NavigationView navigationView)
             return;
-
-        NavigationView.HeaderVisibility =
-            navigationView.SelectedItem?.TargetPageType != typeof(DashboardPage)
-                ? Visibility.Visible
-                : Visibility.Collapsed;
+        
+        NavigationView.HeaderVisibility = Visibility.Collapsed;
+        /*
+                    navigationView.SelectedItem?.TargetPageType != typeof(DashboardPage)
+                        ? Visibility.Visible
+                        : Visibility.Collapsed;
+        */
     }
 
     private void MainWindow_OnSizeChanged(object sender, SizeChangedEventArgs e)
@@ -125,6 +130,6 @@ public partial class MainWindow :  IWindow
     //protected override void OnClosed(EventArgs e)
     //{
     //    base.OnClosed(e);
-    //    Application.Current.Shutdown();
+    //    Application.Settings.Shutdown();
     //}
 }
