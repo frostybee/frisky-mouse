@@ -164,6 +164,7 @@ internal class RippleEffectController : IDisposable
                 _blankCanvas?.Dispose();
                 _animationManager.Dispose();
                 _highlighterWindow?.Dispose();
+                _currentRipplesProfile?.Dispose();
                 _canvas = null;
                 _blankCanvas = null;
             }

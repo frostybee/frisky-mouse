@@ -1,7 +1,7 @@
  
 namespace FriskyMouse.UI.Controls;
 
-[ContentProperty(nameof(ExampleContent))]
+[ContentProperty(nameof(MainContent))]
 public class ModulePageContentControl : Control
 {
     public static readonly DependencyProperty HeaderTextProperty = DependencyProperty.Register(
@@ -11,22 +11,22 @@ public class ModulePageContentControl : Control
         new PropertyMetadata(null)
     );
 
-    public static readonly DependencyProperty ExampleContentProperty = DependencyProperty.Register(
-        nameof(ExampleContent),
+    public static readonly DependencyProperty MainContentProperty = DependencyProperty.Register(
+        nameof(MainContent),
         typeof(object),
         typeof(ModulePageContentControl),
         new PropertyMetadata(null)
     );
 
-    public string? HeaderText
+    public string HeaderText
     {
         get => (string)GetValue(HeaderTextProperty);
         set => SetValue(HeaderTextProperty, value);
     }
 
-    public object? ExampleContent
+    public object MainContent
     {
-        get => GetValue(ExampleContentProperty);
-        set => SetValue(ExampleContentProperty, value);
+        get => GetValue(MainContentProperty);
+        set => SetValue(MainContentProperty, value);
     }
 }

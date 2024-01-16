@@ -30,7 +30,7 @@
                             Text="{TemplateBinding HeaderText}" />
 
                         <!--  Module main content  -->
-                        <ContentPresenter Grid.Row="1" Content="{TemplateBinding ExampleContent}" />
+                        <ContentPresenter Grid.Row="1" Content="{TemplateBinding MainContent}" />
 
                     </Grid>
                 </ControlTemplate>

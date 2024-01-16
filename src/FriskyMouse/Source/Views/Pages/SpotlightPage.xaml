@@ -92,6 +92,7 @@
                                     CanReposition="False"
                                     Header="Spotlight color"
                                     Icon="{ui:SymbolIcon Color24}">
+                                    <!--<controls:ColorPickerControl SelectedColor="{Binding ViewModel.FillColor, Mode=TwoWay}" />-->
 
                                     <ui:Card Width="90" Padding="5">
                                         <Grid>
@@ -244,31 +245,7 @@
                             Icon="{ui:SymbolIcon ColorBackground24}"
                             Style="{StaticResource SettingsCardExpanderItemStyle}">
 
-                            <ui:Card Width="90" Padding="5">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <colorpicker:PortableColorPicker
-                                        Width="60"
-                                        Height="35"
-                                        Padding="2,2,5,2"
-                                        AllowDrop="True"
-                                        HintColor="Red"
-                                        SelectedColor="{Binding ViewModel.OutlineColor, Mode=TwoWay}"
-                                        ShowAlpha="False"
-                                        ShowFractionalPart="False"
-                                        SmallChange="5"
-                                        Style="{DynamicResource DefaultColorPickerStyle}"
-                                        UseHintColor="True" />
-                                    <ui:SymbolIcon
-                                        Grid.Column="2"
-                                        Margin="5,0,0,0"
-                                        Symbol="ChevronDown48" />
-                                </Grid>
-                            </ui:Card>
-
+                            <controls:ColorPickerControl SelectedColor="{Binding ViewModel.OutlineColor, Mode=TwoWay}" />
                         </controls:SettingsCard>
 
                         <controls:SettingsCard
@@ -351,30 +328,7 @@
                             Icon="{ui:SymbolIcon ColorFill20}"
                             Style="{StaticResource SettingsCardExpanderItemStyle}">
 
-                            <ui:Card Width="90" Padding="5">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <colorpicker:PortableColorPicker
-                                        Width="60"
-                                        Height="35"
-                                        Padding="2,2,5,2"
-                                        AllowDrop="True"
-                                        HintColor="Red"
-                                        SelectedColor="{Binding ViewModel.ShadowColor, Mode=TwoWay}"
-                                        ShowAlpha="False"
-                                        ShowFractionalPart="False"
-                                        SmallChange="5"
-                                        Style="{DynamicResource DefaultColorPickerStyle}"
-                                        UseHintColor="True" />
-                                    <ui:SymbolIcon
-                                        Grid.Column="2"
-                                        Margin="5,0,0,0"
-                                        Symbol="ChevronDown48" />
-                                </Grid>
-                            </ui:Card>
+                            <controls:ColorPickerControl SelectedColor="{Binding ViewModel.ShadowColor, Mode=TwoWay}" />
 
                         </controls:SettingsCard>
 
