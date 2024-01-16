@@ -51,7 +51,7 @@ public partial class MainWindow :  IWindow
     {
         if (sender is not Wpf.Ui.Controls.NavigationView navigationView)
             return;
-
+        
         NavigationView.HeaderVisibility = Visibility.Collapsed;
         /*
                     navigationView.SelectedItem?.TargetPageType != typeof(DashboardPage)

@@ -2,33 +2,158 @@
     x:Class="FriskyMouse.Views.Pages.UiTestsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
-    xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
     xmlns:controls="clr-namespace:FriskyMouse.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:FriskyMouse.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="Mouse Spotlight Page"
+    Title="AnchorPage"
     d:DataContext="{d:DesignInstance local:UiTestsPage,
                                      IsDesignTimeCreatable=False}"
-    d:DesignHeight="1450"
+    d:DesignHeight="450"
     d:DesignWidth="800"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-    <StackPanel Margin="0,0,0,24">
-        <!--<ui:TextBlock
-            Margin="0,0,0,8"
-            FontTypography="BodyStrong"
-            Text="Appearance &amp; behavior" />-->
-        <ui:TextBlock
-            x:Name="TestTst"
-            Margin="0,0,0,8"
-            FontTypography="BodyStrong"
-            Text="Oi!?" />
-    </StackPanel>
+
+    <controls:ModulePageContentControl HeaderText="Settings Page Test">
+        <StackPanel>
+            <ui:TextBlock
+                x:Name="TestTst"
+                Margin="0,0,0,8"
+                FontTypography="BodyStrong"
+                Text="Oi!?" />
+            <ui:TextBlock
+                Margin="0,0,0,8"
+                FontTypography="BodyStrong"
+                Text="Oi!?" />
+            <ui:TextBlock
+                Margin="0,0,0,8"
+                FontTypography="BodyStrong"
+                Text="Oi!?" />
+            <ui:TextBlock
+                Margin="0,0,0,8"
+                FontTypography="BodyStrong"
+                Text="Oi!?" />
+            <ui:TextBlock
+                Margin="0,0,0,8"
+                FontTypography="BodyStrong"
+                Text="Oi!?" />
+            <ui:TextBlock
+                Margin="0,0,0,8"
+                FontTypography="BodyStrong"
+                Text="Oi!?" />
+            <ui:TextBlock
+                Margin="0,0,0,8"
+                FontTypography="BodyStrong"
+                Text="Oi!?" />
+            <ui:TextBlock
+                Margin="0,0,0,8"
+                FontTypography="BodyStrong"
+                Text="Oi!?" />
+            <ui:TextBlock
+                Margin="0,0,0,8"
+                FontTypography="BodyStrong"
+                Text="Oi!?" />
+            <ui:TextBlock
+                Margin="0,0,0,8"
+                FontTypography="BodyStrong"
+                Text="Oi!?" />
+        </StackPanel>
+    </controls:ModulePageContentControl>
+    <!--<Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            x:Name="Header"
+            MaxWidth="{StaticResource PageMaxWidth}"
+            Margin="0,44,0,0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Style="{StaticResource TitleTextBlockStyle}"
+            Text=" Oiiiiiiiiiiiiiii" />
+        <ui:DynamicScrollViewer Grid.Row="1">
+
+
+            <Grid Margin="0,0,0,24">
+                <StackPanel Margin="0,0,0,24">
+    -->
+    <!--<ui:TextBlock
+         Margin="0,0,0,8"
+         FontTypography="BodyStrong"
+         Text="Appearance &amp; behavior" />-->
+    <!--
+                    <ui:TextBlock
+                        x:Name="TestTst"
+                        Margin="0,0,0,8"
+                        FontTypography="BodyStrong"
+                        Text="Oi!?" />
+                    <ui:TextBlock
+                        Margin="0,0,0,8"
+                        FontTypography="BodyStrong"
+                        Text="Oi!?" />
+                    <ui:TextBlock
+                        Margin="0,0,0,8"
+                        FontTypography="BodyStrong"
+                        Text="Oi!?" />
+                    <ui:TextBlock
+                        Margin="0,0,0,8"
+                        FontTypography="BodyStrong"
+                        Text="Oi!?" />
+                    <ui:TextBlock
+                        Margin="0,0,0,8"
+                        FontTypography="BodyStrong"
+                        Text="Oi!?" />
+                    <ui:TextBlock
+                        Margin="0,0,0,8"
+                        FontTypography="BodyStrong"
+                        Text="Oi!?" />
+                    <ui:TextBlock
+                        Margin="0,0,0,8"
+                        FontTypography="BodyStrong"
+                        Text="Oi!?" />
+                    <ui:TextBlock
+                        Margin="0,0,0,8"
+                        FontTypography="BodyStrong"
+                        Text="Oi!?" />
+                    <ui:TextBlock
+                        Margin="0,0,0,8"
+                        FontTypography="BodyStrong"
+                        Text="Oi!?" />
+                    <ui:TextBlock
+                        Margin="0,0,0,8"
+                        FontTypography="BodyStrong"
+                        Text="Oi!?" />
+
+                    <ui:TextBlock
+                        Margin="0,0,0,8"
+                        FontTypography="BodyStrong"
+                        Text="Oi!?" />
+                    <ui:TextBlock
+                        Margin="0,0,0,8"
+                        FontTypography="BodyStrong"
+                        Text="Oi!?" />
+                    <ui:TextBlock
+                        Margin="0,0,0,8"
+                        FontTypography="BodyStrong"
+                        Text="Oi!?" />
+                    <ui:TextBlock
+                        Margin="0,0,0,8"
+                        FontTypography="BodyStrong"
+                        Text="Oi!?" />
+                    <ui:TextBlock
+                        Margin="0,0,0,8"
+                        FontTypography="BodyStrong"
+                        Text="Oi!?" />
+
+
+                </StackPanel>
+            </Grid>
+        </ui:DynamicScrollViewer>
+    </Grid>-->
+
 </Page>
-
-

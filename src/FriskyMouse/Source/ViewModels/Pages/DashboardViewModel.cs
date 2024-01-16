@@ -41,7 +41,7 @@ public partial class DashboardViewModel : ObservableObject
         .Apply(
             currentTheme == ApplicationTheme.Light
                 ? ApplicationTheme.Dark
-                : ApplicationTheme.Light
+                : ApplicationTheme.Light 
         );
         SettingsManager.Settings.ApplicationInfo.AppUiTheme = ApplicationThemeManager.GetAppTheme();
     }
