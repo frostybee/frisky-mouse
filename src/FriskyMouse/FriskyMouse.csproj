@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <TargetFramework>$(TargetFramework)</TargetFramework>    
     <!--<Nullable>enable</Nullable>-->    
     <UseWPF>true</UseWPF>
@@ -83,10 +83,6 @@
   <ItemGroup>
     <Using Include="System.Text" />
     <Using Include="System.Text.Json.Serialization" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Themes\" />
   </ItemGroup>
 
 </Project>

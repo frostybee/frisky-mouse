@@ -28,7 +28,7 @@ public partial class RippleProfileInfo : ObservableObject
     #endregion        
 
     #region Visual Appearance
-    public bool CanFadeColor { get; set; } = false;
+    public bool CanFadeColor { get; set; } = true;
     public ushort InitialOpacity { get; set; } = 100;
     public ushort RadiusMultiplier { get; set; } = 10;
     public Color FillColor { get; set; } = Color.DeepPink;

@@ -8,10 +8,9 @@
 
     <Thickness x:Key="MainContainerMargin">20</Thickness>
     <system:Double x:Key="PageHeaderFontSize">25</system:Double>
-    <system:Double x:Key="PageMaxWidth">1000</system:Double>
+    <system:Double x:Key="PageContentMaxWidth">1000</system:Double>
     <system:Double x:Key="SubtitleTextBlockFontSize">20</system:Double>
     <system:Double x:Key="TitleTextBlockFontSize">28</system:Double>
-    <Thickness x:Key="ModulePageTitleTextMargin">0,44,0,30</Thickness>
 
     <Style x:Key="TextBlockSettingDescriptionStyle" TargetType="TextBlock">
         <Setter Property="TextWrapping" Value="Wrap" />

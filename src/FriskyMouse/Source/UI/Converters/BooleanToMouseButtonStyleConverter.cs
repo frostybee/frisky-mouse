@@ -1,6 +1,6 @@
 ﻿
 namespace FriskyMouse.UI.Converters;
-internal sealed class ButtonStyleToBooleanConverter : IValueConverter
+internal sealed class BooleanToMouseButtonStyleConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {

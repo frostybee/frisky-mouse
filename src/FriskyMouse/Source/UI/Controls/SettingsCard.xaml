@@ -81,6 +81,8 @@
                                 x:Name="ResizableFlag"
                                 Content="{TemplateBinding CanReposition}"
                                 Visibility="Collapsed" />
+
+                            <!--  Card Icon element  -->
                             <ContentControl
                                 x:Name="ControlIcon"
                                 Grid.Column="0"
@@ -94,6 +96,7 @@
                                 KeyboardNavigation.IsTabStop="False"
                                 SnapsToDevicePixels="True" />
 
+                            <!--  Header and description panel  -->
                             <Grid
                                 x:Name="DescriptionPanel"
                                 Grid.Column="1"
@@ -122,6 +125,7 @@
                                     TextWrapping="WrapWithOverflow" />
                             </Grid>
 
+                            <!--  Action element  -->
                             <ContentPresenter
                                 x:Name="PART_ActionableElement"
                                 VerticalAlignment="Center"

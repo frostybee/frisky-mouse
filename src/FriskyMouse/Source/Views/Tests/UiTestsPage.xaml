@@ -15,54 +15,10 @@
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    ScrollViewer.CanContentScroll="False"
     mc:Ignorable="d">
 
-    <controls:ModulePageContentControl HeaderText="Settings Page Test">
-        <StackPanel>
-            <ui:TextBlock
-                x:Name="TestTst"
-                Margin="0,0,0,8"
-                FontTypography="BodyStrong"
-                Text="Oi!?" />
-            <ui:TextBlock
-                Margin="0,0,0,8"
-                FontTypography="BodyStrong"
-                Text="Oi!?" />
-            <ui:TextBlock
-                Margin="0,0,0,8"
-                FontTypography="BodyStrong"
-                Text="Oi!?" />
-            <ui:TextBlock
-                Margin="0,0,0,8"
-                FontTypography="BodyStrong"
-                Text="Oi!?" />
-            <ui:TextBlock
-                Margin="0,0,0,8"
-                FontTypography="BodyStrong"
-                Text="Oi!?" />
-            <ui:TextBlock
-                Margin="0,0,0,8"
-                FontTypography="BodyStrong"
-                Text="Oi!?" />
-            <ui:TextBlock
-                Margin="0,0,0,8"
-                FontTypography="BodyStrong"
-                Text="Oi!?" />
-            <ui:TextBlock
-                Margin="0,0,0,8"
-                FontTypography="BodyStrong"
-                Text="Oi!?" />
-            <ui:TextBlock
-                Margin="0,0,0,8"
-                FontTypography="BodyStrong"
-                Text="Oi!?" />
-            <ui:TextBlock
-                Margin="0,0,0,8"
-                FontTypography="BodyStrong"
-                Text="Oi!?" />
-        </StackPanel>
-    </controls:ModulePageContentControl>
-    <!--<Grid>
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -70,23 +26,22 @@
 
         <TextBlock
             x:Name="Header"
-            MaxWidth="{StaticResource PageMaxWidth}"
+            MaxWidth="{StaticResource PageContentMaxWidth}"
             Margin="0,44,0,0"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Style="{StaticResource TitleTextBlockStyle}"
-            Text=" Oiiiiiiiiiiiiiii" />
+            Text=" This is a header text" />
         <ui:DynamicScrollViewer Grid.Row="1">
 
-
-            <Grid Margin="0,0,0,24">
+            <Grid MaxWidth="{StaticResource PageContentMaxWidth}" Margin="0,0,0,24">
                 <StackPanel Margin="0,0,0,24">
-    -->
-    <!--<ui:TextBlock
-         Margin="0,0,0,8"
-         FontTypography="BodyStrong"
-         Text="Appearance &amp; behavior" />-->
-    <!--
+
+                    <ui:TextBlock
+                        Margin="0,0,0,8"
+                        FontTypography="BodyStrong"
+                        Text="Appearance &amp; behavior" />
+
                     <ui:TextBlock
                         x:Name="TestTst"
                         Margin="0,0,0,8"
@@ -150,10 +105,54 @@
                         FontTypography="BodyStrong"
                         Text="Oi!?" />
 
+                    <controls:FeaturePageContentControl FeatureDescription="Settings Page Test">
+                        <StackPanel>
+                            <ui:TextBlock
+                                Margin="0,0,0,8"
+                                FontTypography="BodyStrong"
+                                Text="Oi!?" />
+                            <ui:TextBlock
+                                Margin="0,0,0,8"
+                                FontTypography="BodyStrong"
+                                Text="Oi!?" />
+                            <ui:TextBlock
+                                Margin="0,0,0,8"
+                                FontTypography="BodyStrong"
+                                Text="Oi!?" />
+                            <ui:TextBlock
+                                Margin="0,0,0,8"
+                                FontTypography="BodyStrong"
+                                Text="Oi!?" />
+                            <ui:TextBlock
+                                Margin="0,0,0,8"
+                                FontTypography="BodyStrong"
+                                Text="Oi!?" />
+                            <ui:TextBlock
+                                Margin="0,0,0,8"
+                                FontTypography="BodyStrong"
+                                Text="Oi!?" />
+                            <ui:TextBlock
+                                Margin="0,0,0,8"
+                                FontTypography="BodyStrong"
+                                Text="Oi!?" />
+                            <ui:TextBlock
+                                Margin="0,0,0,8"
+                                FontTypography="BodyStrong"
+                                Text="Oi!?" />
+                            <ui:TextBlock
+                                Margin="0,0,0,8"
+                                FontTypography="BodyStrong"
+                                Text="Oi!?" />
+                            <ui:TextBlock
+                                Margin="0,0,0,8"
+                                FontTypography="BodyStrong"
+                                Text="Oi!?" />
+                        </StackPanel>
+                    </controls:FeaturePageContentControl>
 
                 </StackPanel>
             </Grid>
         </ui:DynamicScrollViewer>
-    </Grid>-->
+    </Grid>
 
 </Page>
