@@ -1,13 +1,15 @@
 ﻿using FriskyMouse.Core;
 using System.Diagnostics;
+using System.Windows.Forms;
 using System.Windows.Interop;
+using TextBlock = Wpf.Ui.Controls.TextBlock;
 
 namespace FriskyMouse.Views.Windows;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class MainWindow :  IWindow
+public partial class MainWindow : IWindow
 {
     public MainWindowViewModel ViewModel { get; }
     private bool _isUserClosedPane;
@@ -22,8 +24,7 @@ public partial class MainWindow :  IWindow
         IContentDialogService contentDialogService
     )
     {
-        //FIXME: check Wpf.UI's Gallery for the right way to watch the system's theme.
-        //Wpf.UI.Appearance.SystemThemeWatcher.Watch(this);
+        Wpf.Ui.Appearance.SystemThemeWatcher.Watch(this);
 
         ViewModel = viewModel;
         DataContext = this;
@@ -36,7 +37,7 @@ public partial class MainWindow :  IWindow
         NavigationView.SetServiceProvider(serviceProvider);
         NavigationView.Loaded += (_, _) => NavigationView.Navigate(typeof(DashboardPage));
         this.SetValue(TextOptions.TextFormattingModeProperty, TextFormattingMode.Ideal);
-        
+
         Loaded += MainWindow_Loaded;
     }
 
@@ -51,13 +52,15 @@ public partial class MainWindow :  IWindow
     {
         if (sender is not Wpf.Ui.Controls.NavigationView navigationView)
             return;
-        
+
         NavigationView.HeaderVisibility = Visibility.Collapsed;
-        /*
-                    navigationView.SelectedItem?.TargetPageType != typeof(DashboardPage)
-                        ? Visibility.Visible
-                        : Visibility.Collapsed;
-        */
+        // TODO: We can assign a new header just in case we want to override
+        // the default page title.
+        /*NavigationView.HeaderVisibility =
+            navigationView.SelectedItem?.TargetPageType != typeof(DashboardPage)
+                ? Visibility.Visible
+                : Visibility.Collapsed;*/
+
     }
 
     private void MainWindow_OnSizeChanged(object sender, SizeChangedEventArgs e)

@@ -16,7 +16,8 @@
                 <ui:ControlsDictionary />
                 <ResourceDictionary Source="pack://application:,,,/Source/UI/Styles/CommonStyles.xaml" />
                 <ResourceDictionary Source="Source/UI/Controls/SettingsCard.xaml" />
-                <ResourceDictionary Source="Source/UI/Controls/ModulePageContentControl.xaml" />
+                <ResourceDictionary Source="Source/UI/Controls/FeaturePageContentControl.xaml" />
+                <ResourceDictionary Source="Source/UI/Controls/SettingsGroupHeaderControl.xaml" />
                 <ResourceDictionary Source="Source/UI/Controls/ColorPickerControl.xaml" />
                 <ResourceDictionary Source="Source/UI/Controls/ToolNavigationPresenter.xaml" />
                 <ResourceDictionary Source="Source/UI/Controls/ExpandableSettingsControl.xaml" />
@@ -24,7 +25,7 @@
             </ResourceDictionary.MergedDictionaries>
             <converters:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
             <converters:ThemeToIndexConverter x:Key="ThemeToIndexConverter" />
-            <converters:ButtonStyleToBooleanConverter x:Key="ButtonStyleToBooleanConverter" />
+            <converters:BooleanToMouseButtonStyleConverter x:Key="BooleanToMouseButtonStyleConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

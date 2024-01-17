@@ -10,7 +10,6 @@
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="FriskyMouse Settings"
-    MaxWidth="{StaticResource PageMaxWidth}"
     d:DataContext="{d:DesignInstance local:SettingsPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
@@ -23,7 +22,10 @@
         <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
     </Page.Resources>
 
-    <controls:ModulePageContentControl HeaderText="Settings">
+    <controls:FeaturePageContentControl
+        FeatureDescription="Adjust the application-wide settings"
+        FeatureTitle="Settings"
+        Icon="{ui:SymbolIcon Settings24}">
 
         <StackPanel Margin="0,10,0,24">
             <ui:TextBlock
@@ -139,5 +141,5 @@
                 </StackPanel>
             </controls:ExpandableSettingsControl>
         </StackPanel>
-    </controls:ModulePageContentControl>
+    </controls:FeaturePageContentControl>
 </Page>

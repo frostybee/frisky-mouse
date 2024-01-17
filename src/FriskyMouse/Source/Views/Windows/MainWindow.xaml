@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="{Binding ViewModel.ApplicationTitle, Mode=OneWay}"
-    Width="950"
+    Width="1350"
     Height="1000"
     MinWidth="650"
     d:DataContext="{d:DesignInstance local:MainWindow,
@@ -42,14 +42,16 @@
             FooterMenuItemsSource="{Binding ViewModel.FooterMenuItems, Mode=OneWay}"
             FrameMargin="0"
             IsBackButtonVisible="Visible"
+            IsPaneOpen="True"
             IsPaneToggleVisible="True"
             MenuItemsSource="{Binding ViewModel.MenuItems, Mode=OneWay}"
-            OpenPaneLength="310"
+            OpenPaneLength="210"
             PaneClosed="NavigationView_OnPaneClosed"
-            PaneDisplayMode="Left"
+            PaneDisplayMode="LeftMinimal"
             PaneOpened="NavigationView_OnPaneOpened"
             SelectionChanged="OnNavigationSelectionChanged"
-            TitleBar="{Binding ElementName=TitleBar, Mode=OneWay}">
+            TitleBar="{Binding ElementName=TitleBar, Mode=OneWay}"
+            TransitionDuration="350">
             <ui:NavigationView.Header>
                 <StackPanel Margin="42,32,42,20">
                     <ui:BreadcrumbBar x:Name="BreadcrumbBar" />

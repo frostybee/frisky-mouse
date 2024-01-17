@@ -23,11 +23,11 @@ public partial class MainWindowViewModel : ObservableObject
 
         _menuItems = new ObservableCollection<object>
         {
-            new NavigationViewItem("Home", SymbolRegular.Home48, typeof(DashboardPage)),                       
+            new NavigationViewItem("Dashboard", SymbolRegular.Home48, typeof(DashboardPage)),                       
             new NavigationViewItemSeparator(),
             new NavigationViewItem("Mouse Highlighter", SymbolRegular.Flashlight20, typeof(SpotlightPage)),
             new NavigationViewItemSeparator(),
-            new NavigationViewItem("Click Effect", SymbolRegular.CursorClick24, typeof(RippleEffectPage)),
+            new NavigationViewItem("Click Indicator", SymbolRegular.CursorClick24, typeof(RippleEffectPage)),
             new NavigationViewItemSeparator(),
             new NavigationViewItem("UI Tests", SymbolRegular.Ruler48, typeof(UiTestsPage)),
         };

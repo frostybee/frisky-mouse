@@ -3,11 +3,8 @@ using Color = System.Windows.Media.Color;
 
 namespace FriskyMouse.UI.Controls;
 
-//[ContentProperty(nameof(MainContent))]
 public class ColorPickerControl : Control
 {
-
-
     public static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register(
         nameof(SelectedColor),
         typeof(Color),

@@ -1,30 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
+﻿
 namespace FriskyMouse.UI.Controls;
 
 /// <summary>
 /// Interaction logic for SettingsGroupHeaderControl.xaml
 /// </summary>
-public partial class SettingsGroupHeaderControl : UserControl
+[ContentProperty(nameof(GroupContent))]
+public class SettingsGroupHeaderControl : Control
 {
     /// <summary>
-    /// Property for <see cref="OptionsHeader"/>.
+    /// Property for <see cref="Header"/>.
     /// </summary>
-    public static readonly DependencyProperty OptionsHeaderProperty = DependencyProperty.Register(
-        nameof(OptionsHeader),
+    public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
+        nameof(Header),
         typeof(string),
         typeof(SettingsGroupHeaderControl),
         new PropertyMetadata(null)
@@ -35,25 +22,37 @@ public partial class SettingsGroupHeaderControl : UserControl
       typeof(SettingsGroupHeaderControl),
       new PropertyMetadata(null)
   );
+
+    public static readonly DependencyProperty GroupContentProperty = DependencyProperty.Register(
+      nameof(GroupContent),
+      typeof(object),
+      typeof(SettingsGroupHeaderControl),
+      new PropertyMetadata(null)
+  );
+
     public SettingsGroupHeaderControl()
     {
-        InitializeComponent();
-        DataContext = this;
     }
 
     /// <summary>
     /// Title is the data used to for the header of each item in the control.
     /// </summary>
 
-    public string OptionsHeader
+    public string Header
     {
-        get => (string)GetValue(OptionsHeaderProperty);
-        set => SetValue(OptionsHeaderProperty, value);
+        get => (string)GetValue(HeaderProperty);
+        set => SetValue(HeaderProperty, value);
     }
 
     public string? Description
     {
         get => (string)GetValue(DescriptionProperty);
         set => SetValue(DescriptionProperty, value);
+    }
+
+    public object GroupContent
+    {
+        get => GetValue(GroupContentProperty);
+        set => SetValue(GroupContentProperty, value);
     }
 }
