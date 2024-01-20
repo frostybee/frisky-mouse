@@ -118,13 +118,13 @@ internal class DecorationManager : IDisposable
         _rightClickDecorator.SetAnimationSettings(_settings.RightClickOptions);
     }
 
-    internal BaseRippleProfile MakeRippleEffectProfile(RippleEffectController controller, RippleProfileInfo profileOptions)
+    internal void MakeRippleEffectProfile(RippleEffectController controller, RippleProfileInfo profileOptions)
     {
         controller.StopAnimation();
         BaseRippleProfile _newProfile = ConstructableFactory.GetInstanceOf<BaseRippleProfile>(profileOptions.CurrentRippleProfile);
         controller?.SwitchProfile(_newProfile);
         _newProfile.UpdateRipplesStyle(profileOptions);
-        return _newProfile;
+        //return _newProfile;
     }
 
     protected virtual void Dispose(bool disposing)

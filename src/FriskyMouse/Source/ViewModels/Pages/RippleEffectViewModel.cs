@@ -7,7 +7,6 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
 {
     #region Fields
     private RippleEffectController _rippleEffectController;
-    private BaseRippleProfile _currentRippleProfile;
     private RippleProfileInfo _rippleOptions;
     private DecorationManager _decorationManager;
     private bool _isInitialized = false;
@@ -95,7 +94,7 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
     {
         _decorationManager = DecorationManager.Instance;
         // Default mouse click ripple profiles.
-        _currentRippleProfile = new FilledSonarPulseProfile();
+        //_currentRippleProfile = new FilledSonarPulseProfile();
 
         // Load the list of ripple profiles from their corresponding enum.
         RippleProfiles = FMAppHelper.GetEnumDescriptions<RippleProfileType>();
@@ -128,7 +127,7 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
             _rippleEffectController = _decorationManager.RightClickDecorator;
             // Switch the options:
             _rippleOptions = SettingsManager.Settings.RightClickOptions;
-        }
+        }        
         AdjustEnablingSwitchText(clickType);
         LoadProfileOptions();
     }
@@ -169,19 +168,13 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
         _rippleEffectController.SetAnimationSettings(_rippleOptions);
     }
 
-    private void SwitchLeftProfile()
+    private void SwitchCurrentProfile()
     {
         if (_isInitialized)
         {
             // Make a new profile based on the user's selection.
-            _currentRippleProfile = _decorationManager.MakeRippleEffectProfile(_rippleEffectController, _rippleOptions);
-        }
-        else
-        {
-            // No need to make a new one if the user hasn't selected another ripple profile 
-            // From the dropdown menu.
-            _currentRippleProfile = _rippleEffectController.CurrentProfile;
-        }
+            _decorationManager.MakeRippleEffectProfile(_rippleEffectController, _rippleOptions);
+        }       
     }
 
     private void SwitchAnimationInterpolator(InterpolationType interpolator)
@@ -205,7 +198,7 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
     partial void OnCanFadeColorChanged(bool value)
     {
         _rippleOptions.CanFadeColor = value;
-        _currentRippleProfile.ResetColorOpacity();
+        _rippleEffectController?.CurrentProfile.ResetColorOpacity();
     }
 
     partial void OnRadiusMultiplierChanged(ushort value)
@@ -222,7 +215,7 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
     {
         _rippleEffectController?.StopAnimation();
         _rippleOptions.CurrentRippleProfile = (RippleProfileType)value;
-        SwitchLeftProfile();
+        SwitchCurrentProfile();
     }
 
     partial void OnAnimationSpeedChanged(int value)
@@ -246,7 +239,7 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
     {
         _rippleEffectController.StopAnimation();
         _rippleOptions.FillColor = value.ToDrawingColor();
-        _currentRippleProfile?.UpdateRipplesStyle(_rippleOptions);
+        _rippleEffectController?.CurrentProfile.UpdateRipplesStyle(_rippleOptions);
     }
 
     [RelayCommand]
@@ -257,7 +250,6 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
             return;
         if (parameter == "left_button")
         {            
-            
             SwitchCurrentProfileSettings(MouseButtonType.LeftClick);
         }
         else if (parameter == "right_button")

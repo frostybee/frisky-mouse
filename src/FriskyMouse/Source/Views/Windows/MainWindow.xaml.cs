@@ -11,10 +11,10 @@ namespace FriskyMouse.Views.Windows;
 /// </summary>
 public partial class MainWindow : IWindow
 {
-    public MainWindowViewModel ViewModel { get; }
     private bool _isUserClosedPane;
     private bool _isPaneOpenedOrClosedFromCode;
     private HwndSource _hwndSource;
+    public MainWindowViewModel ViewModel { get; }
 
     public MainWindow(
         MainWindowViewModel viewModel,
@@ -99,7 +99,6 @@ public partial class MainWindow : IWindow
 
         _hwndSource = HwndSource.FromHwnd(new WindowInteropHelper(this).Handle);
         _hwndSource?.AddHook(HwndHook);
-
         //RegisterHotKeys();
     }
 
@@ -130,9 +129,10 @@ public partial class MainWindow : IWindow
         this.Topmost = false;
         this.Focus();
     }
-    //protected override void OnClosed(EventArgs e)
-    //{
-    //    base.OnClosed(e);
-    //    Application.Settings.Shutdown();
-    //}
+    protected override void OnClosed(EventArgs e)
+    {
+        base.OnClosed(e);
+        _hwndSource?.RemoveHook(HwndHook);
+        _hwndSource?.Dispose();
+    }
 }

@@ -1,6 +1,5 @@
-﻿using FriskyMouse.UI.Helpers;
+﻿namespace FriskyMouse.Views.Pages;
 
-namespace FriskyMouse.Views.Pages;
 [ApplicationPage(3, "Settings", "Change the application settings", SymbolRegular.Settings24)]
 public partial class SettingsPage : INavigableView<SettingsViewModel>
 {

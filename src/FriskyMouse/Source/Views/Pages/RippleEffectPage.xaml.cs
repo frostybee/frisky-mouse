@@ -1,6 +1,4 @@
-﻿using FriskyMouse.UI.Helpers;
-
-namespace FriskyMouse.Views.Pages;
+﻿namespace FriskyMouse.Views.Pages;
 
 /// <summary>
 /// Interaction logic for RippleEffectPage.xaml

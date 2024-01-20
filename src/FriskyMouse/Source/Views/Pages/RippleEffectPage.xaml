@@ -52,7 +52,6 @@
                                 TextWrapping="WrapWithOverflow" />
                         </StackPanel>
                     </ui:CardAction>
-
                     <ui:CardAction
                         Margin="30,0,0,0"
                         Command="{Binding ViewModel.CardOptionsClickCommand}"

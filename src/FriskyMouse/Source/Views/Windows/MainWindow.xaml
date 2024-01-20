@@ -22,7 +22,7 @@
     TextOptions.TextFormattingMode="Display"
     TextOptions.TextRenderingMode="Auto"
     WindowBackdropType="Mica"
-    WindowCornerPreference="Default"
+    WindowCornerPreference="Round"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
