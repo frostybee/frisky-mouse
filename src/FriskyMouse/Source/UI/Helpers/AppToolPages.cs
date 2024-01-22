@@ -1,4 +1,4 @@
-namespace FriskyMouse.UI.Helpers;
+namespace FriskyMouse.Views.Helpers;
 
 static class AppToolPages
 {

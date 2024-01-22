@@ -81,15 +81,19 @@ internal static class GraphicsExtensions
         graphics.CompositingQuality = CompositingQuality.HighQuality;
     }
 
-
+    /// <summary>
+    /// Converts a System.Drawing bitmap into a BitmapSource object.
+    /// </summary>
+    /// <param name="bitmap">The bitmap to be converted.</param>
+    /// <returns>The converted BitmapSource object.</returns>
     public static BitmapSource ToBitmapSource(this Bitmap bitmap)
     {
         IntPtr hBitmap = bitmap.GetHbitmap();
-        BitmapSource retval;
+        BitmapSource resultBitmap;
 
         try
         {
-            retval = Imaging.CreateBitmapSourceFromHBitmap(
+            resultBitmap = Imaging.CreateBitmapSourceFromHBitmap(
                          hBitmap,
                          IntPtr.Zero,
                          Int32Rect.Empty,
@@ -100,6 +104,6 @@ internal static class GraphicsExtensions
             NativeMethods.DeleteObject(hBitmap);
         }
 
-        return retval;
-    }     
+        return resultBitmap;
+    }
 }

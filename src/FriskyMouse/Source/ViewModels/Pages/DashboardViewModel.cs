@@ -32,6 +32,8 @@ public partial class DashboardViewModel : ObservableObject
     private void InitializeViewModel()
     {
         FeedBackUri = App.Configuration.SendFeedbackURI;
+        // Register hotkeys.
+        DecorationManager.Instance.HotkeysController.RegisterGlobalHotkeys();
     }
 
     private static void SwitchThemes()
@@ -43,7 +45,7 @@ public partial class DashboardViewModel : ObservableObject
                 ? ApplicationTheme.Dark
                 : ApplicationTheme.Light 
         );
-        SettingsManager.Settings.ApplicationInfo.AppUiTheme = ApplicationThemeManager.GetAppTheme();
+        SettingsManager.Current.ApplicationInfo.AppUiTheme = ApplicationThemeManager.GetAppTheme();
     }
 
     [RelayCommand]

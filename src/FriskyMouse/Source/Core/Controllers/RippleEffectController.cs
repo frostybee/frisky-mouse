@@ -13,7 +13,7 @@
 using PixelFormat = System.Drawing.Imaging.PixelFormat;
 
 
-namespace FriskyMouse.Core;
+namespace FriskyMouse.Core.Controllers;
 
 /// <summary>
 /// Responsible for creating, switching and animating ripple profiles. 

@@ -49,7 +49,7 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
     partial void OnCurrentApplicationThemeChanged(ApplicationTheme oldValue, ApplicationTheme newValue)
     {
         FMAppHelper.ChangeUICurrentTheme(newValue);        
-        SettingsManager.Settings.ApplicationInfo.AppUiTheme = newValue;
+        SettingsManager.Current.ApplicationInfo.AppUiTheme = newValue;
     }
 
     private void OnThemeChanged(ApplicationTheme currentApplicationTheme, Color systemAccent)

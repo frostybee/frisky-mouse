@@ -1,4 +1,4 @@
-﻿using FriskyMouse.UI.Helpers;
+﻿using FriskyMouse.Views.Helpers;
 
 namespace FriskyMouse.Views.Pages;
 

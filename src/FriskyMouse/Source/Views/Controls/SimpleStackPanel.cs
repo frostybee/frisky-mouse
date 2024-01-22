@@ -2,7 +2,7 @@
 using Size = System.Windows.Size;
 using System.Windows.Controls;
 
-namespace FriskyMouse.UI.Controls;
+namespace FriskyMouse.Views.Controls;
 
 /// <summary>
 /// Arranges child elements into a single line that can be oriented horizontally

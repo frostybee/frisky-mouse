@@ -15,9 +15,9 @@ using FriskyMouse.Settings;
 
 namespace FriskyMouse.Drawing.Ripples;
 
-public partial class RippleProfileInfo : ObservableObject
+public partial class RippleProfileInfo 
 {
-     public HotkeySettings DefaultActivationShortcut => new HotkeySettings(true, false, false, true, 0x48);
+    public string Hotkey { get; set; } = "Ctrl + Shift + Alt + S";
     public bool IsEnabled { get; set; } = true;
     public RippleProfileType CurrentRippleProfile { get; set; } = RippleProfileType.Circle;
 

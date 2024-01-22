@@ -14,10 +14,11 @@ using Color = System.Drawing.Color;
 
 namespace FriskyMouse.Models;
 
-public partial class HighlighterInfo : ObservableObject
+public partial class HighlighterInfo 
 {
 
     #region Properties        
+    public string Hotkey { get; set; } = "Ctrl + Shift + Alt + A";
     public bool IsEnabled { get; set; } = true;
     public ushort Radius { get; set; } = 15;
     public ushort Width { get; set; } = 200;

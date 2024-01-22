@@ -1,5 +1,5 @@
  
-namespace FriskyMouse.UI.Controls;
+namespace FriskyMouse.Views.Controls;
 
 [ContentProperty(nameof(PageContent))]
 public class FeaturePageContentControl : Control
