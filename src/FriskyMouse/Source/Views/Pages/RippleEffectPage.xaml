@@ -101,14 +101,8 @@
             <!--
 
         </Grid>-->
-            <!--<ComboBox
-            Width="200"
-            MinWidth="20"
-            HorizontalAlignment="Left"
-            SelectedIndex="{Binding ViewModel.CurrentMouseButtonType, Mode=TwoWay}">
-            <ComboBoxItem Content="Left Click" />
-            <ComboBoxItem Content="Right Click" />
-        </ComboBox>-->
+
+            <controls:HotkeysVisualControl Hotkeys="{Binding ViewModel.Hotkeys}" />
             <controls:SettingsCard
                 Margin="0,20,0,0"
                 Description="{Binding ViewModel.SwitchDescriptionText}"

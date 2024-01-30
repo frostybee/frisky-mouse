@@ -58,6 +58,8 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
     private bool _isLeftButtonCurrent;
     [ObservableProperty]
     private bool _isRightButtonCurrent;
+    [ObservableProperty]
+    private List<string> _hotkeys;
 
     #region Animation Settings
     [ObservableProperty]
@@ -162,6 +164,7 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
         RadiusMultiplier = _rippleOptions.RadiusMultiplier;
         OpacityMultiplier = _rippleOptions.OpacityMultiplier;
         FillColor = _rippleOptions.FillColor.ToMediaColor();
+        Hotkeys = _rippleOptions.Hotkey.Split("+", StringSplitOptions.TrimEntries).ToList();
     }
 
     private void AdjustAnimationSpeed(int speed)
