@@ -8,7 +8,6 @@ public partial class DashboardPage : INavigableView<DashboardViewModel>
     {
         ViewModel = viewModel;
         DataContext = this;
-
         InitializeComponent();
     }
 }

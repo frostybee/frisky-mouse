@@ -11,10 +11,10 @@ namespace FriskyMouse.Views.Windows;
 /// </summary>
 public partial class MainWindow : IWindow
 {
-    public MainWindowViewModel ViewModel { get; }
     private bool _isUserClosedPane;
     private bool _isPaneOpenedOrClosedFromCode;
     private HwndSource _hwndSource;
+    public MainWindowViewModel ViewModel { get; }
 
     public MainWindow(
         MainWindowViewModel viewModel,
@@ -44,8 +44,8 @@ public partial class MainWindow : IWindow
     private void MainWindow_Loaded(object sender, RoutedEventArgs e)
     {
         // Apply the theme that was selected by the user.
-        FMAppHelper.ChangeUICurrentTheme(SettingsManager.Settings.ApplicationInfo.AppUiTheme);
-        ViewModel.DoStartUp();
+        FMAppHelper.ChangeUICurrentTheme(SettingsManager.Current.ApplicationInfo.AppUiTheme);
+        ViewModel.LoadAppModules();
     }
 
     private void OnNavigationSelectionChanged(object sender, RoutedEventArgs e)
@@ -90,7 +90,7 @@ public partial class MainWindow : IWindow
     }
     /// <summary>
     /// This is called after MainWindow() and before OnContentRendered()
-    /// Bring the main window to foreground or register hotkeys.
+    /// Bring the main window to foreground or register hotkeys. 
     /// </summary>
     /// <param name="e"></param>
     protected override void OnSourceInitialized(EventArgs e)
@@ -99,8 +99,6 @@ public partial class MainWindow : IWindow
 
         _hwndSource = HwndSource.FromHwnd(new WindowInteropHelper(this).Handle);
         _hwndSource?.AddHook(HwndHook);
-
-        //RegisterHotKeys();
     }
 
     [DebuggerStepThrough]
@@ -130,9 +128,10 @@ public partial class MainWindow : IWindow
         this.Topmost = false;
         this.Focus();
     }
-    //protected override void OnClosed(EventArgs e)
-    //{
-    //    base.OnClosed(e);
-    //    Application.Settings.Shutdown();
-    //}
+    protected override void OnClosed(EventArgs e)
+    {
+        base.OnClosed(e);
+        _hwndSource?.RemoveHook(HwndHook);
+        _hwndSource?.Dispose();
+    }
 }

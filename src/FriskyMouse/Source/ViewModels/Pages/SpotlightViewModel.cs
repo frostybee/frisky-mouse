@@ -2,6 +2,10 @@
 using Color = System.Windows.Media.Color;
 
 namespace FriskyMouse.ViewModels.Pages;
+
+/// <summary>
+/// Responsible for managing the mouse highlighter logic.
+/// </summary>
 public partial class SpotlightViewModel : ObservableObject, INavigationAware
 {
     #region Fields    
@@ -9,6 +13,13 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     private bool _isInitialized = false;
     private DecorationManager _decorationManager;
     private HighlighterInfo _spotlightOptions;
+
+    [ObservableProperty]
+    private List<string> _hotkeys;
+    //private List<string> _hotkeys = new List<string> { "Ctrl", "Alt", "F5" };
+
+    //[ObservableProperty]
+    //private List<object> _keys = new List<object> { "Ctrl", "Alt", "F5" };
 
     [ObservableProperty]
     private BitmapSource _spotlightImagePreview;
@@ -46,7 +57,6 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     private byte _shadowDepth;
     [ObservableProperty]
     private byte _shadowOpacityPercentage;
-
     #endregion
 
     public void OnNavigatedFrom()
@@ -64,19 +74,27 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     private void InitializeViewModel()
     {
         _decorationManager = DecorationManager.Instance;
-        _spotlightOptions = SettingsManager.Settings.HighlighterOptions;
-        LoadSpotlightOptions();
+        _spotlightOptions = SettingsManager.Current.HighlighterOptions;
+        LoadSpotlightOptions();        
         // Load the outline styles from their corresponding enum.
         OutlineStyles = FMAppHelper.GetEnumDescriptions<OutlineStyle>();
         SelectedOutlineStyle = (int)_spotlightOptions.OutlineStyle;
+        _decorationManager.HotkeysController.MouseHighlighterToggled += HotkeysController_MouseHighlighterToggled;
+        //HotkeyManager.HotkeyAlreadyRegistered += HotkeyManager_HotkeyAlreadyRegistered;
         // We apply the options and draw the spotlight once we're done
         // loading all the options.
         _isInitialized = true;
         ApplySpotlightOptions();
+        //RegisterGlobalHotkeys();
+    }
+    private void HotkeysController_MouseHighlighterToggled(object sender, EventArgs e)
+    {
+        IsEnabled = _spotlightOptions.IsEnabled;
     }
 
     private void LoadSpotlightOptions()
     {
+        Hotkeys = _spotlightOptions.Hotkey.Split("+", StringSplitOptions.TrimEntries).ToList();
         FillColor = _spotlightOptions.FillColor.ToMediaColor();
         ShadowColor = _spotlightOptions.ShadowColor.ToMediaColor();
         OutlineColor = _spotlightOptions.OutlineColor.ToMediaColor();

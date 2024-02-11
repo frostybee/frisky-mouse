@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 # nullable enable
-namespace FriskyMouse.UI.Controls;
+namespace FriskyMouse.Views.Controls;
 
 [TemplatePart(Name = MainPanelControl, Type = typeof(Grid))]
 [TemplatePart(Name = ActionableElement, Type = typeof(ContentPresenter))]

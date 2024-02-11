@@ -10,9 +10,10 @@
 */
 #endregion
 
+using System.Drawing;
 using Color = System.Drawing.Color;
 
-namespace FriskyMouse.Core;
+namespace FriskyMouse.Core.Controllers;
 
 internal class HighlighterController : IDisposable
 {
@@ -42,7 +43,7 @@ internal class HighlighterController : IDisposable
         // Clean up any previously generated bitmap.
         _spotlightBitmap?.Dispose();
         _spotlightBitmap = DrawingHelper.CreateBitmap(200, 200, Color.Transparent);
-        Graphics graphics = Graphics.FromImage(_spotlightBitmap);
+        using Graphics graphics = Graphics.FromImage(_spotlightBitmap);
         graphics.ClearCanvas();
         Rectangle rect = DrawingHelper.CreateRectangle(200, 200, highlighterInfo.Radius);
         graphics.DrawHighlighter(rect, highlighterInfo);
@@ -53,7 +54,6 @@ internal class HighlighterController : IDisposable
         // applying new settings. 
         MoveSpotlight(FMAppHelper.GetCursorPosition());
         _highlighterWindow.Show();
-        graphics?.Dispose();
     }
 
     /// <summary>

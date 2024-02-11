@@ -16,7 +16,7 @@ using NativeStructs = FriskyMouse.NativeApi;
 using Color = System.Drawing.Color;
 using CreateParams = System.Windows.Forms.CreateParams;
 
-namespace FriskyMouse.UI;
+namespace FriskyMouse.Views;
 
 /// <summary>
 /// Represents a lightweight, click-through window onto which 

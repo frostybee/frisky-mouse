@@ -1,4 +1,4 @@
-namespace FriskyMouse.UI.Controls;
+namespace FriskyMouse.Views.Controls;
 
 public class ToolNavigationPresenter : System.Windows.Controls.Control
 {
@@ -58,7 +58,7 @@ public class ToolNavigationPresenter : System.Windows.Controls.Control
             .Debug
             .WriteLine(
                 $"INFO | {nameof(ToolNavigationPresenter)} navigated, ({pageType})",
-                "FriskyMouse.UI.Controls"
+                "FriskyMouse.Views.Controls"
             );
 #endif
     }

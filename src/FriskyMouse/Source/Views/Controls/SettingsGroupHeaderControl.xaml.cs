@@ -1,5 +1,5 @@
 ﻿
-namespace FriskyMouse.UI.Controls;
+namespace FriskyMouse.Views.Controls;
 
 /// <summary>
 /// Interaction logic for SettingsGroupHeaderControl.xaml

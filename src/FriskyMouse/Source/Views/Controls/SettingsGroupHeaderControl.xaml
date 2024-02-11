@@ -1,8 +1,8 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:helpers="clr-namespace:FriskyMouse.UI.Controls"
-    xmlns:local="clr-namespace:FriskyMouse.UI.Controls"
+    xmlns:helpers="clr-namespace:FriskyMouse.Views.Controls"
+    xmlns:local="clr-namespace:FriskyMouse.Views.Controls"
     xmlns:syntax="http://schemas.lepo.co/wpfui/2022/xaml/syntax"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">

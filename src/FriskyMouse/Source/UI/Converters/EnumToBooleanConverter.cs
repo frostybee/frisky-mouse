@@ -1,4 +1,4 @@
-﻿namespace FriskyMouse.UI.Converters;
+﻿namespace FriskyMouse.Views.Converters;
 
 internal class EnumToBooleanConverter : IValueConverter
 {

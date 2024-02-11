@@ -1,4 +1,4 @@
-namespace FriskyMouse.UI.Helpers;
+namespace FriskyMouse.Views.Helpers;
 
 [AttributeUsage(AttributeTargets.Class)]
 class ApplicationPageAttribute : Attribute

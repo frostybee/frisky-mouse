@@ -1,7 +1,7 @@
 
 using Color = System.Windows.Media.Color;
 
-namespace FriskyMouse.UI.Controls;
+namespace FriskyMouse.Views.Controls;
 
 public class ColorPickerControl : Control
 {

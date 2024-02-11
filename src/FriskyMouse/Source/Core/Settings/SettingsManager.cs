@@ -11,6 +11,7 @@
 #endregion
 
 using System.Text.Json;
+using Color = System.Drawing.Color;
 
 namespace FriskyMouse.Settings;
 
@@ -18,7 +19,7 @@ internal static class SettingsManager
 {
     private static string _settingsFileName = "settings.json";
     private static Mutex _jsonMutex = new Mutex();
-    public static SettingsWrapper Settings { get; private set; } 
+    public static SettingsWrapper Current { get; private set; } 
 
     private static string SettingsFilePath
     {
@@ -47,7 +48,7 @@ internal static class SettingsManager
                 using FileStream openStream = File.OpenRead(settingFilePath);
                 if (openStream.CanRead)
                 {
-                    Settings = JsonSerializer.Deserialize<SettingsWrapper>(openStream, GetJsonSerializerOptions());
+                    Current = JsonSerializer.Deserialize<SettingsWrapper>(openStream, GetJsonSerializerOptions());
                     //TODO: verify if JSON file is not corrupted.
                 }
             }
@@ -74,12 +75,12 @@ internal static class SettingsManager
             {
                 Console.WriteLine("Saving settings in " + filePath);
                 //LoadDefaultSettings();
-                Settings.ApplicationInfo.ApplicationName = App.Configuration.ApplicationName;
-                Settings.ApplicationInfo.Version = FMAppHelper.GetApplicationVersion();
+                Current.ApplicationInfo.ApplicationName = App.Configuration.ApplicationName;
+                Current.ApplicationInfo.Version = FMAppHelper.GetApplicationVersion();
                 // Create the directory that will hold the settings file if it doesn't exist.
                 FileHelpers.CreateDirectoryFromFilePath(filePath);
                 FileStream createStream = File.Create(filePath);
-                JsonSerializer.SerializeAsync(createStream, Settings, GetJsonSerializerOptions());
+                JsonSerializer.SerializeAsync(createStream, Current, GetJsonSerializerOptions());
                 createStream.DisposeAsync();
                 //TODO: verify if JSON file is not corrupted.
             }
@@ -97,7 +98,14 @@ internal static class SettingsManager
 
     private static void LoadDefaultSettings()
     {
-        Settings ??= new SettingsWrapper();
+        if (Current == null)
+        {
+            Current = new SettingsWrapper();
+            // Differentiate the default click indicators.
+            Current.RightClickOptions.CurrentRippleProfile = RippleProfileType.Square;
+            Current.RightClickOptions.FillColor = Color.Green;
+            Current.RightClickOptions.Hotkey = "Ctrl + Shift + Alt + D";
+        }        
     }
 
     private static JsonSerializerOptions GetJsonSerializerOptions()

@@ -1,5 +1,5 @@
 ﻿
-namespace FriskyMouse.UI.Converters;
+namespace FriskyMouse.Views.Converters;
 
 public class NullToVisibilityConverter : IValueConverter
 {

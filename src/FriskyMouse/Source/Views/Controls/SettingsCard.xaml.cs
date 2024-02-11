@@ -1,10 +1,10 @@
 using System.ComponentModel;
 using System.Windows.Automation.Peers;
 
-namespace FriskyMouse.UI.Controls;
+namespace FriskyMouse.Views.Controls;
 
 /// <summary>
-/// Settings Card with Icon, header, description and content and <see cref="Footer"/>.
+/// Current Card with Icon, header, description and content and <see cref="Footer"/>.
 /// </summary>
 [TemplatePart(Name = MainPanelControl, Type = typeof(Grid))]
 [TemplatePart(Name = ActionableElement, Type = typeof(ContentPresenter))]
