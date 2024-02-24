@@ -419,20 +419,6 @@
 
                     <controls:SettingsCard
                         Grid.Row="1"
-                        Description="Specify whether you want the animation to progress inward, outward, or inward-outward"
-                        Header="Direction"
-                        Icon="{ui:SymbolIcon ArrowTurnBidirectionalDownRight24}"
-                        Style="{StaticResource SettingsCardExpanderItemStyle}">
-                        <ComboBox
-                            x:Name="RippleAnimationDirections"
-                            MinWidth="200"
-                            HorizontalAlignment="Left"
-                            ItemsSource="{Binding ViewModel.AnimationDirections, Mode=OneWay}"
-                            SelectedIndex="{Binding ViewModel.SelectedAnimationDirection, Mode=TwoWay}" />
-                    </controls:SettingsCard>
-
-                    <controls:SettingsCard
-                        Grid.Row="2"
                         Description="Select a function to control the acceleration and deceleration of the ripples animation"
                         Header="Easing fucntions"
                         Icon="{ui:SymbolIcon DesignIdeas24}"
@@ -445,6 +431,21 @@
                             ScrollViewer.VerticalScrollBarVisibility="Visible"
                             SelectedIndex="{Binding ViewModel.SelectedInterpolator, Mode=TwoWay}" />
                     </controls:SettingsCard>
+
+                    <controls:SettingsCard
+                        Grid.Row="2"
+                        Description="Specify whether you want the animation to progress inward, outward, or inward-outward"
+                        Header="Direction"
+                        Icon="{ui:SymbolIcon ArrowTurnBidirectionalDownRight24}"
+                        Style="{StaticResource SettingsCardExpanderItemStyle}">
+                        <ComboBox
+                            x:Name="RippleAnimationDirections"
+                            MinWidth="200"
+                            HorizontalAlignment="Left"
+                            ItemsSource="{Binding ViewModel.AnimationDirections, Mode=OneWay}"
+                            SelectedIndex="{Binding ViewModel.SelectedAnimationDirection, Mode=TwoWay}" />
+                    </controls:SettingsCard>
+
                 </Grid>
             </controls:ExpandableSettingsControl>
         </controls:SimpleStackPanel>

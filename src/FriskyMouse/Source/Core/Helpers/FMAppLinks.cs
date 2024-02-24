@@ -14,9 +14,10 @@ namespace FriskyMouse.Helpers;
 internal static class FMAppLinks
 {
     // General links.
-    public const string WebsiteURL = "https://friskymouse.github.io";
+    public const string WebsiteURL = "https://friskymouse.github.io";     
     public const string DocsURL = WebsiteURL + "/docs";
     public const string GitHubRepoURL = "https://github.com/frostybee/frisky-mouse";
+    public const string GitHubFeedbackURL = "https://github.com/frostybee/frisky-mouse/issues/new/choose";
     public const string GitHubIssuesURL = GitHubRepoURL + "/issues?q=is%3Aissue";
     public const string PrivacyPolicyURL = "";
     public const string DeveloperURL = "https://github.com/frostybee";

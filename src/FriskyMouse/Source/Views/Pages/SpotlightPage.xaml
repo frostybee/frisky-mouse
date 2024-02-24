@@ -164,7 +164,7 @@
                             </controls:SettingsCard>
 
                             <ui:Button
-                                Margin="30,10,0,0"
+                                Margin="5,10,0,0"
                                 HorizontalAlignment="Left"
                                 Appearance="Primary"
                                 Command="{Binding ViewModel.ResetButtonClickCommand, Mode=OneWay}"

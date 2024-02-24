@@ -42,9 +42,9 @@ public sealed class AppConfigurationInfo
     /// Application name like "FriskyMouse".
     /// </summary>
     public string ApplicationName { get; internal set; } = "FriskyMouse";
-    public string SendFeedbackURI { get; private set; } = "https://github.com/frostybee/friskymouse/issues/new?assignees=frostybee&amp;labels=bug,friskymouse&amp;template=bug_report.yaml&amp;title=FriskyMouse+Problem";
-    public string ProjectGitHubRepo { get; private set; } = "https://github.com/frostybee/friskymouse";
-    public string ApplicationWebsite { get; private set; } = "https://friskymouse.github.io/";
+    public string SendFeedbackURI { get; private set; } = FMAppLinks.GitHubFeedbackURL;
+    public string ProjectGitHubRepo { get; private set; } = FMAppLinks.GitHubRepoURL;
+    public string ApplicationWebsite { get; private set; } = FMAppLinks.WebsiteURL;
 
 
     // TODO: add app's version and URLs.

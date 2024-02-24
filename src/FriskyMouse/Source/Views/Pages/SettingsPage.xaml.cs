@@ -1,6 +1,6 @@
 ﻿namespace FriskyMouse.Views.Pages;
 
-[ApplicationPage(3, "Current", "Change the application settings", SymbolRegular.Settings24)]
+[ApplicationPage(3, "Settings", "Change the application settings", SymbolRegular.Settings24)]
 public partial class SettingsPage : INavigableView<SettingsViewModel>
 {
     public SettingsViewModel ViewModel { get; }
