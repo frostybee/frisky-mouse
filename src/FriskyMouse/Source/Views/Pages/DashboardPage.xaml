@@ -131,21 +131,23 @@
                 Margin="8,8,0,0"
                 Padding="4"
                 Content="Documentation"
+                Icon="{ui:SymbolIcon BookInformation24}"
                 NavigateUri="https://friskymouse.github.io/"
                 ToolTip="https://friskymouse.github.io/" />
             <ui:HyperlinkButton
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="Microsoft Store"
+                Icon="{ui:SymbolIcon StoreMicrosoft20}"
                 NavigateUri="https://apps.microsoft.com/detail/9NDWJST4VTQR"
                 ToolTip="https://apps.microsoft.com/detail/9NDWJST4VTQR" />
             <ui:HyperlinkButton
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="GitHub"
-                Icon="{ui:SymbolIcon WeatherSunny24}"
-                NavigateUri="https://github.com/frostybee/FriskyMouse"
-                ToolTip="https://github.com/frostybee/FriskyMouse" />
+                Icon="{ui:SymbolIcon CodeBlock24}"
+                NavigateUri="https://github.com/frostybee/frisky-mouse"
+                ToolTip="Visit https://github.com/frostybee/frisky-mouse" />
         </StackPanel>
     </Grid>
 </Page>
