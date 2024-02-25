@@ -4,8 +4,6 @@ FriskyMouse is a free, highly customizable, and open-source utility application 
 
 With FriskyMouse, you can draw a spotlight around your mouse cursor and indicate the location of your mouse left or right clicks using a set of different ripple effects, enabling your audience to follow your mouse movements and actions with ease.
 
-FriskyMouse is a application that provides features for highlighting the mouse cursor and decorating left and right clicks.
-
 ## Screenshots
 
 ![Mouse Highlighter](screenshots/highlighter.png)

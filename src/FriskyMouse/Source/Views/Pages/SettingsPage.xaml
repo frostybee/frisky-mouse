@@ -12,7 +12,7 @@
     Title="FriskyMouse Settings"
     d:DataContext="{d:DesignInstance local:SettingsPage,
                                      IsDesignTimeCreatable=False}"
-    d:DesignHeight="450"
+    d:DesignHeight="1000"
     d:DesignWidth="800"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
@@ -84,12 +84,54 @@
 
             <controls:ExpandableSettingsControl
                 Margin="0,5,0,0"
-                Description="Doc"
                 Header="Useful links"
                 HeaderContentPadding="0,0,0,0"
                 Icon="{ui:SymbolIcon Link48}"
-                IsExpanded="False">
-                <StackPanel>
+                IsExpanded="True">
+                <Grid Margin="42,12,6,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <ui:HyperlinkButton
+                            Content="Source code"
+                            Icon="{ui:SymbolIcon CodeBlock24}"
+                            NavigateUri="https://github.com/frostybee/frisky-mouse"
+                            ToolTip="https://github.com/frostybee/frisky-mouse" />
+
+                        <ui:HyperlinkButton
+                            Content="Privacy Policy"
+                            Icon="{ui:SymbolIcon TabInprivateAccount24}"
+                            NavigateUri="https://friskymouse.github.io/privacy-policy/"
+                            ToolTip="https://friskymouse.github.io/privacy-policy/" />
+
+                        <ui:HyperlinkButton
+                            Content="Rate and review on Microsoft Store"
+                            Icon="{ui:SymbolIcon StoreMicrosoft20}"
+                            NavigateUri="https://apps.microsoft.com/detail/9ndwjst4vtqr"
+                            ToolTip="https://apps.microsoft.com/detail/9ndwjst4vtqr" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <ui:HyperlinkButton
+                            Content="License"
+                            Icon="{ui:SymbolIcon BookInformation24}"
+                            NavigateUri="https://friskymouse.github.io/"
+                            ToolTip="https://friskymouse.github.io/" />
+                        <ui:HyperlinkButton
+                            Content="Third party licenses"
+                            Icon="{ui:SymbolIcon ClipboardCode24}"
+                            NavigateUri="https://github.com/frostybee/frisky-mouse/blob/main/THIRD-PARTY-NOTICES.md"
+                            ToolTip="https://github.com/frostybee/frisky-mouse/blob/main/THIRD-PARTY-NOTICES.md" />
+                        <ui:HyperlinkButton
+                            Content="Report a problem"
+                            Icon="{ui:SymbolIcon Bug24}"
+                            NavigateUri="https://github.com/frostybee/frisky-mouse/issues/new/choose"
+                            ToolTip="https://github.com/frostybee/frisky-mouse/issues/new/choose" />
+                    </StackPanel>
+                </Grid>
+                <!--<StackPanel>
                     <Grid Margin="16">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -112,7 +154,7 @@
                         NavigateUri="https://github.com/lepoco/wpfui/issues/new/choose">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
+                               222 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="File a bug or request a new sample" />
@@ -138,7 +180,7 @@
                         </Grid>
                     </ui:Anchor>
                     <TextBlock Margin="16" Text="{Binding ViewModel.AppVersion, Mode=OneWay}" />
-                </StackPanel>
+                </StackPanel>-->
             </controls:ExpandableSettingsControl>
         </StackPanel>
     </controls:FeaturePageContentControl>

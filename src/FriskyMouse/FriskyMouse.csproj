@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <None Remove="Assets\FmLogo.png" />
-    <None Remove="Assets\images\RightClick50.png" />
     <None Remove="Assets\sampleText.png" />
     <None Remove="FriskyMouseIcon.ico" />
   </ItemGroup>
@@ -33,33 +32,23 @@
     <Resource Include="FriskyMouseIcon.ico" />
   </ItemGroup>
 
-  <!--<PropertyGroup>
-    --><!--https://github.com/nulastudio/NetBeauty2--><!--
+  <PropertyGroup>
+    <!--https://github.com/nulastudio/NetBeauty2-->
     <BeautySharedRuntimeMode>False</BeautySharedRuntimeMode>
     <BeautyLibsDir Condition="$(BeautySharedRuntimeMode) == 'True'">../lib</BeautyLibsDir>
-    <BeautyLibsDir Condition="$(BeautySharedRuntimeMode) != 'True'">./lib</BeautyLibsDir>
-    --><!-- Exclude files if necessary
-		<BeautyExcludes>xyz.dll</BeautyExcludes>
-		--><!--    
+    <!--<BeautyLibsDir Condition="$(BeautySharedRuntimeMode) != 'True'">./lib</BeautyLibsDir>
+     Exclude files if necessary
+		<BeautyExcludes>xyz.dll</BeautyExcludes>-->
+		    
     <DisableBeauty>False</DisableBeauty>
     <BeautyOnPublishOnly>False</BeautyOnPublishOnly>
     <BeautyEnableDebugging>False</BeautyEnableDebugging>
     <BeautyUsePatch>False</BeautyUsePatch>
     <BeautyLogLevel>Info</BeautyLogLevel>
-  </PropertyGroup>-->
+  </PropertyGroup>
 
   <ItemGroup>
-    <Resource Include="Assets\images\RightClick50.png" />
     <Resource Include="Assets\sampleText.png" />
-    <Resource Include="Assets\WinUiGallery\Button.png" />
-    <Resource Include="Assets\WinUiGallery\Flyout.png" />
-    <Resource Include="Assets\WinUiGallery\MenuBar.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="License - Images.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -84,6 +73,15 @@
   <ItemGroup>
     <Using Include="System.Text" />
     <Using Include="System.Text.Json.Serialization" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Licenses\LICENSE.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Licenses\THIRD-PARTY-NOTICES.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

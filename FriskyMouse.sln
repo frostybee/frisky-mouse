@@ -3,20 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wpf.Ui", "wpfui\src\Wpf.Ui\Wpf.Ui.csproj", "{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wpf.Ui", "src\wpfui\src\Wpf.Ui\Wpf.Ui.csproj", "{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FriskyMouse", "FriskyMouse\FriskyMouse.csproj", "{171B8D91-EFA4-48FF-9D16-4473E93C220C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FriskyMouse", "src\FriskyMouse\FriskyMouse.csproj", "{171B8D91-EFA4-48FF-9D16-4473E93C220C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FriskyMouse.Core", "FriskyMouse.Core\FriskyMouse.Core.csproj", "{16F9990C-7BA2-400F-88EA-98FD00CA84CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FriskyMouse.Core", "src\FriskyMouse.Core\FriskyMouse.Core.csproj", "{16F9990C-7BA2-400F-88EA-98FD00CA84CD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FriskyMouse.Drawing", "FriskyMouse.Drawing\FriskyMouse.Drawing.csproj", "{C170CDDB-C91E-424C-BB45-364D677EAA71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FriskyMouse.Drawing", "src\FriskyMouse.Drawing\FriskyMouse.Drawing.csproj", "{C170CDDB-C91E-424C-BB45-364D677EAA71}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BE5E05B3-07F3-4226-B0DB-ACA94D6EB03F}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "FriskyMouse.Package", "FriskyMouse.Package\FriskyMouse.Package.wapproj", "{BBD3BC17-1BF1-4A53-92C4-E55E60A55BDD}"
+Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "FriskyMouse.Package", "src\FriskyMouse.Package\FriskyMouse.Package.wapproj", "{BBD3BC17-1BF1-4A53-92C4-E55E60A55BDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -239,9 +239,23 @@
                                 <RowDefinition />
                             </Grid.RowDefinitions>
                             <controls:SettingsCard
+                                Grid.Row="0"
+                                Description="Select an outline style"
+                                Header="Outline style"
+                                Icon="{ui:SymbolIcon BorderTopBottomDouble24}"
+                                Style="{StaticResource SettingsCardExpanderItemStyle}">
+                                <ComboBox
+                                    MinWidth="200"
+                                    HorizontalAlignment="Left"
+                                    ItemsSource="{Binding ViewModel.OutlineStyles, Mode=OneWay}"
+                                    SelectedIndex="{Binding ViewModel.SelectedOutlineStyle, Mode=TwoWay}" />
+                            </controls:SettingsCard>
+
+                            <controls:SettingsCard
+                                Grid.Row="1"
                                 Height="55"
                                 CanReposition="False"
-                                Description="Select color for the spotlight's outline"
+                                Description="Change the color of the spotlight outline"
                                 Header="Color"
                                 Icon="{ui:SymbolIcon ColorBackground24}"
                                 Style="{StaticResource SettingsCardExpanderItemStyle}">
@@ -250,7 +264,7 @@
                             </controls:SettingsCard>
 
                             <controls:SettingsCard
-                                Grid.Row="1"
+                                Grid.Row="2"
                                 Description="Adjust the width of the spotlight outline"
                                 Header="Width (px)"
                                 Icon="{ui:SymbolIcon AutoFitWidth24}"
@@ -266,26 +280,6 @@
                                     Value="{Binding ViewModel.OutlineWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             </controls:SettingsCard>
 
-                            <controls:SettingsCard
-                                Grid.Row="2"
-                                Description="Select an outline style"
-                                Header="Outline style"
-                                Icon="{ui:SymbolIcon BorderTopBottomDouble24}"
-                                Style="{StaticResource SettingsCardExpanderItemStyle}">
-                                <ComboBox
-                                    MinWidth="200"
-                                    HorizontalAlignment="Left"
-                                    ItemsSource="{Binding ViewModel.OutlineStyles, Mode=OneWay}"
-                                    SelectedIndex="{Binding ViewModel.SelectedOutlineStyle, Mode=TwoWay}" />
-                                <!--<Slider
-                                Width="200"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                AutoToolTipPlacement="TopLeft"
-                                Maximum="100"
-                                Minimum="0"
-                                Value="{Binding ViewModel.OutlineStyle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
-                            </controls:SettingsCard>
                         </Grid>
                     </controls:ExpandableSettingsControl>
                 </controls:SettingsGroupHeaderControl>
