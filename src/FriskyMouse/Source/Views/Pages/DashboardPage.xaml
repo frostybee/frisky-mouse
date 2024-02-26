@@ -65,7 +65,7 @@
                             FontSize="14"
                             FontTypography="Body"
                             Foreground="#B7FFFFFF"
-                            Text="Highlight your mouse cursor and decorate your mouse clicks." />
+                            Text="Highlight your mouse cursor and decorate your mouse clicks!" />
                     </StackPanel>
                     <ui:TextBlock
                         Margin="12"

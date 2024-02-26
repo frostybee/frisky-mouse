@@ -74,6 +74,7 @@
 
                                     <ContentPresenter
                                         x:Name="PART_ActionableElement"
+                                        Margin="0,0,25,0"
                                         VerticalAlignment="Center"
                                         Content="{TemplateBinding ExpanderAction}"
                                         Style="{StaticResource NormalState}" />

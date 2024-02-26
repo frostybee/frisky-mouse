@@ -26,14 +26,14 @@
     <Thickness x:Key="SettingsExpanderItemPadding">58,8,44,8</Thickness>
     <Thickness x:Key="SettingsExpanderHeaderPadding">16,16,4,16</Thickness>
 
-    <Thickness x:Key="SettingsExpanderItemBorderThickness">0,1,0,0</Thickness>
+    <Thickness x:Key="SettingsExpanderItemBorderThickness">0,2,0,0</Thickness>
     <system:Double x:Key="SettingsExpanderContentMinHeight">16</system:Double>
 
     <Style x:Key="DefaultSettingsCardStyle" TargetType="{x:Type local:SettingsCard}">
         <Setter Property="Background" Value="{DynamicResource CardBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource CardForeground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource CardBorderBrush}" />
-        <Setter Property="BorderThickness" Value="{StaticResource CardBorderThemeThickness}" />
+        <Setter Property="BorderThickness" Value="{StaticResource SettingsCardBorderThickness}" />
         <Setter Property="Padding" Value="{StaticResource SettingsCardPadding}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />

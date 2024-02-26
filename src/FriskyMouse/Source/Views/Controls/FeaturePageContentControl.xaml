@@ -42,7 +42,7 @@
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <!--  Top header panel  -->
-                                <Grid MaxWidth="{StaticResource PageContentMaxWidth}" Margin="{StaticResource ModulePageTitleTextMargin}">
+                                <!--<Grid MaxWidth="{StaticResource PageContentMaxWidth}" Margin="{StaticResource ModulePageTitleTextMargin}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
@@ -66,13 +66,16 @@
                                             SnapsToDevicePixels="True" />
                                     </ui:Card>
 
-                                    <StackPanel
+                                -->
+                                <!--<StackPanel
                                         x:Name="DescriptionPanel"
                                         Grid.Row="0"
                                         Grid.RowSpan="2"
                                         Grid.Column="1"
                                         Margin="20,0,0,0">
-                                        <!--  Panel text  -->
+                                -->
+                                <!--  Panel text  -->
+                                <!--
                                         <ui:TextBlock
                                             x:Name="DescriptionText"
                                             MaxWidth="{StaticResource PageContentMaxWidth}"
@@ -83,7 +86,8 @@
                                             Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}"
                                             Text="{TemplateBinding FeatureDescription}" />
 
-                                        <!--<ItemsControl x:Name="PrimaryLinksControl"
+                                -->
+                                <!--<ItemsControl x:Name="PrimaryLinksControl"
                                           Margin="0,8,0,0"
                                           IsTabStop="False"
                                           ItemsSource="{Bind PrimaryLinks}">
@@ -103,8 +107,10 @@
                                         </ItemsPanelTemplate>
                                     </ItemsControl.ItemsPanel>
                                 </ItemsControl>-->
-                                    </StackPanel>
-                                </Grid>
+                                <!--
+                                    </StackPanel>-->
+                                <!--
+                                </Grid>-->
 
                                 <!--  Module main content  -->
                                 <ContentPresenter

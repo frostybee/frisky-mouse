@@ -49,7 +49,7 @@
                             <ItemsPanelTemplate>
                                 <ui:VirtualizingWrapPanel
                                     IsItemsHost="True"
-                                    ItemSize="270,170"
+                                    ItemSize="285,170"
                                     Orientation="Vertical"
                                     SpacingMode="Uniform"
                                     StretchItems="True" />

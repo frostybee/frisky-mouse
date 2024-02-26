@@ -13,7 +13,7 @@
     d:DataContext="{d:DesignInstance local:SpotlightPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="2000"
-    d:DesignWidth="900"
+    d:DesignWidth=" 1200"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
@@ -28,185 +28,183 @@
         <!--  Page Content  -->
         <StackPanel Margin="0,0,0,50" HorizontalAlignment="Stretch">
 
-            <controls:HotkeysVisualControl Hotkeys="{Binding ViewModel.Hotkeys}" />
+            <!--
+            TODO: convert this into text
+            <controls:HotkeysVisualControl Hotkeys="{Binding ViewModel.Hotkeys}" />-->
 
             <!--  Enable spotlight switch  -->
             <controls:SettingsCard Header="Enable mouse highlighter" Icon="{ui:SymbolIcon Flashlight16}">
                 <ui:ToggleSwitch
+                    Margin="0,0,20,0"
                     IsChecked="{Binding ViewModel.IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     OffContent="Off"
                     OnContent="On" />
             </controls:SettingsCard>
 
             <!--  Spotlight options  -->
-            <Grid Margin="0,30,0,0" HorizontalAlignment="Stretch">
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0" HorizontalAlignment="Left">
-                    <StackPanel Orientation="Horizontal">
+            <controls:ExpandableSettingsControl
+                Margin="0,10,0,0"
+                Description="Adjust the highlighter's visual properties"
+                Header="Highlighter Options"
+                HeaderContentPadding="0,0,0,0"
+                Icon="{ui:SymbolIcon MoviesAndTv24}"
+                IsExpanded="True">
 
-                        <ui:TextBlock
-                            Margin="2,0,0,5"
-                            HorizontalAlignment="Left"
-                            FontTypography="BodyStrong"
-                            Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}"
-                            Text="Highlighter options"
-                            TextOptions.TextFormattingMode="Ideal"
-                            TextOptions.TextRenderingMode="Auto"
-                            TextWrapping="WrapWithOverflow" />
-
-                    </StackPanel>
-                    <!--<ui:Card
-                        Width="400"
-                        Padding="0,20,20,20"
-                        HorizontalAlignment="Left">-->
-                    <Grid>
-                        <Grid.RowDefinitions />
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <StackPanel
-                            Width="600"
-                            Margin="0,0,0,0"
-                            HorizontalAlignment="Left">
-
-                            <controls:SettingsCard
-                                Height="45"
-                                Margin="0,0,0,0"
-                                Padding="5,5,25,5"
-                                CanReposition="False"
-                                Header="Filled spotlight"
-                                Icon="{ui:SymbolIcon CircleHalfFill24}">
-                                <ui:ToggleSwitch
-                                    Margin="70,0,0,0"
-                                    IsChecked="{Binding ViewModel.IsFilled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                    OffContent="Off"
-                                    OnContent="On" />
-                            </controls:SettingsCard>
-
-                            <controls:SettingsCard
-                                Margin="0,0,0,0"
-                                Padding="5,5,25,5"
-                                CanReposition="False"
-                                Header="Spotlight color"
-                                Icon="{ui:SymbolIcon Color24}">
-                                <!--<controls:ColorPickerControl SelectedColor="{Binding ViewModel.FillColor, Mode=TwoWay}" />-->
-
-                                <ui:Card Width="90" Padding="5">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-                                        <colorpicker:PortableColorPicker
-                                            Width="60"
-                                            Height="35"
-                                            Padding="2,2,5,2"
-                                            AllowDrop="True"
-                                            HintColor="Red"
-                                            SelectedColor="{Binding ViewModel.FillColor, Mode=TwoWay}"
-                                            ShowAlpha="False"
-                                            ShowFractionalPart="False"
-                                            SmallChange="5"
-                                            Style="{DynamicResource DefaultColorPickerStyle}"
-                                            UseHintColor="True" />
-                                        <ui:SymbolIcon
-                                            Grid.Column="2"
-                                            Margin="5,0,0,0"
-                                            Symbol="ChevronDown48" />
-                                    </Grid>
-                                </ui:Card>
-
-                            </controls:SettingsCard>
-
-                            <controls:SettingsCard
-                                Height="45"
-                                Margin="0,0,0,0"
-                                Padding="5,5,25,5"
-                                CanReposition="False"
-                                Header="Radius (px)"
-                                Icon="{ui:SymbolIcon CircleEdit24}">
-                                <Slider
-                                    Grid.Column="1"
-                                    Width="160"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    AutoToolTipPlacement="TopLeft"
-                                    IsSnapToTickEnabled="True"
-                                    Maximum="80"
-                                    Minimum="10"
-                                    SmallChange="1"
-                                    Value="{Binding ViewModel.Radius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            </controls:SettingsCard>
-
-                            <controls:SettingsCard
-                                Height="45"
-                                Margin="0,0,0,0"
-                                Padding="5,5,25,5"
-                                CanReposition="False"
-                                Header="Opacity"
-                                Icon="{ui:SymbolIcon LightbulbFilament24}">
-                                <Slider
-                                    Grid.Row="2"
-                                    Grid.Column="1"
-                                    Width="160"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    AutoToolTipPlacement="TopLeft"
-                                    Maximum="95"
-                                    Minimum="10"
-                                    Value="{Binding ViewModel.OpacityPercentage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            </controls:SettingsCard>
-
-                            <ui:Button
-                                Margin="5,10,0,0"
-                                HorizontalAlignment="Left"
-                                Appearance="Primary"
-                                Command="{Binding ViewModel.ResetButtonClickCommand, Mode=OneWay}"
-                                CommandParameter="ResetSpotlight"
-                                Icon="{ui:SymbolIcon ArrowReset48}">
-                                Reset Options
-                            </ui:Button>
-                        </StackPanel>
-                    </Grid>
-
-                    <!--</ui:Card>-->
-
-                </StackPanel>
-                <StackPanel Grid.Column="1" Margin="10,0,0,0">
-                    <ui:TextBlock
-                        Margin="0,0,0,5"
-                        FontTypography="BodyStrong"
-                        Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}"
-                        Text="Preview"
-                        TextOptions.TextFormattingMode="Ideal"
-                        TextOptions.TextRenderingMode="Auto"
-                        TextWrapping="WrapWithOverflow" />
-                    <ui:Card
-                        Width="220"
-                        Margin="0,0,0,0"
-                        Padding="0,0,0,0"
+                <Grid Margin="0,30,0,0" HorizontalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel
+                        Grid.Column="0"
+                        Margin="20,0,0,20"
                         HorizontalAlignment="Left">
                         <Grid>
-                            <Image
-                                Width="230"
-                                Height="240"
-                                Source="pack://application:,,,/Assets/sampleText.png" />
-                            <Image
-                                Width="200"
-                                Height="240"
-                                Source="{Binding ViewModel.SpotlightImagePreview}" />
+                            <Grid.RowDefinitions />
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel
+                                Width="700"
+                                Margin="0,0,0,0"
+                                HorizontalAlignment="Left">
+
+                                <controls:SettingsCard
+                                    Height="45"
+                                    Margin="0,0,0,0"
+                                    Padding="5,5,25,5"
+                                    CanReposition="False"
+                                    Header="Filled spotlight"
+                                    Icon="{ui:SymbolIcon CircleHalfFill24}"
+                                    Style="{StaticResource SettingsCardExpanderItemStyle}">
+                                    <ui:ToggleSwitch
+                                        Margin="70,0,0,0"
+                                        IsChecked="{Binding ViewModel.IsFilled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        OffContent="Off"
+                                        OnContent="On" />
+                                </controls:SettingsCard>
+
+                                <controls:SettingsCard
+                                    Margin="0,0,0,0"
+                                    Padding="5,5,25,5"
+                                    CanReposition="True"
+                                    Header="Highlighter color"
+                                    Icon="{ui:SymbolIcon Color24}"
+                                    Style="{StaticResource SettingsCardExpanderItemStyle}">
+                                    <!--<controls:ColorPickerControl SelectedColor="{Binding ViewModel.FillColor, Mode=TwoWay}" />-->
+
+                                    <ui:Card Width="90" Padding="5">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <colorpicker:PortableColorPicker
+                                                Width="60"
+                                                Height="35"
+                                                Padding="2,2,5,2"
+                                                AllowDrop="True"
+                                                HintColor="Red"
+                                                SelectedColor="{Binding ViewModel.FillColor, Mode=TwoWay}"
+                                                ShowAlpha="False"
+                                                ShowFractionalPart="False"
+                                                SmallChange="5"
+                                                Style="{DynamicResource DefaultColorPickerStyle}"
+                                                UseHintColor="True" />
+                                            <ui:SymbolIcon
+                                                Grid.Column="2"
+                                                Margin="5,0,0,0"
+                                                Symbol="ChevronDown48" />
+                                        </Grid>
+                                    </ui:Card>
+
+                                </controls:SettingsCard>
+
+                                <controls:SettingsCard
+                                    Height="45"
+                                    Margin="0,0,0,0"
+                                    Padding="5,5,25,5"
+                                    CanReposition="False"
+                                    Description="Change the highlighter's radius"
+                                    Header="Radius (px)"
+                                    Icon="{ui:SymbolIcon CircleEdit24}"
+                                    Style="{StaticResource SettingsCardExpanderItemStyle}">
+                                    <Slider
+                                        Grid.Column="1"
+                                        Width="160"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        AutoToolTipPlacement="TopLeft"
+                                        IsSnapToTickEnabled="True"
+                                        Maximum="80"
+                                        Minimum="10"
+                                        SmallChange="1"
+                                        Value="{Binding ViewModel.Radius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </controls:SettingsCard>
+
+                                <controls:SettingsCard
+                                    Height="45"
+                                    Margin="0,0,0,0"
+                                    Padding="5,5,25,5"
+                                    CanReposition="False"
+                                    Description="Adjust the percentage of the highlighter's opacity"
+                                    Header="Opacity (%)"
+                                    Icon="{ui:SymbolIcon LightbulbFilament24}"
+                                    Style="{StaticResource SettingsCardExpanderItemStyle}">
+                                    <Slider
+                                        Grid.Row="2"
+                                        Grid.Column="1"
+                                        Width="160"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        AutoToolTipPlacement="TopLeft"
+                                        Maximum="95"
+                                        Minimum="10"
+                                        Value="{Binding ViewModel.OpacityPercentage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </controls:SettingsCard>
+
+                                <ui:Button
+                                    Margin="15,10,0,0"
+                                    HorizontalAlignment="Left"
+                                    Appearance="Primary"
+                                    Command="{Binding ViewModel.ResetButtonClickCommand, Mode=OneWay}"
+                                    CommandParameter="ResetSpotlight"
+                                    Icon="{ui:SymbolIcon ArrowReset48}">
+                                    Reset Options
+                                </ui:Button>
+                            </StackPanel>
                         </Grid>
 
-                        <!--<ImageBrush ImageSource="{Binding ViewModel.SpotlightImagePreview}" Stretch="UniformToFill" />-->
-                    </ui:Card>
-                </StackPanel>
-            </Grid>
+                        <!--</ui:Card>-->
+
+                    </StackPanel>
+
+                    <!--  Spotlight Preivew  -->
+                    <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                        <ui:Card
+                            Width="220"
+                            Margin="0,0,0,0"
+                            Padding="0,0,0,0"
+                            HorizontalAlignment="Left">
+                            <Grid>
+                                <Image
+                                    Width="230"
+                                    Height="240"
+                                    Source="pack://application:,,,/Assets/sampleText.png" />
+                                <Image
+                                    Width="200"
+                                    Height="240"
+                                    Source="{Binding ViewModel.SpotlightImagePreview}" />
+                            </Grid>
+
+                            <!--<ImageBrush ImageSource="{Binding ViewModel.SpotlightImagePreview}" Stretch="UniformToFill" />-->
+                        </ui:Card>
+                    </StackPanel>
+                </Grid>
+            </controls:ExpandableSettingsControl>
 
             <StackPanel
                 Margin="0,15,0,0"
@@ -214,7 +212,7 @@
                 Orientation="Vertical">
 
                 <!--  Spotlight outline options  -->
-                <controls:SettingsGroupHeaderControl Description="Customize the outline to be rendered around the highlighter" Header="Outline options">
+                <controls:SettingsGroupHeaderControl Description="Customize an outline to be rendered around the highlighter" Header="Outline options">
                     <!--  TODO:  add description below the options header.  -->
                     <controls:ExpandableSettingsControl
                         Header="Enable highlighter outline"
@@ -253,7 +251,7 @@
 
                             <controls:SettingsCard
                                 Grid.Row="1"
-                                Height="55"
+                                Height="65"
                                 CanReposition="False"
                                 Description="Change the color of the spotlight outline"
                                 Header="Color"
@@ -285,7 +283,7 @@
                 </controls:SettingsGroupHeaderControl>
 
                 <!--  Shadow options  -->
-                <controls:SettingsGroupHeaderControl Description="Adjust the style of the shadow to be rendered around the highlighter's outline" Header="Shadow options">
+                <controls:SettingsGroupHeaderControl Description="Customize the style of the shadow to be rendered around the highlighter's outline" Header="Shadow options">
                     <controls:ExpandableSettingsControl
                         Header="Enable highlighter shadow"
                         HeaderContentPadding="0,0,0,0"
@@ -308,7 +306,7 @@
                                 <RowDefinition />
                             </Grid.RowDefinitions>
                             <controls:SettingsCard
-                                Height="55"
+                                Height="65"
                                 CanReposition="False"
                                 Description="Select a shadow color"
                                 Header="Color"

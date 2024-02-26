@@ -40,7 +40,7 @@
      Exclude files if necessary
 		<BeautyExcludes>xyz.dll</BeautyExcludes>-->
 		    
-    <DisableBeauty>False</DisableBeauty>
+    <DisableBeauty>True</DisableBeauty>
     <BeautyOnPublishOnly>False</BeautyOnPublishOnly>
     <BeautyEnableDebugging>False</BeautyEnableDebugging>
     <BeautyUsePatch>False</BeautyUsePatch>
@@ -65,7 +65,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FriskyMouse.Core\FriskyMouse.Core.csproj" />
     <ProjectReference Include="..\FriskyMouse.Drawing\FriskyMouse.Drawing.csproj" />
     <ProjectReference Include="..\wpfui\src\Wpf.Ui\Wpf.Ui.csproj" />
   </ItemGroup>

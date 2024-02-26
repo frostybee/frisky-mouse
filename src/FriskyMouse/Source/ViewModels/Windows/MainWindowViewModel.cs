@@ -30,9 +30,9 @@ public partial class MainWindowViewModel : ObservableObject
             new NavigationViewItemSeparator(),
             new NavigationViewItem("Mouse Highlighter", SymbolRegular.Flashlight20, typeof(SpotlightPage)),
             new NavigationViewItemSeparator(),
-            new NavigationViewItem("Click Indicator", SymbolRegular.CursorClick24, typeof(RippleEffectPage)),
-            new NavigationViewItemSeparator(),
-            new NavigationViewItem("Views Tests", SymbolRegular.Ruler48, typeof(UiTestsPage)),
+            new NavigationViewItem("Click Indicator", SymbolRegular.CursorClick24, typeof(RippleEffectPage))
+            //new NavigationViewItemSeparator(),
+            //new NavigationViewItem("Views Tests", SymbolRegular.Ruler48, typeof(UiTestsPage)),
         };
 
         _footerMenuItems = new ObservableCollection<object>()

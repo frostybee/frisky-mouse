@@ -14,7 +14,7 @@
 
     <Style x:Key="TextBlockSettingDescriptionStyle" TargetType="TextBlock">
         <Setter Property="TextWrapping" Value="Wrap" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontSize" Value="13" />
         <Setter Property="Opacity" Value="0.80" />
     </Style>
 
