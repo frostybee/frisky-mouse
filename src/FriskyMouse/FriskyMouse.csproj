@@ -12,7 +12,7 @@
     <Platforms>AnyCPU;x64</Platforms>
     <RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
     <UseWindowsForms>False</UseWindowsForms>
-    <Configurations>Debug;Release;Portable;SelfContained;MicrosoftStore</Configurations>
+    <Configurations>Debug;Release;Portable;MicrosoftStore;SelfContained</Configurations>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <!--<UseWindowsForms>True</UseWindowsForms>-->    
   </PropertyGroup>
@@ -32,20 +32,20 @@
     <Resource Include="FriskyMouseIcon.ico" />
   </ItemGroup>
 
-  <PropertyGroup>
-    <!--https://github.com/nulastudio/NetBeauty2-->
+  <!--<PropertyGroup>
+    --><!--https://github.com/nulastudio/NetBeauty2--><!--
     <BeautySharedRuntimeMode>False</BeautySharedRuntimeMode>
     <BeautyLibsDir Condition="$(BeautySharedRuntimeMode) == 'True'">../lib</BeautyLibsDir>
-    <!--<BeautyLibsDir Condition="$(BeautySharedRuntimeMode) != 'True'">./lib</BeautyLibsDir>
+    --><!--<BeautyLibsDir Condition="$(BeautySharedRuntimeMode) != 'True'">./lib</BeautyLibsDir>
      Exclude files if necessary
-		<BeautyExcludes>xyz.dll</BeautyExcludes>-->
+		<BeautyExcludes>xyz.dll</BeautyExcludes>--><!--
 		    
     <DisableBeauty>True</DisableBeauty>
     <BeautyOnPublishOnly>False</BeautyOnPublishOnly>
     <BeautyEnableDebugging>False</BeautyEnableDebugging>
     <BeautyUsePatch>False</BeautyUsePatch>
     <BeautyLogLevel>Info</BeautyLogLevel>
-  </PropertyGroup>
+  </PropertyGroup>-->
 
   <ItemGroup>
     <Resource Include="Assets\sampleText.png" />

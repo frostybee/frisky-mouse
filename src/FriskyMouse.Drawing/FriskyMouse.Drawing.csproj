@@ -11,12 +11,36 @@
 		<AssemblyTitle>FriskyMouse HelpersLib</AssemblyTitle>
 		<Product>FriskyMouse.HelpersLib</Product>
 		<Copyright>Copyright ©  2023</Copyright>
-		<AssemblyVersion>$(Version)</AssemblyVersion>
+		<AssemblyVersion>$(Version)</AssemblyVersion> 
 		<FileVersion>$(Version)</FileVersion>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<RootNamespace>FriskyMouse.Drawing</RootNamespace>
-		<Configurations>Debug;Release;Portable;SelfContained;MicrosoftStore</Configurations>
+		<Configurations>Debug;Release;Portable;MicrosoftStore</Configurations>
 		<SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <DebugType>none</DebugType>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+	  <DebugType>none</DebugType>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <DebugType>none</DebugType>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+	  <DebugType>none</DebugType>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Portable|AnyCPU'">
+	  <DebugType>none</DebugType>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Portable|x64'">
+	  <DebugType>none</DebugType>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MicrosoftStore|AnyCPU'">
+	  <DebugType>none</DebugType>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MicrosoftStore|x64'">
+	  <DebugType>none</DebugType>
 	</PropertyGroup>	
 	<ItemGroup>
 		<Compile Remove="Source\Animation\Easings\SpringEasing.cs" />
