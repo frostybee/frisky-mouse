@@ -4,8 +4,8 @@ using Color = System.Windows.Media.Color;
 
 public partial class SettingsViewModel : ObservableObject, INavigationAware
 {
-     private readonly INavigationService _navigationService;
-
+    private readonly IContentDialogService _contentDialogService;
+    private readonly INavigationService _navigationService;
     private bool _isInitialized = false;
 
     [ObservableProperty]
@@ -20,9 +20,10 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
     private NavigationViewPaneDisplayMode _currentApplicationNavigationStyle =
         NavigationViewPaneDisplayMode.Left;
 
-    public SettingsViewModel(INavigationService navigationService)
+    public SettingsViewModel(INavigationService navigationService, IContentDialogService contentDialogService)
     {
         _navigationService = navigationService;
+        _contentDialogService = contentDialogService;
     }
 
     private void InitializeViewModel()
@@ -48,7 +49,7 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
 
     partial void OnCurrentApplicationThemeChanged(ApplicationTheme oldValue, ApplicationTheme newValue)
     {
-        FMAppHelper.ChangeUICurrentTheme(newValue);        
+        FMAppHelper.ChangeUICurrentTheme(newValue);
         SettingsManager.Current.ApplicationInfo.AppUiTheme = newValue;
     }
 
@@ -59,5 +60,15 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
         {
             CurrentApplicationTheme = currentApplicationTheme;
         }
-    }    
+    }
+
+    [RelayCommand]
+    private async Task OnShowLicenseDialog()
+    {
+        var licenseDialog = new LicenseContentDialog(
+            _contentDialogService.GetContentPresenter()
+        );
+        var result = await licenseDialog.ShowAsync();
+    }
+
 }

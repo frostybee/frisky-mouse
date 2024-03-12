@@ -11,6 +11,7 @@ global using FriskyMouse.Services.Contracts;
 global using FriskyMouse.ViewModels.Windows;
 global using FriskyMouse.Views.Pages;
 global using FriskyMouse.Views.Helpers;
+global using FriskyMouse.Views.Dialogs;
 global using FriskyMouse.ViewModels.Pages;
 global using FriskyMouse.Models;
 global using FriskyMouse.Views.Windows;

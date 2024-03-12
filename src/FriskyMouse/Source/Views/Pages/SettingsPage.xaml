@@ -114,10 +114,10 @@
                             ToolTip="https://apps.microsoft.com/detail/9ndwjst4vtqr" />
                     </StackPanel>
                     <StackPanel Grid.Column="1">
-                        <ui:HyperlinkButton
+                        <ui:Button
+                            Command="{Binding ViewModel.ShowLicenseDialogCommand}"
                             Content="License"
                             Icon="{ui:SymbolIcon BookInformation24}"
-                            NavigateUri="https://friskymouse.github.io/"
                             ToolTip="https://friskymouse.github.io/" />
                         <ui:HyperlinkButton
                             Content="Third party licenses"

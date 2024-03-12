@@ -1,0 +1,39 @@
+﻿<ui:ContentDialog
+    x:Class="FriskyMouse.Views.Dialogs.LicenseContentDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:FriskyMouse.Views.Dialogs"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="License"
+    MinWidth="500"
+    d:DesignHeight="1000"
+    d:DesignWidth="750"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    CloseButtonText="Close"
+    DialogMaxWidth="1750"
+    mc:Ignorable="d">
+
+    <ui:ContentDialog.Resources>
+        <Style BasedOn="{StaticResource {x:Type ui:ContentDialog}}" TargetType="{x:Type local:LicenseContentDialog}" />
+    </ui:ContentDialog.Resources>
+    <Grid
+        x:Name="MainPanel"
+        Width="500"
+        Focusable="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+            <ui:TextBlock
+                x:Name="TxtLicenseContent"
+                Margin="0,0,0,5"
+                HorizontalAlignment="Left"
+                FontSize="13"
+                TextWrapping="WrapWithOverflow"
+                Visibility="Visible" />
+        </StackPanel>
+    </Grid>
+</ui:ContentDialog>    
