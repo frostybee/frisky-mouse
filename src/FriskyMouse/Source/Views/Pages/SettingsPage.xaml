@@ -114,7 +114,7 @@
                             ToolTip="https://apps.microsoft.com/detail/9ndwjst4vtqr" />
                     </StackPanel>
                     <StackPanel Grid.Column="1">
-                        <ui:Button
+                        <ui:HyperlinkButton
                             Command="{Binding ViewModel.ShowLicenseDialogCommand}"
                             Content="License"
                             Icon="{ui:SymbolIcon BookInformation24}"

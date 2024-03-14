@@ -32,7 +32,7 @@ internal static class SettingsManager
     private static string GetSettingsFolderLocation()
     {
         return App.Configuration.IsPortable ?
-            FileHelpers.GetAbsolutePath() :
+            FileHelpers.GetAppAbsolutePath() :
             Path.Combine(Environment.GetFolderPath(
                 Environment.SpecialFolder.LocalApplicationData),
                 App.Configuration.ApplicationName);

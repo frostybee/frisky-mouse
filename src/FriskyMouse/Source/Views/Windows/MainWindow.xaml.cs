@@ -24,7 +24,7 @@ public partial class MainWindow : IWindow
         IContentDialogService contentDialogService
     )
     {
-        Wpf.Ui.Appearance.SystemThemeWatcher.Watch(this);
+        //Wpf.Ui.Appearance.SystemThemeWatcher.Watch(this);
 
         ViewModel = viewModel;
         DataContext = this;
@@ -52,15 +52,7 @@ public partial class MainWindow : IWindow
     {
         if (sender is not Wpf.Ui.Controls.NavigationView navigationView)
             return;
-
-        NavigationView.HeaderVisibility = Visibility.Collapsed;
-        // TODO: We can assign a new header just in case we want to override
-        // the default page title.
-        /*NavigationView.HeaderVisibility =
-            navigationView.SelectedItem?.TargetPageType != typeof(DashboardPage)
-                ? Visibility.Visible
-                : Visibility.Collapsed;*/
-
+        NavigationView.HeaderVisibility = Visibility.Collapsed;        
     }
 
     private void MainWindow_OnSizeChanged(object sender, SizeChangedEventArgs e)

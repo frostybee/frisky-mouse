@@ -43,8 +43,8 @@
             <Border CornerRadius="8">
                 <Border.Background>
                     <RadialGradientBrush>
-                        <GradientStop Offset="0" Color="#1F000000" />
-                        <GradientStop Offset="1" Color="#4F000000" />
+                        <!--<GradientStop Offset="0" Color="#1F000000" />-->
+                        <GradientStop Offset="1" Color="#7F000000" />
                     </RadialGradientBrush>
                 </Border.Background>
                 <Grid>
@@ -67,13 +67,7 @@
                             Foreground="#B7FFFFFF"
                             Text="Highlight your mouse cursor and decorate your mouse clicks!" />
                     </StackPanel>
-                    <ui:TextBlock
-                        Margin="12"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Bottom"
-                        FontTypography="Caption"
-                        Foreground="#57FFFFFF"
-                        Text="Created by FrostyBee" />
+
                 </Grid>
             </Border>
         </Border>
@@ -121,7 +115,6 @@
             Padding="0"
             ItemsSource="{Binding ViewModel.NavigationCards, Mode=OneWay}" />
 
-
         <StackPanel Grid.Row="3" Margin="0,55,0,0">
             <TextBlock
                 FontSize="18"
@@ -137,15 +130,15 @@
             <ui:HyperlinkButton
                 Margin="8,0,0,0"
                 Padding="4"
-                Content="Microsoft Store"
+                Content="Rate and review on Microsoft Store"
                 Icon="{ui:SymbolIcon StoreMicrosoft20}"
                 NavigateUri="https://apps.microsoft.com/detail/9NDWJST4VTQR"
                 ToolTip="https://apps.microsoft.com/detail/9NDWJST4VTQR" />
             <ui:HyperlinkButton
                 Margin="8,0,0,0"
                 Padding="4"
-                Content="GitHub"
-                Icon="{ui:SymbolIcon CodeBlock24}"
+                Content="Send us feedback"
+                Icon="{ui:SymbolIcon PersonFeedback24}"
                 NavigateUri="https://github.com/frostybee/frisky-mouse"
                 ToolTip="Visit https://github.com/frostybee/frisky-mouse" />
         </StackPanel>

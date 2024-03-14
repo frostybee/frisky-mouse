@@ -14,32 +14,11 @@ namespace FriskyMouse.Helpers;
 
 public static class FileHelpers
 {
-    public static string GetAbsolutePath()
+    public static string GetAppAbsolutePath()
     {
         return Path.GetFullPath(AppDomain.CurrentDomain.BaseDirectory);
     }
-
-    public static string ExpandFolderVariables(string path, bool supportCustomSpecialFolders = false)
-    {
-        if (!string.IsNullOrEmpty(path))
-        {
-            try
-            {
-                foreach (Environment.SpecialFolder specialFolder in FMAppHelper.GetEnums<Environment.SpecialFolder>())
-                {
-                    path = path.Replace($"%{specialFolder}%", Environment.GetFolderPath(specialFolder), StringComparison.OrdinalIgnoreCase);
-                }
-
-                path = Environment.ExpandEnvironmentVariables(path);
-            }
-            catch (Exception e)
-            {
-                DebugHelper.WriteException(e);
-            }
-        }
-
-        return path;
-    }
+      
 
     public static void CreateDirectory(string directoryPath)
     {

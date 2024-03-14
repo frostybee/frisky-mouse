@@ -77,6 +77,7 @@
                                     Margin="0,0,0,0"
                                     Padding="5,5,25,5"
                                     CanReposition="False"
+                                    Description="When disabled, an outline will be rendered around the mouse cursor"
                                     Header="Filled spotlight"
                                     Icon="{ui:SymbolIcon CircleHalfFill24}"
                                     Style="{StaticResource SettingsCardExpanderItemStyle}">
@@ -91,6 +92,7 @@
                                     Margin="0,0,0,0"
                                     Padding="5,5,25,5"
                                     CanReposition="True"
+                                    Description="Select a spotlight color"
                                     Header="Highlighter color"
                                     Icon="{ui:SymbolIcon Color24}"
                                     Style="{StaticResource SettingsCardExpanderItemStyle}">
@@ -215,6 +217,7 @@
                 <controls:SettingsGroupHeaderControl Description="Customize an outline to be rendered around the highlighter" Header="Outline options">
                     <!--  TODO:  add description below the options header.  -->
                     <controls:ExpandableSettingsControl
+                        Description="When enabled, an outline will be rendered on top of the highlighter"
                         Header="Enable highlighter outline"
                         HeaderContentPadding="0,0,0,0"
                         Icon="{ui:SymbolIcon BorderNone24}"

@@ -27,16 +27,6 @@ public static class FMAppHelper
         return (T[])Enum.GetValues(typeof(T));
     }
 
-    public static int GetEnumLength<T>()
-    {
-        return Enum.GetValues(typeof(T)).Length;
-    }
-
-    public static T GetEnumFromIndex<T>(int i)
-    {
-        return GetEnums<T>()[i];
-    }
-
     public static IReadOnlyList<String> GetEnumDescriptions<T>()
     {
         IReadOnlyList<string> descriptions = new List<string>();
