@@ -193,7 +193,7 @@
                         </controls:SettingsCard>
 
                         <controls:SettingsCard
-                            Description="Adjust the rate at which the ripple’s color will fade"
+                            Description="Adjust the rate at which the ripple's color will fade"
                             Header="Fading opacity (%)"
                             Icon="{ui:SymbolIcon LightbulbPerson24}"
                             Style="{StaticResource SettingsCardExpanderItemStyle}">
