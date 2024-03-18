@@ -12,11 +12,11 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>1.0.2</Version>
+    <Version>1.0.1</Version>
     <Authors>FrostyBee</Authors>
     <Company>FrostyBee</Company>
     <Copyright>Copyright (C) 2022-2023 FrostyBee</Copyright>
-    <RepositoryUrl>https://github.com/friskymouse/frisky-mouse-wpf</RepositoryUrl>
+    <RepositoryUrl>https://github.com/frostybee/frisky-mouse</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup>

@@ -1,9 +1,14 @@
-﻿namespace FriskyMouse.ViewModels.Pages;
+﻿using System.Runtime;
+using System.Windows.Forms;
 
-public partial class DashboardViewModel : ObservableObject
+namespace FriskyMouse.ViewModels.Pages;
+
+public partial class DashboardViewModel : ObservableObject, INavigationAware
 {
     private readonly INavigationService _navigationService;
-
+    private readonly GitHubUpdateChecker _updateChecker = new GitHubUpdateChecker();
+    private bool _isInitialized = false;
+    private ApplicationInfo _settings;
     [ObservableProperty]
     private string _feedBackUri;
 
@@ -25,12 +30,26 @@ public partial class DashboardViewModel : ObservableObject
 
     public DashboardViewModel(INavigationService navigationService)
     {
-        _navigationService = navigationService;
-        InitializeViewModel();
+        _navigationService = navigationService;        
+    }
+    public void OnNavigatedTo()
+    {
+        if (!_isInitialized)
+        {            
+            InitializeViewModel();
+            // Check for updates? 
+            CheckIfUpdatesAreAvailable();
+        }
+    }
+
+    public void OnNavigatedFrom()
+    {
+        //throw new NotImplementedException();
     }
 
     private void InitializeViewModel()
     {
+        _settings = SettingsManager.Current.ApplicationInfo;
         FeedBackUri = App.Configuration.SendFeedbackURI;
         // Register hotkeys.
         DecorationManager.Instance.HotkeysController.RegisterGlobalHotkeys();
@@ -46,6 +65,52 @@ public partial class DashboardViewModel : ObservableObject
                 : ApplicationTheme.Light 
         );
         SettingsManager.Current.ApplicationInfo.AppUiTheme = ApplicationThemeManager.GetAppTheme();
+    }
+    private async void CheckIfUpdatesAreAvailable()
+    {
+        if (IsCheckForUpdateRequired())
+        {
+            await Task.Run(_updateChecker.CheckGitHubNewerVersion);
+            if (_updateChecker.IsUpdateAvailable)
+            {
+                Debug.WriteLine("A new version is available, please consider updating FriskyMouse!");
+                //TODO: Show the new update notification on the dashboard page.
+                /*  MessageBox.Show("A new version is available, please consider updating FriskyMouse!"
+                      , "FriskyMouse Update"
+                      , MessageBoxButtons.OK
+                      , MessageBoxIcon.Information
+                      );*/
+                //UpdateLatestVerionLabel(_updateChecker.NewVersionInfo);
+                Debug.WriteLine("New version: "+ _updateChecker.NewVersionInfo);
+            }
+            else
+            {
+                Debug.WriteLine("Up to date!!");
+                ///UpdateLatestVerionLabel("Up to date!");
+            }
+        }
+        else
+        {
+            Debug.WriteLine("Up to date!!");
+            //UpdateLatestVerionLabel("Up to date!");
+        }
+    }
+    private bool IsCheckForUpdateRequired()
+    {
+        bool isUpdateRequired = false;
+        string lastUpdateDate = _settings.LastCheckForUpdate;
+        var lastUpdated = DateTime.Now;
+        var today = DateTime.Now;
+        DateTime.TryParseExact(lastUpdateDate, "MM-dd-yyyy", CultureInfo.InvariantCulture,
+                          DateTimeStyles.None, out lastUpdated);
+        var diffOfDates = today - lastUpdated;
+        //-- We only perform the check every two days. 
+        if (diffOfDates.Days >= 2)
+        {
+            isUpdateRequired = true;
+            _settings.LastCheckForUpdate = DateTime.Now.ToString("MM-dd-yyyy");
+        }
+        return isUpdateRequired;
     }
 
     [RelayCommand]
