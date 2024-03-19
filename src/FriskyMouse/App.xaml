@@ -6,7 +6,6 @@
     xmlns:local="clr-namespace:FriskyMouse"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    DispatcherUnhandledException="OnDispatcherUnhandledException"
     Exit="OnExit"
     ShutdownMode="OnMainWindowClose"
     Startup="OnApplicationStartup">

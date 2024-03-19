@@ -1,7 +1,4 @@
-﻿using System.Configuration;
-using System.Reflection;
-
-namespace FriskyMouse;
+﻿namespace FriskyMouse;
 
 /// <summary>
 /// Interaction logic for App.xaml
@@ -32,12 +29,16 @@ public partial class App : Application
             // No running instance has been detected,
             // We Start a new instance of this application.
             _mutex.ReleaseMutex();
+
+            // Register handlers for application-wide runtime exceptions.
+            RegisterGlobalExceptionHandling();
+
             //!important: the app configuration must be loaded first
             // before loading the user's settings. 
             Configuration.LoadAppConfigurationInfo();
             // Load the user-saved settings first.
             SettingsManager.LoadSettings();
-
+            //
             _host = Host.CreateDefaultBuilder(e.Args)
                 .ConfigureAppConfiguration(c =>
                 {
@@ -75,7 +76,7 @@ public partial class App : Application
         // App services. 
         services.AddSingleton<INavigationService, NavigationService>();
         services.AddSingleton<ISnackbarService, SnackbarService>();
-        services.AddSingleton<IContentDialogService, ContentDialogService>();        
+        services.AddSingleton<IContentDialogService, ContentDialogService>();
 
         // Main window container with navigation
         services.AddSingleton<IWindow, MainWindow>();
@@ -108,21 +109,6 @@ public partial class App : Application
         // Uninstall the global mouse hook.
         DecorationManager.Instance?.DisableHook();
         DecorationManager.Instance?.Dispose();
-
-        Console.WriteLine("Exiting the application...");
-    }
-
-    /// <summary>
-    /// Occurs when an exception is thrown by an application but not handled.
-    /// </summary>
-    private void OnDispatcherUnhandledException(
-        object sender,
-        DispatcherUnhandledExceptionEventArgs e
-    )
-    {
-        // For more info see https://docs.microsoft.com/en-us/dotnet/api/system.windows.application.dispatcherunhandledexception?view=windowsdesktop-6.0
-        // Prevent default unhandled exception processing
-        e.Handled = true;
     }
 
     /// <summary>
@@ -143,5 +129,65 @@ public partial class App : Application
         where T : class
     {
         return _host.Services.GetRequiredService<T>();
+    }
+    private void RegisterGlobalExceptionHandling()
+    {
+        // this is the line you really want 
+        AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
+            {
+                ShowUnhandledException((Exception)e.ExceptionObject, "AppDomain.CurrentDomain.UnhandledException", true);
+            };
+
+        Application.Current.DispatcherUnhandledException += (sender, e) =>
+            {
+                // If we are debugging, let Visual Studio handle the exception and take us to the code that threw it.
+                if (!Debugger.IsAttached)
+                {
+                    e.Handled = true;
+                    ShowUnhandledException((Exception)e.Exception, "Application.Current.DispatcherUnhandledException", true);
+                }
+            };
+
+        TaskScheduler.UnobservedTaskException += (sender, e) =>
+            {
+                ShowUnhandledException((Exception)e.Exception, "TaskScheduler.UnobservedTaskException", true);
+            };
+        // Handler for exceptions in threads behind forms.
+        System.Windows.Forms.Application.ThreadException += (sender, e) =>
+             {
+                 ShowUnhandledException((Exception)e.Exception, "System.Windows.Forms.Application.ThreadException", true);
+             };
+    }
+
+    private void ShowUnhandledException(Exception e, string unhandledExceptionType, bool promptUserForShutdown)
+    {
+        // TODO: rework the message content
+        // TODO: add consider submitting a bug report: include a link.        
+        string errorMessage = string.Format("An application error occurred.\nPlease check whether your data is correct and repeat the action. If this error occurs again there seems to be a more serious malfunction in the application, and you better close it.\n\nError: {0}\n\nDo you want to continue?\n(if you click Yes you will continue with your work, if you click No the application will close)",
+        e.Message + (e.InnerException != null ? "\n" +
+        e.InnerException.Message : null));
+
+        if (System.Windows.MessageBox.Show(errorMessage, "Application Error", System.Windows.MessageBoxButton.YesNo, MessageBoxImage.Error) == System.Windows.MessageBoxResult.No)
+        {
+            Application.Current.Shutdown();
+
+            /* System.Reflection.AssemblyName assemblyName = System.Reflection.Assembly.GetExecutingAssembly().GetName();
+             var messageBoxTitle = $"Unexpected Error Occurred: {unhandledExceptionType}";
+             string messageBoxContent = string.Format("Unhandled exception in {0} v{1} \n\n", assemblyName.Name, assemblyName.Version);
+             messageBoxContent += $"The following exception occurred:\n\n{e}";
+             var messageBoxButtons = System.Windows.MessageBoxButton.OK;
+
+             if (promptUserForShutdown)
+             {
+                 messageBoxContent += "\n\nNormally the application will shutdown. Should we close it?";
+                 messageBoxButtons = System.Windows.MessageBoxButton.YesNo;
+             }
+
+             // Let the user decide if the app should die or not (if applicable).
+             if (System.Windows.MessageBox.Show(messageBoxContent, messageBoxTitle, messageBoxButtons, MessageBoxImage.Error) == System.Windows.MessageBoxResult.Yes)
+             {
+                 Application.Current.Shutdown();
+             }*/
+        }
     }
 }
