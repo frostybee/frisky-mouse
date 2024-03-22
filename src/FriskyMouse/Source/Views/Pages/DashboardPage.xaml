@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:FriskyMouse.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:s="clr-namespace:FriskyMouse.Helpers"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="Dashboard Page"
     MaxWidth="1400"
@@ -125,22 +126,22 @@
                 Padding="4"
                 Content="Documentation"
                 Icon="{ui:SymbolIcon BookInformation24}"
-                NavigateUri="https://friskymouse.github.io/"
-                ToolTip="https://friskymouse.github.io/" />
+                NavigateUri="{x:Static s:FMAppLinks.DocWebsiteURI}"
+                ToolTip="{x:Static s:FMAppLinks.DocWebsiteURI}" />
             <ui:HyperlinkButton
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="Rate and review on Microsoft Store"
                 Icon="{ui:SymbolIcon StoreMicrosoft20}"
-                NavigateUri="https://apps.microsoft.com/detail/9NDWJST4VTQR"
-                ToolTip="https://apps.microsoft.com/detail/9NDWJST4VTQR" />
+                NavigateUri="{x:Static s:FMAppLinks.MicrosoftStoreURI}"
+                ToolTip="{x:Static s:FMAppLinks.MicrosoftStoreURI}" />
             <ui:HyperlinkButton
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="Send us feedback"
                 Icon="{ui:SymbolIcon PersonFeedback24}"
-                NavigateUri="https://github.com/frostybee/frisky-mouse"
-                ToolTip="Visit https://github.com/frostybee/frisky-mouse" />
+                NavigateUri="{x:Static s:FMAppLinks.GitHubFeedbackURL}"
+                ToolTip="{x:Static s:FMAppLinks.GitHubFeedbackURL}" />
         </StackPanel>
     </Grid>
 </Page>

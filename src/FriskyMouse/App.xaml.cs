@@ -135,7 +135,7 @@ public partial class App : Application
         // this is the line you really want 
         AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
             {
-                ShowUnhandledException((Exception)e.ExceptionObject, "AppDomain.CurrentDomain.UnhandledException", true);
+                ShowUnhandledException((Exception)e.ExceptionObject, "AppDomain.CurrentDomain.UnhandledException");
             };
 
         Application.Current.DispatcherUnhandledException += (sender, e) =>
@@ -144,50 +144,37 @@ public partial class App : Application
                 if (!Debugger.IsAttached)
                 {
                     e.Handled = true;
-                    ShowUnhandledException((Exception)e.Exception, "Application.Current.DispatcherUnhandledException", true);
+                    ShowUnhandledException((Exception)e.Exception, "Application.Current.DispatcherUnhandledException");
                 }
             };
 
         TaskScheduler.UnobservedTaskException += (sender, e) =>
             {
-                ShowUnhandledException((Exception)e.Exception, "TaskScheduler.UnobservedTaskException", true);
+                ShowUnhandledException((Exception)e.Exception, "TaskScheduler.UnobservedTaskException");
             };
         // Handler for exceptions in threads behind forms.
         System.Windows.Forms.Application.ThreadException += (sender, e) =>
              {
-                 ShowUnhandledException((Exception)e.Exception, "System.Windows.Forms.Application.ThreadException", true);
+                 ShowUnhandledException((Exception)e.Exception, "System.Windows.Forms.Application.ThreadException");
              };
     }
 
-    private void ShowUnhandledException(Exception e, string unhandledExceptionType, bool promptUserForShutdown)
+    private void ShowUnhandledException(Exception e, string unhandledExceptionType)
     {
-        // TODO: rework the message content
-        // TODO: add consider submitting a bug report: include a link.        
-        string errorMessage = string.Format("An application error occurred.\nPlease check whether your data is correct and repeat the action. If this error occurs again there seems to be a more serious malfunction in the application, and you better close it.\n\nError: {0}\n\nDo you want to continue?\n(if you click Yes you will continue with your work, if you click No the application will close)",
-        e.Message + (e.InnerException != null ? "\n" +
-        e.InnerException.Message : null));
-
-        if (System.Windows.MessageBox.Show(errorMessage, "Application Error", System.Windows.MessageBoxButton.YesNo, MessageBoxImage.Error) == System.Windows.MessageBoxResult.No)
+        System.Reflection.AssemblyName assemblyName = System.Reflection.Assembly.GetExecutingAssembly().GetName();
+        var messageBoxTitle = $"Unexpected Error Occurred: {unhandledExceptionType}";
+        string messageBoxContent = string.Format("Unhandled exception in {0} v{1} \n\n", assemblyName.Name, assemblyName.Version);
+        messageBoxContent += $"The following exception occurred:\n\n{e}";
+        //
+        messageBoxContent += "\n\nNormally the application will shutdown. Should we close it?";
+        // Let the user decide if the app should die or not (if applicable).
+        if (System.Windows.MessageBox.Show(
+            messageBoxContent,
+            messageBoxTitle,
+            System.Windows.MessageBoxButton.YesNo,
+            MessageBoxImage.Error) == System.Windows.MessageBoxResult.Yes)
         {
             Application.Current.Shutdown();
-
-            /* System.Reflection.AssemblyName assemblyName = System.Reflection.Assembly.GetExecutingAssembly().GetName();
-             var messageBoxTitle = $"Unexpected Error Occurred: {unhandledExceptionType}";
-             string messageBoxContent = string.Format("Unhandled exception in {0} v{1} \n\n", assemblyName.Name, assemblyName.Version);
-             messageBoxContent += $"The following exception occurred:\n\n{e}";
-             var messageBoxButtons = System.Windows.MessageBoxButton.OK;
-
-             if (promptUserForShutdown)
-             {
-                 messageBoxContent += "\n\nNormally the application will shutdown. Should we close it?";
-                 messageBoxButtons = System.Windows.MessageBoxButton.YesNo;
-             }
-
-             // Let the user decide if the app should die or not (if applicable).
-             if (System.Windows.MessageBox.Show(messageBoxContent, messageBoxTitle, messageBoxButtons, MessageBoxImage.Error) == System.Windows.MessageBoxResult.Yes)
-             {
-                 Application.Current.Shutdown();
-             }*/
         }
     }
 }

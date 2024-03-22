@@ -7,6 +7,7 @@
     xmlns:helpers="clr-namespace:FriskyMouse.Views.Converters"
     xmlns:local="clr-namespace:FriskyMouse.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:s="clr-namespace:FriskyMouse.Helpers"
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="FriskyMouse Settings"
@@ -81,7 +82,6 @@
                 Value="{Binding ViewModel.OutlineWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
             </controls:SettingsCard>
 
-
             <controls:ExpandableSettingsControl
                 Margin="0,5,0,0"
                 Header="Useful links"
@@ -98,89 +98,39 @@
                         <ui:HyperlinkButton
                             Content="Source code"
                             Icon="{ui:SymbolIcon CodeBlock24}"
-                            NavigateUri="https://github.com/frostybee/frisky-mouse"
-                            ToolTip="https://github.com/frostybee/frisky-mouse" />
+                            NavigateUri="{x:Static s:FMAppLinks.GitHubRepoURI}"
+                            ToolTip="{x:Static s:FMAppLinks.GitHubRepoURI}" />
 
                         <ui:HyperlinkButton
                             Content="Privacy Policy"
                             Icon="{ui:SymbolIcon TabInprivateAccount24}"
-                            NavigateUri="https://friskymouse.github.io/privacy-policy/"
-                            ToolTip="https://friskymouse.github.io/privacy-policy/" />
+                            NavigateUri="{x:Static s:FMAppLinks.PrivacyPolicyURI}"
+                            ToolTip="{x:Static s:FMAppLinks.PrivacyPolicyURI}" />
 
                         <ui:HyperlinkButton
                             Content="Rate and review on Microsoft Store"
                             Icon="{ui:SymbolIcon StoreMicrosoft20}"
-                            NavigateUri="https://apps.microsoft.com/detail/9ndwjst4vtqr"
-                            ToolTip="https://apps.microsoft.com/detail/9ndwjst4vtqr" />
+                            NavigateUri="{x:Static s:FMAppLinks.MicrosoftStoreURI}"
+                            ToolTip="{x:Static s:FMAppLinks.MicrosoftStoreURI}" />
                     </StackPanel>
                     <StackPanel Grid.Column="1">
                         <ui:HyperlinkButton
                             Command="{Binding ViewModel.ShowLicenseDialogCommand}"
                             Content="License"
                             Icon="{ui:SymbolIcon BookInformation24}"
-                            ToolTip="https://friskymouse.github.io/" />
+                            ToolTip="Click to view license/" />
                         <ui:HyperlinkButton
                             Content="Third party licenses"
                             Icon="{ui:SymbolIcon ClipboardCode24}"
-                            NavigateUri="https://github.com/frostybee/frisky-mouse/blob/main/THIRD-PARTY-NOTICES.md"
-                            ToolTip="https://github.com/frostybee/frisky-mouse/blob/main/THIRD-PARTY-NOTICES.md" />
+                            NavigateUri="{x:Static s:FMAppLinks.ThirdPartyLicenseURI}"
+                            ToolTip="{x:Static s:FMAppLinks.ThirdPartyLicenseURI}" />
                         <ui:HyperlinkButton
                             Content="Report a problem"
                             Icon="{ui:SymbolIcon Bug24}"
-                            NavigateUri="https://github.com/frostybee/frisky-mouse/issues/new/choose"
-                            ToolTip="https://github.com/frostybee/frisky-mouse/issues/new/choose" />
+                            NavigateUri="{x:Static s:FMAppLinks.GitHubFeedbackURL}"
+                            ToolTip="{x:Static s:FMAppLinks.GitHubFeedbackURL}" />
                     </StackPanel>
                 </Grid>
-                <!--<StackPanel>
-                    <Grid Margin="16">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="To clone this repository" />
-                        <TextBlock
-                            Grid.Column="1"
-                            Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                            Text="git clone https://github.com/lepoco/wpfui.git" />
-                    </Grid>
-                    <ui:Anchor
-                        Margin="0"
-                        Padding="16"
-                        HorizontalAlignment="Stretch"
-                        HorizontalContentAlignment="Stretch"
-                        Background="Transparent"
-                        BorderThickness="0,1,0,0"
-                        CornerRadius="0"
-                        NavigateUri="https://github.com/lepoco/wpfui/issues/new/choose">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                               222 <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="File a bug or request a new sample" />
-                            <ui:SymbolIcon Grid.Column="1" Symbol="Link24" />
-                        </Grid>
-                    </ui:Anchor>
-                    <ui:Anchor
-                        Margin="0"
-                        Padding="16"
-                        HorizontalAlignment="Stretch"
-                        HorizontalContentAlignment="Stretch"
-                        Background="Transparent"
-                        BorderThickness="0,1,0,1"
-                        CornerRadius="0"
-                        NavigateUri="https://wpfui.lepo.co/">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="Check out the docs" />
-                            <ui:SymbolIcon Grid.Column="1" Symbol="Link24" />
-                        </Grid>
-                    </ui:Anchor>
-                    <TextBlock Margin="16" Text="{Binding ViewModel.AppVersion, Mode=OneWay}" />
-                </StackPanel>-->
             </controls:ExpandableSettingsControl>
         </StackPanel>
     </controls:FeaturePageContentControl>

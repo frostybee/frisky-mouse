@@ -43,7 +43,7 @@ public sealed class AppConfigurationInfo
     /// </summary>
     public string ApplicationName { get; internal set; } = "FriskyMouse";
     public string SendFeedbackURI { get; private set; } = FMAppLinks.GitHubFeedbackURL;
-    public string ProjectGitHubRepo { get; private set; } = FMAppLinks.GitHubRepoURL;
+    public string ProjectGitHubRepo { get; private set; } = FMAppLinks.GitHubRepoURI;
     public string ApplicationWebsite { get; private set; } = FMAppLinks.WebsiteURL;
 
 
