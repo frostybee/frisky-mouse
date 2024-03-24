@@ -1,0 +1,79 @@
+﻿<Window
+    x:Class="FriskyMouse.Views.Dialogs.CustomErrorDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:FriskyMouse.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:s="clr-namespace:FriskyMouse.Helpers"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="Runtime Error"
+    Width="700"
+    Height="250"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="SingleBorderWindow"
+    mc:Ignorable="d">
+    <Grid Margin="10,10,0,4">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="0,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Margin="0,0,10,0">
+                <Image>
+                    <Image.Source>
+                        <BitmapImage UriSource="pack://application:,,,/Assets/error-36.png" />
+                    </Image.Source>
+                </Image>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <TextBlock x:Name="TxtErrorTitle" FontWeight="Bold">An error occured</TextBlock>
+                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                <TextBlock x:Name="TxtErrorMessage" Margin="0,0,0,50" />
+            </StackPanel>
+        </Grid>
+        <StackPanel Grid.Row="1" Margin="60,0,0,10">
+            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontWeight="Bold">
+                    Please consider submitting a
+                </TextBlock>
+                <ui:HyperlinkButton
+                    Margin="8,0,0,0"
+                    Padding="4"
+                    Content="bug report"
+                    Icon="{ui:SymbolIcon PersonFeedback24}"
+                    NavigateUri="{x:Static s:FMAppLinks.GitHubFeedbackURL}"
+                    ToolTip="{x:Static s:FMAppLinks.GitHubFeedbackURL}" />
+            </StackPanel>
+
+            <TextBlock Margin="0,0,0,0">
+                Would you like to close the application?
+            </TextBlock>
+        </StackPanel>
+        <StackPanel
+            Grid.Row="2"
+            Margin="0,0,10,5"
+            HorizontalAlignment="Right"
+            Orientation="Horizontal">
+            <Button
+                Width="80"
+                Background="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}"
+                Click="YesButton_Click">
+                Yes
+            </Button>
+            <Button
+                Width="80"
+                Background="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}"
+                Click="NoButton_Click">
+                No
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

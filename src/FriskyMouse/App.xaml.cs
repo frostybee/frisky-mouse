@@ -1,4 +1,6 @@
-﻿namespace FriskyMouse;
+﻿using System.Reflection;
+
+namespace FriskyMouse;
 
 /// <summary>
 /// Interaction logic for App.xaml
@@ -159,20 +161,18 @@ public partial class App : Application
              };
     }
 
-    private void ShowUnhandledException(Exception e, string unhandledExceptionType)
+    private void ShowUnhandledException(Exception exception, string unhandledExceptionType)
     {
+        CustomErrorDialog errorDialog = new CustomErrorDialog();
         System.Reflection.AssemblyName assemblyName = System.Reflection.Assembly.GetExecutingAssembly().GetName();
-        var messageBoxTitle = $"Unexpected Error Occurred: {unhandledExceptionType}";
-        string messageBoxContent = string.Format("Unhandled exception in {0} v{1} \n\n", assemblyName.Name, assemblyName.Version);
-        messageBoxContent += $"The following exception occurred:\n\n{e}";
-        //
-        messageBoxContent += "\n\nNormally the application will shutdown. Should we close it?";
-        // Let the user decide if the app should die or not (if applicable).
-        if (System.Windows.MessageBox.Show(
-            messageBoxContent,
-            messageBoxTitle,
-            System.Windows.MessageBoxButton.YesNo,
-            MessageBoxImage.Error) == System.Windows.MessageBoxResult.Yes)
+        var messageBoxTitle = string.Format("Unhandled exception occurred in {0} v{1}", assemblyName.Name, assemblyName.Version);
+        //var messageBoxTitle = $"Unexpected Error Occurred: {unhandledExceptionType}";
+        string messageBoxContent = $"\n Type: {unhandledExceptionType} \n\n";
+        messageBoxContent += $"Error: {exception.Message} \n";
+        errorDialog.ErrorTitle = messageBoxTitle;
+        errorDialog.ErrorMessage = messageBoxContent;
+        errorDialog.ShowDialog();
+        if (errorDialog.DialogResult == System.Windows.MessageBoxResult.Yes)
         {
             Application.Current.Shutdown();
         }

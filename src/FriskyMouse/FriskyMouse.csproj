@@ -18,6 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\error-36.png" />
     <None Remove="Assets\FmLogo.png" />
     <None Remove="Assets\sampleText.png" />
     <None Remove="FriskyMouseIcon.ico" />
@@ -28,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\error-36.png" />
     <Resource Include="Assets\FmLogo.png" />
     <Resource Include="FriskyMouseIcon.ico" />
   </ItemGroup>
