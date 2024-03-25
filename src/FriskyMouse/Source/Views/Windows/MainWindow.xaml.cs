@@ -14,6 +14,7 @@ public partial class MainWindow : IWindow
     private bool _isUserClosedPane;
     private bool _isPaneOpenedOrClosedFromCode;
     private HwndSource _hwndSource;
+    private readonly NotifyIcon? _notifyIcon;
     public MainWindowViewModel ViewModel { get; }
 
     public MainWindow(
@@ -38,7 +39,24 @@ public partial class MainWindow : IWindow
         NavigationView.Loaded += (_, _) => NavigationView.Navigate(typeof(DashboardPage));
         this.SetValue(TextOptions.TextFormattingModeProperty, TextFormattingMode.Ideal);
 
+        _notifyIcon = new NotifyIcon
+        {
+            Icon = System.Drawing.Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location),
+            Visible = true,
+            ContextMenuStrip = CreateContextMenu()
+        };
+
+        _notifyIcon.DoubleClick += (sender, args) =>
+        {
+            BringWindowToFront();
+        };
         Loaded += MainWindow_Loaded;
+        Closing += MainWindow_Closing;
+    }
+
+    private void MainWindow_Closing(object sender, CancelEventArgs e)
+    {
+       _notifyIcon?.Dispose();
     }
 
     private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -47,12 +65,39 @@ public partial class MainWindow : IWindow
         FMAppHelper.ChangeUICurrentTheme(SettingsManager.Current.ApplicationInfo.AppUiTheme);
         ViewModel.LoadAppModules();
     }
+    private ContextMenuStrip CreateContextMenu()
+    {
+        var openItem = new ToolStripMenuItem("Open");
+        openItem.Click += (sender, e) =>
+        {
+            BringWindowToFront();
+        };
+        var exitItem = new ToolStripMenuItem("Exit");
+        exitItem.Click += (sender, e) =>
+        {
+            System.Windows.Application.Current.Shutdown();
+        };
+        var contextMenu = new ContextMenuStrip
+        {
+            Items = { openItem, exitItem }
+        };
+        return contextMenu;
+    }
+ 
+    protected override void OnStateChanged(EventArgs e)
+    {
+        if (WindowState == System.Windows.WindowState.Minimized)
+            this.Hide();
+
+        base.OnStateChanged(e);
+    }
+
 
     private void OnNavigationSelectionChanged(object sender, RoutedEventArgs e)
     {
         if (sender is not Wpf.Ui.Controls.NavigationView navigationView)
             return;
-        NavigationView.HeaderVisibility = Visibility.Collapsed;        
+        NavigationView.HeaderVisibility = Visibility.Collapsed;
     }
 
     private void MainWindow_OnSizeChanged(object sender, SizeChangedEventArgs e)
