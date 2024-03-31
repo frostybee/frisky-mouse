@@ -18,9 +18,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\about-50.png" />
+    <None Remove="Assets\close-64.png" />
     <None Remove="Assets\error-36.png" />
     <None Remove="Assets\FmLogo.png" />
     <None Remove="Assets\sampleText.png" />
+    <None Remove="Assets\show-app.png" />
     <None Remove="FriskyMouseIcon.ico" />
   </ItemGroup>
 
@@ -29,8 +32,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\about-50.png" />
+    <Resource Include="Assets\close-64.png" />
     <Resource Include="Assets\error-36.png" />
     <Resource Include="Assets\FmLogo.png" />
+    <Resource Include="Assets\show-app.png" />
     <Resource Include="FriskyMouseIcon.ico" />
   </ItemGroup>
 

@@ -54,6 +54,7 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Background="Transparent">
+
                         <ui:TextBlock
                             FontTypography="Title"
                             Foreground="#FFFFFF"

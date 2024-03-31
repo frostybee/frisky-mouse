@@ -44,7 +44,7 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
 
     public void OnNavigatedFrom()
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 
     private void InitializeViewModel()

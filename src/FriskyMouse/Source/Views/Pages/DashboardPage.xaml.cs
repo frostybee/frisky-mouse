@@ -1,4 +1,6 @@
-﻿namespace FriskyMouse.Views.Pages;
+﻿using System.Windows.Media.Imaging;
+
+namespace FriskyMouse.Views.Pages;
 
 public partial class DashboardPage : INavigableView<DashboardViewModel>
 {
@@ -9,5 +11,6 @@ public partial class DashboardPage : INavigableView<DashboardViewModel>
         ViewModel = viewModel;
         DataContext = this;
         InitializeComponent();
+        //ImageEx.Source = new BitmapImage(new Uri(@"/Assets/show-app.png", UriKind.Relative));
     }
 }

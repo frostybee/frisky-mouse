@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.Windows.Interop;
+using System.Windows.Media.Imaging;
+using System.Windows.Resources;
 using TextBlock = Wpf.Ui.Controls.TextBlock;
 
 namespace FriskyMouse.Views.Windows;
@@ -14,6 +16,7 @@ public partial class MainWindow : IWindow
     private bool _isUserClosedPane;
     private bool _isPaneOpenedOrClosedFromCode;
     private HwndSource _hwndSource;
+    private INavigationService _navigationService;
     private readonly NotifyIcon? _notifyIcon;
     public MainWindowViewModel ViewModel { get; }
 
@@ -31,8 +34,9 @@ public partial class MainWindow : IWindow
         DataContext = this;
 
         InitializeComponent();
+        _navigationService = navigationService;
         snackbarService.SetSnackbarPresenter(SnackbarPresenter);
-        navigationService.SetNavigationControl(NavigationView);
+        _navigationService.SetNavigationControl(NavigationView);
         contentDialogService.SetContentPresenter(RootContentDialog);
         //-- Page navigation service.
         NavigationView.SetServiceProvider(serviceProvider);
@@ -56,7 +60,7 @@ public partial class MainWindow : IWindow
 
     private void MainWindow_Closing(object sender, CancelEventArgs e)
     {
-       _notifyIcon?.Dispose();
+        _notifyIcon?.Dispose();
     }
 
     private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -68,22 +72,31 @@ public partial class MainWindow : IWindow
     private ContextMenuStrip CreateContextMenu()
     {
         var openItem = new ToolStripMenuItem("Open");
+        openItem.Image = System.Drawing.Image.FromStream(FMAppHelper.GetResourceStream(@"/Assets/show-app.png"));
         openItem.Click += (sender, e) =>
         {
             BringWindowToFront();
         };
+        var aboutItem = new ToolStripMenuItem("About");
+        aboutItem.Image = System.Drawing.Image.FromStream(FMAppHelper.GetResourceStream(@"/Assets/about-50.png"));
+        aboutItem.Click += (sender, e) =>
+        {
+            BringWindowToFront();
+            _navigationService.Navigate("Settings");
+        };
         var exitItem = new ToolStripMenuItem("Exit");
+        exitItem.Image = System.Drawing.Image.FromStream(FMAppHelper.GetResourceStream(@"/Assets/close-64.png"));
         exitItem.Click += (sender, e) =>
         {
             System.Windows.Application.Current.Shutdown();
         };
         var contextMenu = new ContextMenuStrip
         {
-            Items = { openItem, exitItem }
+            Items = { openItem, aboutItem, exitItem }
         };
         return contextMenu;
     }
- 
+
     protected override void OnStateChanged(EventArgs e)
     {
         if (WindowState == System.Windows.WindowState.Minimized)

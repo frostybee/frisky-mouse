@@ -26,7 +26,16 @@ public partial class App : Application
     {
         _mutex = new Mutex(true, _mutexName);
         var mutexIsAcquired = _mutex.WaitOne(TimeSpan.Zero, true);
-        if (mutexIsAcquired)
+        if (!mutexIsAcquired)
+        {
+            // An instance of this application is already running.
+            // Bring it into the foreground
+            SingleAppInstanceHelper.PostMessageToMainWindow();
+            // Shutdown this new instance.
+            _singleInstanceClose = true;
+            Shutdown();            
+        }
+        else
         {
             // No running instance has been detected,
             // We Start a new instance of this application.
@@ -50,15 +59,6 @@ public partial class App : Application
                 .Build();
 
             _host.Start();
-        }
-        else
-        {
-            // An instance of this application is already running.
-            // Bring it into the foreground
-            SingleAppInstanceHelper.PostMessageToMainWindow();
-            // Shutdown this new instance.
-            _singleInstanceClose = true;
-            Shutdown();
         }
     }
 

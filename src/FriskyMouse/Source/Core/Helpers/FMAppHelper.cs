@@ -14,6 +14,7 @@ using FriskyMouse.NativeApi;
 using FriskyMouse.Extensions;
 using System.Diagnostics;
 using System.ComponentModel;
+using System.Windows.Resources;
 
 namespace FriskyMouse.Helpers;
 using Color = System.Drawing.Color;
@@ -128,5 +129,11 @@ public static class FMAppHelper
     internal static void ChangeUICurrentTheme(ApplicationTheme newTheme)
     {
         ApplicationThemeManager.Apply(newTheme);
+    }
+
+    internal static Stream GetResourceStream(string resourcePath)
+    {
+        Uri uri = new Uri(resourcePath, UriKind.Relative);
+        return System.Windows.Application.GetResourceStream(uri).Stream;
     }
 }
