@@ -67,6 +67,7 @@
     <PackageReference Include="nulastudio.NetBeauty" Version="2.1.4.4" />
     <PackageReference Include="Octokit" Version="10.0.0" />
     <PackageReference Include="PixiEditor.ColorPicker" Version="3.4.1" />
+    <PackageReference Include="WPF-UI" Version="3.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -75,7 +76,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FriskyMouse.Drawing\FriskyMouse.Drawing.csproj" />
-    <ProjectReference Include="..\wpfui\src\Wpf.Ui\Wpf.Ui.csproj" />
   </ItemGroup>
 
   <ItemGroup>

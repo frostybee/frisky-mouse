@@ -19,9 +19,9 @@ internal class HotkeysController
 
     public HotkeysController()
     {
-        _spotlightOptions = SettingsManager.Current.HighlighterOptions;
-        _leftClickOptions = SettingsManager.Current.LeftClickOptions;
-        _rightClickOptions = SettingsManager.Current.RightClickOptions;
+        _spotlightOptions = SettingsManager.Settings.HighlighterOptions;
+        _leftClickOptions = SettingsManager.Settings.LeftClickOptions;
+        _rightClickOptions = SettingsManager.Settings.RightClickOptions;
     }
 
     public void RegisterGlobalHotkeys()

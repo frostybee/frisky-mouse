@@ -49,7 +49,7 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
 
     private void InitializeViewModel()
     {
-        _settings = SettingsManager.Current.ApplicationInfo;
+        _settings = SettingsManager.Settings.ApplicationInfo;
         FeedBackUri = App.Configuration.SendFeedbackURI;
         // Register hotkeys.
         DecorationManager.Instance.HotkeysController.RegisterGlobalHotkeys();
@@ -64,7 +64,7 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
                 ? ApplicationTheme.Dark
                 : ApplicationTheme.Light 
         );
-        SettingsManager.Current.ApplicationInfo.AppUiTheme = ApplicationThemeManager.GetAppTheme();
+        SettingsManager.Settings.ApplicationInfo.AppUiTheme = ApplicationThemeManager.GetAppTheme();
     }
     private async void CheckIfUpdatesAreAvailable()
     {

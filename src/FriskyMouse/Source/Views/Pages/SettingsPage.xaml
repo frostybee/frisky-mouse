@@ -60,6 +60,17 @@
                 </ComboBox>
             </ui:CardControl>
 
+
+            <controls:SettingsCard
+                Description="When enabled, a balloon tip will be shown upon minimizing the application's main window"
+                Header="Show system tray's notification"
+                Icon="{ui:SymbolIcon Balloon24}">
+                <ui:ToggleSwitch
+                    IsChecked="{Binding ViewModel.ShowBalloonTip, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    OffContent="Off"
+                    OnContent="On" />
+            </controls:SettingsCard>
+
             <ui:TextBlock
                 Margin="0,24,0,8"
                 FontTypography="BodyStrong"

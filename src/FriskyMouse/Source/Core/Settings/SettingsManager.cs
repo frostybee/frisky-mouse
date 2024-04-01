@@ -19,7 +19,7 @@ internal static class SettingsManager
 {
     private static string _settingsFileName = "settings.json";
     private static Mutex _jsonMutex = new Mutex();
-    public static SettingsWrapper Current { get; private set; } 
+    public static SettingsWrapper Settings { get; private set; } 
 
     private static string SettingsFilePath
     {
@@ -48,7 +48,7 @@ internal static class SettingsManager
                 using FileStream openStream = File.OpenRead(settingFilePath);
                 if (openStream.CanRead)
                 {
-                    Current = JsonSerializer.Deserialize<SettingsWrapper>(openStream, GetJsonSerializerOptions());
+                    Settings = JsonSerializer.Deserialize<SettingsWrapper>(openStream, GetJsonSerializerOptions());
                     //TODO: verify if JSON file is not corrupted.
                 }
             }
@@ -75,12 +75,12 @@ internal static class SettingsManager
             {
                 Console.WriteLine("Saving settings in " + filePath);
                 //LoadDefaultSettings();
-                Current.ApplicationInfo.ApplicationName = App.Configuration.ApplicationName;
-                Current.ApplicationInfo.Version = FMAppHelper.GetApplicationVersion();
+                Settings.ApplicationInfo.ApplicationName = App.Configuration.ApplicationName;
+                Settings.ApplicationInfo.Version = FMAppHelper.GetApplicationVersion();
                 // Create the directory that will hold the settings file if it doesn't exist.
                 FileHelpers.CreateDirectoryFromFilePath(filePath);
                 FileStream createStream = File.Create(filePath);
-                JsonSerializer.SerializeAsync(createStream, Current, GetJsonSerializerOptions());
+                JsonSerializer.SerializeAsync(createStream, Settings, GetJsonSerializerOptions());
                 createStream.DisposeAsync();
                 //TODO: verify if JSON file is not corrupted.
             }
@@ -98,13 +98,13 @@ internal static class SettingsManager
 
     private static void LoadDefaultSettings()
     {
-        if (Current == null)
+        if (Settings == null)
         {
-            Current = new SettingsWrapper();
+            Settings = new SettingsWrapper();
             // Differentiate the default click indicators.
-            Current.RightClickOptions.CurrentRippleProfile = RippleProfileType.Square;
-            Current.RightClickOptions.FillColor = Color.Green;
-            Current.RightClickOptions.Hotkey = "Ctrl + Shift + Alt + D";
+            Settings.RightClickOptions.CurrentRippleProfile = RippleProfileType.Square;
+            Settings.RightClickOptions.FillColor = Color.Green;
+            Settings.RightClickOptions.Hotkey = "Ctrl + Shift + Alt + D";
         }        
     }
 

@@ -74,7 +74,7 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     private void InitializeViewModel()
     {
         _decorationManager = DecorationManager.Instance;
-        _spotlightOptions = SettingsManager.Current.HighlighterOptions;
+        _spotlightOptions = SettingsManager.Settings.HighlighterOptions;
         LoadSpotlightOptions();        
         // Load the outline styles from their corresponding enum.
         OutlineStyles = FMAppHelper.GetEnumDescriptions<OutlineStyle>();

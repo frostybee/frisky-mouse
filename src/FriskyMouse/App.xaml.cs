@@ -146,7 +146,7 @@ public partial class App : Application
                 if (!Debugger.IsAttached)
                 {
                     e.Handled = true;
-                    ShowUnhandledException((Exception)e.Exception, "Application.Current.DispatcherUnhandledException");
+                    ShowUnhandledException((Exception)e.Exception, "Application.Settings.DispatcherUnhandledException");
                 }
             };
 

@@ -1,5 +1,6 @@
 ﻿using FriskyMouse.Core;
 using System.Diagnostics;
+using System.Resources;
 using System.Windows.Forms;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
@@ -17,7 +18,7 @@ public partial class MainWindow : IWindow
     private bool _isPaneOpenedOrClosedFromCode;
     private HwndSource _hwndSource;
     private INavigationService _navigationService;
-    private readonly NotifyIcon? _notifyIcon;
+    private readonly NotifyIcon? _notifyIcon = new NotifyIcon();
     public MainWindowViewModel ViewModel { get; }
 
     public MainWindow(
@@ -42,20 +43,23 @@ public partial class MainWindow : IWindow
         NavigationView.SetServiceProvider(serviceProvider);
         NavigationView.Loaded += (_, _) => NavigationView.Navigate(typeof(DashboardPage));
         this.SetValue(TextOptions.TextFormattingModeProperty, TextFormattingMode.Ideal);
+        Loaded += MainWindow_Loaded;
+        Closing += MainWindow_Closing;
+        SetupNotifyIcon();
+    }
 
-        _notifyIcon = new NotifyIcon
-        {
-            Icon = System.Drawing.Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location),
-            Visible = true,
-            ContextMenuStrip = CreateContextMenu()
-        };
-
+    private void SetupNotifyIcon()
+    {
+        _notifyIcon.Visible = true;
+        _notifyIcon.BalloonTipText = "It is available here in the System Tray. You can disable this notification in the application's settings.";
+        _notifyIcon.BalloonTipTitle = "FriskyMouse is running!";
+        _notifyIcon.Text = "Double click to open FriskyMouse";
+        _notifyIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
+        _notifyIcon.ContextMenuStrip = CreateContextMenu();
         _notifyIcon.DoubleClick += (sender, args) =>
         {
             BringWindowToFront();
         };
-        Loaded += MainWindow_Loaded;
-        Closing += MainWindow_Closing;
     }
 
     private void MainWindow_Closing(object sender, CancelEventArgs e)
@@ -66,7 +70,7 @@ public partial class MainWindow : IWindow
     private void MainWindow_Loaded(object sender, RoutedEventArgs e)
     {
         // Apply the theme that was selected by the user.
-        FMAppHelper.ChangeUICurrentTheme(SettingsManager.Current.ApplicationInfo.AppUiTheme);
+        FMAppHelper.ChangeUICurrentTheme(SettingsManager.Settings.ApplicationInfo.AppUiTheme);
         ViewModel.LoadAppModules();
     }
     private ContextMenuStrip CreateContextMenu()
@@ -82,7 +86,7 @@ public partial class MainWindow : IWindow
         aboutItem.Click += (sender, e) =>
         {
             BringWindowToFront();
-            _navigationService.Navigate("Settings");
+            _ = _navigationService.Navigate("Settings");
         };
         var exitItem = new ToolStripMenuItem("Exit");
         exitItem.Image = System.Drawing.Image.FromStream(FMAppHelper.GetResourceStream(@"/Assets/close-64.png"));
@@ -99,9 +103,16 @@ public partial class MainWindow : IWindow
 
     protected override void OnStateChanged(EventArgs e)
     {
-        if (WindowState == System.Windows.WindowState.Minimized)
+        if (WindowState == WindowState.Minimized)
+        {
+            _notifyIcon.Visible = true;
+            if (SettingsManager.Settings.ApplicationInfo.ShowNotificationBalloonTip)
+            {
+                _notifyIcon.ShowBalloonTip(300);
+            }
             this.Hide();
-
+            ShowInTaskbar = false;
+        }
         base.OnStateChanged(e);
     }
 
@@ -176,6 +187,7 @@ public partial class MainWindow : IWindow
         this.Activate();
         this.Topmost = true;
         this.Topmost = false;
+        ShowInTaskbar = true;
         this.Focus();
     }
     protected override void OnClosed(EventArgs e)

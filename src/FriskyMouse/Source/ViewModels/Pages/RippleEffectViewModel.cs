@@ -123,7 +123,7 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
             // Left click (left button).
             _rippleEffectController = _decorationManager.LeftClickDecorator;
             // Switch the options:
-            _rippleOptions = SettingsManager.Current.LeftClickOptions;
+            _rippleOptions = SettingsManager.Settings.LeftClickOptions;
         }
         else if (_currentProfileType == MouseButtonType.RightClick)
         {
@@ -132,7 +132,7 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
             // Right click (right button).
             _rippleEffectController = _decorationManager.RightClickDecorator;
             // Switch the options:
-            _rippleOptions = SettingsManager.Current.RightClickOptions;
+            _rippleOptions = SettingsManager.Settings.RightClickOptions;
         }
         AdjustEnablingSwitchText();
         LoadProfileOptions();
@@ -255,7 +255,7 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
         // button profile is being set to current. 
         if (_currentProfileType  == MouseButtonType.LeftClick)
         {
-            IsEnabled = SettingsManager.Current.LeftClickOptions.IsEnabled;
+            IsEnabled = SettingsManager.Settings.LeftClickOptions.IsEnabled;
         }        
     }
 
@@ -263,7 +263,7 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
     {
         if (_currentProfileType == MouseButtonType.RightClick)
         {
-            IsEnabled = SettingsManager.Current.RightClickOptions.IsEnabled;
+            IsEnabled = SettingsManager.Settings.RightClickOptions.IsEnabled;
         }
     }
 

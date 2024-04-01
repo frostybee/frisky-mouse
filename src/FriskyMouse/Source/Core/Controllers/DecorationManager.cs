@@ -39,7 +39,7 @@ internal class DecorationManager : IDisposable
 
     private DecorationManager()
     {
-        _settings = SettingsManager.Current;
+        _settings = SettingsManager.Settings;
         _leftClickDecorator = new RippleEffectController(_settings.LeftClickOptions);
         _rightClickDecorator = new RippleEffectController(_settings.RightClickOptions);
         _highlighter = new HighlighterController(_settings.HighlighterOptions);

@@ -12,6 +12,8 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
     private string _appVersion = String.Empty;
     [ObservableProperty]
     private string _applicationName = String.Empty;
+    [ObservableProperty]
+    private bool _showBalloonTip;
 
     [ObservableProperty]
     private ApplicationTheme _currentApplicationTheme = ApplicationTheme.Unknown;
@@ -33,6 +35,7 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
 
         ApplicationThemeManager.Changed += OnThemeChanged;
         ApplicationName = App.Configuration.ApplicationName;
+        ShowBalloonTip = SettingsManager.Settings.ApplicationInfo.ShowNotificationBalloonTip;
         _isInitialized = true;
     }
 
@@ -50,7 +53,7 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
     partial void OnCurrentApplicationThemeChanged(ApplicationTheme oldValue, ApplicationTheme newValue)
     {
         FMAppHelper.ChangeUICurrentTheme(newValue);
-        SettingsManager.Current.ApplicationInfo.AppUiTheme = newValue;
+        SettingsManager.Settings.ApplicationInfo.AppUiTheme = newValue;
     }
 
     private void OnThemeChanged(ApplicationTheme currentApplicationTheme, Color systemAccent)
@@ -60,6 +63,11 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
         {
             CurrentApplicationTheme = currentApplicationTheme;
         }
+    }
+
+    partial void OnShowBalloonTipChanged(bool value)
+    {
+        SettingsManager.Settings.ApplicationInfo.ShowNotificationBalloonTip = value;
     }
 
     [RelayCommand]
