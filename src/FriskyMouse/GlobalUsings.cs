@@ -44,5 +44,5 @@ global using System.Runtime.InteropServices;
 global using System.Diagnostics;
 global using System.Reflection;
 global using System.Windows.Markup;
-
+global using System.Windows.Input;
 

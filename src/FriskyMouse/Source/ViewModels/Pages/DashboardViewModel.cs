@@ -11,6 +11,10 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
     private ApplicationInfo _settings;
     [ObservableProperty]
     private string _feedBackUri;
+    [ObservableProperty]
+    private bool _isUpdateAvailable;
+    [ObservableProperty]
+    private InfoBarSeverity _shortInfoBarSeverity = InfoBarSeverity.Warning;
 
     [ObservableProperty]
     private ICollection<NavigationCard> _navigationCards = new ObservableCollection<NavigationCard>(
@@ -53,6 +57,7 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
         FeedBackUri = App.Configuration.SendFeedbackURI;
         // Register hotkeys.
         DecorationManager.Instance.HotkeysController.RegisterGlobalHotkeys();
+         IsUpdateAvailable = true;
     }
 
     private static void SwitchThemes()

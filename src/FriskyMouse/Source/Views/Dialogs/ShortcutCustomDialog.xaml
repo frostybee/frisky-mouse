@@ -1,0 +1,87 @@
+﻿<ui:ContentDialog
+    x:Class="FriskyMouse.Views.Dialogs.ShortcutCustomDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:FriskyMouse.Views.Dialogs"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:FriskyMouse.Views.Dialogs"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="Edit shortcut"
+    d:DesignHeight="400"
+    d:DesignWidth="750"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    CloseButtonText="Close"
+    DialogMaxWidth="750"
+    mc:Ignorable="d">
+
+    <ui:ContentDialog.Resources>
+        <Style BasedOn="{StaticResource {x:Type ui:ContentDialog}}" TargetType="{x:Type local:ShortcutCustomDialog}" />
+    </ui:ContentDialog.Resources>
+
+    <Grid
+        x:Name="MainPanel"
+        MinWidth="350"
+        MinHeight="150"
+        Focusable="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition MinHeight="110" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Press a combination of keys to change this shortcut" />
+
+        <ItemsControl
+            x:Name="KeysVisualControl"
+            Grid.Row="1"
+            Height="56"
+            Margin="0,40,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            ItemsSource="{Binding HotkeysList}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ui:Button
+                        Width="70"
+                        Height="50"
+                        Margin="5,0,0,0"
+                        Appearance="Primary"
+                        Content="{Binding}"
+                        FontSize="16" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <StackPanel
+            Grid.Row="2"
+            Margin="0,10,0,0"
+            Orientation="Vertical">
+            <Grid>
+                <Grid.RowDefinitions />
+                <ui:InfoBar
+                    Name="InvalidShortcut"
+                    Title="Invalid combination"
+                    Width="450"
+                    IsClosable="False"
+                    IsOpen="True"
+                    IsTabStop="True"
+                    Message="please try again"
+                    Severity="Error"
+                    Visibility="Collapsed" />
+            </Grid>
+            <TextBlock
+                x:Name="TxtErrorMessage"
+                Margin="0,10,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                FontSize="12"
+                Text="Only shortcuts that start with Ctrl, Shift, and Alt are valid."
+                Visibility="Visible" />
+        </StackPanel>
+    </Grid>
+</ui:ContentDialog>
