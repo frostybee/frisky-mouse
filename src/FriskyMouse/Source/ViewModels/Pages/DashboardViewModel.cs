@@ -34,12 +34,12 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
 
     public DashboardViewModel(INavigationService navigationService)
     {
-        _navigationService = navigationService;        
+        _navigationService = navigationService;
     }
     public void OnNavigatedTo()
     {
         if (!_isInitialized)
-        {            
+        {
             InitializeViewModel();
             // Check for updates? 
             CheckIfUpdatesAreAvailable();
@@ -55,9 +55,9 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
     {
         _settings = SettingsManager.Settings.ApplicationInfo;
         FeedBackUri = App.Configuration.SendFeedbackURI;
-        // Register hotkeys.
-        DecorationManager.Instance.HotkeysController.RegisterGlobalHotkeys();
-         IsUpdateAvailable = true;
+        // Register global hotkeys.
+        DecorationManager.Instance.HotkeysController.RegisterAllHotkeys();
+        IsUpdateAvailable = true;
     }
 
     private static void SwitchThemes()
@@ -67,7 +67,7 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
         .Apply(
             currentTheme == ApplicationTheme.Light
                 ? ApplicationTheme.Dark
-                : ApplicationTheme.Light 
+                : ApplicationTheme.Light
         );
         SettingsManager.Settings.ApplicationInfo.AppUiTheme = ApplicationThemeManager.GetAppTheme();
     }
@@ -86,7 +86,7 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
                       , MessageBoxIcon.Information
                       );*/
                 //UpdateLatestVerionLabel(_updateChecker.NewVersionInfo);
-                Debug.WriteLine("New version: "+ _updateChecker.NewVersionInfo);
+                Debug.WriteLine("New version: " + _updateChecker.NewVersionInfo);
             }
             else
             {

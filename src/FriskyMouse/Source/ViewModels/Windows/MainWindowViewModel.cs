@@ -52,7 +52,5 @@ public partial class MainWindowViewModel : ObservableObject
         DecorationManager.Instance?.SetRippleEffectProfiles();
         // Initialize the global manager and bootstrap the application's logic.        
         DecorationManager.Instance?.EnableMouseDecoration();
-        // Register global hotkeys.
-        //DecorationManager.Instance?.RegisterGlobalHotkeys();
     }    
 }

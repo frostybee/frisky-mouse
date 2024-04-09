@@ -1,4 +1,5 @@
-﻿using System.Windows.Media.Imaging;
+﻿using FriskyMouse.Core.Hotkeys;
+using System.Windows.Media.Imaging;
 using Color = System.Windows.Media.Color;
 
 namespace FriskyMouse.ViewModels.Pages;
@@ -13,13 +14,11 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     private bool _isInitialized = false;
     private DecorationManager _decorationManager;
     private HighlighterInfo _spotlightOptions;
+    private readonly IContentDialogService _contentDialogService;
+    private List<string> _hotkeys = new List<string> { "Ctrl", "Alt", "Shift", "F5" };
 
     [ObservableProperty]
-    private List<string> _hotkeys;
-    //private List<string> _hotkeys = new List<string> { "Ctrl", "Alt", "F5" };
-
-    //[ObservableProperty]
-    //private List<object> _keys = new List<object> { "Ctrl", "Alt", "F5" };
+    private string _currentHotkeyText;
 
     [ObservableProperty]
     private BitmapSource _spotlightImagePreview;
@@ -59,6 +58,11 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     private byte _shadowOpacityPercentage;
     #endregion
 
+    public SpotlightViewModel(IContentDialogService contentDialogService)
+    {
+        _contentDialogService = contentDialogService;        
+    }
+
     public void OnNavigatedFrom()
     {
     }
@@ -85,7 +89,7 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
         // loading all the options.
         _isInitialized = true;
         ApplySpotlightOptions();
-        //RegisterGlobalHotkeys();
+        //RegisterAllHotkeys();
     }
     private void HotkeysController_MouseHighlighterToggled(object sender, EventArgs e)
     {
@@ -94,7 +98,8 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
 
     private void LoadSpotlightOptions()
     {
-        Hotkeys = _spotlightOptions.Hotkey.Split("+", StringSplitOptions.TrimEntries).ToList();
+        _hotkeys = _spotlightOptions.Hotkey.Split("+", StringSplitOptions.TrimEntries).ToList();
+        CurrentHotkeyText = _spotlightOptions.Hotkey.Trim();
         FillColor = _spotlightOptions.FillColor.ToMediaColor();
         ShadowColor = _spotlightOptions.ShadowColor.ToMediaColor();
         OutlineColor = _spotlightOptions.OutlineColor.ToMediaColor();
@@ -161,6 +166,30 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     }
 
     #region Properties event handlers
+    [RelayCommand]
+    private async Task OnOpenShortcutDialog()
+    {
+        _hotkeys = _spotlightOptions.Hotkey.Split("+", StringSplitOptions.TrimEntries).ToList();
+        var shortcutDialog = new ShortcutCustomDialog(
+            _contentDialogService.GetContentPresenter(), _hotkeys
+        )
+        {
+            Title = "Edit Activation Shortcut",
+            PrimaryButtonText = "Save",
+            IsSecondaryButtonEnabled = false,
+        };
+
+        var result = await shortcutDialog.ShowAsync();
+        if (result == ContentDialogResult.Primary)
+        {
+            if (shortcutDialog.SelectedHotKey != HotKey.None)
+            {
+                _spotlightOptions.Hotkey = shortcutDialog.SelectedHotKey.ConvertToString();
+                _decorationManager.HotkeysController.UpdateHighlighterHotkey(_spotlightOptions.Hotkey);
+                CurrentHotkeyText = _spotlightOptions.Hotkey;
+            }            
+        }
+    }
 
     [RelayCommand]
     private void OnResetButtonClick(string parameter)

@@ -10,6 +10,9 @@ namespace FriskyMouse.Core.Controllers;
 /// </summary>
 internal class HotkeysController
 {
+    private const string TOGGLE_HIGHLITER_KEY = "ToggleHighlighter";
+    private const string TOGGLE_RIGHTCLICK_KEY = "ToggleRightClick";
+    private const string TOGGLE_LEFTCLICK_KEY = "ToggleLeftClick";
     private readonly HighlighterInfo _spotlightOptions;
     private readonly RippleProfileInfo _leftClickOptions;
     private readonly RippleProfileInfo _rightClickOptions;
@@ -24,38 +27,28 @@ internal class HotkeysController
         _rightClickOptions = SettingsManager.Settings.RightClickOptions;
     }
 
-    public void RegisterGlobalHotkeys()
+    public void RegisterAllHotkeys()
     {
         try
         {
-            AddHighlighterHotkeys(_spotlightOptions.Hotkey);
-            AddLeftClickIndicatorHotkeys(_leftClickOptions.Hotkey);
-            AddRightClickIndicatorHotkeys(_rightClickOptions.Hotkey);
+            AddActivationHotkey(TOGGLE_HIGHLITER_KEY, _spotlightOptions.Hotkey, OnToggleHighlighterFeature);
+            AddActivationHotkey(TOGGLE_RIGHTCLICK_KEY, _rightClickOptions.Hotkey, OnToggleRightClickFeature);
+            AddActivationHotkey(TOGGLE_LEFTCLICK_KEY, _leftClickOptions.Hotkey, OnToggleLeftClickFeature);
         }
         catch (Exception ex)
         {
             Console.WriteLine("Registering hotkeys..." + ex.Message);
         }
     }
-
-    private void AddRightClickIndicatorHotkeys(string hotkey)
+    public void UpdateHighlighterHotkey(string newHotkey)
     {
-        KeyGesture HighlighterGesture = GetKeyGestureFromString(_rightClickOptions.Hotkey);
-        HotkeyManager.Current.AddOrReplace("ToggleRightClick", HighlighterGesture, OnToggleRightClickFeature);
+        AddActivationHotkey(TOGGLE_HIGHLITER_KEY, newHotkey, OnToggleHighlighterFeature);
     }
 
-
-
-    private void AddLeftClickIndicatorHotkeys(string hotkey)
+    private void AddActivationHotkey(string hotkeyName, string hotkey, EventHandler<HotkeyEventArgs> onHotkeyPressed)
     {
-        KeyGesture HighlighterGesture = GetKeyGestureFromString(_leftClickOptions.Hotkey);
-        HotkeyManager.Current.AddOrReplace("ToggleLeftClick", HighlighterGesture, OnToggleLeftClickFeature);
-    }
-
-    private void AddHighlighterHotkeys(string inHotkey)
-    {
-        KeyGesture HighlighterGesture = GetKeyGestureFromString(_spotlightOptions.Hotkey);
-        HotkeyManager.Current.AddOrReplace("ToggleHighlighter", HighlighterGesture, OnToggleHighlighterFeature);
+        KeyGesture htGesture = GetKeyGestureFromString(hotkey);
+        HotkeyManager.Current.AddOrReplace(hotkeyName, htGesture, onHotkeyPressed);
     }
 
     private KeyGesture GetKeyGestureFromString(string keyCombination)
