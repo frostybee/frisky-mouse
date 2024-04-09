@@ -23,20 +23,30 @@
     <Grid
         x:Name="MainPanel"
         MinWidth="350"
-        MinHeight="150"
+        MinHeight="190"
         Focusable="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition MinHeight="110" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="Press a combination of keys to change this shortcut" />
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Press a combination of keys to change this shortcut" />
+            <TextBlock
+                x:Name="TxtErrorMessage"
+                Margin="0,5,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                FontSize="12"
+                Text="Hint: only shortcuts that start with Ctrl, Shift, and Alt are valid."
+                Visibility="Visible" />
+        </StackPanel>
 
         <ItemsControl
             x:Name="KeysVisualControl"
             Grid.Row="1"
-            Height="56"
-            Margin="0,40,0,0"
+            Height="48"
+            Margin="0,35,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             ItemsSource="{Binding HotkeysList}">
@@ -48,7 +58,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <ui:Button
-                        Width="70"
+                        Width="65"
                         Height="50"
                         Margin="5,0,0,0"
                         Appearance="Primary"
@@ -59,14 +69,14 @@
         </ItemsControl>
         <StackPanel
             Grid.Row="2"
-            Margin="0,10,0,0"
+            Margin="0,20,0,0"
             Orientation="Vertical">
             <Grid>
                 <Grid.RowDefinitions />
                 <ui:InfoBar
-                    Name="InvalidShortcut"
+                    Name="InfobarInvalidShortcut"
                     Title="Invalid combination"
-                    Width="450"
+                    Width="350"
                     IsClosable="False"
                     IsOpen="True"
                     IsTabStop="True"
@@ -74,14 +84,6 @@
                     Severity="Error"
                     Visibility="Collapsed" />
             </Grid>
-            <TextBlock
-                x:Name="TxtErrorMessage"
-                Margin="0,10,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                FontSize="12"
-                Text="Only shortcuts that start with Ctrl, Shift, and Alt are valid."
-                Visibility="Visible" />
         </StackPanel>
     </Grid>
 </ui:ContentDialog>

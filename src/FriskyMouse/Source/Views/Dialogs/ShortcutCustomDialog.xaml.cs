@@ -16,6 +16,7 @@ public partial class ShortcutCustomDialog : ContentDialog
     }
 
     public static readonly DependencyProperty HotkeysListProperty = DependencyProperty.Register("HotkeysList", typeof(ObservableCollection<string>), typeof(ShortcutCustomDialog), new PropertyMetadata(default(string)));
+
     public ShortcutCustomDialog(ContentPresenter contentPresenter, List<string> currentHotKeys)
         : base(contentPresenter)
     {
@@ -41,23 +42,25 @@ public partial class ShortcutCustomDialog : ContentDialog
 
     private void ShortcutCustomDialog_PreviewKeyDown(object sender, KeyEventArgs e)
     {
-        // Swallow all hotkeys, so our control can catch the pressedKey strokes
+        // Swallow all hotkeys, so our control can catch the pressed Key strokes
         e.Handled = true;
         var pressedKey = e.Key == Key.System ? e.SystemKey : e.Key;
-        bool is_valid = _shortcutProcessor.ProcessKeyCombination(pressedKey);
-        if (!is_valid)
+        if (!_shortcutProcessor.IsKeysCombinationValid(pressedKey))
         {
             HotkeysList.Clear();
             HotkeysList.Add("None");
+            InfobarInvalidShortcut.Visibility = Visibility.Visible;
             Debug.WriteLine("INVALID Key pressed: " + _shortcutProcessor.SelectedHotKey);
         }
         else
         {
+            Debug.WriteLine("Not so virtual key pressed: " + pressedKey);
             HotkeysList.Clear();
             _ = _shortcutProcessor.SelectedHotKey?.ConvertToString();
             _shortcutProcessor.SelectedHotKey?.HotkeysList.ForEach(hotkey => HotkeysList.Add(hotkey));
             SelectedHotKey = _shortcutProcessor.SelectedHotKey;
-            Debug.WriteLine("Valid Key pressed: " + _shortcutProcessor.SelectedHotKey);
+            InfobarInvalidShortcut.Visibility = Visibility.Collapsed;
+            Debug.WriteLine("Valid Key pressed: " + _shortcutProcessor.SelectedHotKey.ConvertToString());
         }
     }
 }

@@ -84,9 +84,9 @@ class ShortcutProcessor
             //_allowedKeys.Add(k);
         }
     }
-    public bool ProcessKeyCombination(Key pressedKey)
+    public bool IsKeysCombinationValid(Key pressedKey)
     {
-        
+
         SelectedHotKey = HotKey.None;
         var pressedModifiers = Keyboard.Modifiers;
         // Handle the case where F10 is pressed
@@ -146,7 +146,7 @@ class ShortcutProcessor
 
         // We now have a valid hotkey.
         SelectedHotKey = new HotKey(pressedKey, pressedModifiers);
-        return true;    
+        return true;
     }
 
     private void UpdateControlText()

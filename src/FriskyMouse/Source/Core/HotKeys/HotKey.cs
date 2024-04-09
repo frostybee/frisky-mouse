@@ -9,7 +9,7 @@ public class HotKey : IEquatable<HotKey>
     private const int VK_CONTROL = 17;
     private const int VK_SHIFT = 16;
     public static HotKey None = new HotKey(Key.None, ModifierKeys.None);
-    public Key Key { get; } 
+    public Key Key { get; }
     public ModifierKeys ModifierKeys { get; }
     public List<string> HotkeysList { get; set; } = new List<string>();
 
@@ -41,7 +41,7 @@ public class HotKey : IEquatable<HotKey>
 
     public string ConvertToString()
     {
-        HotkeysList.Clear();    
+        HotkeysList.Clear();
         var sb = new StringBuilder();
         string strKey;
         if ((this.ModifierKeys & ModifierKeys.Control) == ModifierKeys.Control)
