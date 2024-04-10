@@ -12,5 +12,11 @@ public partial class DashboardPage : INavigableView<DashboardViewModel>
         DataContext = this;
         InitializeComponent();
         //ImageEx.Source = new BitmapImage(new Uri(@"/Assets/show-app.png", UriKind.Relative));
+        Loaded += DashboardPage_Loaded;
+    }
+
+    private void DashboardPage_Loaded(object sender, RoutedEventArgs e)
+    {
+        ViewModel?.RegisterAppHotkeys();
     }
 }

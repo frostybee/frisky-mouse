@@ -1,4 +1,6 @@
-﻿using System.Runtime;
+﻿using NHotkey;
+using NHotkey.Wpf;
+using System.Runtime;
 using System.Windows.Forms;
 
 namespace FriskyMouse.ViewModels.Pages;
@@ -8,6 +10,7 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
     private readonly INavigationService _navigationService;
     private readonly GitHubUpdateChecker _updateChecker = new GitHubUpdateChecker();
     private bool _isInitialized = false;
+    private bool _areHotkeysRegistered = false;
     private ApplicationInfo _settings;
     [ObservableProperty]
     private string _feedBackUri;
@@ -55,11 +58,13 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
     {
         _settings = SettingsManager.Settings.ApplicationInfo;
         FeedBackUri = App.Configuration.SendFeedbackURI;
-        // Register global hotkeys.
-        DecorationManager.Instance.HotkeysController.RegisterAllHotkeys();
+        _isInitialized = true;
         IsUpdateAvailable = true;
     }
-
+    private void HotkeyManager_HotkeyAlreadyRegistered(object sender, HotkeyAlreadyRegisteredEventArgs e)
+    {
+        System.Windows.Forms.MessageBox.Show(string.Format("The hotkey {0} is already registered by another application", e.Name));
+    }
     private static void SwitchThemes()
     {
         var currentTheme = ApplicationThemeManager.GetAppTheme();
@@ -141,5 +146,26 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
             return;
 
         _navigationService.Navigate(pageType);
+    }
+
+    internal void RegisterAppHotkeys()
+    {
+        if (!_areHotkeysRegistered)
+        {
+            HotkeyManager.HotkeyAlreadyRegistered += HotkeyManager_HotkeyAlreadyRegistered;
+            try
+            {
+                // Register global hotkeys.
+                DecorationManager.Instance.HotkeysController.RegisterAllHotkeys();
+            }
+            catch (HotkeyAlreadyRegisteredException ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Oi" + ex.Message);
+            }
+            finally
+            {
+                _areHotkeysRegistered = true;
+            }
+        }
     }
 }

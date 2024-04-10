@@ -29,7 +29,10 @@ internal class HotkeysController
 
     public void RegisterAllHotkeys()
     {
-        try
+        AddActivationHotkey(TOGGLE_HIGHLITER_KEY, _spotlightOptions.Hotkey, OnToggleHighlighterFeature);
+        AddActivationHotkey(TOGGLE_RIGHTCLICK_KEY, _rightClickOptions.Hotkey, OnToggleRightClickFeature);
+        AddActivationHotkey(TOGGLE_LEFTCLICK_KEY, _leftClickOptions.Hotkey, OnToggleLeftClickFeature);
+        /*try
         {
             AddActivationHotkey(TOGGLE_HIGHLITER_KEY, _spotlightOptions.Hotkey, OnToggleHighlighterFeature);
             AddActivationHotkey(TOGGLE_RIGHTCLICK_KEY, _rightClickOptions.Hotkey, OnToggleRightClickFeature);
@@ -38,7 +41,7 @@ internal class HotkeysController
         catch (Exception ex)
         {
             Console.WriteLine("Registering hotkeys..." + ex.Message);
-        }
+        }*/
     }
     public void UpdateHighlighterHotkey(string newHotkey)
     {

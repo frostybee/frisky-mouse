@@ -1,13 +1,13 @@
 
 using FriskyMouse.Core.Hotkeys;
-
+using NHotkey.Wpf;
 
 namespace FriskyMouse.Views.Dialogs;
 
 public partial class ShortcutCustomDialog : ContentDialog
 {
     private readonly ShortcutProcessor _shortcutProcessor = new();
-    public HotKey? SelectedHotKey { get; set; }
+    public HotKey SelectedHotKey { get; set; }
     private readonly List<string> _currentHotkeys;
     public ObservableCollection<string> HotkeysList
     {
@@ -38,6 +38,12 @@ public partial class ShortcutCustomDialog : ContentDialog
         Focus();
         Keyboard.Focus(this);
         _currentHotkeys.ForEach(hotkey => { HotkeysList.Add(hotkey); });
+        HotkeyManager.HotkeyAlreadyRegistered += HotkeyManager_HotkeyAlreadyRegistered;
+    }
+
+    private void HotkeyManager_HotkeyAlreadyRegistered(object sender, HotkeyAlreadyRegisteredEventArgs e)
+    {
+        System.Windows.MessageBox.Show(string.Format("The hotkey {0} is already registered by another application", e.Name));
     }
 
     private void ShortcutCustomDialog_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -54,9 +60,11 @@ public partial class ShortcutCustomDialog : ContentDialog
         }
         else
         {
-            Debug.WriteLine("Not so virtual key pressed: " + pressedKey);
+            //TODO: 
+            Debug.WriteLine("Not so virtual key pressed: " + pressedKey);            
             HotkeysList.Clear();
-            _ = _shortcutProcessor.SelectedHotKey?.ConvertToString();
+            string newHotkey = _shortcutProcessor.SelectedHotKey?.ConvertToString();
+            DecorationManager.Instance.HotkeysController.UpdateHighlighterHotkey(newHotkey);
             _shortcutProcessor.SelectedHotKey?.HotkeysList.ForEach(hotkey => HotkeysList.Add(hotkey));
             SelectedHotKey = _shortcutProcessor.SelectedHotKey;
             InfobarInvalidShortcut.Visibility = Visibility.Collapsed;
