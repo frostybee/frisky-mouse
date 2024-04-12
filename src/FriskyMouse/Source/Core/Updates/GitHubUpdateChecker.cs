@@ -4,8 +4,9 @@ namespace FriskyMouse.Core;
 
 public class GitHubUpdateChecker
 {
+    private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
     public bool IsUpdateAvailable { get; private set; } = false;
-    public string? NewVersionInfo { get; private set; } = "Up to date!";
+    public string? NewVersionInfo { get; private set; } = "Up to date!";    
 
     public async Task CheckGitHubNewerVersion()
     {
@@ -31,8 +32,9 @@ public class GitHubUpdateChecker
                     NewVersionInfo = latestGitHubVersion.ToString();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Logger.Error(ex, "A problem occurred while checking GitHub latest release");
             }
         }
     }

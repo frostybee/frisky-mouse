@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using NLog;
+using System.Reflection;
 
 namespace FriskyMouse;
 
@@ -17,6 +18,8 @@ public partial class App : Application
     private static IHost _host;
     public static readonly AppConfigurationInfo Configuration = new AppConfigurationInfo();
     private bool _singleInstanceClose = false;
+    private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
     #endregion
 
     /// <summary>
@@ -44,6 +47,8 @@ public partial class App : Application
             // Register handlers for application-wide runtime exceptions.
             RegisterGlobalExceptionHandling();
 
+            ConfigureNLog();
+
             //!important: the app configuration must be loaded first
             // before loading the user's settings. 
             Configuration.LoadAppConfigurationInfo();
@@ -60,6 +65,15 @@ public partial class App : Application
 
             _host.Start();
         }
+    }
+
+    private void ConfigureNLog()
+    {
+        NLog.LogManager.Setup().LoadConfiguration(builder => {
+            builder.ForLogger().FilterMinLevel(LogLevel.Info).WriteToConsole();
+            builder.ForLogger().FilterMinLevel(LogLevel.Debug).WriteToFile(fileName: "fm-log.txt");
+            builder.ForLogger().FilterMinLevel(LogLevel.Error).WriteToFile(fileName: "fm-log.txt");
+        });
     }
 
     private void ConfigureServices(HostBuilderContext context, IServiceCollection services)
@@ -132,6 +146,7 @@ public partial class App : Application
     {
         return _host.Services.GetRequiredService<T>();
     }
+
     private void RegisterGlobalExceptionHandling()
     {
         // this is the line you really want 
@@ -176,5 +191,6 @@ public partial class App : Application
         {
             Application.Current.Shutdown();
         }
+        Logger.Error(exception, unhandledExceptionType);
     }
 }

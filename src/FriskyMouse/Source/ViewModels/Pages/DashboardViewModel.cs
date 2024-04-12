@@ -7,6 +7,7 @@ namespace FriskyMouse.ViewModels.Pages;
 
 public partial class DashboardViewModel : ObservableObject, INavigationAware
 {
+    private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
     private readonly INavigationService _navigationService;
     private readonly GitHubUpdateChecker _updateChecker = new GitHubUpdateChecker();
     private bool _isInitialized = false;
@@ -67,42 +68,56 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
     }
     private static void SwitchThemes()
     {
-        var currentTheme = ApplicationThemeManager.GetAppTheme();
-        ApplicationThemeManager
-        .Apply(
-            currentTheme == ApplicationTheme.Light
-                ? ApplicationTheme.Dark
-                : ApplicationTheme.Light
-        );
-        SettingsManager.Settings.ApplicationInfo.AppUiTheme = ApplicationThemeManager.GetAppTheme();
+        try
+        {
+            var currentTheme = ApplicationThemeManager.GetAppTheme();
+            ApplicationThemeManager
+            .Apply(
+                currentTheme == ApplicationTheme.Light
+                    ? ApplicationTheme.Dark
+                    : ApplicationTheme.Light
+            );
+            SettingsManager.Settings.ApplicationInfo.AppUiTheme = ApplicationThemeManager.GetAppTheme();
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, "Failed to switch to the selected theme");
+        }
     }
     private async void CheckIfUpdatesAreAvailable()
     {
-        if (IsCheckForUpdateRequired())
+        try
         {
-            await Task.Run(_updateChecker.CheckGitHubNewerVersion);
-            if (_updateChecker.IsUpdateAvailable)
+            if (IsCheckForUpdateRequired())
             {
-                Debug.WriteLine("A new version is available, please consider updating FriskyMouse!");
-                //TODO: Show the new update notification on the dashboard page.
-                /*  MessageBox.Show("A new version is available, please consider updating FriskyMouse!"
-                      , "FriskyMouse Update"
-                      , MessageBoxButtons.OK
-                      , MessageBoxIcon.Information
-                      );*/
-                //UpdateLatestVerionLabel(_updateChecker.NewVersionInfo);
-                Debug.WriteLine("New version: " + _updateChecker.NewVersionInfo);
+                await Task.Run(_updateChecker.CheckGitHubNewerVersion);
+                if (_updateChecker.IsUpdateAvailable)
+                {
+                    Debug.WriteLine("A new version is available, please consider updating FriskyMouse!");
+                    //TODO: Show the new update notification on the dashboard page.
+                    /*  MessageBox.Show("A new version is available, please consider updating FriskyMouse!"
+                          , "FriskyMouse Update"
+                          , MessageBoxButtons.OK
+                          , MessageBoxIcon.Information
+                          );*/
+                    //UpdateLatestVerionLabel(_updateChecker.NewVersionInfo);
+                    Debug.WriteLine("New version: " + _updateChecker.NewVersionInfo);
+                }
+                else
+                {
+                    Debug.WriteLine("Up to date!!");
+                    ///UpdateLatestVerionLabel("Up to date!");
+                }
             }
             else
             {
                 Debug.WriteLine("Up to date!!");
-                ///UpdateLatestVerionLabel("Up to date!");
+                //UpdateLatestVerionLabel("Up to date!");
             }
         }
-        else
+        catch (Exception ex)
         {
-            Debug.WriteLine("Up to date!!");
-            //UpdateLatestVerionLabel("Up to date!");
+            Logger.Error(ex, "Failed to check for latest updates");
         }
     }
     private bool IsCheckForUpdateRequired()
