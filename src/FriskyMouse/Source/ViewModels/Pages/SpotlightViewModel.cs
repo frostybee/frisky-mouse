@@ -166,29 +166,18 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     }
 
     #region Properties event handlers
+
     [RelayCommand]
     private async Task OnOpenShortcutDialog()
     {
         _hotkeys = _spotlightOptions.Hotkey.Split("+", StringSplitOptions.TrimEntries).ToList();
-        var shortcutDialog = new ShortcutCustomDialog(
-            _contentDialogService.GetContentPresenter(), _hotkeys
-        )
+        var selectedHotkey = await FMAppHelper.OpenEditShortcutDialogAsync(_contentDialogService, _hotkeys);
+        if (selectedHotkey != HotKey.None)
         {
-            Title = "Edit Activation Shortcut",
-            PrimaryButtonText = "Save",
-            IsSecondaryButtonEnabled = false,
-        };
-
-        var result = await shortcutDialog.ShowAsync();
-        if (result == ContentDialogResult.Primary)
-        {
-            if (shortcutDialog.SelectedHotKey != HotKey.None)
-            {
-                _spotlightOptions.Hotkey = shortcutDialog.SelectedHotKey.ConvertToString();
-                _decorationManager.HotkeysController.UpdateHighlighterHotkey(_spotlightOptions.Hotkey);
-                CurrentHotkeyText = _spotlightOptions.Hotkey;
-            }            
-        }
+            _spotlightOptions.Hotkey = selectedHotkey.ConvertToString();
+            _decorationManager.HotkeysController.UpdateHighlighterHotkey(_spotlightOptions.Hotkey);
+            CurrentHotkeyText = _spotlightOptions.Hotkey;
+        }        
     }
 
     [RelayCommand]

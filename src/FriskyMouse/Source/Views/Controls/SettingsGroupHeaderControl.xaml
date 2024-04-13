@@ -28,7 +28,7 @@
 
                         <!--  Group header  -->
                         <ui:TextBlock
-                            Margin="10,30,0,0"
+                            Margin="10,25,0,0"
                             FontTypography="BodyStrong"
                             Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}"
                             Text="{TemplateBinding Header}"

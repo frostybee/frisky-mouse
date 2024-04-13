@@ -12,7 +12,7 @@
     Title="Mouse Highlighter Settings"
     d:DataContext="{d:DesignInstance local:SpotlightPage,
                                      IsDesignTimeCreatable=False}"
-    d:DesignHeight="2000"
+    d:DesignHeight="1700"
     d:DesignWidth=" 1200"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"

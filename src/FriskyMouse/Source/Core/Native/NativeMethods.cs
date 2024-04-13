@@ -22,7 +22,17 @@ public static class NativeMethods
     private const string USER32_DLL = "user32.dll";
     private const string GDI32_DLL = "gdi32.dll";
 
-
+    public enum MapType : uint
+    {
+        MAPVK_VK_TO_VSC = 0x0,
+        MAPVK_VSC_TO_VK = 0x1,
+        MAPVK_VK_TO_CHAR = 0x2,
+        MAPVK_VSC_TO_VK_EX = 0x3,
+    }
+    [DllImport("user32.dll")]
+    public static extern uint MapVirtualKey(uint uCode, MapType uMapType);
+    [DllImport("user32.dll", CharSet = CharSet.Auto)]
+    public static extern int GetKeyNameText(int lParam, [MarshalAs(UnmanagedType.LPWStr), Out] StringBuilder str, int size);
     #region USER32 Native Methods
     /// <summary>
     /// An application-defined or library-defined callback function used with the SetWindowsHookEx function        

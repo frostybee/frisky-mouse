@@ -1,4 +1,5 @@
 ﻿using FriskyMouse.Core;
+using FriskyMouse.Core.Hotkeys;
 using FriskyMouse.Drawing.Attributes;
 using FriskyMouse.Drawing.Extensions;
 
@@ -11,7 +12,8 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
     private DecorationManager _decorationManager;
     private bool _isInitialized = false;
     private MouseButtonType _currentProfileType;
-
+    private readonly IContentDialogService _contentDialogService;
+    private List<string> _hotkeys = new List<string> { "Ctrl", "Alt", "Shift", "F5" };
     /// <summary>
     /// Holds the list of pre-defined ripple profiles.
     /// </summary>
@@ -59,7 +61,8 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
     [ObservableProperty]
     private bool _isRightButtonCurrent;
     [ObservableProperty]
-    private List<string> _hotkeys;
+    private string _currentHotkeyText;
+
 
     #region Animation Settings
     [ObservableProperty]
@@ -80,6 +83,10 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
     #endregion
     #endregion
 
+    public RippleEffectViewModel(IContentDialogService contentDialogService)
+    {
+        _contentDialogService = contentDialogService;
+    }
     public void OnNavigatedFrom()
     {
 
@@ -164,7 +171,8 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
         RadiusMultiplier = _rippleOptions.RadiusMultiplier;
         OpacityMultiplier = _rippleOptions.OpacityMultiplier;
         FillColor = _rippleOptions.FillColor.ToMediaColor();
-        Hotkeys = _rippleOptions.Hotkey.Split("+", StringSplitOptions.TrimEntries).ToList();
+        _hotkeys = _rippleOptions.Hotkey.Split("+", StringSplitOptions.TrimEntries).ToList();
+        CurrentHotkeyText = _rippleOptions.Hotkey.Trim();
     }
 
     private void AdjustAnimationSpeed(int speed)
@@ -253,10 +261,10 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
     {
         // Change the toggle switch's status only if the respective 
         // button profile is being set to current. 
-        if (_currentProfileType  == MouseButtonType.LeftClick)
+        if (_currentProfileType == MouseButtonType.LeftClick)
         {
             IsEnabled = SettingsManager.Settings.LeftClickOptions.IsEnabled;
-        }        
+        }
     }
 
     private void OnMouseRightClickIndicatorToggled(object sender, EventArgs e)
@@ -282,6 +290,18 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
         {
             _currentProfileType = MouseButtonType.RightClick;
             SwitchCurrentProfileSettings();
+        }
+    }
+    [RelayCommand]
+    private async Task OnOpenShortcutDialog()
+    {
+        _hotkeys = _rippleOptions.Hotkey.Split("+", StringSplitOptions.TrimEntries).ToList();
+        var selectedHotkey = await FMAppHelper.OpenEditShortcutDialogAsync(_contentDialogService, _hotkeys);
+        if (selectedHotkey != HotKey.None)
+        {
+            _rippleOptions.Hotkey = selectedHotkey.ConvertToString();
+            _decorationManager.HotkeysController.UpdateHighlighterHotkey(_rippleOptions.Hotkey);
+            CurrentHotkeyText = _rippleOptions.Hotkey;
         }
     }
 }
