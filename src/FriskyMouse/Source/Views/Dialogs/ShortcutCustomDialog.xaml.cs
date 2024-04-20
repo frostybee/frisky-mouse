@@ -64,7 +64,11 @@ public partial class ShortcutCustomDialog : ContentDialog
             Debug.WriteLine("Not so virtual key pressed: " + pressedKey);            
             HotkeysList.Clear();
             string newHotkey = _shortcutProcessor.SelectedHotKey?.ConvertToString();
-            DecorationManager.Instance.HotkeysController.UpdateHighlighterHotkey(newHotkey);
+            //DecorationManager.Instance.HotkeysController.UpdateHighlighterHotkey(newHotkey);
+            //TODO:
+            // 1) CHECK IF THE KEY IS ALREADY REGISTERED;
+            // 2) IF YES, DISPLAY ERROR MESSAGE
+            // 3) UNREGISTER IT. 
             _shortcutProcessor.SelectedHotKey?.HotkeysList.ForEach(hotkey => HotkeysList.Add(hotkey));
             SelectedHotKey = _shortcutProcessor.SelectedHotKey;
             InfobarInvalidShortcut.Visibility = Visibility.Collapsed;

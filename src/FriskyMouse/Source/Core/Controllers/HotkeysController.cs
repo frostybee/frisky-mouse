@@ -6,7 +6,7 @@ namespace FriskyMouse.Core.Controllers;
 
 /// <summary>
 /// Manages the registration and unregistration of global
-/// hotkeys that are used to enable/disable some of the application features.
+/// hotkeys that are used to enable/disable the application features.
 /// </summary>
 internal class HotkeysController
 {

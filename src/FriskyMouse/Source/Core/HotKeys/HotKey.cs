@@ -11,7 +11,7 @@ public class HotKey : IEquatable<HotKey>
     public static HotKey None = new HotKey(Key.None, ModifierKeys.None);
     public Key Key { get; }
     public ModifierKeys ModifierKeys { get; }
-    public List<string> HotkeysList { get; set; } = new List<string>();
+    public List<string> HotkeysList { get; set; } = [];
 
     public HotKey(Key key, ModifierKeys modifierKeys = ModifierKeys.None)
     {
