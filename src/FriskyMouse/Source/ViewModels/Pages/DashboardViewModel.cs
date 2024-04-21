@@ -46,7 +46,7 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
         {
             InitializeViewModel();
             // Check for updates? 
-            CheckIfUpdatesAreAvailable();
+            AreUpdatesAvailable();
         }
     }
 
@@ -84,7 +84,7 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
             Logger.Error(ex, "Failed to switch to the selected theme");
         }
     }
-    private async void CheckIfUpdatesAreAvailable()
+    private async void AreUpdatesAvailable()
     {
         try
         {

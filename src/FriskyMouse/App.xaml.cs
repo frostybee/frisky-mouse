@@ -47,7 +47,7 @@ public partial class App : Application
             // Register handlers for application-wide runtime exceptions.
             RegisterGlobalExceptionHandling();
 
-            ConfigureNLog();
+            ConfigureNLogService();
 
             //!important: the app configuration must be loaded first
             // before loading the user's settings. 
@@ -67,10 +67,9 @@ public partial class App : Application
         }
     }
 
-    private void ConfigureNLog()
+    private void ConfigureNLogService()
     {
         NLog.LogManager.Setup().LoadConfiguration(builder => {
-            builder.ForLogger().FilterMinLevel(LogLevel.Info).WriteToConsole();
             builder.ForLogger().FilterMinLevel(LogLevel.Debug).WriteToFile(fileName: "fm-log.txt");
             builder.ForLogger().FilterMinLevel(LogLevel.Error).WriteToFile(fileName: "fm-log.txt");
         });
