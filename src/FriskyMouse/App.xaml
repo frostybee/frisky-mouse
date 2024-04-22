@@ -24,9 +24,12 @@
                 <ResourceDictionary Source="Source/Views/Controls/HotkeysVisualControl.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/ColorPicker;component/Styles/DefaultColorPickerStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <!--  Custom converters  -->
             <converters:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
             <converters:ThemeToIndexConverter x:Key="ThemeToIndexConverter" />
+            <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
             <converters:BooleanToMouseButtonStyleConverter x:Key="BooleanToMouseButtonStyleConverter" />
+
             <DataTemplate DataType="{x:Type sys:String}">
                 <TextBlock Text="{Binding}">
                     <TextBlock.Resources>

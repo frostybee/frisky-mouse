@@ -14,7 +14,10 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
     private string _applicationName = String.Empty;
     [ObservableProperty]
     private bool _showBalloonTip;
-
+    [ObservableProperty]
+    private string _lastUpdateCheckDate;
+    [ObservableProperty]
+    private bool _isUpdateAvailable;
     [ObservableProperty]
     private ApplicationTheme _currentApplicationTheme = ApplicationTheme.Unknown;
 
@@ -31,11 +34,13 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
     private void InitializeViewModel()
     {
         CurrentApplicationTheme = ApplicationThemeManager.GetAppTheme();
-        AppVersion = App.Configuration.AppBuildInfo;
-
         ApplicationThemeManager.Changed += OnThemeChanged;
+
+        AppVersion = App.Configuration.AppBuildInfo;
         ApplicationName = App.Configuration.ApplicationName;
         ShowBalloonTip = SettingsManager.Settings.ApplicationInfo.ShowNotificationBalloonTip;
+        LastUpdateCheckDate = "Last checked for update: " + SettingsManager.Settings.ApplicationInfo.LastCheckForUpdate;
+        IsUpdateAvailable = SettingsManager.Settings.ApplicationInfo.IsUpdatesAvailable;
         _isInitialized = true;
     }
 

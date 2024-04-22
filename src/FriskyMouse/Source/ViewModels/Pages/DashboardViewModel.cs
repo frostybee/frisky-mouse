@@ -93,26 +93,21 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
                 await Task.Run(_updateChecker.CheckGitHubNewerVersion);
                 if (_updateChecker.IsUpdateAvailable)
                 {
-                    Debug.WriteLine("A new version is available, please consider updating FriskyMouse!");
+                    SettingsManager.Settings.ApplicationInfo.IsUpdatesAvailable = true;
+                    //Debug.WriteLine("A new version is available, please consider updating FriskyMouse!");
                     //TODO: Show the new update notification on the dashboard page.
-                    /*  MessageBox.Show("A new version is available, please consider updating FriskyMouse!"
-                          , "FriskyMouse Update"
-                          , MessageBoxButtons.OK
-                          , MessageBoxIcon.Information
-                          );*/
                     //UpdateLatestVerionLabel(_updateChecker.NewVersionInfo);
-                    Debug.WriteLine("New version: " + _updateChecker.NewVersionInfo);
+                    //Debug.WriteLine("New version: " + _updateChecker.NewVersionInfo);
                 }
                 else
                 {
-                    Debug.WriteLine("Up to date!!");
-                    ///UpdateLatestVerionLabel("Up to date!");
+                    SettingsManager.Settings.ApplicationInfo.IsUpdatesAvailable = false;
+                    //Debug.WriteLine("Up to date!!");
                 }
             }
             else
             {
-                Debug.WriteLine("Up to date!!");
-                //UpdateLatestVerionLabel("Up to date!");
+                //Debug.WriteLine("Up to date!!");
             }
         }
         catch (Exception ex)
