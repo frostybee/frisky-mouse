@@ -20,6 +20,13 @@ internal class HotkeysController
     public event EventHandler MouseLeftClickIndicatorToggled;
     public event EventHandler MouseRightClickIndicatorToggled;
 
+    public enum AppHotkeyType
+    {
+        ToggleHighlighter,
+        ToggleLeftClickEffects,
+        ToggleRightClickEffects
+    }
+
     public HotkeysController()
     {
         _spotlightOptions = SettingsManager.Settings.HighlighterOptions;
@@ -43,9 +50,23 @@ internal class HotkeysController
             Console.WriteLine("Registering hotkeys..." + ex.Message);
         }*/
     }
-    public void UpdateHighlighterHotkey(string newHotkey)
+    public void UpdateAppHotkey(AppHotkeyType hotkeyType, string newHotkey)
     {
-        AddActivationHotkey(TOGGLE_HIGHLITER_KEY, newHotkey, OnToggleHighlighterFeature);
+        switch (hotkeyType)
+        {
+            case AppHotkeyType.ToggleHighlighter:
+                AddActivationHotkey(TOGGLE_HIGHLITER_KEY, newHotkey, OnToggleHighlighterFeature);
+                break;
+            case AppHotkeyType.ToggleLeftClickEffects:
+                AddActivationHotkey(TOGGLE_LEFTCLICK_KEY, newHotkey, OnToggleLeftClickFeature);
+                break;
+            case AppHotkeyType.ToggleRightClickEffects:
+                AddActivationHotkey(TOGGLE_RIGHTCLICK_KEY, newHotkey, OnToggleRightClickFeature);
+                break;
+            default:
+                break;
+        }
+        
     }
 
     private void AddActivationHotkey(string hotkeyName, string hotkey, EventHandler<HotkeyEventArgs> onHotkeyPressed)

@@ -2,6 +2,7 @@
 using FriskyMouse.Core.Hotkeys;
 using FriskyMouse.Drawing.Attributes;
 using FriskyMouse.Drawing.Extensions;
+using static FriskyMouse.Core.Controllers.HotkeysController;
 
 namespace FriskyMouse.ViewModels.Pages;
 public partial class RippleEffectViewModel : ObservableObject, INavigationAware
@@ -299,8 +300,11 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
         var selectedHotkey = await FMAppHelper.OpenEditShortcutDialogAsync(_contentDialogService, _hotkeys);
         if (selectedHotkey != HotKey.None)
         {
+            AppHotkeyType hotkeyType = (_currentProfileType == MouseButtonType.LeftClick) ?
+                            AppHotkeyType.ToggleLeftClickEffects : 
+                            AppHotkeyType.ToggleRightClickEffects;
             _rippleOptions.Hotkey = selectedHotkey.ConvertToString();
-            _decorationManager.HotkeysController.UpdateHighlighterHotkey(_rippleOptions.Hotkey);
+            _decorationManager.HotkeysController.UpdateAppHotkey(hotkeyType, _rippleOptions.Hotkey);
             CurrentHotkeyText = _rippleOptions.Hotkey;
         }
     }

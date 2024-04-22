@@ -1,5 +1,6 @@
 ﻿using FriskyMouse.Core.Hotkeys;
 using System.Windows.Media.Imaging;
+using static FriskyMouse.Core.Controllers.HotkeysController;
 using Color = System.Windows.Media.Color;
 
 namespace FriskyMouse.ViewModels.Pages;
@@ -60,7 +61,7 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
 
     public SpotlightViewModel(IContentDialogService contentDialogService)
     {
-        _contentDialogService = contentDialogService;        
+        _contentDialogService = contentDialogService;
     }
 
     public void OnNavigatedFrom()
@@ -79,7 +80,7 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     {
         _decorationManager = DecorationManager.Instance;
         _spotlightOptions = SettingsManager.Settings.HighlighterOptions;
-        LoadSpotlightOptions();        
+        LoadSpotlightOptions();
         // Load the outline styles from their corresponding enum.
         OutlineStyles = FMAppHelper.GetEnumDescriptions<OutlineStyle>();
         SelectedOutlineStyle = (int)_spotlightOptions.OutlineStyle;
@@ -175,9 +176,9 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
         if (selectedHotkey != HotKey.None)
         {
             _spotlightOptions.Hotkey = selectedHotkey.ConvertToString();
-            _decorationManager.HotkeysController.UpdateHighlighterHotkey(_spotlightOptions.Hotkey);
+            _decorationManager.HotkeysController.UpdateAppHotkey(AppHotkeyType.ToggleHighlighter, _spotlightOptions.Hotkey);
             CurrentHotkeyText = _spotlightOptions.Hotkey;
-        }        
+        }
     }
 
     [RelayCommand]

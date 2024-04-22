@@ -318,6 +318,7 @@
 
                     <controls:SettingsCard
                         Grid.Row="2"
+                        Margin="0,0,0,20"
                         Description="Specify whether you want the animation to progress inward, outward, or inward-outward"
                         Header="Direction"
                         Icon="{ui:SymbolIcon ArrowTurnBidirectionalDownRight24}"
