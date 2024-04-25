@@ -33,23 +33,11 @@
                 Margin="0,0,0,8"
                 FontTypography="BodyStrong"
                 Text="Appearance &amp; behavior" />
-            <ui:CardControl Margin="0,0,0,5" Icon="{ui:SymbolIcon Color24}">
-                <ui:CardControl.Header>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <ui:TextBlock
-                            Grid.Row="0"
-                            FontTypography="Body"
-                            Text="App theme" />
-                        <ui:TextBlock
-                            Grid.Row="1"
-                            Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                            Text="Select which app theme to display" />
-                    </Grid>
-                </ui:CardControl.Header>
+
+            <controls:SettingsCard
+                Description="App theme"
+                Header="Select which app theme to display"
+                Icon="{ui:SymbolIcon Color24}">
                 <ComboBox
                     Grid.Column="1"
                     MinWidth="200"
@@ -58,10 +46,10 @@
                     <ComboBoxItem Content="Dark" />
                     <ComboBoxItem Content="High Contrast" />
                 </ComboBox>
-            </ui:CardControl>
-
+            </controls:SettingsCard>
 
             <controls:SettingsCard
+                Margin="0,4,0,0"
                 Description="When enabled, a balloon tip will be shown upon minimizing the application's main window"
                 Header="Show system tray's notification"
                 Icon="{ui:SymbolIcon Balloon24}">
@@ -88,32 +76,32 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <ui:TextBlock
                             Grid.Row="0"
                             FontTypography="Body"
                             Text="{Binding ViewModel.ApplicationName}" />
                         <ui:TextBlock
-                            Grid.Row="2"
+                            Grid.Row="1"
                             Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
                             Text="{Binding ViewModel.LastUpdateCheckDate}" />
+                        <ui:TextBlock
+                            Grid.Row="2"
+                            Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                            Text="{Binding ViewModel.AppVersion}" />
                         <ui:InfoBar
                             Title="An update is available!"
-                            Grid.Row="1"
-                            Grid.Column="0"
+                            Grid.Row="3"
                             Margin="0,10,0,0"
                             IsOpen="{Binding ViewModel.IsUpdateAvailable, Mode=TwoWay}"
                             Message="Please consider installing the new version."
-                            Severity="Warning"
-                            Visibility="{Binding ViewModel.IsUpdateAvailable, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
+                            Severity="Warning">
                             <ui:Button>Test</ui:Button>
                         </ui:InfoBar>
                     </Grid>
                 </ui:CardControl.Header>
-                <ui:TextBlock
-                    Grid.Row="1"
-                    Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                    Text="{Binding ViewModel.AppVersion}" />
+
             </ui:CardControl>
 
 

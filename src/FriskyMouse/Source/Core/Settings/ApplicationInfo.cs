@@ -24,8 +24,8 @@ public sealed class ApplicationInfo
     public string Version { get; set; } = string.Empty;
     public string LastCheckForUpdate { get; set; }  = "03-15-2024";
     public ApplicationTheme AppUiTheme{ get; set; } = ApplicationTheme.Dark;
-    public bool ShowNotificationBalloonTip  { get; set; }
-    public bool IsUpdatesAvailable { get; set; }
+    public bool ShowNotificationBalloonTip  { get; set; } = true;
+    public bool IsUpdatesAvailable { get; set; } = false;
 
     #endregion
 }
