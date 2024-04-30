@@ -82,14 +82,8 @@
                             Grid.Row="0"
                             FontTypography="Body"
                             Text="{Binding ViewModel.ApplicationName}" />
-                        <ui:TextBlock
-                            Grid.Row="1"
-                            Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                            Text="{Binding ViewModel.LastUpdateCheckDate}" />
-                        <ui:TextBlock
-                            Grid.Row="2"
-                            Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                            Text="{Binding ViewModel.AppVersion}" />
+                        <ui:TextBlock Grid.Row="1" Text="{Binding ViewModel.LastUpdateCheckDate}" />
+                        <ui:TextBlock Grid.Row="2" Text="{Binding ViewModel.AppVersion}" />
                         <ui:InfoBar
                             Title="An update is available!"
                             Grid.Row="3"
