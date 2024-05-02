@@ -10,7 +10,6 @@
 */
 #endregion
 
-
 using NHotkey.Wpf;
 using NHotkey;
 using System.Windows.Input;

@@ -1,3 +1,4 @@
+﻿extensions: .cs 
 #region License Information (MIT)
 /* 
    FriskyMouse - A utility application for Windows OS that lets you highlight your mouse cursor 
@@ -9,18 +10,3 @@
    See license.txt or https://mit-license.org/
 */
 #endregion
-
-namespace FriskyMouse.Models;
-
-public record NavigationCard
-{
-    public string Title { get; init; }
-
-    public SymbolRegular Icon { get; init; }
-
-    public string Description { get; init; }
-
-    public Type PageType { get; init; }
-
-    public string Shortcut{ get; init; }
-}

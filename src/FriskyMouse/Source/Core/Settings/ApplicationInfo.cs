@@ -10,7 +10,6 @@
 */
 #endregion
 
-
 namespace FriskyMouse.Settings;
 
 /// <summary>
