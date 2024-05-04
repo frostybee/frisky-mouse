@@ -3,18 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wpf.Ui", "src\wpfui\src\Wpf.Ui\Wpf.Ui.csproj", "{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FriskyMouse", "FriskyMouse\FriskyMouse.csproj", "{171B8D91-EFA4-48FF-9D16-4473E93C220C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FriskyMouse", "src\FriskyMouse\FriskyMouse.csproj", "{171B8D91-EFA4-48FF-9D16-4473E93C220C}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FriskyMouse.Drawing", "src\FriskyMouse.Drawing\FriskyMouse.Drawing.csproj", "{C170CDDB-C91E-424C-BB45-364D677EAA71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FriskyMouse.Drawing", "FriskyMouse.Drawing\FriskyMouse.Drawing.csproj", "{C170CDDB-C91E-424C-BB45-364D677EAA71}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BE5E05B3-07F3-4226-B0DB-ACA94D6EB03F}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "FriskyMouse.Package", "src\FriskyMouse.Package\FriskyMouse.Package.wapproj", "{BBD3BC17-1BF1-4A53-92C4-E55E60A55BDD}"
+Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "FriskyMouse.Package", "FriskyMouse.Package\FriskyMouse.Package.wapproj", "{BBD3BC17-1BF1-4A53-92C4-E55E60A55BDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,46 +38,6 @@ Global
 		SelfContained|x64 = SelfContained|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.Debug|ARM.Build.0 = Debug|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.Debug|ARM64.ActiveCfg = Debug|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.Debug|ARM64.Build.0 = Debug|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.Debug|x64.Build.0 = Debug|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.MicrosoftStore|Any CPU.ActiveCfg = Release|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.MicrosoftStore|Any CPU.Build.0 = Release|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.MicrosoftStore|ARM.ActiveCfg = Release|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.MicrosoftStore|ARM.Build.0 = Release|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.MicrosoftStore|ARM64.ActiveCfg = Release|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.MicrosoftStore|ARM64.Build.0 = Release|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.MicrosoftStore|x64.ActiveCfg = Release|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.MicrosoftStore|x64.Build.0 = Release|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.Portable|Any CPU.ActiveCfg = Release|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.Portable|Any CPU.Build.0 = Release|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.Portable|ARM.ActiveCfg = Release|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.Portable|ARM.Build.0 = Release|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.Portable|ARM64.ActiveCfg = Release|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.Portable|ARM64.Build.0 = Release|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.Portable|x64.ActiveCfg = Release|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.Portable|x64.Build.0 = Release|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.Release|ARM.ActiveCfg = Release|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.Release|ARM.Build.0 = Release|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.Release|ARM64.ActiveCfg = Release|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.Release|ARM64.Build.0 = Release|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.Release|x64.ActiveCfg = Release|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.Release|x64.Build.0 = Release|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.SelfContained|Any CPU.ActiveCfg = SelfContained|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.SelfContained|Any CPU.Build.0 = SelfContained|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.SelfContained|ARM.ActiveCfg = SelfContained|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.SelfContained|ARM.Build.0 = SelfContained|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.SelfContained|ARM64.ActiveCfg = SelfContained|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.SelfContained|ARM64.Build.0 = SelfContained|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.SelfContained|x64.ActiveCfg = SelfContained|Any CPU
-		{92D1B44B-AAE0-407D-9EE0-A1D1A0B4DEA7}.SelfContained|x64.Build.0 = SelfContained|Any CPU
 		{171B8D91-EFA4-48FF-9D16-4473E93C220C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{171B8D91-EFA4-48FF-9D16-4473E93C220C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{171B8D91-EFA4-48FF-9D16-4473E93C220C}.Debug|ARM.ActiveCfg = Debug|Any CPU
