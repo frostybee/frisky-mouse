@@ -10,10 +10,9 @@
 */
 #endregion
 
-using NHotkey.Wpf;
+using FriskyMouse.Core.HotKeys;
 using NHotkey;
-using System.Runtime;
-using System.Windows.Input;
+using NHotkey.Wpf;
 namespace FriskyMouse.Core.Controllers;
 
 /// <summary>
@@ -23,14 +22,16 @@ namespace FriskyMouse.Core.Controllers;
 internal class HotkeysController
 {
     private const string TOGGLE_HIGHLITER_KEY = "ToggleHighlighter";
-    private const string TOGGLE_RIGHTCLICK_KEY = "ToggleRightClick";
-    private const string TOGGLE_LEFTCLICK_KEY = "ToggleLeftClick";
+    private const string TOGGLE_RIGHT_CLICK_KEY = "ToggleRightClick";
+    private const string TOGGLE_LEFT_CLICK_KEY = "ToggleLeftClick";
     private readonly HighlighterInfo _spotlightOptions;
     private readonly RippleProfileInfo _leftClickOptions;
     private readonly RippleProfileInfo _rightClickOptions;
     public event EventHandler MouseHighlighterToggled;
     public event EventHandler MouseLeftClickIndicatorToggled;
     public event EventHandler MouseRightClickIndicatorToggled;
+    public List<string> RegistrationErrors { get; set; } = [];
+    public List<HotKeyInfo> AppHotkeys { get; private set; } = [];
 
     public enum AppHotkeyType
     {
@@ -44,24 +45,53 @@ internal class HotkeysController
         _spotlightOptions = SettingsManager.Settings.HighlighterOptions;
         _leftClickOptions = SettingsManager.Settings.LeftClickOptions;
         _rightClickOptions = SettingsManager.Settings.RightClickOptions;
+        //--
+        PopulateAppHotKeys();
+    }
+
+    private void PopulateAppHotKeys()
+    {
+        //TODO:
+        AppHotkeys.AddRange([
+            new HotKeyInfo
+            {
+                ActionName = TOGGLE_HIGHLITER_KEY,
+                HotKey = _spotlightOptions.Hotkey,
+                Command = OnToggleHighlighterFeature,
+            },
+            new HotKeyInfo
+            {
+                ActionName = TOGGLE_RIGHT_CLICK_KEY,
+                HotKey = _rightClickOptions.Hotkey,
+                Command = OnToggleRightClickFeature,
+            },
+              new HotKeyInfo
+              {
+                  ActionName = TOGGLE_LEFT_CLICK_KEY,
+                  HotKey = _leftClickOptions.Hotkey,
+                  Command = OnToggleLeftClickFeature,
+              }
+        ]);
     }
 
     public void RegisterAllHotkeys()
     {
-        AddActivationHotkey(TOGGLE_HIGHLITER_KEY, _spotlightOptions.Hotkey, OnToggleHighlighterFeature);
-        AddActivationHotkey(TOGGLE_RIGHTCLICK_KEY, _rightClickOptions.Hotkey, OnToggleRightClickFeature);
-        AddActivationHotkey(TOGGLE_LEFTCLICK_KEY, _leftClickOptions.Hotkey, OnToggleLeftClickFeature);
-        /*try
+        RegistrationErrors.Clear();
+
+        foreach (var hotKey in AppHotkeys)
         {
-            AddActivationHotkey(TOGGLE_HIGHLITER_KEY, _spotlightOptions.Hotkey, OnToggleHighlighterFeature);
-            AddActivationHotkey(TOGGLE_RIGHTCLICK_KEY, _rightClickOptions.Hotkey, OnToggleRightClickFeature);
-            AddActivationHotkey(TOGGLE_LEFTCLICK_KEY, _leftClickOptions.Hotkey, OnToggleLeftClickFeature);
+            try
+            {
+                AddActivationHotkey(hotKey.ActionName, hotKey.HotKey, hotKey.Command);
+            }
+            catch (HotkeyAlreadyRegisteredException ex)
+            {                
+                System.Windows.Forms.MessageBox.Show("Oi "+hotKey.HotKey +" " + ex.Message);
+            }
+
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Registering hotkeys..." + ex.Message);
-        }*/
     }
+
     public void UpdateAppHotkey(AppHotkeyType hotkeyType, string newHotkey)
     {
         switch (hotkeyType)
@@ -70,15 +100,15 @@ internal class HotkeysController
                 AddActivationHotkey(TOGGLE_HIGHLITER_KEY, newHotkey, OnToggleHighlighterFeature);
                 break;
             case AppHotkeyType.ToggleLeftClickEffects:
-                AddActivationHotkey(TOGGLE_LEFTCLICK_KEY, newHotkey, OnToggleLeftClickFeature);
+                AddActivationHotkey(TOGGLE_LEFT_CLICK_KEY, newHotkey, OnToggleLeftClickFeature);
                 break;
             case AppHotkeyType.ToggleRightClickEffects:
-                AddActivationHotkey(TOGGLE_RIGHTCLICK_KEY, newHotkey, OnToggleRightClickFeature);
+                AddActivationHotkey(TOGGLE_RIGHT_CLICK_KEY, newHotkey, OnToggleRightClickFeature);
                 break;
             default:
                 break;
         }
-        
+
     }
 
     private void AddActivationHotkey(string hotkeyName, string hotkey, EventHandler<HotkeyEventArgs> onHotkeyPressed)

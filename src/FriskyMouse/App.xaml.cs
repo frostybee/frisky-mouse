@@ -82,8 +82,9 @@ public partial class App : Application
     private void ConfigureNLogService()
     {
         NLog.LogManager.Setup().LoadConfiguration(builder => {
-            builder.ForLogger().FilterMinLevel(LogLevel.Debug).WriteToFile(fileName: "fm-log.txt");
-            builder.ForLogger().FilterMinLevel(LogLevel.Error).WriteToFile(fileName: "fm-log.txt");
+            builder.ForLogger().FilterMinLevel(LogLevel.Info).WriteToFile(fileName: "logs/fm-log.txt");
+            builder.ForLogger().FilterMinLevel(LogLevel.Debug).WriteToFile(fileName: "logs/fm-log.txt");
+            builder.ForLogger().FilterMinLevel(LogLevel.Error).WriteToFile(fileName: "logs/fm-log.txt");
         });
     }
 

@@ -8,6 +8,7 @@
     <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
     <RootNamespace>FriskyMouse</RootNamespace>
     <BaseOutputPath>..\bin</BaseOutputPath>
+    
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
