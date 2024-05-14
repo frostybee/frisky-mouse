@@ -30,6 +30,10 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
     [ObservableProperty]
     private bool _isUpdateAvailable;
     [ObservableProperty]
+    private bool _hasFailedHotkeys;
+    [ObservableProperty]
+    private string _failedHotkeysRegistrationErrors;
+    [ObservableProperty]
     private InfoBarSeverity _shortInfoBarSeverity = InfoBarSeverity.Warning;
 
     [ObservableProperty]
@@ -145,6 +149,34 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
         return isUpdateRequired;
     }
 
+    internal void RegisterAppHotkeys()
+    {
+        HotkeysController hotkeysController = DecorationManager.Instance.HotkeysController;
+        if (!_areHotkeysRegistered)
+        {
+            HotkeyManager.HotkeyAlreadyRegistered += HotkeyManager_HotkeyAlreadyRegistered;
+            try
+            {
+                // Register global hotkeys.
+                hotkeysController.RegisterAllHotkeys();
+                if (hotkeysController.HasRegistrationErrors)
+                {
+                    HasFailedHotkeys = hotkeysController.HasRegistrationErrors;
+                    FailedHotkeysRegistrationErrors = string.Join(", \n" ,hotkeysController.RegistrationErrors);
+                }
+                
+            }
+            catch (HotkeyAlreadyRegisteredException ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Oi" + ex.Message);
+            }
+            finally
+            {
+                _areHotkeysRegistered = true;
+            }
+        }
+    }
+
     [RelayCommand]
     private void OnToolButtonClick(string parameter)
     {
@@ -168,26 +200,5 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
             return;
 
         _navigationService.Navigate(pageType);
-    }
-
-    internal void RegisterAppHotkeys()
-    {
-        if (!_areHotkeysRegistered)
-        {
-            HotkeyManager.HotkeyAlreadyRegistered += HotkeyManager_HotkeyAlreadyRegistered;
-            try
-            {
-                // Register global hotkeys.
-                DecorationManager.Instance.HotkeysController.RegisterAllHotkeys();
-            }
-            catch (HotkeyAlreadyRegisteredException ex)
-            {
-                System.Windows.Forms.MessageBox.Show("Oi" + ex.Message);
-            }
-            finally
-            {
-                _areHotkeysRegistered = true;
-            }
-        }
-    }
+    }   
 }

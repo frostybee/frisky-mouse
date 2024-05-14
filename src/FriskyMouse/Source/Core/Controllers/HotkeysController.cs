@@ -21,24 +21,30 @@ namespace FriskyMouse.Core.Controllers;
 /// </summary>
 internal class HotkeysController
 {
-    private const string TOGGLE_HIGHLITER_KEY = "ToggleHighlighter";
-    private const string TOGGLE_RIGHT_CLICK_KEY = "ToggleRightClick";
-    private const string TOGGLE_LEFT_CLICK_KEY = "ToggleLeftClick";
+    #region Fields
+    private const string TOGGLE_HIGHLITER_KEY = "Toggle highlighter";
+    private const string TOGGLE_RIGHT_CLICK_KEY = "Toggle right click indicator";
+    private const string TOGGLE_LEFT_CLICK_KEY = "Toggle left click indicator";
     private readonly HighlighterInfo _spotlightOptions;
     private readonly RippleProfileInfo _leftClickOptions;
     private readonly RippleProfileInfo _rightClickOptions;
     public event EventHandler MouseHighlighterToggled;
     public event EventHandler MouseLeftClickIndicatorToggled;
     public event EventHandler MouseRightClickIndicatorToggled;
-    public List<string> RegistrationErrors { get; set; } = [];
-    public List<HotKeyInfo> AppHotkeys { get; private set; } = [];
-
     public enum AppHotkeyType
     {
         ToggleHighlighter,
         ToggleLeftClickEffects,
         ToggleRightClickEffects
     }
+    #endregion
+
+    #region Properties
+    public List<string> RegistrationErrors { get; set; } = [];
+    public List<HotKeyInfo> AppHotkeys { get; private set; } = [];
+    public bool HasRegistrationErrors { get; private set; } = false;
+    #endregion
+
 
     public HotkeysController()
     {
@@ -49,9 +55,12 @@ internal class HotkeysController
         PopulateAppHotKeys();
     }
 
+    /// <summary>
+    /// Loads the info of the hotkeys used across the application into a a list. 
+    /// </summary>
     private void PopulateAppHotKeys()
     {
-        //TODO:
+        //TODO: Need to refactor the logic of managing the hotkeys.
         AppHotkeys.AddRange([
             new HotKeyInfo
             {
@@ -77,7 +86,7 @@ internal class HotkeysController
     public void RegisterAllHotkeys()
     {
         RegistrationErrors.Clear();
-
+        HasRegistrationErrors = false;  
         foreach (var hotKey in AppHotkeys)
         {
             try
@@ -85,8 +94,9 @@ internal class HotkeysController
                 AddActivationHotkey(hotKey.ActionName, hotKey.HotKey, hotKey.Command);
             }
             catch (HotkeyAlreadyRegisteredException ex)
-            {                
-                System.Windows.Forms.MessageBox.Show("Oi "+hotKey.HotKey +" " + ex.Message);
+            {
+                RegistrationErrors.Add(hotKey.ActionName + ": " + hotKey.HotKey);
+                HasRegistrationErrors = true;
             }
 
         }
