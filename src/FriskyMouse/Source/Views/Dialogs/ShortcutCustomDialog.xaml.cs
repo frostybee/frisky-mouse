@@ -69,7 +69,13 @@ public partial class ShortcutCustomDialog : ContentDialog
             HotkeysList.Add("None");
             InfobarInvalidShortcut.Visibility = Visibility.Visible;
             Debug.WriteLine("INVALID Key pressed: " + _shortcutProcessor.SelectedHotKey);
+            return;
         }
+        // If the pressed key combination is already being assigned within this application. 
+        /*else if (DecorationManager.Instance.HotkeysController.IsHotKeyAlreadyAssigned())
+        {
+
+        }*/
         else
         {
             //TODO: 

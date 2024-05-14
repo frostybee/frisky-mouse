@@ -162,9 +162,11 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
                 if (hotkeysController.HasRegistrationErrors)
                 {
                     HasFailedHotkeys = hotkeysController.HasRegistrationErrors;
-                    FailedHotkeysRegistrationErrors = string.Join(", \n" ,hotkeysController.RegistrationErrors);
-                }
-                
+                    string errorMessage = "The following hotkeys are already registered by another application: \n "; 
+                    errorMessage += string.Join(", \n", hotkeysController.RegistrationErrors);
+                    errorMessage += "\n\n Please select a different hotkey or quit the conflicting application and reopen FriskyMouse.";
+                    FailedHotkeysRegistrationErrors = errorMessage;
+                }                
             }
             catch (HotkeyAlreadyRegisteredException ex)
             {
