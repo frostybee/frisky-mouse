@@ -40,7 +40,7 @@ public partial class ShortcutCustomDialog : ContentDialog
         _currentHotkeys = currentHotKeys;
         HotkeysList = new ObservableCollection<string>();
         SelectedHotKey = HotKey.None;
-        Loaded += ShortcutCustomDialog_Loaded;
+        Loaded += ShortcutCustomDialog_Loaded;        
     }
 
     private void ShortcutCustomDialog_Loaded(object sender, RoutedEventArgs e)
@@ -79,7 +79,7 @@ public partial class ShortcutCustomDialog : ContentDialog
         else
         {
             //TODO: 
-            Debug.WriteLine("Not so virtual key pressed: " + pressedKey);            
+            Debug.WriteLine("Not so virtual key pressed: " + pressedKey);
             HotkeysList.Clear();
             string newHotkey = _shortcutProcessor.SelectedHotKey?.ConvertToString();
             //DecorationManager.Instance.HotkeysController.UpdateAppHotkey(newHotkey);

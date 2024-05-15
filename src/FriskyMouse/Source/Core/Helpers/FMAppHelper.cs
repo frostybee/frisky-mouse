@@ -111,7 +111,7 @@ public static class FMAppHelper
 
         return POINT.Empty;
     }
-     
+
     internal static void OpenURL(string website)
     {
         try
@@ -140,7 +140,7 @@ public static class FMAppHelper
     }
 
     internal static async Task<HotKey> OpenEditShortcutDialogAsync(IContentDialogService contentDialogService, List<string> hotkeys)
-    {        
+    {
         var shortcutDialog = new ShortcutCustomDialog(
             contentDialogService.GetContentPresenter(), hotkeys
         )
@@ -149,7 +149,9 @@ public static class FMAppHelper
             PrimaryButtonText = "Save",
             IsSecondaryButtonEnabled = false,
         };
-        var result = await shortcutDialog.ShowAsync();        
-        return shortcutDialog.SelectedHotKey;
+        var result = await shortcutDialog.ShowAsync();
+        
+        return result == ContentDialogResult.Primary ?
+            shortcutDialog.SelectedHotKey : HotKey.None;
     }
 }
