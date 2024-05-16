@@ -40,7 +40,7 @@ public partial class ShortcutCustomDialog : ContentDialog
         _currentHotkeys = currentHotKeys;
         HotkeysList = new ObservableCollection<string>();
         SelectedHotKey = HotKey.None;
-        Loaded += ShortcutCustomDialog_Loaded;        
+        Loaded += ShortcutCustomDialog_Loaded;
     }
 
     private void ShortcutCustomDialog_Loaded(object sender, RoutedEventArgs e)
@@ -65,23 +65,33 @@ public partial class ShortcutCustomDialog : ContentDialog
         var pressedKey = e.Key == Key.System ? e.SystemKey : e.Key;
         if (!_shortcutProcessor.IsKeysCombinationValid(pressedKey))
         {
+            //-- 1) Invalid key combination.
             HotkeysList.Clear();
             HotkeysList.Add("None");
             InfobarInvalidShortcut.Visibility = Visibility.Visible;
-            Debug.WriteLine("INVALID Key pressed: " + _shortcutProcessor.SelectedHotKey);
+            SelectedHotKey = _shortcutProcessor.SelectedHotKey;
+            //InfobarInvalidShortcut.Message = "Oi!!!";
+            //Debug.WriteLine("INVALID Key pressed: " + _shortcutProcessor.SelectedHotKey);
             return;
         }
-        // If the pressed key combination is already being assigned within this application. 
-        /*else if (DecorationManager.Instance.HotkeysController.IsHotKeyAlreadyAssigned())
-        {
-
-        }*/
         else
         {
-            //TODO: 
-            Debug.WriteLine("Not so virtual key pressed: " + pressedKey);
+            //Debug.WriteLine("Not so virtual key pressed: " + pressedKey);
             HotkeysList.Clear();
             string newHotkey = _shortcutProcessor.SelectedHotKey?.ConvertToString();
+            //-- 2) Check whether the pressed key combination is already being assigned
+            // to another feature within this application. 
+            /*if (DecorationManager.Instance.HotkeysController.IsHotKeyAlreadyAssigned(newHotkey))
+            {
+                
+                // TODO: add a show error message.
+                InfobarInvalidShortcut.Visibility = Visibility.Visible;
+                SelectedHotKey = HotKey.None;
+                InfobarInvalidShortcut.Message = "The selected key combination is already assigned to. Please try again.";
+                return ;
+            }*/
+            //-- 3) If the selected hotkey is already registered by another application.
+
             //DecorationManager.Instance.HotkeysController.UpdateAppHotkey(newHotkey);
             //TODO:
             // 1) CHECK IF THE KEY IS ALREADY REGISTERED;
@@ -90,7 +100,7 @@ public partial class ShortcutCustomDialog : ContentDialog
             _shortcutProcessor.SelectedHotKey?.HotkeysList.ForEach(hotkey => HotkeysList.Add(hotkey));
             SelectedHotKey = _shortcutProcessor.SelectedHotKey;
             InfobarInvalidShortcut.Visibility = Visibility.Collapsed;
-            Debug.WriteLine("Valid Key pressed: " + _shortcutProcessor.SelectedHotKey.ConvertToString());
+            //Debug.WriteLine("Valid Key pressed: " + _shortcutProcessor.SelectedHotKey.ConvertToString());
         }
     }
 }

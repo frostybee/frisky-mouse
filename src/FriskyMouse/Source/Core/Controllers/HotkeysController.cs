@@ -41,7 +41,7 @@ internal class HotkeysController
 
     #region Properties
     public List<string> RegistrationErrors { get; set; } = [];
-    public List<HotKeyInfo> AppHotkeys { get; private set; } = [];
+    public List<HotKeyInfo> _appHotKeys = [];
     public bool HasRegistrationErrors { get; private set; } = false;
     #endregion
 
@@ -61,7 +61,7 @@ internal class HotkeysController
     private void PopulateAppHotKeys()
     {
         //TODO: Need to refactor the logic of managing the hotkeys.
-        AppHotkeys.AddRange([
+        _appHotKeys.AddRange([
             new HotKeyInfo
             {
                 ActionName = TOGGLE_HIGHLITER_KEY,
@@ -87,7 +87,7 @@ internal class HotkeysController
     {
         RegistrationErrors.Clear();
         HasRegistrationErrors = false;  
-        foreach (var hotKey in AppHotkeys)
+        foreach (var hotKey in _appHotKeys)
         {
             try
             {
@@ -166,6 +166,11 @@ internal class HotkeysController
         }
         MouseHighlighterToggled?.Invoke(this, e);
         e.Handled = true;
+    }
+
+    internal bool IsHotKeyAlreadyAssigned(string newHotkey)
+    {
+        return _appHotKeys.Any(hotkey => hotkey.HotKey == newHotkey);   
     }
     #endregion
 
