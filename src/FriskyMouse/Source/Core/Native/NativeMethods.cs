@@ -16,7 +16,7 @@ using System.Runtime.InteropServices;
 namespace FriskyMouse.NativeApi;
 
 
-public static class NativeMethods
+public static partial class NativeMethods
 {
     private const string KERNEL_32 = "kernel32.dll";
     private const string USER32_DLL = "user32.dll";
@@ -29,10 +29,20 @@ public static class NativeMethods
         MAPVK_VK_TO_CHAR = 0x2,
         MAPVK_VSC_TO_VK_EX = 0x3,
     }
-    [DllImport("user32.dll")]
+    [DllImport(USER32_DLL, CharSet = CharSet.Auto)]
     public static extern uint MapVirtualKey(uint uCode, MapType uMapType);
-    [DllImport("user32.dll", CharSet = CharSet.Auto)]
+    
+    [DllImport(USER32_DLL, CharSet = CharSet.Auto)]
     public static extern int GetKeyNameText(int lParam, [MarshalAs(UnmanagedType.LPWStr), Out] StringBuilder str, int size);
+
+    [LibraryImport(USER32_DLL)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    public static partial bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
+
+    [LibraryImport(USER32_DLL)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    public static partial bool UnregisterHotKey(IntPtr hWnd, int id);
+
     #region USER32 Native Methods
     /// <summary>
     /// An application-defined or library-defined callback function used with the SetWindowsHookEx function        

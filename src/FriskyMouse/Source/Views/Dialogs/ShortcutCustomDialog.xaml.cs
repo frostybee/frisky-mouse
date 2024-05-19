@@ -12,7 +12,9 @@
 
 
 using FriskyMouse.Core.Hotkeys;
+using FriskyMouse.Core.HotKeys;
 using NHotkey.Wpf;
+using System.Windows.Interop;
 using static FriskyMouse.Core.Controllers.HotkeysController;
 
 namespace FriskyMouse.Views.Dialogs;
@@ -23,6 +25,9 @@ public partial class ShortcutCustomDialog : ContentDialog
     public HotKey SelectedHotKey { get; set; }
     private readonly List<string> _currentHotkeys;
     private readonly AppHotkeyType _appHotkeyType;
+    private readonly IntPtr _hWnd;
+
+    #region Properties
     public ObservableCollection<string> HotkeysList
     {
         get => (ObservableCollection<string>)GetValue(HotkeysListProperty);
@@ -31,6 +36,7 @@ public partial class ShortcutCustomDialog : ContentDialog
 
     public static readonly DependencyProperty HotkeysListProperty = DependencyProperty.Register("HotkeysList", typeof(ObservableCollection<string>), typeof(ShortcutCustomDialog), new PropertyMetadata(default(string)));
 
+    #endregion
     public ShortcutCustomDialog(ContentPresenter contentPresenter,
         List<string> currentHotKeys,
          AppHotkeyType hotkeyType)
@@ -38,6 +44,7 @@ public partial class ShortcutCustomDialog : ContentDialog
     {
         InitializeComponent();
         DataContext = this;
+        _hWnd = new WindowInteropHelper(Application.Current.MainWindow).Handle;
         IsPrimaryButtonEnabled = true;
         PrimaryButtonText = "Save";
         CloseButtonText = "Cancel";
@@ -68,9 +75,9 @@ public partial class ShortcutCustomDialog : ContentDialog
         // Swallow all hotkeys, so our control can catch the pressed Key strokes
         e.Handled = true;
         var pressedKey = e.Key == Key.System ? e.SystemKey : e.Key;
+        //-- 1) Invalid key combination.
         if (!_shortcutProcessor.IsKeysCombinationValid(pressedKey))
         {
-            //-- 1) Invalid key combination.
             HotkeysList.Clear();
             HotkeysList.Add("None");
             InfobarInvalidShortcut.Visibility = Visibility.Visible;
@@ -81,31 +88,31 @@ public partial class ShortcutCustomDialog : ContentDialog
         }
         else
         {
+            // We got a key combination that satisfies the rules. 
+
             //Debug.WriteLine("Not so virtual key pressed: " + pressedKey);
             HotkeysList.Clear();
             string newHotkey = _shortcutProcessor.SelectedHotKey?.ConvertToString();
-            //-- 2) Check whether the pressed key combination is already being assigned
-            // to another feature within this application. 
-            /*if (DecorationManager.Instance.HotkeysController.IsHotKeyAlreadyAssigned(newHotkey))
-            {
-                
-                // TODO: add a show error message.
-                InfobarInvalidShortcut.Visibility = Visibility.Visible;
-                SelectedHotKey = HotKey.None;
-                InfobarInvalidShortcut.Message = "The selected key combination is already assigned to. Please try again.";
-                return ;
-            }*/
             //-- 3) If the selected hotkey is already registered by another application.
+            if (HotKeyChecker.IsHotkeyRegistered(_hWnd,
+                _shortcutProcessor.SelectedHotKey.Key,
+                _shortcutProcessor.SelectedHotKey.ModifierKeys))
+            {
+                System.Windows.Forms.MessageBox.Show("The selected hotkey is already registered! Please select another one...");
+            }
+            else
+            {
+                //TODO:
+                // 1) CHECK IF THE KEY IS ALREADY REGISTERED;
+                // 2) IF YES, DISPLAY ERROR MESSAGE
+                // 3) UNREGISTER IT. 
+                _shortcutProcessor.SelectedHotKey?.HotkeysList.ForEach(hotkey => HotkeysList.Add(hotkey));
+                SelectedHotKey = _shortcutProcessor.SelectedHotKey;
+                InfobarInvalidShortcut.Visibility = Visibility.Collapsed;
+                //Debug.WriteLine("Valid Key pressed: " + _shortcutProcessor.SelectedHotKey.ConvertToString());
 
-            //DecorationManager.Instance.HotkeysController.UpdateAppHotkey(newHotkey);
-            //TODO:
-            // 1) CHECK IF THE KEY IS ALREADY REGISTERED;
-            // 2) IF YES, DISPLAY ERROR MESSAGE
-            // 3) UNREGISTER IT. 
-            _shortcutProcessor.SelectedHotKey?.HotkeysList.ForEach(hotkey => HotkeysList.Add(hotkey));
-            SelectedHotKey = _shortcutProcessor.SelectedHotKey;
-            InfobarInvalidShortcut.Visibility = Visibility.Collapsed;
-            //Debug.WriteLine("Valid Key pressed: " + _shortcutProcessor.SelectedHotKey.ConvertToString());
+                //var winHandle = new WindowInteropHelper(Application.Current.MainWindow).Handle;
+            }
         }
     }
 }
