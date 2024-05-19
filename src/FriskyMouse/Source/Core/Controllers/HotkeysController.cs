@@ -19,7 +19,7 @@ namespace FriskyMouse.Core.Controllers;
 /// Manages the registration and unregistration of global
 /// hotkeys that are used to enable/disable the application features.
 /// </summary>
-internal class HotkeysController
+public class HotkeysController
 {
     #region Fields
     private const string TOGGLE_HIGHLITER_KEY = "Toggle highlighter";
@@ -86,7 +86,7 @@ internal class HotkeysController
     public void RegisterAllHotkeys()
     {
         RegistrationErrors.Clear();
-        HasRegistrationErrors = false;  
+        HasRegistrationErrors = false;
         foreach (var hotKey in _appHotKeys)
         {
             try
@@ -95,7 +95,7 @@ internal class HotkeysController
             }
             catch (HotkeyAlreadyRegisteredException ex)
             {
-                RegistrationErrors.Add(hotKey.ActionName + ": " + hotKey.HotKey);
+                RegistrationErrors.Add("- " + hotKey.ActionName + ": " + hotKey.HotKey);
                 HasRegistrationErrors = true;
             }
 
@@ -104,27 +104,41 @@ internal class HotkeysController
 
     public void UpdateAppHotkey(AppHotkeyType hotkeyType, string newHotkey)
     {
-        switch (hotkeyType)
+        try
         {
-            case AppHotkeyType.ToggleHighlighter:
-                AddActivationHotkey(TOGGLE_HIGHLITER_KEY, newHotkey, OnToggleHighlighterFeature);
-                break;
-            case AppHotkeyType.ToggleLeftClickEffects:
-                AddActivationHotkey(TOGGLE_LEFT_CLICK_KEY, newHotkey, OnToggleLeftClickFeature);
-                break;
-            case AppHotkeyType.ToggleRightClickEffects:
-                AddActivationHotkey(TOGGLE_RIGHT_CLICK_KEY, newHotkey, OnToggleRightClickFeature);
-                break;
-            default:
-                break;
+            switch (hotkeyType)
+            {
+                case AppHotkeyType.ToggleHighlighter:
+                    AddActivationHotkey(TOGGLE_HIGHLITER_KEY, newHotkey, OnToggleHighlighterFeature);
+                    break;
+                case AppHotkeyType.ToggleLeftClickEffects:
+                    AddActivationHotkey(TOGGLE_LEFT_CLICK_KEY, newHotkey, OnToggleLeftClickFeature);
+                    break;
+                case AppHotkeyType.ToggleRightClickEffects:
+                    AddActivationHotkey(TOGGLE_RIGHT_CLICK_KEY, newHotkey, OnToggleRightClickFeature);
+                    break;
+                default:
+                    break;
+            }
+        }
+        catch (HotkeyAlreadyRegisteredException)
+        {
+            throw;
         }
 
     }
 
     private void AddActivationHotkey(string hotkeyName, string hotkey, EventHandler<HotkeyEventArgs> onHotkeyPressed)
     {
-        KeyGesture htGesture = GetKeyGestureFromString(hotkey);
-        HotkeyManager.Current.AddOrReplace(hotkeyName, htGesture, onHotkeyPressed);
+        try
+        {
+            KeyGesture htGesture = GetKeyGestureFromString(hotkey);
+            HotkeyManager.Current.AddOrReplace(hotkeyName, htGesture, onHotkeyPressed);
+        }
+        catch (HotkeyAlreadyRegisteredException)
+        {
+            throw;
+        }
     }
 
     private KeyGesture GetKeyGestureFromString(string keyCombination)
@@ -170,7 +184,7 @@ internal class HotkeysController
 
     internal bool IsHotKeyAlreadyAssigned(string newHotkey)
     {
-        return _appHotKeys.Any(hotkey => hotkey.HotKey == newHotkey);   
+        return _appHotKeys.Any(hotkey => hotkey.HotKey == newHotkey);
     }
     #endregion
 

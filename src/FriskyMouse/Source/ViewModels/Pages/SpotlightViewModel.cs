@@ -11,6 +11,7 @@
 #endregion
 
 using FriskyMouse.Core.Hotkeys;
+using NHotkey;
 using System.Windows.Media.Imaging;
 using static FriskyMouse.Core.Controllers.HotkeysController;
 using Color = System.Windows.Media.Color;
@@ -184,12 +185,22 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     private async Task OnOpenShortcutDialog()
     {
         _hotkeys = _spotlightOptions.Hotkey.Split("+", StringSplitOptions.TrimEntries).ToList();
-        var selectedHotkey = await FMAppHelper.OpenEditShortcutDialogAsync(_contentDialogService, _hotkeys);
+        var selectedHotkey = await FMAppHelper.OpenEditShortcutDialogAsync(
+            _contentDialogService,
+            _hotkeys,
+            AppHotkeyType.ToggleHighlighter);
         if (selectedHotkey != HotKey.None)
         {
-            _spotlightOptions.Hotkey = selectedHotkey.ConvertToString();
-            _decorationManager.HotkeysController.UpdateAppHotkey(AppHotkeyType.ToggleHighlighter, _spotlightOptions.Hotkey);
-            CurrentHotkeyText = _spotlightOptions.Hotkey;
+            try
+            {
+                _spotlightOptions.Hotkey = selectedHotkey.ConvertToString();
+                _decorationManager.HotkeysController.UpdateAppHotkey(AppHotkeyType.ToggleHighlighter, _spotlightOptions.Hotkey);
+                CurrentHotkeyText = _spotlightOptions.Hotkey;
+            }
+            catch (HotkeyAlreadyRegisteredException)
+            {
+
+            }
         }
     }
 

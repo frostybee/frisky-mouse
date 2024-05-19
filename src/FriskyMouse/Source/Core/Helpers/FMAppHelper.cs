@@ -19,6 +19,8 @@ using FriskyMouse.Core.Controllers;
 using FriskyMouse.Core.Hotkeys;
 
 namespace FriskyMouse.Helpers;
+
+using static FriskyMouse.Core.Controllers.HotkeysController;
 using Color = System.Drawing.Color;
 public static class FMAppHelper
 {
@@ -139,18 +141,20 @@ public static class FMAppHelper
         return System.Windows.Application.GetResourceStream(uri).Stream;
     }
 
-    internal static async Task<HotKey> OpenEditShortcutDialogAsync(IContentDialogService contentDialogService, List<string> hotkeys)
+    internal static async Task<HotKey> OpenEditShortcutDialogAsync(
+        IContentDialogService contentDialogService,
+        List<string> hotkeys,
+        AppHotkeyType hotkeyType)
     {
         var shortcutDialog = new ShortcutCustomDialog(
-            contentDialogService.GetContentPresenter(), hotkeys
-        )
+            contentDialogService.GetContentPresenter(), hotkeys, hotkeyType)
         {
             Title = "Edit Activation Shortcut",
             PrimaryButtonText = "Save",
             IsSecondaryButtonEnabled = false,
         };
         var result = await shortcutDialog.ShowAsync();
-        
+
         return result == ContentDialogResult.Primary ?
             shortcutDialog.SelectedHotKey : HotKey.None;
     }

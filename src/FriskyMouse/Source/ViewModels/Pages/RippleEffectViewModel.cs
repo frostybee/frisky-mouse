@@ -14,6 +14,7 @@ using FriskyMouse.Core;
 using FriskyMouse.Core.Hotkeys;
 using FriskyMouse.Drawing.Attributes;
 using FriskyMouse.Drawing.Extensions;
+using NHotkey;
 using static FriskyMouse.Core.Controllers.HotkeysController;
 
 namespace FriskyMouse.ViewModels.Pages;
@@ -309,15 +310,25 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
     private async Task OnOpenShortcutDialog()
     {
         _hotkeys = _rippleOptions.Hotkey.Split("+", StringSplitOptions.TrimEntries).ToList();
-        var selectedHotkey = await FMAppHelper.OpenEditShortcutDialogAsync(_contentDialogService, _hotkeys);
+        AppHotkeyType hotkeyType = (_currentProfileType == MouseButtonType.LeftClick) ?
+                            AppHotkeyType.ToggleLeftClickEffects :
+                            AppHotkeyType.ToggleRightClickEffects;
+        //
+        var selectedHotkey = await FMAppHelper.OpenEditShortcutDialogAsync(
+            _contentDialogService, _hotkeys, hotkeyType);
         if (selectedHotkey != HotKey.None)
         {
-            AppHotkeyType hotkeyType = (_currentProfileType == MouseButtonType.LeftClick) ?
-                            AppHotkeyType.ToggleLeftClickEffects : 
-                            AppHotkeyType.ToggleRightClickEffects;
-            _rippleOptions.Hotkey = selectedHotkey.ConvertToString();
-            _decorationManager.HotkeysController.UpdateAppHotkey(hotkeyType, _rippleOptions.Hotkey);
-            CurrentHotkeyText = _rippleOptions.Hotkey;
+            try
+            {
+                
+                _rippleOptions.Hotkey = selectedHotkey.ConvertToString();
+                _decorationManager.HotkeysController.UpdateAppHotkey(hotkeyType, _rippleOptions.Hotkey);
+                CurrentHotkeyText = _rippleOptions.Hotkey;
+            }
+            catch (HotkeyAlreadyRegisteredException)
+            {
+                // Failed to register the newly selected hotkey.
+            }
         }
     }
 }

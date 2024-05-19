@@ -13,6 +13,7 @@
 
 using FriskyMouse.Core.Hotkeys;
 using NHotkey.Wpf;
+using static FriskyMouse.Core.Controllers.HotkeysController;
 
 namespace FriskyMouse.Views.Dialogs;
 
@@ -21,6 +22,7 @@ public partial class ShortcutCustomDialog : ContentDialog
     private readonly ShortcutProcessor _shortcutProcessor = new();
     public HotKey SelectedHotKey { get; set; }
     private readonly List<string> _currentHotkeys;
+    private readonly AppHotkeyType _appHotkeyType;
     public ObservableCollection<string> HotkeysList
     {
         get => (ObservableCollection<string>)GetValue(HotkeysListProperty);
@@ -29,7 +31,9 @@ public partial class ShortcutCustomDialog : ContentDialog
 
     public static readonly DependencyProperty HotkeysListProperty = DependencyProperty.Register("HotkeysList", typeof(ObservableCollection<string>), typeof(ShortcutCustomDialog), new PropertyMetadata(default(string)));
 
-    public ShortcutCustomDialog(ContentPresenter contentPresenter, List<string> currentHotKeys)
+    public ShortcutCustomDialog(ContentPresenter contentPresenter,
+        List<string> currentHotKeys,
+         AppHotkeyType hotkeyType)
         : base(contentPresenter)
     {
         InitializeComponent();
@@ -38,6 +42,7 @@ public partial class ShortcutCustomDialog : ContentDialog
         PrimaryButtonText = "Save";
         CloseButtonText = "Cancel";
         _currentHotkeys = currentHotKeys;
+        _appHotkeyType = hotkeyType;
         HotkeysList = new ObservableCollection<string>();
         SelectedHotKey = HotKey.None;
         Loaded += ShortcutCustomDialog_Loaded;

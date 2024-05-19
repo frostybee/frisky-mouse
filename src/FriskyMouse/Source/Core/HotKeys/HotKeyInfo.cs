@@ -2,7 +2,7 @@
 
 namespace FriskyMouse.Core.HotKeys;
 
-internal class HotKeyInfo
+public class HotKeyInfo
 {
     public string HotKey { get; set; }
     public string ActionName { get; set; }
