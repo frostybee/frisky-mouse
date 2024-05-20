@@ -30,6 +30,9 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
     [ObservableProperty]
     private bool _isUpdateAvailable;
     [ObservableProperty]
+    private string _newUpdateMessage = string.Empty;
+
+    [ObservableProperty]
     private bool _hasFailedHotkeys;
     [ObservableProperty]
     private string _failedHotkeysRegistrationErrors;
@@ -118,6 +121,8 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
                 }
             }
             IsUpdateAvailable = SettingsManager.Settings.ApplicationInfo.IsUpdatesAvailable;
+            string newVersion = SettingsManager.Settings.ApplicationInfo.LatestVersion;
+            NewUpdateMessage = $"Please consider installing the new version: {newVersion}";
         }
         catch (Exception ex)
         {

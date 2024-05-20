@@ -31,6 +31,8 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
     [ObservableProperty]
     private bool _isUpdateAvailable;
     [ObservableProperty]
+    private string _newUpdateMessage = string.Empty;
+    [ObservableProperty]
     private ApplicationTheme _currentApplicationTheme = ApplicationTheme.Unknown;
 
     [ObservableProperty]
@@ -54,6 +56,8 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
         // Load updates info.
         LastUpdateCheckDate = "Last checked for update: " + SettingsManager.Settings.ApplicationInfo.LastCheckForUpdate;
         IsUpdateAvailable = SettingsManager.Settings.ApplicationInfo.IsUpdatesAvailable;
+        string newVersion = SettingsManager.Settings.ApplicationInfo.LatestVersion;
+        NewUpdateMessage = $"Please consider installing the new version: {newVersion}";
         // Ensure that this view model is initialized once.
         _isInitialized = true;
     }

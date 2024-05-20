@@ -81,8 +81,8 @@
             Grid.Row="1"
             Grid.Column="0"
             Margin="0,10,0,0"
-            IsOpen="{Binding ViewModel.IsUpdateAvailable, Mode=TwoWay}"
-            Message="Please consider installing the new version."
+            IsOpen="{Binding ViewModel.IsUpdateAvailable, Mode=OneWay}"
+            Message="{Binding ViewModel.NewUpdateMessage, Mode=OneWay}"
             Severity="{Binding ViewModel.ShortInfoBarSeverity, Mode=OneWay}" />
 
         <!--  Hotkeys registration errors  -->
