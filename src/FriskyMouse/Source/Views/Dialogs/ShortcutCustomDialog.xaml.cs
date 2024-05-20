@@ -82,7 +82,6 @@ public partial class ShortcutCustomDialog : ContentDialog
             HotkeysList.Add("None");
             InfobarInvalidShortcut.Visibility = Visibility.Visible;
             SelectedHotKey = _shortcutProcessor.SelectedHotKey;
-            //InfobarInvalidShortcut.Message = "Oi!!!";
             //Debug.WriteLine("INVALID Key pressed: " + _shortcutProcessor.SelectedHotKey);
             return;
         }
@@ -94,25 +93,15 @@ public partial class ShortcutCustomDialog : ContentDialog
             HotkeysList.Clear();
             string newHotkey = _shortcutProcessor.SelectedHotKey?.ConvertToString();
             //-- 3) If the selected hotkey is already registered by another application.
-            if (HotKeyChecker.IsHotkeyRegistered(_hWnd,
-                _shortcutProcessor.SelectedHotKey.Key,
-                _shortcutProcessor.SelectedHotKey.ModifierKeys))
-            {
-                System.Windows.Forms.MessageBox.Show("The selected hotkey is already registered! Please select another one...");
-            }
-            else
-            {
-                //TODO:
-                // 1) CHECK IF THE KEY IS ALREADY REGISTERED;
-                // 2) IF YES, DISPLAY ERROR MESSAGE
-                // 3) UNREGISTER IT. 
-                _shortcutProcessor.SelectedHotKey?.HotkeysList.ForEach(hotkey => HotkeysList.Add(hotkey));
-                SelectedHotKey = _shortcutProcessor.SelectedHotKey;
-                InfobarInvalidShortcut.Visibility = Visibility.Collapsed;
-                //Debug.WriteLine("Valid Key pressed: " + _shortcutProcessor.SelectedHotKey.ConvertToString());
-
-                //var winHandle = new WindowInteropHelper(Application.Current.MainWindow).Handle;
-            }
+            //TODO:
+            // 1) CHECK IF THE KEY IS ALREADY REGISTERED;
+            // 2) IF YES, DISPLAY ERROR MESSAGE
+            // 3) UNREGISTER IT. 
+            _shortcutProcessor.SelectedHotKey?.HotkeysList.ForEach(hotkey => HotkeysList.Add(hotkey));
+            SelectedHotKey = _shortcutProcessor.SelectedHotKey;
+            InfobarInvalidShortcut.Visibility = Visibility.Collapsed;
+            //Debug.WriteLine("Valid Key pressed: " + _shortcutProcessor.SelectedHotKey.ConvertToString());
+            //var winHandle = new WindowInteropHelper(Application.Current.MainWindow).Handle;
         }
     }
 }

@@ -75,8 +75,7 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
     {
         _settings = SettingsManager.Settings.ApplicationInfo;
         FeedBackUri = App.Configuration.SendFeedbackURI;
-        _isInitialized = true;
-        IsUpdateAvailable = true;
+        _isInitialized = true;        
     }
     private void HotkeyManager_HotkeyAlreadyRegistered(object sender, HotkeyAlreadyRegisteredEventArgs e)
     {
@@ -110,21 +109,15 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
                 if (_updateChecker.IsUpdateAvailable)
                 {
                     SettingsManager.Settings.ApplicationInfo.IsUpdatesAvailable = true;
-                    //Debug.WriteLine("A new version is available, please consider updating FriskyMouse!");
-                    //TODO: Show the new update notification on the dashboard page.
-                    //UpdateLatestVerionLabel(_updateChecker.NewVersionInfo);
-                    //Debug.WriteLine("New version: " + _updateChecker.NewVersionInfo);
+                    SettingsManager.Settings.ApplicationInfo.LatestVersion = _updateChecker.NewVersionInfo;
+                    //Debug.WriteLine("Latest version detected "+_updateChecker.NewVersionInfo);
                 }
                 else
                 {
                     SettingsManager.Settings.ApplicationInfo.IsUpdatesAvailable = false;
-                    //Debug.WriteLine("Up to date!!");
                 }
             }
-            else
-            {
-                //Debug.WriteLine("Up to date!!");
-            }
+            IsUpdateAvailable = SettingsManager.Settings.ApplicationInfo.IsUpdatesAvailable;
         }
         catch (Exception ex)
         {
@@ -133,20 +126,20 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
     }
     private bool IsCheckForUpdateRequired()
     {
-        bool isUpdateRequired = false;
+        bool isCheckRequired = false;
         string lastUpdateDate = _settings.LastCheckForUpdate;
-        var lastUpdated = DateTime.Now;
-        var today = DateTime.Now;
+        DateTime lastUpdated = DateTime.Now;
+        DateTime today = DateTime.Now;
         DateTime.TryParseExact(lastUpdateDate, "MM-dd-yyyy", CultureInfo.InvariantCulture,
                           DateTimeStyles.None, out lastUpdated);
         var diffOfDates = today - lastUpdated;
         //-- We only perform the check every two days. 
         if (diffOfDates.Days >= 2)
         {
-            isUpdateRequired = true;
+            isCheckRequired = true;
             _settings.LastCheckForUpdate = DateTime.Now.ToString("MM-dd-yyyy");
         }
-        return isUpdateRequired;
+        return isCheckRequired;
     }
 
     internal void RegisterAppHotkeys()

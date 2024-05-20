@@ -49,10 +49,12 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
         ApplicationThemeManager.Changed += OnThemeChanged;
 
         AppVersion = App.Configuration.AppBuildInfo;
-        ApplicationName = App.Configuration.ApplicationName;
+        ApplicationName = App.Configuration.ApplicationName; 
         ShowBalloonTip = SettingsManager.Settings.ApplicationInfo.ShowNotificationBalloonTip;
+        // Load updates info.
         LastUpdateCheckDate = "Last checked for update: " + SettingsManager.Settings.ApplicationInfo.LastCheckForUpdate;
         IsUpdateAvailable = SettingsManager.Settings.ApplicationInfo.IsUpdatesAvailable;
+        // Ensure that this view model is initialized once.
         _isInitialized = true;
     }
 
@@ -62,7 +64,7 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
         if (!_isInitialized)
         {
             InitializeViewModel();
-        }
+        }    
     }
 
     public void OnNavigatedFrom() { }

@@ -26,20 +26,20 @@ public class GitHubUpdateChecker
         string repository = "frisky-mouse";
         GitHubClient client = new GitHubClient(new ProductHeaderValue(repository));
         Release latestRelease = await client.Repository.Release.GetLatest(owner, repository);
-        Debug.WriteLine("Checking for updates.....");
+        //Debug.WriteLine("Checking for updates.....");
         if (latestRelease != null)
         {
             try
             {
-                Debug.WriteLine("Inside Checking for updates.....");
+                //Debug.WriteLine("Inside Checking for updates.....");
                 Version latestGitHubVersion = new Version(ParseRemoteVersion(latestRelease.TagName));
                 Version localVersion = FMAppHelper.GetCurrentVersion();
                 //Compare the current version with the latest published on GitHub.
-                Debug.WriteLine("localVersion: "+ localVersion);
-                Debug.WriteLine("latestGitHubVersion: " + latestGitHubVersion);
+                //Debug.WriteLine("localVersion: "+ localVersion);
+                //Debug.WriteLine("latestGitHubVersion: " + latestGitHubVersion);
                 if (localVersion.CompareTo(latestGitHubVersion) < 0)
                 {
-                    Debug.WriteLine("The version on GitHub is more up to date than this local release.");
+                    //Debug.WriteLine("The version on GitHub is more up to date than this local release.");
                     IsUpdateAvailable = true;
                     NewVersionInfo = latestGitHubVersion.ToString();
                 }

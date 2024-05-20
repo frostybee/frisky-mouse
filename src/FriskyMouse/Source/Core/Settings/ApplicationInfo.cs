@@ -20,7 +20,8 @@ public sealed class ApplicationInfo
     #region Properties        
 
     public string ApplicationName { get; set; } = "FriskyMouse";
-    public string Version { get; set; } = string.Empty;
+    public string CurrentVersion { get; set; } = string.Empty;
+    public string LatestVersion { get; set; } = string.Empty;
     public string LastCheckForUpdate { get; set; }  = "03-15-2024";
     public ApplicationTheme AppUiTheme{ get; set; } = ApplicationTheme.Dark;
     public bool ShowNotificationBalloonTip  { get; set; } = true;

@@ -129,7 +129,10 @@ public partial class App : Application
     private void OnExit(object sender, ExitEventArgs e)
     {
         // Save the settings before disposing any runtime objects/shutting down the app.
-        SettingsManager.SaveSettings();
+        if (SettingsManager.Settings != null)
+        {
+            SettingsManager.SaveSettings();
+        }        
 
         _host.StopAsync().Wait();
         _host.Dispose();

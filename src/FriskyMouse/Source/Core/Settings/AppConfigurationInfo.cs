@@ -60,7 +60,7 @@ public sealed class AppConfigurationInfo
 
 
     // TODO: add app's version and URLs.
-    /*public static string VersionString { get; } = Version.ToString(3);    
+    /*public static string VersionString { get; } = CurrentVersion.ToString(3);    
     public static string LatestReleaseUrl { get; } = ProjectUrl + "/releases/latest";*/
 
     private string GetAppBuildInfo()
@@ -69,7 +69,7 @@ public sealed class AppConfigurationInfo
         string version = FMAppHelper.GetApplicationVersion();
         string architecture = RuntimeInformation.OSArchitecture.ToString();
 
-        return $"Version: {version} | {architecture} | {BuildInfo} ";
+        return $"CurrentVersion: {version} | {architecture} | {BuildInfo} ";
     }
 
     public void LoadAppConfigurationInfo()

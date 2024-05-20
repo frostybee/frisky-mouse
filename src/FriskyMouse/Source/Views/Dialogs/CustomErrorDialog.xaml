@@ -7,9 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="clr-namespace:FriskyMouse.Helpers"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="Runtime Error"
+    Title="FriskyMouse - Runtime Error"
     Width="700"
-    Height="250"
+    Height="280"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="SingleBorderWindow"
@@ -53,7 +53,7 @@
                     ToolTip="{x:Static s:FMAppLinks.GitHubFeedbackURL}" />
             </StackPanel>
 
-            <TextBlock Margin="0,0,0,0">
+            <TextBlock Margin="0,10,0,0" FontWeight="Bold">
                 Would you like to close the application?
             </TextBlock>
         </StackPanel>

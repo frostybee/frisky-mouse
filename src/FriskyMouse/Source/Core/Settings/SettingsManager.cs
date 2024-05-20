@@ -76,7 +76,7 @@ internal static class SettingsManager
                 Console.WriteLine("Saving settings in " + filePath);
                 //LoadDefaultSettings();
                 Settings.ApplicationInfo.ApplicationName = App.Configuration.ApplicationName;
-                Settings.ApplicationInfo.Version = FMAppHelper.GetApplicationVersion();
+                Settings.ApplicationInfo.CurrentVersion = FMAppHelper.GetApplicationVersion();
                 // Create the directory that will hold the settings file if it doesn't exist.
                 FileHelpers.CreateDirectoryFromFilePath(filePath);
                 FileStream createStream = File.Create(filePath);
