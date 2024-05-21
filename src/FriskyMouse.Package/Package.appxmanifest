@@ -8,7 +8,7 @@
 
   <Identity
     Name="8168FrostyBee.FriskyMouse"
-    Publisher="CN=A09D9444-6C59-45FB-9975-D37DB1755B31"
+    Publisher="CN=FrostyBee"
     Version="0.1.2.0" />
 
   <Properties>

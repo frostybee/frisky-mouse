@@ -69,7 +69,7 @@ public sealed class AppConfigurationInfo
         string version = FMAppHelper.GetApplicationVersion();
         string architecture = RuntimeInformation.OSArchitecture.ToString();
 
-        return $"CurrentVersion: {version} | {architecture} | {BuildInfo} ";
+        return $"Current Version: {version} | {architecture} | {BuildInfo} ";
     }
 
     public void LoadAppConfigurationInfo()
