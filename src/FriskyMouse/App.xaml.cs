@@ -12,6 +12,7 @@
 
 using NLog;
 using System.Reflection;
+using System.Reflection.Metadata;
 
 namespace FriskyMouse;
 
@@ -30,7 +31,7 @@ public partial class App : Application
     private static IHost _host;
     public static readonly AppConfigurationInfo Configuration = new AppConfigurationInfo();
     private bool _singleInstanceClose = false;
-    private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+    private static readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
 
     #endregion
 
@@ -40,15 +41,15 @@ public partial class App : Application
     private void OnApplicationStartup(object sender, StartupEventArgs e)
     {
         _mutex = new Mutex(true, _mutexName);
-        var mutexIsAcquired = _mutex.WaitOne(TimeSpan.Zero, true);
-        if (!mutexIsAcquired)
+        var _mutexIsAcquired = _mutex.WaitOne(TimeSpan.Zero, true);
+        if (!_mutexIsAcquired)
         {
             // An instance of this application is already running.
             // Bring it into the foreground
             SingleAppInstanceHelper.PostMessageToMainWindow();
             // Shutdown this new instance.
             _singleInstanceClose = true;
-            Shutdown();            
+            Shutdown();
         }
         else
         {
@@ -81,7 +82,8 @@ public partial class App : Application
 
     private void ConfigureNLogService()
     {
-        NLog.LogManager.Setup().LoadConfiguration(builder => {
+        NLog.LogManager.Setup().LoadConfiguration(builder =>
+        {
             builder.ForLogger().FilterMinLevel(LogLevel.Info).WriteToFile(fileName: "logs/fm-log.txt");
             builder.ForLogger().FilterMinLevel(LogLevel.Debug).WriteToFile(fileName: "logs/fm-log.txt");
             builder.ForLogger().FilterMinLevel(LogLevel.Error).WriteToFile(fileName: "logs/fm-log.txt");
@@ -124,25 +126,6 @@ public partial class App : Application
     }
 
     /// <summary>
-    /// Occurs when the application is closing.
-    /// </summary>
-    private void OnExit(object sender, ExitEventArgs e)
-    {
-        // Save the settings before disposing any runtime objects/shutting down the app.
-        if (SettingsManager.Settings != null)
-        {
-            SettingsManager.SaveSettings();
-        }        
-
-        _host.StopAsync().Wait();
-        _host.Dispose();
-        _host = null;
-        // Uninstall the global mouse hook.
-        DecorationManager.Instance?.DisableHook();
-        DecorationManager.Instance?.Dispose();
-    }
-
-    /// <summary>
     /// Gets registered service.
     /// </summary>
     /// <typeparam name="T">Type of the service to get.</typeparam>
@@ -151,6 +134,7 @@ public partial class App : Application
     {
         return _host.Services.GetService(typeof(T)) as T ?? null;
     }
+
     /// <summary>
     /// Gets registered service.
     /// </summary>
@@ -206,6 +190,58 @@ public partial class App : Application
         {
             Application.Current.Shutdown();
         }
-        Logger.Error(exception, unhandledExceptionType);
+        _logger.Error(exception, unhandledExceptionType);
+    }
+
+
+    /// <summary>
+    /// Occurs when the application is closing.
+    /// </summary>
+    private void OnExit(object sender, ExitEventArgs e)
+    {
+        try
+        {
+            // Save the settings before disposing any runtime objects/shutting down the app.
+            if (SettingsManager.Settings != null)
+            {
+                SettingsManager.SaveSettings();
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.Error(ex, "Failed to save the application settings.");
+        }
+        try
+        {
+            if (_mutex != null)
+            {
+                _mutex.ReleaseMutex();
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.Error(ex, "Impossible to release the single instance mutex.");
+        }
+        _host.StopAsync().Wait();
+        _host.Dispose();
+        _host = null;
+        try
+        {
+            // Uninstall the global mouse hook.
+            DecorationManager.Instance?.DisableHook();
+            DecorationManager.Instance?.Dispose();
+        }
+        catch (Exception ex)
+        {
+            _logger.Error(ex, "Failed to uninstall the global hook and cleanup the allocated resources.");
+        }
+    }
+    public void Dispose()
+    {
+        if (_mutex != null)
+        {
+            _mutex.ReleaseMutex();
+        }
+        _mutex?.Dispose();
     }
 }

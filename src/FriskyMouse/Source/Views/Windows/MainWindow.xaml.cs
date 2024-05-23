@@ -30,7 +30,8 @@ public partial class MainWindow : IWindow
     private bool _isPaneOpenedOrClosedFromCode;
     private HwndSource _hwndSource;
     private INavigationService _navigationService;
-    private readonly NotifyIcon? _notifyIcon = new NotifyIcon();
+    private readonly NotifyIcon _notifyIcon = new();
+    private static readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
     public MainWindowViewModel ViewModel { get; }
 
     public MainWindow(
@@ -81,9 +82,16 @@ public partial class MainWindow : IWindow
 
     private void MainWindow_Loaded(object sender, RoutedEventArgs e)
     {
-        // Apply the theme that was selected by the user.
-        FMAppHelper.ChangeUICurrentTheme(SettingsManager.Settings.ApplicationInfo.AppUiTheme);
-        ViewModel.LoadAppModules();
+        try
+        {
+            // Apply the theme that was selected by the user.
+            FMAppHelper.ChangeUICurrentTheme(SettingsManager.Settings.ApplicationInfo.AppUiTheme);
+            ViewModel.LoadAppModules();
+        }
+        catch (Exception ex)
+        {
+            _logger.Error(ex);
+        }
     }
     private ContextMenuStrip CreateContextMenu()
     {

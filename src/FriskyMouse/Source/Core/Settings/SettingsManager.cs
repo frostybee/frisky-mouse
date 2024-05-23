@@ -85,10 +85,9 @@ internal static class SettingsManager
                 //TODO: verify if JSON file is not corrupted.
             }
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            DebugHelper.WriteException(e);
-            //OnSettingsSaveFailed(e);
+            throw;
         }
         finally
         {

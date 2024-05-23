@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
+  <!--Build info-->
   <PropertyGroup>    
     <TargetFramework>net8.0-windows</TargetFramework>
     <LangVersion>latest</LangVersion>
@@ -8,16 +9,16 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
     <RootNamespace>FriskyMouse</RootNamespace>
-    <BaseOutputPath>..\bin</BaseOutputPath>
-    
+    <BaseOutputPath>..\bin</BaseOutputPath>    
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
+  <!--App Info-->
   <PropertyGroup>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Authors>FrostyBee</Authors>
     <Company>FrostyBee</Company>
-    <Copyright>Copyright (C) 2022-2023 FrostyBee</Copyright>
+    <Copyright>Copyright (C) 2022-2024 FrostyBee</Copyright>
     <RepositoryUrl>https://github.com/frostybee/frisky-mouse</RepositoryUrl>
   </PropertyGroup>
 
