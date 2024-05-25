@@ -21,7 +21,7 @@ internal sealed class SettingsWrapper
     public ApplicationInfo ApplicationInfo { get; set; } = new ApplicationInfo();
 
     [JsonPropertyName("highlighterSettings")]
-    public HighlighterInfo HighlighterOptions { get; set; } = new HighlighterInfo();
+    public HighlighterOptions HighlighterOptions { get; set; } = new HighlighterOptions();
 
     [JsonPropertyName("mouseLeftClickSettings")]
     public RippleProfileInfo LeftClickOptions { get; set; } = new RippleProfileInfo();

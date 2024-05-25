@@ -25,7 +25,7 @@ public class HotkeysController
     private const string TOGGLE_HIGHLITER_KEY = "Toggle highlighter";
     private const string TOGGLE_RIGHT_CLICK_KEY = "Toggle right click indicator";
     private const string TOGGLE_LEFT_CLICK_KEY = "Toggle left click indicator";
-    private readonly HighlighterInfo _spotlightOptions;
+    private readonly HighlighterOptions _spotlightOptions;
     private readonly RippleProfileInfo _leftClickOptions;
     private readonly RippleProfileInfo _rightClickOptions;
     public event EventHandler MouseHighlighterToggled;

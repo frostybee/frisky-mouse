@@ -27,7 +27,7 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
 
     private bool _isInitialized = false;
     private DecorationManager _decorationManager;
-    private HighlighterInfo _spotlightOptions;
+    private HighlighterOptions _spotlightOptions;
     private readonly IContentDialogService _contentDialogService;
     private List<string> _hotkeys = new List<string> { "Ctrl", "Alt", "Shift", "F5" };
 

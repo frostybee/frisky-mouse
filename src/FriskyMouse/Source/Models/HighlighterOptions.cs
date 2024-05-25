@@ -14,7 +14,7 @@ using Color = System.Drawing.Color;
 
 namespace FriskyMouse.Models;
 
-public partial class HighlighterInfo 
+public partial class HighlighterOptions 
 {
 
     #region Properties        
@@ -48,5 +48,7 @@ public partial class HighlighterInfo
             return (byte)(Math.Min(ShadowOpacityPercentage * 255 / 100, 255));
         }
     }
-    #endregion    
+
+    public CrosshairOptions CrosshairOptions { get; set; } = new CrosshairOptions();
+    #endregion
 }

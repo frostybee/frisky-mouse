@@ -26,7 +26,7 @@ internal static class GraphicsExtensions
     {
         graphics.Clear(Color.Transparent);
     }
-    public static void DrawHighlighter(this Graphics graphics, Rectangle rect, HighlighterInfo options)
+    public static void DrawHighlighter(this Graphics graphics, Rectangle rect, HighlighterOptions options)
     {
         graphics.SetAntiAliasing();
 
@@ -53,24 +53,30 @@ internal static class GraphicsExtensions
             // Add an outline to the spotlight if enabled.
             graphics.DrawOutline(options);
         }
-        graphics.DrawCrosshair(options);
+        if (options.CrosshairOptions.IsEnabled)
+        {
+            graphics.DrawCrosshair(options.CrosshairOptions);
+        }
     }
 
-    private static void DrawCrosshair(this Graphics graphics, HighlighterInfo options)
+    private static void DrawCrosshair(this Graphics graphics, CrosshairOptions options)
     {
+        //System.Windows.MessageBox.Show("Oi");
         /*AdjustableArrowCap cap = new AdjustableArrowCap(5, 5);
         pen.CustomStartCap = cap;*/
-        int crosshairLength = 45;
+        int crosshairLength = options.Length;
         //Pen pen = Pens.Black;
-        using Pen pen = new Pen(Color.DarkRed, 3);
-        // pen.DashStyle = DashStyle.Dash;        
+        Color color = Color.FromArgb(options.Opacity, options.LineColor);
+        using Pen pen = new Pen(color, options.LineWidth);
+         pen.DashStyle = (DashStyle)options.OutlineStyle;        
+        
         //pen.SetLineCap(LineCap.ArrowAnchor, LineCap.ArrowAnchor, DashCap.Round);
         Point point = new(200 / 2, 200 / 2);
         graphics.DrawLine(pen, point.X - crosshairLength, point.Y, point.X + crosshairLength, point.Y);
         graphics.DrawLine(pen, point.X, point.Y - crosshairLength, point.X, point.Y + crosshairLength);
     }
 
-    public static void DrawOutline(this Graphics graphics, HighlighterInfo options)
+    public static void DrawOutline(this Graphics graphics, HighlighterOptions options)
     {
         Rectangle outlineRect = DrawingHelper.CreateRectangle(options.Width, options.Height, options.Radius + 2);
         //using Pen pen = new Pen(Color.Red, options.OutlineWidth);
@@ -79,7 +85,7 @@ internal static class GraphicsExtensions
         graphics.DrawEllipse(pen, outlineRect);
     }
 
-    public static void DrawRoundShadow(this Graphics graphics, HighlighterInfo options)
+    public static void DrawRoundShadow(this Graphics graphics, HighlighterOptions options)
     {
         int radius = options.Radius +
             (options.IsOutlined ? options.OutlineWidth + 4 : options.ShadowDepth - options.OutlineWidth
