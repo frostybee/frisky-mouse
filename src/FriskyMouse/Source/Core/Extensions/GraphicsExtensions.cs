@@ -16,6 +16,7 @@ using System.Drawing.Drawing2D;
 using Color = System.Drawing.Color;
 using Pen = System.Drawing.Pen;
 using DashStyle = System.Drawing.Drawing2D.DashStyle;
+using Point = System.Drawing.Point;
 
 namespace FriskyMouse.Extensions;
 
@@ -52,6 +53,21 @@ internal static class GraphicsExtensions
             // Add an outline to the spotlight if enabled.
             graphics.DrawOutline(options);
         }
+        graphics.DrawCrosshair(options);
+    }
+
+    private static void DrawCrosshair(this Graphics graphics, HighlighterInfo options)
+    {
+        /*AdjustableArrowCap cap = new AdjustableArrowCap(5, 5);
+        pen.CustomStartCap = cap;*/
+        int crosshairLength = 45;
+        //Pen pen = Pens.Black;
+        using Pen pen = new Pen(Color.DarkRed, 3);
+        // pen.DashStyle = DashStyle.Dash;        
+        //pen.SetLineCap(LineCap.ArrowAnchor, LineCap.ArrowAnchor, DashCap.Round);
+        Point point = new(200 / 2, 200 / 2);
+        graphics.DrawLine(pen, point.X - crosshairLength, point.Y, point.X + crosshairLength, point.Y);
+        graphics.DrawLine(pen, point.X, point.Y - crosshairLength, point.X, point.Y + crosshairLength);
     }
 
     public static void DrawOutline(this Graphics graphics, HighlighterInfo options)
