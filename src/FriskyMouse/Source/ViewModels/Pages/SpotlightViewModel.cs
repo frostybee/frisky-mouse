@@ -30,10 +30,9 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     private HighlighterOptions _spotlightOptions;
     private readonly IContentDialogService _contentDialogService;
     private List<string> _hotkeys = new List<string> { "Ctrl", "Alt", "Shift", "F5" };
-
+    //
     [ObservableProperty]
     private string _currentHotkeyText;
-
     [ObservableProperty]
     private BitmapSource _spotlightImagePreview;
     [ObservableProperty]
@@ -42,10 +41,6 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     private System.Windows.Media.Color _shadowColor;
     [ObservableProperty]
     private System.Windows.Media.Color _outlineColor;
-    [ObservableProperty]
-    private IReadOnlyList<string> _outlineStyles;
-    [ObservableProperty]
-    private int _selectedOutlineStyle;
     [ObservableProperty]
     private bool _isEnabled;
     [ObservableProperty]
@@ -58,18 +53,37 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     private ushort _height;
     [ObservableProperty]
     private bool _isFilled;
+    //-- Outline options
+    [ObservableProperty]
+    private IReadOnlyList<string> _outlineStyles;
+    [ObservableProperty]
+    private int _selectedOutlineStyle;
     [ObservableProperty]
     private bool _isOutlined;
     [ObservableProperty]
     private byte _outlineWidth;
     [ObservableProperty]
     private OutlineStyle _outlineStyle;
+    //-- Shadow options
     [ObservableProperty]
     private bool _hasShadow;
     [ObservableProperty]
     private byte _shadowDepth;
     [ObservableProperty]
     private byte _shadowOpacityPercentage;
+    //-- Crosshair options
+    [ObservableProperty]
+    private bool _isCrosshairEnabled;
+    [ObservableProperty]
+    private Color _crosshairColor;
+    [ObservableProperty]
+    private int _crosshairWidth;
+    [ObservableProperty]
+    private int _crosshairLength;
+    [ObservableProperty]
+    private int _crosshairOutlineStyle;
+    [ObservableProperty]
+    private byte _crosshairOpacity;    
     #endregion
 
     public SpotlightViewModel(IContentDialogService contentDialogService)
@@ -97,6 +111,7 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
         // Load the outline styles from their corresponding enum.
         OutlineStyles = FMAppHelper.GetEnumDescriptions<OutlineStyle>();
         SelectedOutlineStyle = (int)_spotlightOptions.OutlineStyle;
+        CrosshairOutlineStyle = (int)_spotlightOptions.CrosshairOptions.OutlineStyle;
         _decorationManager.HotkeysController.MouseHighlighterToggled += HotkeysController_MouseHighlighterToggled;
         //HotkeyManager.HotkeyAlreadyRegistered += HotkeyManager_HotkeyAlreadyRegistered;
         // We apply the options and draw the spotlight once we're done
@@ -115,17 +130,25 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
         _hotkeys = _spotlightOptions.Hotkey.Split("+", StringSplitOptions.TrimEntries).ToList();
         CurrentHotkeyText = _spotlightOptions.Hotkey.Trim();
         FillColor = _spotlightOptions.FillColor.ToMediaColor();
-        ShadowColor = _spotlightOptions.ShadowColor.ToMediaColor();
-        OutlineColor = _spotlightOptions.OutlineColor.ToMediaColor();
         IsEnabled = _spotlightOptions.IsEnabled;
         Radius = _spotlightOptions.Radius;
         OpacityPercentage = _spotlightOptions.OpacityPercentage;
         IsFilled = _spotlightOptions.IsFilled;
+        // Outline options
+        OutlineColor = _spotlightOptions.OutlineColor.ToMediaColor();
         IsOutlined = _spotlightOptions.IsOutlined;
         OutlineWidth = _spotlightOptions.OutlineWidth;
+        // Shadow options
+        ShadowColor = _spotlightOptions.ShadowColor.ToMediaColor();
         HasShadow = _spotlightOptions.HasShadow;
         ShadowDepth = _spotlightOptions.ShadowDepth;
         ShadowOpacityPercentage = _spotlightOptions.ShadowOpacityPercentage;
+        // Crosshair options
+        IsCrosshairEnabled = _spotlightOptions.CrosshairOptions.IsEnabled;
+        CrosshairColor = _spotlightOptions.CrosshairOptions.LineColor.ToMediaColor();
+        CrosshairLength = _spotlightOptions.CrosshairOptions.Length;
+        CrosshairOpacity = _spotlightOptions.CrosshairOptions.OpacityPercentage;
+        CrosshairWidth = _spotlightOptions.CrosshairOptions.LineWidth;
     }
 
     private void ApplySpotlightOptions()
@@ -177,6 +200,7 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
         FillColor = System.Drawing.Color.Yellow.ToMediaColor();
         OutlineColor = System.Drawing.Color.Red.ToMediaColor();
         ShadowColor = System.Drawing.Color.CornflowerBlue.ToMediaColor();
+        IsCrosshairEnabled = false;
     }
 
     #region Properties event handlers
@@ -280,6 +304,38 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
         _spotlightOptions.ShadowDepth = value;
         ApplySpotlightOptions();
     }
+    partial void OnIsCrosshairEnabledChanged(bool value)
+    {
+        _spotlightOptions.CrosshairOptions.IsEnabled = value;
+        ApplySpotlightOptions();
+    }
+    partial void OnCrosshairColorChanged(Color value)
+    {
+        _spotlightOptions.CrosshairOptions.LineColor = value.ToDrawingColor();
+        ApplySpotlightOptions();
+    }
+
+    partial void OnCrosshairLengthChanged(int value)
+    {
+        _spotlightOptions.CrosshairOptions.Length = value;
+        ApplySpotlightOptions();
+    }
+    partial void OnCrosshairOpacityChanged(byte value)
+    {
+        _spotlightOptions.CrosshairOptions.OpacityPercentage = value;
+        ApplySpotlightOptions();
+    }
+    partial void OnCrosshairWidthChanged(int value)
+    {
+        _spotlightOptions.CrosshairOptions.LineWidth = value;
+        ApplySpotlightOptions();
+    }
+    partial void OnCrosshairOutlineStyleChanged(int value)
+    {
+        _spotlightOptions.CrosshairOptions.OutlineStyle = (OutlineStyle)value ;
+        ApplySpotlightOptions();
+    }
+
     #endregion
 }
 
