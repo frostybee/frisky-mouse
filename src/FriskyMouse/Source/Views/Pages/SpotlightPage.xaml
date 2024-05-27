@@ -12,8 +12,8 @@
     Title="Mouse Highlighter Settings"
     d:DataContext="{d:DesignInstance local:SpotlightPage,
                                      IsDesignTimeCreatable=False}"
-    d:DesignHeight="1700"
-    d:DesignWidth=" 1200"
+    d:DesignHeight="2000"
+    d:DesignWidth=" 1400"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
@@ -170,17 +170,21 @@
                                 Header="Radius (px)"
                                 Icon="{ui:SymbolIcon CircleEdit24}"
                                 Style="{StaticResource SettingsCardExpanderItemStyle}">
-                                <Slider
-                                    Grid.Column="1"
-                                    Width="160"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    AutoToolTipPlacement="TopLeft"
-                                    IsSnapToTickEnabled="True"
-                                    Maximum="80"
-                                    Minimum="5"
-                                    SmallChange="1"
-                                    Value="{Binding ViewModel.Radius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <StackPanel Orientation="Horizontal">
+                                    <Slider
+                                        x:Name="SpotlightRadius"
+                                        Grid.Column="1"
+                                        Width="160"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        AutoToolTipPlacement="TopLeft"
+                                        IsSnapToTickEnabled="True"
+                                        Maximum="80"
+                                        Minimum="5"
+                                        SmallChange="1"
+                                        Value="{Binding ViewModel.Radius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <ui:TextBlock Style="{StaticResource OutputTextBlockStyle}" Text="{Binding Value, ElementName=SpotlightRadius, Mode=OneWay}" />
+                                </StackPanel>
                             </controls:SettingsCard>
 
                             <controls:SettingsCard
@@ -192,16 +196,20 @@
                                 Header="Opacity (%)"
                                 Icon="{ui:SymbolIcon LightbulbFilament24}"
                                 Style="{StaticResource SettingsCardExpanderItemStyle}">
-                                <Slider
-                                    Grid.Row="2"
-                                    Grid.Column="1"
-                                    Width="160"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    AutoToolTipPlacement="TopLeft"
-                                    Maximum="95"
-                                    Minimum="10"
-                                    Value="{Binding ViewModel.OpacityPercentage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <StackPanel Orientation="Horizontal">
+                                    <Slider
+                                        x:Name="SpotlightOpacity"
+                                        Grid.Row="2"
+                                        Grid.Column="1"
+                                        Width="160"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        AutoToolTipPlacement="TopLeft"
+                                        Maximum="95"
+                                        Minimum="10"
+                                        Value="{Binding ViewModel.OpacityPercentage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <ui:TextBlock Style="{StaticResource OutputTextBlockStyle}" Text="{Binding Value, ElementName=SpotlightOpacity, Mode=OneWay}" />
+                                </StackPanel>
                             </controls:SettingsCard>
 
                             <ui:Button
@@ -294,18 +302,27 @@
                             <!--  Crosshair opacity  -->
                             <controls:SettingsCard
                                 Grid.Row="1"
+                                VerticalAlignment="Top"
                                 Description="Adjust the percentage of the crosshair opacity"
                                 Header="Opacity (%)"
                                 Icon="{ui:SymbolIcon BrightnessLow48}"
                                 Style="{StaticResource SettingsCardExpanderItemStyle}">
-                                <Slider
-                                    Width="200"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    AutoToolTipPlacement="TopLeft"
-                                    Maximum="100"
-                                    Minimum="10"
-                                    Value="{Binding ViewModel.CrosshairOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <StackPanel Orientation="Horizontal">
+                                    <Slider
+                                        x:Name="CrosshairOpacity"
+                                        Width="200"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        AutoToolTipPlacement="TopLeft"
+                                        Maximum="100"
+                                        Minimum="10"
+                                        Value="{Binding ViewModel.CrosshairOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <ui:TextBlock
+                                        Margin="10,0,20,0"
+                                        Padding="0,0,30,0"
+                                        Style="{StaticResource OutputTextBlockStyle}"
+                                        Text="{Binding Value, ElementName=CrosshairOpacity, Mode=OneWay}" />
+                                </StackPanel>
                             </controls:SettingsCard>
 
                             <!--  Crosshair's outline style  -->
@@ -343,14 +360,18 @@
                                 Header="Length (px)"
                                 Icon="{ui:SymbolIcon ArrowAutoFitWidthDotted20}"
                                 Style="{StaticResource SettingsCardExpanderItemStyle}">
-                                <Slider
-                                    Width="200"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    AutoToolTipPlacement="TopLeft"
-                                    Maximum="100"
-                                    Minimum="10"
-                                    Value="{Binding ViewModel.CrosshairLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <StackPanel Orientation="Horizontal">
+                                    <Slider
+                                        x:Name="CrosshairLength"
+                                        Width="200"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        AutoToolTipPlacement="TopLeft"
+                                        Maximum="95"
+                                        Minimum="10"
+                                        Value="{Binding ViewModel.CrosshairLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <ui:TextBlock Style="{StaticResource OutputTextBlockStyle}" Text="{Binding Value, ElementName=CrosshairLength, Mode=OneWay}" />
+                                </StackPanel>
                             </controls:SettingsCard>
 
                             <!--  crosshair width  -->
@@ -360,14 +381,18 @@
                                 Header="Width (px)"
                                 Icon="{ui:SymbolIcon AutoFitWidth24}"
                                 Style="{StaticResource SettingsCardExpanderItemStyle}">
-                                <Slider
-                                    Width="200"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    AutoToolTipPlacement="TopLeft"
-                                    Maximum="10"
-                                    Minimum="1"
-                                    Value="{Binding ViewModel.CrosshairWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <StackPanel Orientation="Horizontal">
+                                    <Slider
+                                        x:Name="CrosshairWidth"
+                                        Width="200"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        AutoToolTipPlacement="TopLeft"
+                                        Maximum="10"
+                                        Minimum="1"
+                                        Value="{Binding ViewModel.CrosshairWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <ui:TextBlock Style="{StaticResource OutputTextBlockStyle}" Text="{Binding Value, ElementName=CrosshairWidth, Mode=OneWay}" />
+                                </StackPanel>
                             </controls:SettingsCard>
 
                         </Grid>
@@ -432,15 +457,18 @@
                                 Header="Width (px)"
                                 Icon="{ui:SymbolIcon AutoFitWidth24}"
                                 Style="{StaticResource SettingsCardExpanderItemStyle}">
-
-                                <Slider
-                                    Width="200"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    AutoToolTipPlacement="TopLeft"
-                                    Maximum="6"
-                                    Minimum="1"
-                                    Value="{Binding ViewModel.OutlineWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <StackPanel Orientation="Horizontal">
+                                    <Slider
+                                        x:Name="OutlineRadius"
+                                        Width="200"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Top"
+                                        AutoToolTipPlacement="TopLeft"
+                                        Maximum="6"
+                                        Minimum="1"
+                                        Value="{Binding ViewModel.OutlineWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <ui:TextBlock Style="{StaticResource OutputTextBlockStyle}" Text="{Binding Value, ElementName=OutlineRadius, Mode=OneWay}" />
+                                </StackPanel>
                             </controls:SettingsCard>
 
                         </Grid>
@@ -488,14 +516,18 @@
                                 Header="Depth (px)"
                                 Icon="{ui:SymbolIcon ArrowAutofitWidth24}"
                                 Style="{StaticResource SettingsCardExpanderItemStyle}">
-                                <Slider
-                                    Width="200"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    AutoToolTipPlacement="TopLeft"
-                                    Maximum="15"
-                                    Minimum="2"
-                                    Value="{Binding ViewModel.ShadowDepth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <StackPanel Orientation="Horizontal">
+                                    <Slider
+                                        x:Name="ShadowDepth"
+                                        Width="200"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        AutoToolTipPlacement="TopLeft"
+                                        Maximum="15"
+                                        Minimum="2"
+                                        Value="{Binding ViewModel.ShadowDepth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <ui:TextBlock Style="{StaticResource OutputTextBlockStyle}" Text="{Binding Value, ElementName=ShadowDepth, Mode=OneWay}" />
+                                </StackPanel>
                             </controls:SettingsCard>
 
                             <controls:SettingsCard
@@ -504,14 +536,18 @@
                                 Header="Opacity (%)"
                                 Icon="{ui:SymbolIcon BrightnessLow48}"
                                 Style="{StaticResource SettingsCardExpanderItemStyle}">
-                                <Slider
-                                    Width="200"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    AutoToolTipPlacement="TopLeft"
-                                    Maximum="95"
-                                    Minimum="5"
-                                    Value="{Binding ViewModel.ShadowOpacityPercentage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <StackPanel Orientation="Horizontal">
+                                    <Slider
+                                        x:Name="ShadowOpacity"
+                                        Width="200"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        AutoToolTipPlacement="TopLeft"
+                                        Maximum="95"
+                                        Minimum="5"
+                                        Value="{Binding ViewModel.ShadowOpacityPercentage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <ui:TextBlock Style="{StaticResource OutputTextBlockStyle}" Text="{Binding Value, ElementName=ShadowOpacity, Mode=OneWay}" />
+                                </StackPanel>
                             </controls:SettingsCard>
 
                         </Grid>
@@ -522,22 +558,4 @@
     </controls:FeaturePageContentControl>
 </Page>
 
-<!--<ui:Card Width="300" HorizontalAlignment="Left">
-    <ItemsControl ItemsSource="{Binding ViewModel.Hotkeys}">
-        <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-                <StackPanel Orientation="Horizontal" />
-            </ItemsPanelTemplate>
-        </ItemsControl.ItemsPanel>
-        <ItemsControl.ItemTemplate>
-            <DataTemplate>
-                <ui:Button
-                    Margin="5,0,0,0"
-                    Appearance="Primary"
-                    Content="{Binding}"
-                    FontSize="16" />
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
-    </ItemsControl>
-</ui:Card>-->
 
