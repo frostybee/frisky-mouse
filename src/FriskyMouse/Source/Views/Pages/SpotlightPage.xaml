@@ -257,148 +257,6 @@
                 HorizontalAlignment="Stretch"
                 Orientation="Vertical">
 
-                <!--  Crosshair options  -->
-                <controls:SettingsGroupHeaderControl Description="Add and customize a crosshair to be shown inside the highlighter" Header="Crosshair options">
-                    <controls:ExpandableSettingsControl
-                        Description="When enabled, an outline will be rendered on top of the highlighter"
-                        Header="Enable highlighter outline"
-                        HeaderContentPadding="0,0,0,0"
-                        Icon="{ui:SymbolIcon Add20}"
-                        IsExpanded="True">
-                        <controls:ExpandableSettingsControl.ExpanderAction>
-                            <!--  Toggle crosshair  -->
-                            <ui:ToggleSwitch
-                                x:Name="hasCrosshairSwitch"
-                                Margin="0,0,25,0"
-                                IsChecked="{Binding ViewModel.IsCrosshairEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                OffContent="Off"
-                                OnContent="On" />
-                        </controls:ExpandableSettingsControl.ExpanderAction>
-
-                        <!--  Spotlight shadow's controls  -->
-                        <Grid HorizontalAlignment="Stretch">
-                            <Grid.RowDefinitions>
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-
-                            <!--  Crosshair color  -->
-                            <controls:SettingsCard
-                                Grid.Row="0"
-                                Height="65"
-                                CanReposition="False"
-                                Description="Change the color of the crosshair lines"
-                                Header="Crosshair color"
-                                Icon="{ui:SymbolIcon ColorBackground24}"
-                                Style="{StaticResource SettingsCardExpanderItemStyle}">
-
-                                <controls:ColorPickerControl SelectedColor="{Binding ViewModel.CrosshairColor, Mode=TwoWay}" />
-                            </controls:SettingsCard>
-
-                            <!--  Crosshair opacity  -->
-                            <controls:SettingsCard
-                                Grid.Row="1"
-                                VerticalAlignment="Top"
-                                Description="Adjust the percentage of the crosshair opacity"
-                                Header="Opacity (%)"
-                                Icon="{ui:SymbolIcon BrightnessLow48}"
-                                Style="{StaticResource SettingsCardExpanderItemStyle}">
-                                <StackPanel Orientation="Horizontal">
-                                    <Slider
-                                        x:Name="CrosshairOpacity"
-                                        Width="200"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Center"
-                                        AutoToolTipPlacement="TopLeft"
-                                        Maximum="100"
-                                        Minimum="10"
-                                        Value="{Binding ViewModel.CrosshairOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <ui:TextBlock
-                                        Margin="10,0,20,0"
-                                        Padding="0,0,30,0"
-                                        Style="{StaticResource OutputTextBlockStyle}"
-                                        Text="{Binding Value, ElementName=CrosshairOpacity, Mode=OneWay}" />
-                                </StackPanel>
-                            </controls:SettingsCard>
-
-                            <!--  Crosshair's outline style  -->
-                            <controls:SettingsCard
-                                Grid.Row="2"
-                                Description="Select an outline style"
-                                Header="Outline style"
-                                Icon="{ui:SymbolIcon BorderTopBottomDouble24}"
-                                Style="{StaticResource SettingsCardExpanderItemStyle}">
-                                <ComboBox
-                                    MinWidth="200"
-                                    HorizontalAlignment="Left"
-                                    ItemsSource="{Binding ViewModel.OutlineStyles, Mode=OneWay}"
-                                    SelectedIndex="{Binding ViewModel.CrosshairOutlineStyle, Mode=TwoWay}" />
-                            </controls:SettingsCard>
-
-                            <!--  Crosshair's line cap style  -->
-                            <controls:SettingsCard
-                                Grid.Row="3"
-                                Description="Select a line cap style"
-                                Header="Line cap style"
-                                Icon="{ui:SymbolIcon BorderTopBottomDouble24}"
-                                Style="{StaticResource SettingsCardExpanderItemStyle}">
-                                <ComboBox
-                                    MinWidth="200"
-                                    HorizontalAlignment="Left"
-                                    ItemsSource="{Binding ViewModel.CrosshairLineCapStyles, Mode=OneWay}"
-                                    SelectedIndex="{Binding ViewModel.SelectedLineCapStyle, Mode=TwoWay}" />
-                            </controls:SettingsCard>
-
-                            <!--  Crosshair length  -->
-                            <controls:SettingsCard
-                                Grid.Row="4"
-                                Description="Adjust the length of the crosshair"
-                                Header="Length (px)"
-                                Icon="{ui:SymbolIcon ArrowAutoFitWidthDotted20}"
-                                Style="{StaticResource SettingsCardExpanderItemStyle}">
-                                <StackPanel Orientation="Horizontal">
-                                    <Slider
-                                        x:Name="CrosshairLength"
-                                        Width="200"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Center"
-                                        AutoToolTipPlacement="TopLeft"
-                                        Maximum="95"
-                                        Minimum="10"
-                                        Value="{Binding ViewModel.CrosshairLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <ui:TextBlock Style="{StaticResource OutputTextBlockStyle}" Text="{Binding Value, ElementName=CrosshairLength, Mode=OneWay}" />
-                                </StackPanel>
-                            </controls:SettingsCard>
-
-                            <!--  crosshair width  -->
-                            <controls:SettingsCard
-                                Grid.Row="5"
-                                Description="Change the crosshair width"
-                                Header="Width (px)"
-                                Icon="{ui:SymbolIcon AutoFitWidth24}"
-                                Style="{StaticResource SettingsCardExpanderItemStyle}">
-                                <StackPanel Orientation="Horizontal">
-                                    <Slider
-                                        x:Name="CrosshairWidth"
-                                        Width="200"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Center"
-                                        AutoToolTipPlacement="TopLeft"
-                                        Maximum="10"
-                                        Minimum="1"
-                                        Value="{Binding ViewModel.CrosshairWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <ui:TextBlock Style="{StaticResource OutputTextBlockStyle}" Text="{Binding Value, ElementName=CrosshairWidth, Mode=OneWay}" />
-                                </StackPanel>
-                            </controls:SettingsCard>
-
-                        </Grid>
-                    </controls:ExpandableSettingsControl>
-                </controls:SettingsGroupHeaderControl>
-
                 <!--  Spotlight outline options  -->
                 <controls:SettingsGroupHeaderControl Description="Customize an outline to be rendered around the highlighter" Header="Outline options">
                     <!--  TODO:  add description below the options header.  -->
@@ -474,6 +332,150 @@
                         </Grid>
                     </controls:ExpandableSettingsControl>
                 </controls:SettingsGroupHeaderControl>
+
+                <!--  Crosshair options  -->
+                <controls:SettingsGroupHeaderControl Description="Add and customize a crosshair to be shown inside the highlighter" Header="Crosshair options">
+                    <controls:ExpandableSettingsControl
+                        Description="When enabled, a crosshair will be rendered inside the highlighter drawing"
+                        Header="Enable highlighter outline"
+                        HeaderContentPadding="0,0,0,0"
+                        Icon="{ui:SymbolIcon Add20}"
+                        IsExpanded="True">
+                        <controls:ExpandableSettingsControl.ExpanderAction>
+                            <!--  Toggle crosshair  -->
+                            <ui:ToggleSwitch
+                                x:Name="hasCrosshairSwitch"
+                                Margin="0,0,25,0"
+                                IsChecked="{Binding ViewModel.IsCrosshairEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                OffContent="Off"
+                                OnContent="On" />
+                        </controls:ExpandableSettingsControl.ExpanderAction>
+
+                        <!--  Spotlight shadow's controls  -->
+                        <Grid HorizontalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <!--  Crosshair color  -->
+                            <controls:SettingsCard
+                                Grid.Row="0"
+                                Height="65"
+                                CanReposition="False"
+                                Description="Change the color of the crosshair lines"
+                                Header="Crosshair color"
+                                Icon="{ui:SymbolIcon ColorBackground24}"
+                                Style="{StaticResource SettingsCardExpanderItemStyle}">
+
+                                <controls:ColorPickerControl SelectedColor="{Binding ViewModel.CrosshairColor, Mode=TwoWay}" />
+                            </controls:SettingsCard>
+
+                            <!--  Crosshair opacity  -->
+                            <controls:SettingsCard
+                                Grid.Row="1"
+                                VerticalAlignment="Top"
+                                Description="Adjust the percentage of the crosshair opacity"
+                                Header="Crosshair Opacity (%)"
+                                Icon="{ui:SymbolIcon BrightnessLow48}"
+                                Style="{StaticResource SettingsCardExpanderItemStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Slider
+                                        x:Name="CrosshairOpacity"
+                                        Width="200"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        AutoToolTipPlacement="TopLeft"
+                                        Maximum="100"
+                                        Minimum="10"
+                                        Value="{Binding ViewModel.CrosshairOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <ui:TextBlock
+                                        Margin="10,0,20,0"
+                                        Padding="0,0,30,0"
+                                        Style="{StaticResource OutputTextBlockStyle}"
+                                        Text="{Binding Value, ElementName=CrosshairOpacity, Mode=OneWay}" />
+                                </StackPanel>
+                            </controls:SettingsCard>
+
+                            <!--  Crosshair's outline style  -->
+                            <controls:SettingsCard
+                                Grid.Row="2"
+                                Description="Select an outline style"
+                                Header="Outline style"
+                                Icon="{ui:SymbolIcon BorderTopBottomDouble24}"
+                                Style="{StaticResource SettingsCardExpanderItemStyle}">
+                                <ComboBox
+                                    MinWidth="200"
+                                    HorizontalAlignment="Left"
+                                    ItemsSource="{Binding ViewModel.OutlineStyles, Mode=OneWay}"
+                                    SelectedIndex="{Binding ViewModel.CrosshairOutlineStyle, Mode=TwoWay}" />
+                            </controls:SettingsCard>
+
+                            <!--  Crosshair's line cap style  -->
+                            <controls:SettingsCard
+                                Grid.Row="3"
+                                Description="Select a line cap style"
+                                Header="Line cap style"
+                                Icon="{ui:SymbolIcon BorderTopBottomDouble24}"
+                                Style="{StaticResource SettingsCardExpanderItemStyle}">
+                                <ComboBox
+                                    MinWidth="200"
+                                    HorizontalAlignment="Left"
+                                    ItemsSource="{Binding ViewModel.CrosshairLineCapStyles, Mode=OneWay}"
+                                    SelectedIndex="{Binding ViewModel.SelectedLineCapStyle, Mode=TwoWay}" />
+                            </controls:SettingsCard>
+
+                            <!--  Crosshair length  -->
+                            <controls:SettingsCard
+                                Grid.Row="4"
+                                Description="Adjust the length of the crosshair"
+                                Header="Length (px)"
+                                Icon="{ui:SymbolIcon ArrowAutoFitWidthDotted20}"
+                                Style="{StaticResource SettingsCardExpanderItemStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Slider
+                                        x:Name="CrosshairLength"
+                                        Width="200"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        AutoToolTipPlacement="TopLeft"
+                                        Maximum="95"
+                                        Minimum="10"
+                                        Value="{Binding ViewModel.CrosshairLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <ui:TextBlock Style="{StaticResource OutputTextBlockStyle}" Text="{Binding Value, ElementName=CrosshairLength, Mode=OneWay}" />
+                                </StackPanel>
+                            </controls:SettingsCard>
+
+                            <!--  crosshair width  -->
+                            <controls:SettingsCard
+                                Grid.Row="5"
+                                Description="Change the crosshair width"
+                                Header="Crosshair thickness (px)"
+                                Icon="{ui:SymbolIcon AutoFitWidth24}"
+                                Style="{StaticResource SettingsCardExpanderItemStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Slider
+                                        x:Name="CrosshairWidth"
+                                        Width="200"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        AutoToolTipPlacement="TopLeft"
+                                        Maximum="5"
+                                        Minimum="1"
+                                        Value="{Binding ViewModel.CrosshairWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <ui:TextBlock Style="{StaticResource OutputTextBlockStyle}" Text="{Binding Value, ElementName=CrosshairWidth, Mode=OneWay}" />
+                                </StackPanel>
+                            </controls:SettingsCard>
+
+                        </Grid>
+                    </controls:ExpandableSettingsControl>
+                </controls:SettingsGroupHeaderControl>
+
+
 
                 <!--  Shadow options  -->
                 <controls:SettingsGroupHeaderControl Description="Customize the style of the shadow to be rendered around the highlighter's outline" Header="Shadow options">

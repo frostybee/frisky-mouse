@@ -13,24 +13,24 @@ public enum LineCapTypes : uint
     //     Specifies a flat line cap.
     [Description("None")]
     None = 0,
-       //
+    //
+    // Summary:
+    //     Specifies an arrow-shaped anchor cap.
+    [Description("Arrow Anchor")]
+    ArrowAnchor = 20,
+    //
+    // Summary:
+    //     Specifies a diamond anchor cap.
+    [Description("Diamond Anchor")]
+    DiamondAnchor = 19,
+    //
     // Summary:
     //     Specifies a square anchor line cap.
-    [Description("SquareAnchor")] 
+    [Description("Square Anchor")] 
     SquareAnchor = 17,
     //
     // Summary:
     //     Specifies a round anchor cap.
-    [Description("RoundAnchor")] 
-    RoundAnchor = 18,
-    //
-    // Summary:
-    //     Specifies a diamond anchor cap.
-    [Description("DiamondAnchor")] 
-    DiamondAnchor = 19,
-    //
-    // Summary:
-    //     Specifies an arrow-shaped anchor cap.
-    [Description("ArrowAnchor")] 
-    ArrowAnchor = 20   
+    [Description("Round Anchor")] 
+    RoundAnchor = 18       
 }

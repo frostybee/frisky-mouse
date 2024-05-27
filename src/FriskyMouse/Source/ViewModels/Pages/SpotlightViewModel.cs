@@ -156,8 +156,8 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
         CrosshairOutlineStyle = (int)_spotlightOptions.CrosshairOptions.OutlineStyle;
         CrosshairLineCapStyles = FMAppHelper.GetEnumDescriptions<LineCapTypes>();
         SelectedLineCapStyle = (int)_spotlightOptions.CrosshairOptions.LineCapStyle;
-        var all = FMAppHelper.GetEnums<LineCapTypes>().ToList();
-        
+
+        // Load the the previously selected line cap from the settings.
         var caps = Enum.GetValues(typeof(LineCapTypes));
         for (int i = 0; i < caps.Length; i++)
         {
@@ -357,10 +357,12 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
 
     partial void OnSelectedLineCapStyleChanged(int value)
     {
-        if (value > 0 && value < CrosshairLineCapStyles.Count)
+
+        //Debug.WriteLine(value);
+        if (value >= 0 && value < CrosshairLineCapStyles.Count)
         {
             var cap = FMAppHelper.GetValueFromDescription<LineCapTypes>(CrosshairLineCapStyles[value]);
-
+            Debug.WriteLine("Found " + cap);
             ///LineCapTypes cap = CrosshairLineCapStyles[value];
             _spotlightOptions.CrosshairOptions.LineCapStyle = (LineCapTypes)cap;
             //Debug.WriteLine(value);
