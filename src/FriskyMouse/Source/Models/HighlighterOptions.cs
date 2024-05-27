@@ -36,7 +36,7 @@ public partial class HighlighterOptions
     public bool IsOutlined { get; set; } = false;
     public Color OutlineColor { get; set; } = Color.Red;
     public byte OutlineWidth { get; set; } = 2;
-    public OutlineStyle OutlineStyle { get; set; } = OutlineStyle.Solid;
+    public SpotlightOutlineTypes OutlineStyle { get; set; } = SpotlightOutlineTypes.Solid;
     public bool HasShadow { get; set; } = false;
     public byte ShadowDepth { get; set; } = 5;
     public Color ShadowColor { get; set; } = Color.CornflowerBlue;

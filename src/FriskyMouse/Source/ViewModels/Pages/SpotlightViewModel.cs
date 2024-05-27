@@ -12,6 +12,7 @@
 
 using FriskyMouse.Core.Hotkeys;
 using NHotkey;
+using System;
 using System.Windows.Media.Imaging;
 using static FriskyMouse.Core.Controllers.HotkeysController;
 using Color = System.Windows.Media.Color;
@@ -63,7 +64,7 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     [ObservableProperty]
     private byte _outlineWidth;
     [ObservableProperty]
-    private OutlineStyle _outlineStyle;
+    private SpotlightOutlineTypes _outlineStyle;
     //-- Shadow options
     [ObservableProperty]
     private bool _hasShadow;
@@ -83,7 +84,11 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     [ObservableProperty]
     private int _crosshairOutlineStyle;
     [ObservableProperty]
-    private byte _crosshairOpacity;    
+    private byte _crosshairOpacity;
+    [ObservableProperty]
+    private IReadOnlyList<string> _crosshairLineCapStyles;
+    [ObservableProperty]
+    private int _selectedLineCapStyle;
     #endregion
 
     public SpotlightViewModel(IContentDialogService contentDialogService)
@@ -107,11 +112,7 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     {
         _decorationManager = DecorationManager.Instance;
         _spotlightOptions = SettingsManager.Settings.HighlighterOptions;
-        LoadSpotlightOptions();
-        // Load the outline styles from their corresponding enum.
-        OutlineStyles = FMAppHelper.GetEnumDescriptions<OutlineStyle>();
-        SelectedOutlineStyle = (int)_spotlightOptions.OutlineStyle;
-        CrosshairOutlineStyle = (int)_spotlightOptions.CrosshairOptions.OutlineStyle;
+        LoadSpotlightOptions();        
         _decorationManager.HotkeysController.MouseHighlighterToggled += HotkeysController_MouseHighlighterToggled;
         //HotkeyManager.HotkeyAlreadyRegistered += HotkeyManager_HotkeyAlreadyRegistered;
         // We apply the options and draw the spotlight once we're done
@@ -138,6 +139,9 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
         OutlineColor = _spotlightOptions.OutlineColor.ToMediaColor();
         IsOutlined = _spotlightOptions.IsOutlined;
         OutlineWidth = _spotlightOptions.OutlineWidth;
+        // Load the outline styles from their corresponding enum.
+        OutlineStyles = FMAppHelper.GetEnumDescriptions<SpotlightOutlineTypes>();
+        SelectedOutlineStyle = (int)_spotlightOptions.OutlineStyle;
         // Shadow options
         ShadowColor = _spotlightOptions.ShadowColor.ToMediaColor();
         HasShadow = _spotlightOptions.HasShadow;
@@ -148,7 +152,10 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
         CrosshairColor = _spotlightOptions.CrosshairOptions.LineColor.ToMediaColor();
         CrosshairLength = _spotlightOptions.CrosshairOptions.Length;
         CrosshairOpacity = _spotlightOptions.CrosshairOptions.OpacityPercentage;
-        CrosshairWidth = _spotlightOptions.CrosshairOptions.LineWidth;
+        CrosshairWidth = _spotlightOptions.CrosshairOptions.LineWidth;                
+        CrosshairOutlineStyle = (int)_spotlightOptions.CrosshairOptions.OutlineStyle;
+        CrosshairLineCapStyles = FMAppHelper.GetEnumDescriptions<LineCapTypes>();
+        SelectedLineCapStyle = (int)_spotlightOptions.CrosshairOptions.LineCapStyle;
     }
 
     private void ApplySpotlightOptions()
@@ -195,8 +202,9 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
         IsOutlined = false;
         ShadowDepth = 4;
         ShadowOpacityPercentage = 45;
-        OutlineStyle = OutlineStyle.Solid;
-        SelectedOutlineStyle = (int)OutlineStyle.Solid;
+        OutlineStyle = SpotlightOutlineTypes.Solid;
+        SelectedOutlineStyle = (int)SpotlightOutlineTypes.Solid;
+        SelectedLineCapStyle = (int)LineCapTypes.None;
         FillColor = System.Drawing.Color.Yellow.ToMediaColor();
         OutlineColor = System.Drawing.Color.Red.ToMediaColor();
         ShadowColor = System.Drawing.Color.CornflowerBlue.ToMediaColor();
@@ -256,7 +264,7 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     }
     partial void OnSelectedOutlineStyleChanged(int value)
     {
-        _spotlightOptions.OutlineStyle = (OutlineStyle)value;
+        _spotlightOptions.OutlineStyle = (SpotlightOutlineTypes)value;
         ApplySpotlightOptions();
     }
     partial void OnOpacityPercentageChanged(byte value)
@@ -332,8 +340,21 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     }
     partial void OnCrosshairOutlineStyleChanged(int value)
     {
-        _spotlightOptions.CrosshairOptions.OutlineStyle = (OutlineStyle)value ;
+        _spotlightOptions.CrosshairOptions.OutlineStyle = (SpotlightOutlineTypes)value ;
         ApplySpotlightOptions();
+    }
+     
+    partial void OnSelectedLineCapStyleChanged(int value)
+    {
+        if (value > 0 && value < CrosshairLineCapStyles.Count)
+        {
+            var cap = FMAppHelper.GetValueFromDescription<LineCapTypes>(CrosshairLineCapStyles[value]);
+
+            ///LineCapTypes cap = CrosshairLineCapStyles[value];
+            _spotlightOptions.CrosshairOptions.LineCapStyle = (LineCapTypes)cap;
+            //Debug.WriteLine(value);
+            ApplySpotlightOptions();
+        }
     }
 
     #endregion

@@ -198,7 +198,6 @@ public class LayeredWindow : System.Windows.Forms.NativeWindow, IDisposable
         }
     }
     // Listen to when the handle changes to keep the variable in sync
-    [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
     protected override void OnHandleChange()
     {
         handle = (int)this.Handle;

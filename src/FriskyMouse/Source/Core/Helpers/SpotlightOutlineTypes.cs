@@ -14,7 +14,7 @@ using System.ComponentModel;
 
 namespace FriskyMouse.Helpers;
 
-public enum OutlineStyle: uint
+public enum SpotlightOutlineTypes: uint
 {
     [Description("Solid")]
     Solid = 0,

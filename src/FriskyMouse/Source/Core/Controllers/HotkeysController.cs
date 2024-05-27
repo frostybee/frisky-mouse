@@ -93,7 +93,7 @@ public class HotkeysController
             {
                 AddActivationHotkey(hotKey.ActionName, hotKey.HotKey, hotKey.Command);
             }
-            catch (HotkeyAlreadyRegisteredException ex)
+            catch (HotkeyAlreadyRegisteredException)
             {
                 RegistrationErrors.Add("- " + hotKey.ActionName + ": " + hotKey.HotKey);
                 HasRegistrationErrors = true;

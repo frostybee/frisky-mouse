@@ -97,7 +97,7 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
     private async Task OnShowLicenseDialog()
     {
         var licenseDialog = new LicenseContentDialog(
-            _contentDialogService.GetContentPresenter()
+            _contentDialogService.GetDialogHost()
         );
         var result = await licenseDialog.ShowAsync();
     }

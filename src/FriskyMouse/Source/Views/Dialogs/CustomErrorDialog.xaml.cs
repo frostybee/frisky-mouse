@@ -19,7 +19,7 @@ namespace FriskyMouse.Views.Dialogs;
 /// </summary>
 public partial class CustomErrorDialog : Window
 {
-    public MessageBoxResult DialogResult { get; set; } = MessageBoxResult.No;
+    public new MessageBoxResult DialogResult { get; set; } = MessageBoxResult.No;
     public string ErrorTitle { get; set; }
     public string ErrorMessage { get; set; }
     public CustomErrorDialog()

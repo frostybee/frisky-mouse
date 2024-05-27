@@ -275,6 +275,7 @@
                                 <RowDefinition />
                                 <RowDefinition />
                                 <RowDefinition />
+                                <RowDefinition />
                             </Grid.RowDefinitions>
 
                             <!--  Crosshair color  -->
@@ -321,9 +322,23 @@
                                     SelectedIndex="{Binding ViewModel.CrosshairOutlineStyle, Mode=TwoWay}" />
                             </controls:SettingsCard>
 
-                            <!--  Crosshair length  -->
+                            <!--  Crosshair's line cap style  -->
                             <controls:SettingsCard
                                 Grid.Row="3"
+                                Description="Select a line cap style"
+                                Header="Line cap style"
+                                Icon="{ui:SymbolIcon BorderTopBottomDouble24}"
+                                Style="{StaticResource SettingsCardExpanderItemStyle}">
+                                <ComboBox
+                                    MinWidth="200"
+                                    HorizontalAlignment="Left"
+                                    ItemsSource="{Binding ViewModel.CrosshairLineCapStyles, Mode=OneWay}"
+                                    SelectedIndex="{Binding ViewModel.SelectedLineCapStyle, Mode=TwoWay}" />
+                            </controls:SettingsCard>
+
+                            <!--  Crosshair length  -->
+                            <controls:SettingsCard
+                                Grid.Row="4"
                                 Description="Adjust the length of the crosshair"
                                 Header="Length (px)"
                                 Icon="{ui:SymbolIcon ArrowAutoFitWidthDotted20}"
@@ -340,7 +355,7 @@
 
                             <!--  crosshair width  -->
                             <controls:SettingsCard
-                                Grid.Row="4"
+                                Grid.Row="5"
                                 Description="Change the crosshair width"
                                 Header="Width (px)"
                                 Icon="{ui:SymbolIcon AutoFitWidth24}"

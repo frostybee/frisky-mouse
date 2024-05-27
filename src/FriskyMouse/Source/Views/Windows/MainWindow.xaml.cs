@@ -51,7 +51,7 @@ public partial class MainWindow : IWindow
         _navigationService = navigationService;
         snackbarService.SetSnackbarPresenter(SnackbarPresenter);
         _navigationService.SetNavigationControl(NavigationView);
-        contentDialogService.SetContentPresenter(RootContentDialog);
+        contentDialogService.SetDialogHost(RootContentDialog);
         //-- Page navigation service.
         NavigationView.SetServiceProvider(serviceProvider);
         NavigationView.Loaded += (_, _) => NavigationView.Navigate(typeof(DashboardPage));

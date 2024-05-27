@@ -166,9 +166,9 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
                     FailedHotkeysRegistrationErrors = errorMessage;
                 }                
             }
-            catch (HotkeyAlreadyRegisteredException ex)
+            catch (Exception ex)
             {
-                //System.Windows.Forms.MessageBox.Show("Oi" + ex.Message);
+                Logger.Error(ex, "Failed to register app's global hotkeys.");
             }
             finally
             {

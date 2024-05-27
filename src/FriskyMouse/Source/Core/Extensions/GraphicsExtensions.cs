@@ -61,16 +61,20 @@ internal static class GraphicsExtensions
 
     private static void DrawCrosshair(this Graphics graphics, CrosshairOptions options)
     {
-        //System.Windows.MessageBox.Show("Oi");
-        /*AdjustableArrowCap cap = new AdjustableArrowCap(5, 5);
-        pen.CustomStartCap = cap;*/
         int crosshairLength = options.Length;
         //Pen pen = Pens.Black;
         Color color = Color.FromArgb(options.Opacity, options.LineColor);
         using Pen pen = new Pen(color, options.LineWidth);
-         pen.DashStyle = (DashStyle)options.OutlineStyle;        
-        
-        //pen.SetLineCap(LineCap.ArrowAnchor, LineCap.ArrowAnchor, DashCap.Round);
+        pen.DashStyle = (DashStyle)options.OutlineStyle;
+
+        /*AdjustableArrowCap cap = new AdjustableArrowCap(2, 2, false);
+         * 
+        pen.CustomStartCap = cap;
+        pen.CustomEndCap = cap;*/
+        /*pen.StartCap = LineCap.ArrowAnchor;
+        pen.EndCap = LineCap.ArrowAnchor;*/
+        LineCap cap = (LineCap)options.LineCapStyle;
+        pen.SetLineCap(cap, cap, DashCap.Flat);
         Point point = new(200 / 2, 200 / 2);
         graphics.DrawLine(pen, point.X - crosshairLength, point.Y, point.X + crosshairLength, point.Y);
         graphics.DrawLine(pen, point.X, point.Y - crosshairLength, point.X, point.Y + crosshairLength);
