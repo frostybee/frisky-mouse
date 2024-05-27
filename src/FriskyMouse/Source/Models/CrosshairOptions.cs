@@ -10,6 +10,7 @@ public class CrosshairOptions
     public int LineWidth { get; set; } = 1;    
     public int Length { get; set; } = 45;
     public SpotlightOutlineTypes OutlineStyle { get; set; } = SpotlightOutlineTypes.Dash;
+    public LineCapTypes LineCapStyle { get; set; } = LineCapTypes.ArrowAnchor;
     public byte OpacityPercentage { get; set; } = 50;
     public byte Opacity
     {
@@ -18,7 +19,6 @@ public class CrosshairOptions
             return (byte)(Math.Min(OpacityPercentage * 255 / 100, 255));
         }
     }
-
-    public LineCapTypes LineCapStyle { get; internal set; } = LineCapTypes.ArrowAnchor;
+    
     #endregion
 }

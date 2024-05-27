@@ -13,27 +13,7 @@ public enum LineCapTypes : uint
     //     Specifies a flat line cap.
     [Description("None")]
     None = 0,
-    //
-    // Summary:
-    //     Specifies a square line cap.
-    [Description("Square")]
-    Square = 1,
-    //
-    // Summary:
-    //     Specifies a round line cap.
-    [Description("Round")] 
-    Round = 2,
-    //
-    // Summary:
-    //     Specifies a triangular line cap.
-    [Description("Triangle")] 
-    Triangle = 3,
-    //
-    // Summary:
-    //     Specifies no anchor.
-    [Description("NoAnchor")] 
-    NoAnchor = 16,
-    //
+       //
     // Summary:
     //     Specifies a square anchor line cap.
     [Description("SquareAnchor")] 

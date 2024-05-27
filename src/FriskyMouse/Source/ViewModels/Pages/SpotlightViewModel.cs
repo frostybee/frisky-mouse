@@ -112,7 +112,7 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     {
         _decorationManager = DecorationManager.Instance;
         _spotlightOptions = SettingsManager.Settings.HighlighterOptions;
-        LoadSpotlightOptions();        
+        LoadSpotlightOptions();
         _decorationManager.HotkeysController.MouseHighlighterToggled += HotkeysController_MouseHighlighterToggled;
         //HotkeyManager.HotkeyAlreadyRegistered += HotkeyManager_HotkeyAlreadyRegistered;
         // We apply the options and draw the spotlight once we're done
@@ -152,10 +152,21 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
         CrosshairColor = _spotlightOptions.CrosshairOptions.LineColor.ToMediaColor();
         CrosshairLength = _spotlightOptions.CrosshairOptions.Length;
         CrosshairOpacity = _spotlightOptions.CrosshairOptions.OpacityPercentage;
-        CrosshairWidth = _spotlightOptions.CrosshairOptions.LineWidth;                
+        CrosshairWidth = _spotlightOptions.CrosshairOptions.LineWidth;
         CrosshairOutlineStyle = (int)_spotlightOptions.CrosshairOptions.OutlineStyle;
         CrosshairLineCapStyles = FMAppHelper.GetEnumDescriptions<LineCapTypes>();
         SelectedLineCapStyle = (int)_spotlightOptions.CrosshairOptions.LineCapStyle;
+        var all = FMAppHelper.GetEnums<LineCapTypes>().ToList();
+        
+        var caps = Enum.GetValues(typeof(LineCapTypes));
+        for (int i = 0; i < caps.Length; i++)
+        {
+            if ((uint)caps.GetValue(i) == (uint)_spotlightOptions.CrosshairOptions.LineCapStyle)
+            {
+                SelectedLineCapStyle = i; break;
+            }
+        }
+
     }
 
     private void ApplySpotlightOptions()
@@ -340,10 +351,10 @@ public partial class SpotlightViewModel : ObservableObject, INavigationAware
     }
     partial void OnCrosshairOutlineStyleChanged(int value)
     {
-        _spotlightOptions.CrosshairOptions.OutlineStyle = (SpotlightOutlineTypes)value ;
+        _spotlightOptions.CrosshairOptions.OutlineStyle = (SpotlightOutlineTypes)value;
         ApplySpotlightOptions();
     }
-     
+
     partial void OnSelectedLineCapStyleChanged(int value)
     {
         if (value > 0 && value < CrosshairLineCapStyles.Count)
