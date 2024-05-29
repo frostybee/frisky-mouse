@@ -258,11 +258,11 @@
                 Orientation="Vertical">
 
                 <!--  Spotlight outline options  -->
-                <controls:SettingsGroupHeaderControl Description="Customize an outline to be rendered around the highlighter" Header="Outline options">
+                <controls:SettingsGroupHeaderControl Description="Customize an outline to be rendered around the highlighter" Header="Outline Options">
                     <!--  TODO:  add description below the options header.  -->
                     <controls:ExpandableSettingsControl
                         Description="When enabled, an outline will be rendered on top of the highlighter"
-                        Header="Enable highlighter outline"
+                        Header="Enable Highlighter Outline"
                         HeaderContentPadding="0,0,0,0"
                         Icon="{ui:SymbolIcon BorderNone24}"
                         IsExpanded="True">
@@ -334,10 +334,10 @@
                 </controls:SettingsGroupHeaderControl>
 
                 <!--  Crosshair options  -->
-                <controls:SettingsGroupHeaderControl Description="Add and customize a crosshair to be shown inside the highlighter" Header="Crosshair options">
+                <controls:SettingsGroupHeaderControl Description="Customize a crosshair to be drawn on the mouse pointer" Header="Crosshair Options">
                     <controls:ExpandableSettingsControl
                         Description="When enabled, a crosshair will be rendered inside the highlighter drawing"
-                        Header="Enable highlighter outline"
+                        Header="Enable Highlighter Crosshair"
                         HeaderContentPadding="0,0,0,0"
                         Icon="{ui:SymbolIcon Add20}"
                         IsExpanded="True">
@@ -394,10 +394,10 @@
                                         Minimum="10"
                                         Value="{Binding ViewModel.CrosshairOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     <ui:TextBlock
-                                        Margin="10,0,20,0"
-                                        Padding="0,0,30,0"
+                                        Width="40"
                                         Style="{StaticResource OutputTextBlockStyle}"
                                         Text="{Binding Value, ElementName=CrosshairOpacity, Mode=OneWay}" />
+
                                 </StackPanel>
                             </controls:SettingsCard>
 
@@ -478,9 +478,9 @@
 
 
                 <!--  Shadow options  -->
-                <controls:SettingsGroupHeaderControl Description="Customize the style of the shadow to be rendered around the highlighter's outline" Header="Shadow options">
+                <controls:SettingsGroupHeaderControl Description="Customize the style of the shadow to be rendered around the highlighter's outline" Header="Shadow Options">
                     <controls:ExpandableSettingsControl
-                        Header="Enable highlighter shadow"
+                        Header="Enable Highlighter Shadow"
                         HeaderContentPadding="0,0,0,0"
                         Icon="{ui:SymbolIcon SquareShadow20}"
                         IsExpanded="True">
