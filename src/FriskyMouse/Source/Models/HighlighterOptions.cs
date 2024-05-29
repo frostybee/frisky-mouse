@@ -25,7 +25,7 @@ public partial class HighlighterOptions
     public ushort Height { get; set; } = 200;
     public bool IsFilled { get; set; } = true;
     public Color FillColor { get; set; } = Color.Yellow;
-    public byte OpacityPercentage { get; set; } = 50;
+    public byte OpacityPercentage { get; set; } = 75;
     public byte Opacity
     {
         get
