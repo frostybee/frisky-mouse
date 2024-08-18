@@ -18,15 +18,22 @@
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     ScrollViewer.CanContentScroll="False"
+    VirtualizingPanel.ScrollUnit="Pixel"
     mc:Ignorable="d">
 
     <controls:FeaturePageContentControl
         FeatureDescription="Cursor Highlighter"
         FeatureTitle="Mouse Cursor Highlighter"
-        Icon="{ui:SymbolIcon Flashlight20}">
+        Icon="{ui:SymbolIcon Flashlight20}"
+        VirtualizingPanel.ScrollUnit="Pixel">
 
         <!--  Page Content  -->
-        <StackPanel Margin="0,0,0,50" HorizontalAlignment="Stretch">
+        <StackPanel
+            Margin="0,0,0,50"
+            HorizontalAlignment="Stretch"
+            ScrollViewer.CanContentScroll="False"
+            VirtualizingPanel.ScrollUnit="Pixel"
+            VirtualizingStackPanel.VirtualizationMode="Recycling">
 
             <!--
             TODO: convert this into text
@@ -183,7 +190,10 @@
                                         Minimum="5"
                                         SmallChange="1"
                                         Value="{Binding ViewModel.Radius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <ui:TextBlock Style="{StaticResource OutputTextBlockStyle}" Text="{Binding Value, ElementName=SpotlightRadius, Mode=OneWay}" />
+                                    <ui:TextBlock
+                                        Width="25"
+                                        Style="{StaticResource OutputTextBlockStyle}"
+                                        Text="{Binding Value, ElementName=SpotlightRadius, Mode=OneWay}" />
                                 </StackPanel>
                             </controls:SettingsCard>
 
@@ -205,10 +215,13 @@
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Center"
                                         AutoToolTipPlacement="TopLeft"
-                                        Maximum="95"
+                                        Maximum="100"
                                         Minimum="10"
                                         Value="{Binding ViewModel.OpacityPercentage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <ui:TextBlock Style="{StaticResource OutputTextBlockStyle}" Text="{Binding Value, ElementName=SpotlightOpacity, Mode=OneWay}" />
+                                    <ui:TextBlock
+                                        Width="25"
+                                        Style="{StaticResource OutputTextBlockStyle}"
+                                        Text="{Binding Value, ElementName=SpotlightOpacity, Mode=OneWay}" />
                                 </StackPanel>
                             </controls:SettingsCard>
 
@@ -461,7 +474,6 @@
                                     <Slider
                                         x:Name="CrosshairWidth"
                                         Width="200"
-                                        HorizontalAlignment="Left"
                                         VerticalAlignment="Center"
                                         AutoToolTipPlacement="TopLeft"
                                         Maximum="5"

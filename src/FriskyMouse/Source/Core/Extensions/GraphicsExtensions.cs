@@ -72,7 +72,7 @@ internal static class GraphicsExtensions
         {
             pen.StartCap = LineCap.Flat;
             pen.StartCap = LineCap.Flat;
-                
+
         }
         else
         {
@@ -95,10 +95,12 @@ internal static class GraphicsExtensions
 
     public static void DrawRoundShadow(this Graphics graphics, HighlighterOptions options)
     {
-        int radius = options.Radius +
+        /*int radius = options.Radius +
             (options.IsOutlined ? options.OutlineWidth + 4 : options.ShadowDepth - options.OutlineWidth
             //: (options.HasShadow ? options.ShadowDepth : 0)
-            );
+            );*/
+        // FIXME: there shouldn't be a gap between the spotlight and the shadow.
+        int radius = options.ShadowDepth + options.Radius -4;
         Rectangle shadowRect = DrawingHelper.CreateRectangle(options.Width, options.Height, radius);
         Color color = Color.FromArgb(options.ShadowOpacity, options.ShadowColor);
         using Pen pen = new Pen(color, options.ShadowDepth);

@@ -5,7 +5,7 @@ namespace FriskyMouse.Models;
 public class CrosshairOptions
 {
     #region Properties    
-    public bool IsEnabled { get; set; } = true;    
+    public bool IsEnabled { get; set; } = false;    
     public Color LineColor { get; set; } = Color.Red;    
     public int LineWidth { get; set; } = 2;    
     public int Length { get; set; } = 20;

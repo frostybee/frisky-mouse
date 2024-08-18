@@ -34,7 +34,13 @@
                             Style="{StaticResource TitleTextBlockStyle}"
                             Text="{TemplateBinding FeatureTitle}" />
 
-                        <ScrollViewer Grid.Row="1">
+                        <ScrollViewer
+                            x:Name="myScrollViewer"
+                            Grid.Row="1"
+                            IsDeferredScrollingEnabled="True"
+                            ScrollViewer.CanContentScroll="True"
+                            VirtualizingPanel.ScrollUnit="Pixel"
+                            VirtualizingStackPanel.VirtualizationMode="Recycling">
 
                             <Grid Margin="{StaticResource ModulePageTitleTextMargin}">
                                 <Grid.RowDefinitions>
@@ -126,5 +132,9 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <!--<Style TargetType="{x:Type ScrollViewer}">
 
+        <EventSetter Event="PreviewMouseWheel" Handler="ScrollViewer_PreviewMouseWheel" />
+
+    </Style>-->
 </ResourceDictionary>

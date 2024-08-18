@@ -37,6 +37,7 @@ public partial class HighlighterOptions
     public Color OutlineColor { get; set; } = Color.Red;
     public byte OutlineWidth { get; set; } = 2;
     public SpotlightOutlineTypes OutlineStyle { get; set; } = SpotlightOutlineTypes.Solid;
+
     public bool HasShadow { get; set; } = false;
     public byte ShadowDepth { get; set; } = 5;
     public Color ShadowColor { get; set; } = Color.CornflowerBlue;
@@ -48,7 +49,7 @@ public partial class HighlighterOptions
             return (byte)(Math.Min(ShadowOpacityPercentage * 255 / 100, 255));
         }
     }
-
+    [JsonPropertyName("crosshairOptions")]
     public CrosshairOptions CrosshairOptions { get; set; } = new CrosshairOptions();
     #endregion
 }

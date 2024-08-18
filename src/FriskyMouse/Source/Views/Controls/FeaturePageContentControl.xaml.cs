@@ -47,6 +47,16 @@ public class FeaturePageContentControl : Control
         new PropertyMetadata(null)
     );
 
+    public FeaturePageContentControl() {        
+        Loaded += FeaturePageContentControl_Loaded;           
+        
+    }
+
+    private void FeaturePageContentControl_Loaded(object sender, RoutedEventArgs e)
+    {
+        
+    }
+
     public string FeatureTitle
     {
         get => (string)GetValue(FeatureTitleProperty);
