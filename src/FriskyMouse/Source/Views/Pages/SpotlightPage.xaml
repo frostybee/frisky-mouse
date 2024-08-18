@@ -28,12 +28,7 @@
         VirtualizingPanel.ScrollUnit="Pixel">
 
         <!--  Page Content  -->
-        <StackPanel
-            Margin="0,0,0,50"
-            HorizontalAlignment="Stretch"
-            ScrollViewer.CanContentScroll="False"
-            VirtualizingPanel.ScrollUnit="Pixel"
-            VirtualizingStackPanel.VirtualizationMode="Recycling">
+        <StackPanel Margin="0,0,0,50" HorizontalAlignment="Stretch">
 
             <!--
             TODO: convert this into text

@@ -14,7 +14,7 @@
 namespace FriskyMouse.Views.Controls;
 
 [ContentProperty(nameof(PageContent))]
-public class FeaturePageContentControl : Control
+ public class FeaturePageContentControl : Control
 {
     public static readonly DependencyProperty FeatureTitleProperty = DependencyProperty.Register(
       nameof(FeatureTitle),
@@ -47,8 +47,8 @@ public class FeaturePageContentControl : Control
         new PropertyMetadata(null)
     );
 
-    public FeaturePageContentControl() {        
-        Loaded += FeaturePageContentControl_Loaded;           
+    public FeaturePageContentControl() {
+        Loaded += FeaturePageContentControl_Loaded;        
         
     }
 

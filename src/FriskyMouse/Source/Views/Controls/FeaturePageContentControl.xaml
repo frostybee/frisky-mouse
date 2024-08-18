@@ -7,7 +7,7 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
 
-    <Thickness x:Key="ModulePageTitleTextMargin">0,4,0,48</Thickness>
+    <Thickness x:Key="ModulePageTitleTextMargin">0,4,25,48</Thickness>
 
     <Style TargetType="{x:Type local:FeaturePageContentControl}">
         <Setter Property="Focusable" Value="False" />
@@ -42,7 +42,7 @@
                             VirtualizingPanel.ScrollUnit="Pixel"
                             VirtualizingStackPanel.VirtualizationMode="Recycling">
 
-                            <Grid Margin="{StaticResource ModulePageTitleTextMargin}">
+                            <Grid MaxWidth="{StaticResource PageContentMaxWidth}" Margin="{StaticResource ModulePageTitleTextMargin}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
