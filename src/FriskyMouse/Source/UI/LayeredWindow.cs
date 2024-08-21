@@ -104,10 +104,17 @@ public class LayeredWindow : System.Windows.Forms.NativeWindow, IDisposable
             SetWindowPosition(PositionX, PositionY);
         }
     }
-
+    private const uint SWP_NOSIZE = 0x0001;
+    private const uint SWP_NOMOVE = 0x0002;
+    private const uint SWP_NOACTIVATE = 0x0010;
     private void SetWindowPosition(int x, int y)
     {
-        NativeMethods.SetWindowPos(Handle, (int)SpecialWindowHandles.HWND_TOPMOST, x, y, Width, Height, SetWindowPosFlags.SWP_NOACTIVATE);
+        NativeMethods.SetWindowPos(Handle, (int)SpecialWindowHandles.HWND_TOPMOST,
+            x, y, Width, Height,
+            SetWindowPosFlags.SWP_NOSIZE | 
+            SetWindowPosFlags.SWP_NOMOVE |SetWindowPosFlags.SWP_NOACTIVATE);
+
+        //bool result = SetWindowPos(hWnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE);
     }
 
     public bool IsWindowTopMost()

@@ -6,16 +6,12 @@ With FriskyMouse, you can draw a spotlight around your mouse cursor and indicate
 
 ## Features
 
-- Customizable mouse pointer highlighter.
-- Mouse Left/right clicks visual indicator.
+- Highly customizable mouse pointer highlighter.
+- Animated mouse Left/right clicks visual indicator.
 
 ## Demo
 
 ![alt](screenshots/demo.gif)
-
-## Documentation
-
-FriskyMouse documentation can be found at https://friskymouse.github.io/docs/
 
 ## Building from Source
 
@@ -24,6 +20,18 @@ FriskyMouse requires .NET 8 to be installed on your local machine.
 1. Clone this repository
 2. Open the `.sln` file from the `src` folder in Visual Studio 2022
 3. Rebuild the solution
+
+### Publishing a Self-Contained Version
+
+You can publish a self-contained app by executing the following command.
+
+```bat
+dotnet publish -c SelfContained -r win-x64 --self-contained -p:PublishReadyToRun=true
+```
+
+## Documentation
+
+FriskyMouse documentation can be found at https://friskymouse.github.io/docs/
 
 ## License
 
