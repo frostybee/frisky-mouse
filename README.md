@@ -1,8 +1,8 @@
 # FriskyMouse
 
-FriskyMouse is a free, highly customizable, and open-source utility application for Windows 10 and later.
+**FriskyMouse** is a free, open-source, and highly customizable utility for Windows 10 and later.
 
-With FriskyMouse, you can draw a spotlight around your mouse cursor and indicate the location of your mouse left or right clicks using a set of different ripple effects, enabling your audience to follow your mouse movements and actions with ease.
+It lets you highlight your mouse cursor with a spotlight and visualize left or right clicks using a variety of ripple effects, making it easy for your audience to follow your movements and actions.
 
 ## Features
 
@@ -12,6 +12,18 @@ With FriskyMouse, you can draw a spotlight around your mouse cursor and indicate
 ## Demo
 
 ![alt](screenshots/demo.gif)
+
+## Requirements
+
+### System Requirements
+
+- Windows 10 (version 1903 or later) or Windows 11
+- .NET 8 Runtime (for running pre-built releases)
+
+### Development Requirements
+
+- .NET 8 SDK
+- Visual Studio 2022
 
 ## Building from Source
 
@@ -23,7 +35,7 @@ FriskyMouse requires .NET 8 to be installed on your local machine.
 
 ### Publishing a Self-Contained Version
 
-You can publish a self-contained app by executing the following command.
+To create a self-contained application, run the following command:
 
 ```bat
 dotnet publish -c SelfContained -r win-x64 --self-contained -p:PublishReadyToRun=true

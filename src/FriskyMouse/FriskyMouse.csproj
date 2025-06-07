@@ -14,7 +14,7 @@
     <RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
     <UseWindowsForms>False</UseWindowsForms>
     <Configurations>Debug;Release;Portable;MicrosoftStore;SelfContained</Configurations>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>    
     <!--<UseWindowsForms>True</UseWindowsForms>-->    
   </PropertyGroup>
 

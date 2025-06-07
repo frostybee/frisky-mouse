@@ -11,8 +11,7 @@
     <RootNamespace>FriskyMouse</RootNamespace>
     <BaseOutputPath>..\bin</BaseOutputPath>    
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
-  </PropertyGroup>
-
+  </PropertyGroup>  
   <!--App Info-->
   <PropertyGroup>
     <Version>1.0.2</Version>
