@@ -1,4 +1,16 @@
-# FriskyMouse
+<div align="center">  
+  <h1 style="font-size: 2em;">
+    <span style="display: inline-block; vertical-align: middle;">
+      <img src="src/fm-logo.png" alt="FriskyMouse Logo" width="50">
+    </span>
+    <span style="display: inline-block; vertical-align: middle;">
+      FriskyMouse
+    </span>
+  </h1>
+  <p>Mouse highlighter and clicks decorator.</p>  
+</div>
+
+---
 
 **FriskyMouse** is a free, open-source, and highly customizable utility for Windows 10 and later.
 
