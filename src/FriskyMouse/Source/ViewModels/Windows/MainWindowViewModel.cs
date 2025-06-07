@@ -10,7 +10,6 @@
 */
 #endregion
 
-
 using FriskyMouse.Core;
 using NHotkey;
 using NHotkey.Wpf;

@@ -59,7 +59,14 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
     {
         _navigationService = navigationService;
     }
-    public void OnNavigatedTo()
+    
+
+    public Task OnNavigatedToAsync()
+    {
+        return Task.CompletedTask;
+    }
+
+    public Task OnNavigatedFromAsync()
     {
         if (!_isInitialized)
         {
@@ -67,11 +74,7 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
             // Check for updates? 
             AreUpdatesAvailable();
         }
-    }
-
-    public void OnNavigatedFrom()
-    {
-        //throw new NotImplementedException();
+        return Task.CompletedTask;  
     }
 
     private void InitializeViewModel()
@@ -200,5 +203,7 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
             return;
 
         _navigationService.Navigate(pageType);
-    }   
+    }
+
+   
 }

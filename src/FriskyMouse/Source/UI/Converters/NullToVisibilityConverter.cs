@@ -10,7 +10,6 @@
 */
 #endregion
 
-
 namespace FriskyMouse.Views.Converters;
 
 public class NullToVisibilityConverter : IValueConverter

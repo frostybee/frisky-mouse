@@ -10,7 +10,6 @@
 */
 #endregion
 
- 
 namespace FriskyMouse.Views.Controls;
 
 [ContentProperty(nameof(PageContent))]

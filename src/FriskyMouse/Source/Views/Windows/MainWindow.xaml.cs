@@ -22,7 +22,7 @@ using TextBlock = Wpf.Ui.Controls.TextBlock;
 namespace FriskyMouse.Views.Windows;
 
 /// <summary>
-/// Interaction logic for MainWindow.xaml
+/// Interaction logic for MainWindow.xaml.
 /// </summary>
 public partial class MainWindow : IWindow
 {
@@ -42,20 +42,19 @@ public partial class MainWindow : IWindow
         IContentDialogService contentDialogService
     )
     {
-        //Wpf.Ui.Appearance.SystemThemeWatcher.Watch(this);
+        Wpf.Ui.Appearance.SystemThemeWatcher.Watch(this);
 
         ViewModel = viewModel;
         DataContext = this;
 
         InitializeComponent();
+
         _navigationService = navigationService;
         snackbarService.SetSnackbarPresenter(SnackbarPresenter);
         _navigationService.SetNavigationControl(NavigationView);
         contentDialogService.SetDialogHost(RootContentDialog);
-        //-- Page navigation service.
-        NavigationView.SetServiceProvider(serviceProvider);
-        NavigationView.Loaded += (_, _) => NavigationView.Navigate(typeof(DashboardPage));
-        this.SetValue(TextOptions.TextFormattingModeProperty, TextFormattingMode.Ideal);
+
+        SetValue(TextOptions.TextFormattingModeProperty, TextFormattingMode.Ideal);
         Loaded += MainWindow_Loaded;
         Closing += MainWindow_Closing;
         SetupNotifyIcon();
@@ -150,7 +149,8 @@ public partial class MainWindow : IWindow
             return;
 
         _isPaneOpenedOrClosedFromCode = true;
-        NavigationView.IsPaneOpen = !(e.NewSize.Width <= 1200);
+        //NavigationView.IsPaneOpen = !(e.NewSize.Width <= 1200);
+        NavigationView.SetCurrentValue(NavigationView.IsPaneOpenProperty, e.NewSize.Width > 1200);
         _isPaneOpenedOrClosedFromCode = false;
     }
 

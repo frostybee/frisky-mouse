@@ -57,7 +57,7 @@
                         Command="{Binding ViewModel.CardOptionsClickCommand}"
                         CommandParameter="right_button"
                         Icon="{ui:SymbolIcon ShoppingBagPlay24,
-                                             FontSize=143,
+                                             FontSize=43,
                                              Filled=False}"
                         Style="{Binding ViewModel.IsRightButtonCurrent, Converter={StaticResource BooleanToMouseButtonStyleConverter}, Mode=TwoWay}">
                         <StackPanel>

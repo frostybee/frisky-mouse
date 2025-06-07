@@ -99,7 +99,7 @@ public partial class App : Application
         // https://docs.microsoft.com/dotnet/core/extensions/logging
 
         // TODO: Register services, ViewModels and pages here.
-
+        services = services.AddNavigationViewPageProvider();
         // App Host
         services.AddHostedService<ApplicationHostService>();
 
@@ -222,7 +222,7 @@ public partial class App : Application
         {
             _logger.Error(ex, "Impossible to release the single instance mutex.");
         }
-        _host.StopAsync().Wait();
+        _host?.StopAsync().Wait();
         _host.Dispose();
         _host = null;
         try
