@@ -10,7 +10,6 @@
 */
 #endregion
 
-
 namespace FriskyMouse.Views.Converters;
 internal sealed class BooleanToMouseButtonStyleConverter : IValueConverter
 {

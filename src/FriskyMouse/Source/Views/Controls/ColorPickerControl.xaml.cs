@@ -10,7 +10,6 @@
 */
 #endregion
 
-
 using Color = System.Windows.Media.Color;
 
 namespace FriskyMouse.Views.Controls;

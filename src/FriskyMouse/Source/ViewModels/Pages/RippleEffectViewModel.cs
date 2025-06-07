@@ -101,17 +101,19 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
     {
         _contentDialogService = contentDialogService;
     }
-    public void OnNavigatedFrom()
-    {
-
-    }
-
-    public void OnNavigatedTo()
+    
+    public Task OnNavigatedToAsync()
     {
         if (!_isInitialized)
         {
             InitializeViewModel();
         }
+        return Task.CompletedTask;
+    }
+
+    public Task OnNavigatedFromAsync()
+    {
+        return Task.CompletedTask;
     }
 
     private void InitializeViewModel()
@@ -331,4 +333,6 @@ public partial class RippleEffectViewModel : ObservableObject, INavigationAware
             }
         }
     }
+
+   
 }

@@ -63,15 +63,7 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
     }
 
 
-    public void OnNavigatedTo()
-    {
-        if (!_isInitialized)
-        {
-            InitializeViewModel();
-        }    
-    }
-
-    public void OnNavigatedFrom() { }
+  
 
     partial void OnCurrentApplicationThemeChanged(ApplicationTheme oldValue, ApplicationTheme newValue)
     {
@@ -102,4 +94,17 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
         var result = await licenseDialog.ShowAsync();
     }
 
+    public Task OnNavigatedToAsync()
+    {
+        if (!_isInitialized)
+        {
+            InitializeViewModel();
+        }
+        return Task.CompletedTask;  
+    }
+
+    public Task OnNavigatedFromAsync()
+    {
+        return Task.CompletedTask;
+    }
 }

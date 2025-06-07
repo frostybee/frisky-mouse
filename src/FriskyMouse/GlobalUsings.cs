@@ -18,7 +18,7 @@ global using Microsoft.Extensions.Hosting;
 global using Wpf.Ui.Controls;
 global using Wpf.Ui;
 global using Wpf.Ui.Appearance;
-//global using Wpf.Ui.Abstractions.Controls;
+global using Wpf.Ui.Abstractions.Controls;
 global using FriskyMouse.Services;
 global using FriskyMouse.Services.Contracts;
 global using FriskyMouse.ViewModels.Windows;

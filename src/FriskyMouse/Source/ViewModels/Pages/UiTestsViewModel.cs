@@ -24,14 +24,19 @@ public partial class UiTestsViewModel : ObservableObject, INavigationAware
     private string _switchStatusText = "On";
     [ObservableProperty]
     private System.Windows.Media.Color _selectedColor;
-    public void OnNavigatedFrom()
-    {
-    }
-    public void OnNavigatedTo()
+    
+    public Task OnNavigatedToAsync()
     {
         if (!_isInitialized)
             InitializeViewModel();
+        return Task.CompletedTask;
     }
+
+    public Task OnNavigatedFromAsync()
+    {
+        return Task.CompletedTask;
+    }
+
     private void InitializeViewModel()
     {
         _isInitialized = true;
@@ -70,5 +75,7 @@ public partial class UiTestsViewModel : ObservableObject, INavigationAware
     {
         //Console.WriteLine(value);
     }
+
+   
 }
 

@@ -29,9 +29,9 @@ public class ApplicationHostService : IHostedService
     /// Triggered when the application host is ready to start the service.
     /// </summary>
     /// <param name="cancellationToken">Indicates that the start process has been aborted.</param>
-    public async Task StartAsync(CancellationToken cancellationToken)
+    public Task StartAsync(CancellationToken cancellationToken)
     {
-        await HandleActivationAsync();
+        return HandleActivationAsync();
     }
 
     /// <summary>
@@ -46,16 +46,26 @@ public class ApplicationHostService : IHostedService
     /// <summary>
     /// Creates main window during activation.
     /// </summary>
-    private async Task HandleActivationAsync()
+    private Task HandleActivationAsync()
     {
-        await Task.CompletedTask;
-
-        if (!Application.Current.Windows.OfType<MainWindow>().Any())
+        if (Application.Current.Windows.OfType<MainWindow>().Any())
         {
-            var mainWindow = _serviceProvider.GetService(typeof(IWindow)) as IWindow;
-            mainWindow?.Show();
+            return Task.CompletedTask;
         }
 
-        await Task.CompletedTask;
+        IWindow mainWindow = _serviceProvider.GetRequiredService<IWindow>();
+        mainWindow.Loaded += OnMainWindowLoaded;
+        mainWindow?.Show();
+
+        return Task.CompletedTask;
+    }
+    private void OnMainWindowLoaded(object sender, RoutedEventArgs e)
+    {
+        if (sender is not MainWindow mainWindow)
+        {
+            return;
+        }
+
+        _ = mainWindow.NavigationView.Navigate(typeof(DashboardPage));
     }
 }

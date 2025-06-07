@@ -10,7 +10,6 @@
 */
 #endregion
 
-
 using System.Windows.Input;
 using static System.Net.Mime.MediaTypeNames;
 

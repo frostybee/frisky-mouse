@@ -10,7 +10,6 @@
 */
 #endregion
 
-
 using Microsoft.VisualBasic;
 using System.IO.Packaging;
 
