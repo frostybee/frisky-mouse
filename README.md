@@ -1,7 +1,7 @@
 <div align="center">  
   <h1 style="font-size: 2em;">
     <span style="display: inline-block; vertical-align: middle;">
-      <img src="fm-logo.png" alt="FriskyMouse Logo" width="50">
+      <img src="src/fm-logo.png" alt="FriskyMouse Logo" width="50">
     </span>
     <span style="display: inline-block; vertical-align: middle;">
       FriskyMouse
