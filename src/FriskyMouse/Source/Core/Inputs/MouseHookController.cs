@@ -55,8 +55,13 @@ internal class MouseHookController : GlobalMouseHook
                     break;
                 case MouseButtonTypes.LeftButtonUp:
                     // Fix the issue when the highlighter is no longer top most.
-                    // TODO: lock the involved objects. This is causing an InvalidOperationException.
-                    Task.Delay(500).ContinueWith(t => _highlighter?.BringToFront());
+                    Task.Delay(500).ContinueWith(t =>
+                    {
+                        lock (_syncRoot)
+                        {
+                            _highlighter?.BringToFront();
+                        }
+                    }, TaskScheduler.FromCurrentSynchronizationContext());
                     break;
                 case MouseButtonTypes.MouseMove:
                     //POINT cursorPos = FMAppHelper.GetCursorPosition();
@@ -66,7 +71,13 @@ internal class MouseHookController : GlobalMouseHook
                     break;
                 case MouseButtonTypes.RightButtonUp:
                     // Fix the issue when the highlighter is no longer top most.                        
-                    Task.Delay(400).ContinueWith(t => _highlighter?.BringToFront());
+                    Task.Delay(400).ContinueWith(t =>
+                    {
+                        lock (_syncRoot)
+                        {
+                            _highlighter?.BringToFront();
+                        }
+                    }, TaskScheduler.FromCurrentSynchronizationContext());
                     //Task.Delay(200).ContinueWith(t => _rightClickDecorator?.SetTopMost(hookStruct.pt.X, hookStruct.pt.Y));                    
                     _rightClickDecorator.ShowRipplesAt(hookStruct.pt);
                     //_rightClickDecorator.ShowRipplesAt(cursorPos);

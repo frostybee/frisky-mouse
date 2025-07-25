@@ -30,6 +30,6 @@ internal class HookSafeHandle : SafeHandleZeroOrMinusOneIsInvalid
             base.Dispose();
             return true;
         }
-        return true;
+        return false;
     }
 }

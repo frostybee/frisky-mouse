@@ -74,15 +74,15 @@ internal static class SettingsManager
             if (!string.IsNullOrEmpty(filePath))
             {
                 Console.WriteLine("Saving settings in " + filePath);
-                //LoadDefaultSettings();
                 Settings.ApplicationInfo.ApplicationName = App.Configuration.ApplicationName;
                 Settings.ApplicationInfo.CurrentVersion = FMAppHelper.GetApplicationVersion();
                 // Create the directory that will hold the settings file if it doesn't exist.
                 FileHelpers.CreateDirectoryFromFilePath(filePath);
-                FileStream createStream = File.Create(filePath);
-                JsonSerializer.SerializeAsync(createStream, Settings, GetJsonSerializerOptions());
-                createStream.DisposeAsync();
-                //TODO: verify if JSON file is not corrupted.
+                using (FileStream createStream = File.Create(filePath))
+                {
+                    JsonSerializer.Serialize(createStream, Settings, GetJsonSerializerOptions());
+                    createStream.Flush();
+                }
             }
         }
         catch (Exception)

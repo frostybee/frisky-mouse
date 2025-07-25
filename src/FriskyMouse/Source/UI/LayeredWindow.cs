@@ -179,13 +179,23 @@ public class LayeredWindow : System.Windows.Forms.NativeWindow, IDisposable
         }
         finally
         {
-            NativeMethods.ReleaseDC(IntPtr.Zero, screenDc);
-            if (hBitmap != IntPtr.Zero)
+            // Ensure proper cleanup of all GDI resources in error paths
+            if (hOldBitmap != IntPtr.Zero && memoryDc != IntPtr.Zero)
             {
                 NativeMethods.SelectObject(memoryDc, hOldBitmap);
+            }
+            if (hBitmap != IntPtr.Zero)
+            {
                 NativeMethods.DeleteObject(hBitmap);
             }
-            NativeMethods.DeleteDC(memoryDc);
+            if (memoryDc != IntPtr.Zero)
+            {
+                NativeMethods.DeleteDC(memoryDc);
+            }
+            if (screenDc != IntPtr.Zero)
+            {
+                NativeMethods.ReleaseDC(IntPtr.Zero, screenDc);
+            }
         }
     }
 

@@ -83,10 +83,11 @@ internal class DecorationManager : IDisposable
     {
         lock (_syncLock)
         {
-            //TODO: dispose bitmaps
             _mouseHookController?.Uninstall();
             // HideSpotlight the layered window.
             _highlighter?.HideSpotlight();
+            // Dispose bitmaps to prevent memory leaks
+            _highlighter?.SpotlightDrawing?.Dispose();
         }
     }
 
@@ -115,7 +116,8 @@ internal class DecorationManager : IDisposable
         }
         else   
         {
-            // TODO: Failed to install the mouse hook... Raise an error.
+            // Failed to install the mouse hook... Raise an error.
+            throw new InvalidOperationException("Failed to install mouse hook. Mouse decoration cannot be enabled.");
         }
     }
     internal void SetRippleEffectProfiles()
@@ -153,8 +155,8 @@ internal class DecorationManager : IDisposable
     private void OnEnableHighlighter(object sender, HotkeyEventArgs e)
     {
         System.Windows.MessageBox.Show("OnToggleHighlighterFeature!");        
-        // Negate the IsEnabled property
-        if (!_settings.HighlighterOptions.IsEnabled)
+        // Toggle the IsEnabled property and handle accordingly
+        if (_settings.HighlighterOptions.IsEnabled)
         {
             DisableHighlighter();
         }

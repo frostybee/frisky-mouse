@@ -14,7 +14,7 @@
   </PropertyGroup>  
   <!--App Info-->
   <PropertyGroup>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Authors>FrostyBee</Authors>
     <Company>FrostyBee</Company>
     <Copyright>Copyright (C) 2022-2024 FrostyBee</Copyright>

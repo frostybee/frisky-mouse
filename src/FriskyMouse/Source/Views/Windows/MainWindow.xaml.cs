@@ -49,6 +49,9 @@ public partial class MainWindow : IWindow
 
         InitializeComponent();
 
+        // Override any restored window size.
+        this.Width = 1030;
+        
         _navigationService = navigationService;
         snackbarService.SetSnackbarPresenter(SnackbarPresenter);
         _navigationService.SetNavigationControl(NavigationView);
