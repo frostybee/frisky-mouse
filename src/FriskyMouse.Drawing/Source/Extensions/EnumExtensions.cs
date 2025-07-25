@@ -27,7 +27,10 @@ public static class EnumExtensions
     {
         var type = value.GetType();
         var name = Enum.GetName(type, value);
-        return type.GetField(name)
-            .GetCustomAttribute<TAttribute>();
+        if (name == null)
+            return null;
+            
+        var field = type.GetField(name);
+        return field?.GetCustomAttribute<TAttribute>();
     }
 }

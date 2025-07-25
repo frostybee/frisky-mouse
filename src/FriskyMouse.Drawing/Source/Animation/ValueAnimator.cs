@@ -198,8 +198,7 @@ public class ValueAnimator
             {
                 return;
             }
-            if ((_direction == AnimationDirection.Out
-                || _direction == AnimationDirection.Out)
+            if (_direction == AnimationDirection.Out
                 && _progress != MIN_VALUE)
             {
                 return;
@@ -227,7 +226,7 @@ public class ValueAnimator
     /// <returns>An interpolated value between 0 and 1.</returns>
     public double GetProgress()
     {
-        return _interpolator.Ease(_progress);
+        return _interpolator?.Ease(_progress) ?? _progress;
     }
 
     /// <summary>
